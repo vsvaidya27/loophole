@@ -11,7 +11,7 @@ judge types live. The full plan, demo script and timeline are in
 | --- | --- | --- |
 | Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
 | Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense) | Varun |
-| Invariant graph | Graph view of the stored rules and how they connect (NetworkX) | Rishab |
+| Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
 | Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver) | Rohan |
 | Trainer | GRPO on a 0.5–1B model (TRL + vLLM on Runpod); streams reward and held-out accuracy | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
