@@ -1,0 +1,7 @@
+$ uv pip install ai2-arc --extra-index-url https://hub.primeintellect.ai/beauduffy/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 3s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 105 packages in 2.91s
+Installed 1 package in 3ms
+ + ai2-arc==0.1.0
+

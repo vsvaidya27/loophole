@@ -1,0 +1,10 @@
+$ uv pip install base64bench --extra-index-url https://hub.primeintellect.ai/ob1/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 10s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 107 packages in 7.15s
+Prepared 3 packages in 2.59s
+Installed 3 packages in 7ms
+ + base64bench==0.1.2
+ + levenshtein==0.27.5
+ + python-levenshtein==0.27.5
+

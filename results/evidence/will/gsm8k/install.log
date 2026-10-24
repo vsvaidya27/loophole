@@ -1,0 +1,7 @@
+$ uv pip install gsm8k --extra-index-url https://hub.primeintellect.ai/will/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 4s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 3.56s
+Installed 1 package in 3ms
+ + gsm8k==0.1.2
+
