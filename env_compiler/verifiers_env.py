@@ -24,7 +24,6 @@ def _dataset(game: GameEnv, n: int, seed: int) -> Dataset:
             "prompt": [{"role": "user", "content": t.question}],
             "answer": t.answer,
             "info": t.info,
-            "task": game.name,
         }
         for t in game.tasks(n, seed)
     ]
