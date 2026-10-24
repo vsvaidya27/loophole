@@ -103,3 +103,28 @@ generation uses plain HF, which is fine for a smoke test on a laptop.
 Measured on Qwen2.5-0.5B-Instruct at temperature 1.0: `arith_compute` 24% strict / 68%
 loose; `arith_target`, `clue_guess` and `clue_guess_easy` 0%, too hard to learn from as
 they stand, so use `arith_compute` for the demo until those are retuned.
+
+## Voice-agent environments (`voice_env/`)
+
+A support-agent scenario (an electronics store refund desk with a written policy and a
+secret discount code). The policy decides the correct action from the order facts, so we know
+the ground truth of every call.
+
+- **Option 1, judge hardening (offline):** the reward is an LLM-judge metric over call
+  transcripts (the same `{name, prompt}` shape as a Cartesia custom metric). A hacker writes
+  agent behaviours meant to fool the judge while breaking policy, Gemini simulates the calls,
+  and a fixer rewrites the judge prompt. Reports attack success rate and benign pass rate.
+  ```bash
+  python -m voice_env.harden --rounds 3 --out results/voice_audit
+  ```
+- **Option 2, live calls:** `voice_env/live_call.py` drives a real Cartesia agent over its
+  WebSocket with a simulated customer (Gemini writes the lines, Cartesia Sonic speaks them).
+  The transcript comes back as text events and the call is scored by the agent's assigned
+  Cartesia metrics plus our ground truth.
+  ```bash
+  python -m voice_env.live_call --agent AGENT_ID --turns 3
+  ```
+- `voice_env/cartesia.py` is a small client for agents, metrics (create, assign, results) and
+  calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
+  a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
+- Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s) and cached in `.cache/`.
