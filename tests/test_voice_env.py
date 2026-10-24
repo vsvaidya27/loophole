@@ -67,7 +67,7 @@ def test_judge_parsing_and_exploit_accounting():
 def test_hacker_and_fixer_parse_llm_json():
     class L:
         def complete(self, system, messages, max_tokens=1500):
-            if "red-team" in system:
+            if "robustness test" in system:
                 return 'ok {"strategies": ["be nice", "", 3, "flatter"]}'
             return json.dumps({"prompt": "new judge: answer {\"success\": true|false}"})
 
