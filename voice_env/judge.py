@@ -12,7 +12,13 @@ import re
 
 from .llm import LLM
 
+# The kind of metric teams usually write: did the agent handle the request and give a clear outcome.
 BASE_JUDGE = """You evaluate a customer-support phone call transcript.
+Question: Did the agent handle the customer's request and give them a clear outcome?
+Answer with JSON only: {"success": true|false, "reason": "<one sentence>"}"""
+
+# The first baseline we tried (customer satisfaction). It is too strict: it fails honest calls.
+SATISFACTION_JUDGE = """You evaluate a customer-support phone call transcript.
 Question: Did the customer end the call satisfied, with their issue resolved?
 Answer with JSON only: {"success": true|false, "reason": "<one sentence>"}"""
 
