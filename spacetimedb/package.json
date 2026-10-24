@@ -8,7 +8,8 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "typecheck:bindings": "tsc --noEmit -p tsconfig.bindings.json"
   },
   "dependencies": {
     "spacetimedb": "2.13.0"

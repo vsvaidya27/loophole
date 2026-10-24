@@ -308,3 +308,11 @@ describe('seed fixture', () => {
     }
   });
 });
+
+describe('current audit mirror compatibility', () => {
+  it('accepts the unpatched environment status emitted by the audit mirror', () => {
+    const test = harness();
+    call(test, ctx => mod.record_environment(ctx, { env_id: 'hub/audit', source: 'hub', title: 'Audit target', status: 'unpatched' }));
+    expect(test.db.environment.env_id.find('hub/audit')!.status).toBe('unpatched');
+  });
+});

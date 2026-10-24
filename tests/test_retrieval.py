@@ -112,6 +112,22 @@ class RetrievalTests(unittest.TestCase):
         with patch('harden.store.retrieval.urlopen', return_value=io.BytesIO(b'[]')):
             with self.assertRaises(ValueError): SpacetimeKnowledgeSource().load()
 
+    def test_current_audit_writer_records_are_retrievable(self):
+        from harden.store import mirror
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'mirror.db'
+            mirror.record_environment('hub/real-writer', source='hub', title='Writer test', status='unpatched', db=path)
+            mirror.record_exploit('hub/real-writer', 'e1', exploit_class='substring-match', iteration=1,
+                summary='Substring parser', sample_completion='SECRET_EXPLOIT', reward_original=1,
+                evidence_path='SECRET_PATH', db=path)
+            mirror.record_invariant(mirror.Invariant(env_id='hub/real-writer', exploit_id='e1',
+                title='Strict numeric answer', mechanism='Substring parser accepts candidate spam',
+                root_cause='Loose parser accepts several candidates', preconditions='A numeric answer parser',
+                defense_pattern='Require exactly one numeric answer', evidence_path='SECRET_PATH'), db=path)
+            found = self.retrieve(SQLiteKnowledgeSource(path).load())
+            self.assertEqual(found[0].invariant_id, 'hub/real-writer#e1')
+            self.assertNotIn('SECRET', prompt_context(found)[0])
+
     def test_actual_sqlite_mirror_is_read_only_and_explicitly_degraded(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / 'invariants.db'

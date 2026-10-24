@@ -47,7 +47,7 @@ configuration.
 
 Connect to `wss://maincloud.spacetimedb.com` and database
 `loophole-knowledge-calhacks-2026`, using the SDK's normal connection builder and generated
-bindings. Feed the subscribed rows into `dashboard/src/graph/buildGraph.ts`.
+bindings in `dashboard/src/module_bindings/`. The frontend must install `spacetimedb@2.13.0`. Feed the subscribed rows into `dashboard/src/graph/buildGraph.ts`.
 Database dashboard: https://spacetimedb.com/loophole-knowledge-calhacks-2026
 
 ## Administration

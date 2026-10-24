@@ -139,10 +139,12 @@ core reducer twice, and verifies one dashboard transfer edge. Cross-branch tests
 actual voice hacker/fixer with a fake model and the actual arithmetic GameEnv with an
 attack and 20 benign cases.
 
-Live SpacetimeDB HTTP behavior and LLM-selected patches still need deployment testing.
+The empty Maincloud service and real HTTP reads/writer authorization are now verified;
+see `deployment/README.md`. LLM-selected patches still need deployment testing.
 The integration fixture proves the interfaces and control flow; it does not measure LLM
-retrieval quality or generalization to unseen targets. The remaining audit writer,
-pusher, sandbox runner, and live dashboard subscription are separate integrations.
+retrieval quality or generalization to unseen targets. The merged main branch now includes the audit mirror writer; a test verifies its rows
+can be retrieved. SQLite watch/sync pushing, sandbox runner orchestration, and live
+dashboard subscriptions remain separate integrations.
 
 Verified in this implementation: 19 Python tests, 59 TypeScript/module tests, and two
 cross-branch checks each against `integration` at `21dd252` and `trainer` at `995869b`.

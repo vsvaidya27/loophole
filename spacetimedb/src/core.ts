@@ -9,7 +9,7 @@ import { requireWriter } from './access';
 
 const SOURCES = new Set(['hub', 'game', 'seed']);
 const ENV_STATUSES = new Set([
-  'queued', 'running', 'patched', 'robust', 'failed_to_run',
+  'queued', 'running', 'patched', 'unpatched', 'robust', 'failed_to_run',
   'compiling', 'pre_hardening', 'hardening', 'training', 'done',
 ]);
 const OUTCOMES = new Set(['pre_hardened', 'blocked', 'not_blocked', 'not_applicable']);

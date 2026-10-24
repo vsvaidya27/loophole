@@ -10,8 +10,8 @@ npm run typecheck --prefix spacetimedb
 npm run test:coverage --prefix spacetimedb
 ```
 
-Verified result: **58 tests passed**, TypeScript passed. Coverage for `graph.ts`,
-`graph_tables.ts`, and `buildGraph.ts`: **100% statements/lines/functions, 95.15%
+Verified result: **65 module tests passed**, TypeScript passed. Coverage for `graph.ts`,
+`graph_tables.ts`, and `buildGraph.ts`: **100% statements/lines/functions, 95.37%
 branches**. Core tests also run; these percentages measure the graph-owned files,
 not the entire project. HTML report: `spacetimedb/coverage/index.html` (generated,
 gitignored). Coverage gates enforce 90% statements/lines/functions and 80% branches.
@@ -21,8 +21,8 @@ gitignored). Coverage gates enforce 90% statements/lines/functions and 80% branc
 - The actual SpacetimeDB SDK loads the module and registers all core and graph
   reducers with the expected parameters. Tests use its official transactional
   in-process harness rather than an imitation of its table API.
-- All 16 existing core tests pass alongside 23 graph reducer tests and 19 dashboard
-  projection tests.
+- The suite includes 17 core tests, 23 graph reducer tests, 19 dashboard projection
+  tests, 5 access tests, and one Python/module round-trip test.
 - Real seed fixture records flow through core reducers, graph reducers, and the
   dashboard projection. All four edge kinds appear, with no dangling references or
   unexpected diagnostics.
@@ -53,8 +53,9 @@ npm run test:coverage --prefix spacetimedb
 ## Scope and integration boundaries
 
 This verifies the implemented graph/store module and projection against fixture data.
-It does not demonstrate a deployed SpacetimeDB server, live browser subscriptions,
-SQLite pusher recovery, or actual independent-environment exploit execution. Those
+The empty hosted module and real HTTP reads/writer authorization are separately
+verified in `deployment/README.md`. This suite does not demonstrate live browser
+subscriptions, SQLite pusher recovery, or model-driven independent-target execution. Those
 require the other owners' integrations and real target-run evidence. No simulated
 transfer outcome should be presented as a measured real exploit result.
 
