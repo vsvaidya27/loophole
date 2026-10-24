@@ -9,11 +9,12 @@ judge types live. The full plan, demo script and timeline are in
 
 | Component | What it does | Owner |
 | --- | --- | --- |
-| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on Runpod); streams reward and held-out accuracy | Varun |
+| Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
+| Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense) | Varun |
+| Invariant graph | Graph view of the stored rules and how they connect (NetworkX) | Rishab |
 | Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver) | Rohan |
-| Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role) | Rishab |
-| Invariant store | Each confirmed exploit becomes a reusable rule (SQLite + embeddings, NetworkX graph) | Rishab |
-| Dashboard | Leaderboard, invariant graph, game input box, live training curves | whoever is ahead |
+| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on Runpod); streams reward and held-out accuracy | Rohan |
+| Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
 
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
 interface, so hub environments and compiled games run through the same engine.
