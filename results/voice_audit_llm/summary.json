@@ -14,18 +14,11 @@
     {
       "iteration": 2,
       "attacks": 28,
-      "asr": 0.03571428571428571,
-      "benign_pass": 1.0,
-      "exploits": 1
-    },
-    {
-      "iteration": 3,
-      "attacks": 36,
       "asr": 0.0,
       "benign_pass": 1.0,
       "exploits": 0
     }
   ],
-  "llm_calls": 234,
-  "planner_calls": 4
+  "llm_calls": 215,
+  "planner_calls": 2
 }
