@@ -1,0 +1,14 @@
+# secrets
+.env
+.env.*
+
+# environments and caches
+.venv/
+.venvs/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store
