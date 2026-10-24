@@ -3,7 +3,7 @@
     python -m env_compiler.compile "guess a number from hints" --out compiled/
 
 Steps: (1) fit check, which refuses multi-turn / visual / unverifiable games and offers
-alternatives; (2) Claude fills in the template as `class Game(GameEnv)`; (3) the module
+alternatives; (2) the model fills in the template as `class Game(GameEnv)`; (3) the module
 runs the validation gates in a subprocess; failures are fed back for up to
 `max_attempts` tries. Responses are cached on disk (rate limits and cost).
 """
@@ -17,15 +17,17 @@ import os
 import re
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
-import anthropic
+import httpx
 
 PKG = Path(__file__).resolve().parent
 ROOT = PKG.parent
 CACHE = ROOT / ".cache" / "compiler"
-MODEL = "claude-sonnet-5-5"
+FIT_MODEL = CODEGEN_MODEL = "gemini-3.8-flash"  # pro models are over the free-tier quota
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 SUGGESTIONS = [
     "Arithmetic target: make a number from given digits",
     "Logic clues: deduce a secret code from feedback",
@@ -66,6 +68,33 @@ Here is the template and a complete worked example.
 """
 
 
+class Gemini:
+    """Minimal Gemini REST client. Reads GEMINI_API_KEY from the environment."""
+
+    def __init__(self, api_key: str | None = None):
+        self.api_key = api_key or os.environ["GEMINI_API_KEY"]
+
+    def complete(self, model: str, system: str, messages: list[dict], max_tokens: int) -> str:
+        body = {
+            "systemInstruction": {"parts": [{"text": system}]},
+            "contents": [
+                {"role": "model" if m["role"] == "assistant" else "user", "parts": [{"text": m["content"]}]}
+                for m in messages
+            ],
+            "generationConfig": {"maxOutputTokens": max_tokens, "temperature": 0.4},
+        }
+        for attempt in range(6):  # 503 "high demand" and 429 are transient
+            reply = httpx.post(
+                GEMINI_URL.format(model=model), json=body, headers={"x-goog-api-key": self.api_key}, timeout=180
+            )
+            if reply.status_code not in (429, 503):
+                break
+            time.sleep(2**attempt)
+        reply.raise_for_status()
+        parts = reply.json()["candidates"][0]["content"].get("parts", [])
+        return "".join(p.get("text", "") for p in parts)
+
+
 @dataclass
 class CompileResult:
     ok: bool
@@ -76,20 +105,19 @@ class CompileResult:
     suggestions: list[str] | None = None
 
 
-def _ask(client, system: str, messages: list[dict], max_tokens: int) -> str:
-    key = hashlib.sha256(json.dumps([MODEL, system, messages]).encode()).hexdigest()
+def _ask(client, model: str, system: str, messages: list[dict], max_tokens: int) -> str:
+    key = hashlib.sha256(json.dumps([model, system, messages]).encode()).hexdigest()
     cached = CACHE / f"{key}.txt"
     if cached.is_file():
         return cached.read_text()
-    reply = client.messages.create(model=MODEL, max_tokens=max_tokens, system=system, messages=messages)
-    text = "".join(b.text for b in reply.content if b.type == "text")
+    text = client.complete(model, system, messages, max_tokens)
     CACHE.mkdir(parents=True, exist_ok=True)
     cached.write_text(text)
     return text
 
 
 def check_fit(client, description: str) -> tuple[bool, str]:
-    text = _ask(client, FIT_SYSTEM, [{"role": "user", "content": description}], 200)
+    text = _ask(client, FIT_MODEL, FIT_SYSTEM, [{"role": "user", "content": description}], 2000)
     match = re.search(r"\{.*\}", text, re.DOTALL)
     try:
         data = json.loads(match.group(0)) if match else {}
@@ -126,7 +154,7 @@ def feedback(result: dict) -> str:
 
 
 def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 3) -> CompileResult:
-    client = client or anthropic.Anthropic()
+    client = client or Gemini()
     fits, reason = check_fit(client, description)
     if not fits:
         return CompileResult(False, reason=reason, suggestions=SUGGESTIONS)
@@ -138,7 +166,7 @@ def compile_game(description: str, out_dir: Path, client=None, max_attempts: int
     out_dir.mkdir(parents=True, exist_ok=True)
     last = "no attempt made"
     for attempt in range(1, max_attempts + 1):
-        text = _ask(client, system, messages, 4000)
+        text = _ask(client, CODEGEN_MODEL, system, messages, 16000)
         code = extract_code(text)
         if code is None:
             last = "reply had no python code block"

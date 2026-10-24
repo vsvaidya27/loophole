@@ -1,5 +1,4 @@
 from pathlib import Path
-from types import SimpleNamespace
 
 import env_compiler.compile as comp
 
@@ -10,10 +9,9 @@ GOOD = GOOD.replace("class ClueGuess(", "class Game(")
 class FakeClient:
     def __init__(self, replies):
         self.replies = list(replies)
-        self.messages = self
 
-    def create(self, **kwargs):
-        return SimpleNamespace(content=[SimpleNamespace(type="text", text=self.replies.pop(0))])
+    def complete(self, model, system, messages, max_tokens):
+        return self.replies.pop(0)
 
 
 def _use_tmp_cache(monkeypatch, tmp_path):
