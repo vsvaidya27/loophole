@@ -3,14 +3,11 @@
 State: probe and GRPO script work on a Mac (HF generation, 2-step smoke run). Nothing has
 run with vLLM or on a GPU yet, and no run has shown accuracy climbing.
 
-## 1. Get the GPU box working
-- [ ] Check with Varun: does he already have a working Runpod pod / TRL + vLLM versions? Reuse his.
-- [ ] `bash scripts/setup_runpod.sh`; fix version conflicts (vllm, torch, trl, transformers). Then pin
+## 1. Get the GPU box working (own GPU server, not Runpod)
+- [ ] Check with Varun for TRL + vLLM versions that work for him; reuse them.
+- [ ] `bash scripts/setup_gpu.sh`; fix version conflicts (vllm, torch, trl, transformers). Then pin
       the working versions in `requirements-trainer.txt`.
 - [ ] Put `.env` on the box (only needed for the compiler; training itself needs no keys).
-- [ ] Fallback if Runpod stalls: Modal wrapper (`trainer/modal_app.py`) that runs the same
-      `python -m trainer.train` command on a GPU and writes `metrics.jsonl` to a Volume.
-      Note the Runpod prize needs the demo and recorded runs to be on Runpod.
 
 ## 2. Verify the pipeline on GPU
 - [ ] `python -m trainer.probe arith_compute --n 200 --temperature 1.0` (expect ~24% strict, ~68% loose)

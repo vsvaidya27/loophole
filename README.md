@@ -13,7 +13,7 @@ judge types live. The full plan, demo script and timeline are in
 | Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense) | Varun |
 | Invariant graph | Graph view of the stored rules and how they connect (NetworkX) | Rishab |
 | Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver) | Rohan |
-| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on Runpod); streams reward and held-out accuracy | Rohan |
+| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
 
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
@@ -88,7 +88,7 @@ python -m trainer.train arith_compute --out runs/hardened          # strict pars
 python -m trainer.train arith_compute --loose --out runs/hacked    # hackable parser
 ```
 
-Add `--vllm` on the GPU box (`scripts/setup_runpod.sh` installs everything). Without it
+Add `--vllm` on the GPU box (`scripts/setup_gpu.sh` installs everything). Without it
 generation uses plain HF, which is fine for a smoke test on a laptop.
 
 Measured on Qwen2.5-0.5B-Instruct at temperature 1.0: `arith_compute` 24% strict / 68%
