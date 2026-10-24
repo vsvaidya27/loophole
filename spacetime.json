@@ -1,0 +1,8 @@
+{
+  "database": "loophole",
+  "module-path": "./spacetimedb",
+  "server": "local",
+  "generate": [
+    { "language": "typescript", "out-dir": "./dashboard/src/module_bindings" }
+  ]
+}

@@ -10,8 +10,8 @@ judge types live. The full plan, demo script and timeline are in
 | Component | What it does | Owner |
 | --- | --- | --- |
 | Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
-| Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense) | Varun |
-| Invariant graph | Graph view of the stored rules and how they connect (NetworkX) | Rishab |
+| Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense); SpacetimeDB module and pusher by Rishab, audit-side writes and retrieval by Varun | Varun, Rishab |
+| Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
 | Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver) | Rohan |
 | Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
@@ -22,8 +22,12 @@ interface, so hub environments and compiled games run through the same engine.
 ## Repo layout
 
 ```
-docs/                          build plan
+docs/                          build plan, invariant store plan
 scripts/check_leaderboard.py   acceptance check for the hub audit (see below)
+spacetimedb/                   SpacetimeDB module for the invariant store (cd spacetimedb && npm install && npm test)
+fixtures/                      seed invariants with MiniLM embeddings, for graph and dashboard work
+harden/store/                  Python side of the invariant store (exploit class taxonomy so far)
+spacetime.json                 SpacetimeDB CLI config (database "loophole", local server)
 ```
 
 Suggested homes for new work, so branches don't collide: `trainer/`, `compiler/`,

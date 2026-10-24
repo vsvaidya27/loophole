@@ -1,6 +1,10 @@
 # secrets
 .env
 .env.*
+.spacetime_token
+
+# SQLite rollback journal of the invariant mirror
+invariants.db-journal
 
 # environments and caches
 .venv/
@@ -17,3 +21,6 @@ __pycache__/
 .cache/
 compiled/
 runs/
+
+# node
+node_modules/
