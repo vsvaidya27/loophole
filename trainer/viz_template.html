@@ -1,0 +1,567 @@
+<title>Loophole Replay</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab readout. Game tabs, then summary (scores, training curves), then the replay:
+   one task, three policies side by side, playing on the same board. */
+:root {
+  --bg: #f2f4f7; --surface: #ffffff; --surface-2: #e9edf2; --line: #d6dce4;
+  --fg: #121820; --fg-2: #485363; --fg-3: #737f8f;
+  --hard: #2a78d6; --hack: #eb6834; --base: #8a94a3;
+  --good: #0b8a0b; --warn: #a86d00; --warn-bg: #fff3d6; --crit: #c93434;
+  --lit: #f0bd25; --food: #d03b3b; --snake: #1b2430; --snake-body: #5b6778;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1217; --surface: #161b22; --surface-2: #1f2630; --line: #2b3440;
+    --fg: #e7ecf2; --fg-2: #a9b3c1; --fg-3: #7c8796;
+    --hard: #3987e5; --hack: #d95926; --base: #8d97a6;
+    --good: #3cc23c; --warn: #fab219; --warn-bg: #3a2d0c; --crit: #e66767;
+    --lit: #fab219; --food: #e66767; --snake: #e7ecf2; --snake-body: #8a96a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1217; --surface: #161b22; --surface-2: #1f2630; --line: #2b3440;
+  --fg: #e7ecf2; --fg-2: #a9b3c1; --fg-3: #7c8796;
+  --hard: #3987e5; --hack: #d95926; --base: #8d97a6;
+  --good: #3cc23c; --warn: #fab219; --warn-bg: #3a2d0c; --crit: #e66767;
+  --lit: #fab219; --food: #e66767; --snake: #e7ecf2; --snake-body: #8a96a8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 700; }
+h2 { font-size: 1.45rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 500; }
+p { margin: 0; }
+.lede { color: var(--fg-2); max-width: 68ch; }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+.mono { font-family: var(--mono); }
+.num { font-variant-numeric: tabular-nums; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--hard); outline-offset: 2px; }
+
+header { display: grid; gap: 10px; }
+.legend-key { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--fg-2); font-size: 0.88rem; }
+.legend-key span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 18px; height: 0; border-top: 3px solid; display: inline-block; }
+.sw.dash { border-top-style: dashed; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tab {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+  padding: 6px 14px; cursor: pointer; font-size: 0.9rem; display: inline-flex; gap: 8px; align-items: center;
+}
+.tab small { font-family: var(--mono); color: var(--fg-3); font-size: 0.72rem; }
+.tab[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tab[aria-selected="true"] small { color: var(--bg); opacity: 0.7; }
+
+.game-head { display: grid; gap: 6px; }
+.loophole { display: inline-flex; gap: 8px; align-items: baseline; color: var(--fg-2); font-size: 0.92rem; }
+.loophole b { font-weight: 600; color: var(--warn); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; min-width: 0; }
+
+.scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.score { display: grid; gap: 10px; border-top: 4px solid var(--c); }
+.score .who { display: grid; gap: 2px; }
+.score .who small { color: var(--fg-3); font-size: 0.8rem; }
+.score .big { font: 700 2.3rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.score .row { display: flex; justify-content: space-between; gap: 8px; font-size: 0.86rem; color: var(--fg-2); }
+.score .row b { font-family: var(--mono); font-weight: 500; color: var(--fg); }
+
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.chart { position: relative; display: grid; gap: 6px; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .sub { color: var(--fg-3); font-size: 0.8rem; }
+.axis text { fill: var(--fg-3); font: 11px var(--mono); }
+.grid line { stroke: var(--line); stroke-width: 1; }
+.tip {
+  position: absolute; pointer-events: none; background: var(--fg); color: var(--bg);
+  font: 12px/1.45 var(--mono); padding: 6px 9px; border-radius: 6px; white-space: nowrap; z-index: 2;
+}
+.empty { color: var(--fg-3); font-size: 0.9rem; padding: 18px 0; }
+
+.replay { display: grid; gap: 14px; }
+.nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.nav .group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.btn {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 7px; padding: 6px 12px;
+  cursor: pointer; font-size: 0.88rem; display: inline-flex; gap: 6px; align-items: center;
+}
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+.counter { font: 500 0.88rem var(--mono); color: var(--fg-2); padding: 0 6px; }
+
+.task { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: start; }
+.task .prompt { white-space: pre-wrap; font: 0.84rem/1.5 var(--mono); color: var(--fg-2); margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.task .ref { font-size: 0.86rem; color: var(--fg-2); }
+.task .ref b { font-family: var(--mono); font-weight: 500; color: var(--fg); }
+@media (max-width: 700px) { .task { grid-template-columns: minmax(0, 1fr); } }
+
+.policies { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.pol { display: grid; gap: 12px; align-content: start; border-top: 4px solid var(--c); }
+.pol .who { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.pol .who small { color: var(--fg-3); font-size: 0.78rem; }
+.stage { display: grid; justify-items: center; gap: 8px; min-height: 60px; }
+.status { font: 0.82rem var(--mono); color: var(--fg-2); text-align: center; }
+.status.bad { color: var(--crit); }
+.status.ok { color: var(--good); }
+.answer-big { font: 700 1.9rem/1.1 var(--display); text-align: center; overflow-wrap: anywhere; }
+.noanswer { color: var(--fg-3); font-size: 0.88rem; text-align: center; }
+
+.meters { display: grid; gap: 6px; }
+.meter { display: grid; grid-template-columns: 9.5em 1fr 3.2em; gap: 8px; align-items: center; font-size: 0.8rem; color: var(--fg-2); }
+.meter .bar { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.meter .bar i { display: block; height: 100%; background: var(--c); border-radius: 4px; }
+.meter .bar.paid i { background: repeating-linear-gradient(135deg, var(--c) 0 4px, transparent 4px 7px); }
+.meter b { font: 500 0.82rem var(--mono); text-align: right; color: var(--fg); }
+
+.exploit {
+  display: flex; gap: 8px; align-items: flex-start; background: var(--warn-bg); color: var(--fg);
+  border-radius: 7px; padding: 8px 10px; font-size: 0.84rem;
+}
+.exploit svg { flex: none; margin-top: 2px; }
+.exploit b { color: var(--warn); }
+.exploit code { font-family: var(--mono); overflow-wrap: anywhere; }
+
+details.raw summary { cursor: pointer; font-size: 0.8rem; color: var(--fg-3); }
+details.raw pre {
+  margin: 8px 0 0; background: var(--surface-2); border-radius: 6px; padding: 8px 10px;
+  font: 0.78rem/1.45 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 11em; overflow: auto;
+}
+
+.board { display: grid; grid-template-columns: repeat(var(--n), var(--cell)); gap: 3px; --cell: 24px; }
+.board i { width: var(--cell); height: var(--cell); border-radius: 4px; background: var(--surface-2); display: block; }
+.board.small { --cell: 18px; gap: 2px; }
+.board .head { background: var(--snake); border-radius: 7px; }
+.board .body { background: var(--snake-body); }
+.board .food { background: var(--food); border-radius: 50%; transform: scale(0.62); }
+.board .on { background: var(--lit); box-shadow: 0 0 10px var(--lit); }
+.board.lights { --cell: 40px; gap: 5px; }
+.board.lights.small { --cell: 26px; gap: 3px; }
+
+.tiles { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+.tile {
+  width: 30px; height: 30px; display: grid; place-items: center; border-radius: 5px;
+  background: var(--surface-2); border: 1px solid var(--line); font: 600 0.95rem var(--mono); text-transform: uppercase;
+}
+.tiles.grid4 { display: grid; grid-template-columns: repeat(4, 30px); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; max-height: 9.5em; overflow: auto; }
+.chip { font: 0.82rem var(--mono); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
+.chip.ok { border-color: var(--good); color: var(--good); }
+.chip.bad { color: var(--fg-3); text-decoration: line-through; }
+
+.trade { display: grid; justify-items: center; gap: 4px; }
+.pill { font: 600 1.15rem var(--mono); padding: 3px 12px; border-radius: 6px; background: var(--surface-2); }
+.pnl { font: 500 0.88rem var(--mono); }
+.pnl.up { color: var(--good); }
+.pnl.down { color: var(--crit); }
+.prices text { fill: var(--fg-3); font: 10px var(--mono); }
+
+footer { color: var(--fg-3); font-size: 0.82rem; max-width: 80ch; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Loophole · GRPO on Qwen2.5-0.5B-Instruct</span>
+    <h1>Loophole Replay</h1>
+    <p class="lede">Each game has a hackable reward (a loose answer parser) and a fixed one (strict parser).
+      We train one policy on each and replay all three, plus the untrained base model, on the same held-out tasks.
+      The true score always uses the fixed parser.</p>
+    <div class="legend-key" id="legend"></div>
+  </header>
+  <nav class="tabs" role="tablist" id="tabs" aria-label="Games"></nav>
+  <main id="game" class="wrap" style="gap:18px"></main>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+const POL = {
+  base: { label: "Base model", sub: "before RL", color: "var(--base)", dash: true },
+  hacked: { label: "Trained on hackable env", sub: "GRPO · loose parser", color: "var(--hack)" },
+  hardened: { label: "Trained on fixed env", sub: "GRPO · strict parser", color: "var(--hard)" },
+};
+const NAMES = {
+  arith_compute: "Arithmetic", trading_sim: "Trading sim", snake: "Snake", lights_out: "Lights Out",
+  scrabble_lite: "Scrabble", anagrams: "Anagrams", word_hunt: "Word Hunt",
+  arith_target: "Arith target", clue_guess: "Clue guess", clue_guess_easy: "Clue guess (easy)",
+};
+const LOOPHOLE = {
+  arith_compute: "any number anywhere in the output counts",
+  arith_target: "any matching candidate anywhere in the output counts",
+  clue_guess: "any matching candidate anywhere in the output counts",
+  clue_guess_easy: "any matching candidate anywhere in the output counts",
+  snake: "list many move strings and the best one counts; no 16-move cap",
+  lights_out: "list many press sequences and the best one counts",
+  trading_sim: "list both BUY and SELL, or trade above the size limit",
+  anagrams: "no cap on how many words you list",
+  word_hunt: "no cap on how many words you list",
+  scrabble_lite: "list many words and the best one counts",
+};
+const ORDER = ["arith_compute", "trading_sim", "snake", "lights_out", "scrabble_lite", "anagrams", "word_hunt"];
+
+const games = (DATA?.games || []).slice().sort((a, b) => {
+  const ia = ORDER.indexOf(a.game), ib = ORDER.indexOf(b.game);
+  return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+});
+const state = { g: 0, t: 0, frame: 0, timer: null };
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = v => `${Math.round(v * 100)}%`;
+const last = a => a[a.length - 1];
+const mean = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0;
+const $ = id => document.getElementById(id);
+
+function policiesOf(game) { return game.policies.filter(p => POL[p]); }
+
+/* ---------- header ---------- */
+function renderLegend() {
+  $("legend").innerHTML = Object.entries(POL).map(([k, p]) =>
+    `<span><i class="sw${p.dash ? " dash" : ""}" style="border-color:${p.color}"></i>${p.label}</span>`).join("");
+  $("foot").textContent = DATA?.generated
+    ? `Rollouts are greedy (temperature 0) on held-out tasks the policies never trained on. Built ${DATA.generated}.`
+    : "";
+}
+
+function renderTabs() {
+  $("tabs").innerHTML = games.map((g, i) => {
+    const hard = g.tasks.length ? mean(g.tasks.map(t => t.rollouts.hardened?.strict ?? 0)) : 0;
+    const tag = g.policies.includes("hardened") ? pct(hard) : "untrained";
+    return `<button class="tab" role="tab" id="tab-${g.game}" aria-selected="${i === state.g}" data-i="${i}">
+      ${esc(NAMES[g.game] || g.game)} <small>${tag}</small></button>`;
+  }).join("");
+  $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => selectGame(+b.dataset.i));
+}
+
+function selectGame(i) {
+  stop();
+  state.g = i; state.t = 0;
+  // at rest, boards show where each plan ends; Play replays it from the start
+  state.frame = games[i]?.tasks.length && animated(games[i]) ? maxFrames(games[i].tasks[0]) : 0;
+  $("tabs").querySelectorAll(".tab").forEach((b, j) => b.setAttribute("aria-selected", j === i));
+  try { history.replaceState(null, "", "#" + games[i].game); } catch (e) {}
+  renderGame();
+}
+
+/* ---------- game summary ---------- */
+function renderGame() {
+  const g = games[state.g];
+  if (!g) { $("game").innerHTML = `<p class="empty">No rollouts yet. Run python -m trainer.rollout &lt;game&gt; then python -m trainer.viz.</p>`; return; }
+  const pols = policiesOf(g);
+  const scores = pols.map(p => {
+    const rs = g.tasks.map(t => t.rollouts[p]).filter(Boolean);
+    return { p, strict: mean(rs.map(r => r.strict)), loose: mean(rs.map(r => r.loose)), words: mean(rs.map(r => r.n_words)) };
+  });
+  $("game").innerHTML = `
+    <section class="game-head">
+      <h2>${esc(NAMES[g.game] || g.game)}</h2>
+      <p class="lede">${esc(g.description)}</p>
+      ${LOOPHOLE[g.game] ? `<p class="loophole"><b>Loophole</b> ${esc(LOOPHOLE[g.game])}</p>` : ""}
+    </section>
+    <section class="scores">${scores.map(s => `
+      <div class="panel score" style="--c:${POL[s.p].color}">
+        <div class="who"><h3>${POL[s.p].label}</h3><small>${POL[s.p].sub}</small></div>
+        <div><div class="big">${pct(s.strict)}</div><span class="eyebrow">true score</span></div>
+        <div class="row"><span>Hackable env would pay</span><b>${pct(s.loose)}</b></div>
+        <div class="row"><span>Output length</span><b>${s.words.toFixed(1)} words</b></div>
+      </div>`).join("")}
+    </section>
+    <section class="charts">
+      <div class="panel chart" id="c-reward"></div>
+      <div class="panel chart" id="c-acc"></div>
+    </section>
+    <section class="replay" id="replay"></section>`;
+  renderCharts(g);
+  renderReplay();
+}
+
+/* ---------- training curves ---------- */
+function smooth(pts, k = 5) {
+  return pts.map((p, i) => {
+    const w = pts.slice(Math.max(0, i - Math.floor(k / 2)), i + Math.ceil(k / 2));
+    return [p[0], mean(w.map(q => q[1]))];
+  });
+}
+
+function renderCharts(g) {
+  const runs = ["hardened", "hacked"].filter(m => g.curves?.[m]?.length);
+  const box1 = $("c-reward"), box2 = $("c-acc");
+  if (!runs.length) {
+    box1.innerHTML = `<h3>Reward during training</h3><p class="empty">No training runs for this game yet.</p>`;
+    box2.innerHTML = `<h3>True held-out score</h3><p class="empty">No training runs for this game yet.</p>`;
+    return;
+  }
+  const train = runs.map(m => {
+    const raw = g.curves[m].filter(r => r.kind === "train" && r.reward != null).map(r => [r.step, r.reward]);
+    return { key: m, raw, pts: smooth(raw) };
+  });
+  const evals = runs.map(m => ({ key: m, pts: g.curves[m].filter(r => r.kind === "eval").map(r => [r.step, r.heldout_acc]) }));
+  lineChart(box1, "Reward during training", "What each run was paid, 5-step average (raw faint). The hackable run is paid by the loose parser.", train);
+  lineChart(box2, "True held-out score", "Strict parser on 100 held-out tasks, greedy decoding.", evals);
+}
+
+function lineChart(box, title, sub, series) {
+  const W = 560, H = 230, m = { l: 40, r: 92, t: 10, b: 28 };
+  const xmax = Math.max(1, ...series.flatMap(s => s.pts.map(p => p[0])));
+  const ymax = Math.max(1, ...series.flatMap(s => (s.raw || s.pts).map(p => p[1])));
+  const x = v => m.l + (v / xmax) * (W - m.l - m.r);
+  const y = v => H - m.b - (v / ymax) * (H - m.t - m.b);
+  const path = pts => pts.map((p, i) => `${i ? "L" : "M"}${x(p[0]).toFixed(1)},${y(p[1]).toFixed(1)}`).join("");
+  const yt = [0, 0.25, 0.5, 0.75, 1].map(f => f * ymax);
+  const step = xmax > 40 ? 10 : xmax > 10 ? 5 : 1;
+  const xt = []; for (let v = 0; v <= xmax; v += step) xt.push(v);
+
+  // direct labels at the line ends, nudged apart when they collide
+  const ends = series.map(s => ({ key: s.key, y: y(last(s.pts)?.[1] ?? 0) })).sort((a, b) => a.y - b.y);
+  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
+  const short = { hardened: "Fixed env", hacked: "Hackable env" };
+
+  box.innerHTML = `<h3>${title}</h3><p class="sub">${sub}</p>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}">
+      <g class="grid">${yt.map(v => `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}"/>`).join("")}</g>
+      <g class="axis">
+        ${yt.map(v => `<text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${pct(v)}</text>`).join("")}
+        ${xt.map(v => `<text x="${x(v)}" y="${H - 8}" text-anchor="middle">${v}</text>`).join("")}
+        <text x="${W - m.r}" y="${H - 8}" text-anchor="start" dx="8">step</text>
+      </g>
+      ${series.map(s => `
+        ${s.raw ? `<path d="${path(s.raw)}" fill="none" stroke="${POL[s.key].color}" stroke-width="1" opacity="0.28"/>` : ""}
+        <path d="${path(s.pts)}" fill="none" stroke="${POL[s.key].color}" stroke-width="2" stroke-linejoin="round"/>
+        ${s.raw ? "" : s.pts.map(p => `<circle cx="${x(p[0])}" cy="${y(p[1])}" r="2.5" fill="${POL[s.key].color}"/>`).join("")}
+      `).join("")}
+      ${ends.map(e => { const s = series.find(q => q.key === e.key); const end = last(s.pts);
+        return `<text x="${x(end[0]) + 8}" y="${e.y + 4}" style="fill:var(--fg-2);font:500 11.5px var(--body)">${short[e.key]} ${pct(end[1])}</text>`; }).join("")}
+      <line class="xh" x1="0" x2="0" y1="${m.t}" y2="${H - m.b}" stroke="var(--fg-3)" stroke-dasharray="3 3" visibility="hidden"/>
+      <rect x="${m.l}" y="${m.t}" width="${W - m.l - m.r}" height="${H - m.t - m.b}" fill="transparent" class="hit"/>
+    </svg>
+    <div class="tip" hidden></div>`;
+
+  const svg = box.querySelector("svg"), tip = box.querySelector(".tip"), xh = box.querySelector(".xh");
+  const hit = box.querySelector(".hit");
+  hit.addEventListener("pointermove", ev => {
+    const r = svg.getBoundingClientRect();
+    const sx = (ev.clientX - r.left) * (W / r.width);
+    const stepAt = Math.round(((sx - m.l) / (W - m.l - m.r)) * xmax);
+    const rows = series.map(s => {
+      const p = s.pts.reduce((best, q) => Math.abs(q[0] - stepAt) < Math.abs(best[0] - stepAt) ? q : best, s.pts[0]);
+      return `<span style="color:${POL[s.key].color}">■</span> ${short[s.key]} ${pct(p[1])}`;
+    });
+    xh.setAttribute("x1", x(stepAt)); xh.setAttribute("x2", x(stepAt)); xh.setAttribute("visibility", "visible");
+    tip.innerHTML = `step ${stepAt}<br>${rows.join("<br>")}`;
+    tip.hidden = false;
+    const bx = box.getBoundingClientRect();
+    const left = ev.clientX - bx.left + 14;
+    tip.style.left = Math.min(left, bx.width - tip.offsetWidth - 8) + "px";
+    tip.style.top = (ev.clientY - bx.top - 10) + "px";
+  });
+  hit.addEventListener("pointerleave", () => { tip.hidden = true; xh.setAttribute("visibility", "hidden"); });
+}
+
+/* ---------- task state renderers ---------- */
+function parseBoard(text) { return text.split("\n").map(r => r.trim().split(/\s+/)); }
+
+function board(text, kind, small) {
+  const rows = parseBoard(text);
+  const cls = kind === "snake" ? { H: "head", o: "body", F: "food", ".": "" } : { "#": "on", ".": "" };
+  return `<div class="board ${kind === "lights_out" ? "lights" : ""} ${small ? "small" : ""}" style="--n:${rows[0].length}">
+    ${rows.flat().map(c => `<i class="${cls[c] ?? ""}"></i>`).join("")}</div>`;
+}
+
+function prices(info, w = 300, h = 120) {
+  const ps = info.prices, fut = info.future, all = [...ps, fut];
+  const lo = Math.min(...all) - 2, hi = Math.max(...all) + 2;
+  const m = { l: 30, r: 34, t: 10, b: 20 };
+  const x = i => m.l + i * (w - m.l - m.r) / 10;  // 8 closes, then 3 ticks to the future price
+  const y = v => h - m.b - (v - lo) / (hi - lo) * (h - m.t - m.b);
+  const line = ps.map((v, i) => `${i ? "L" : "M"}${x(i)},${y(v)}`).join("");
+  return `<svg class="prices" viewBox="0 0 ${w} ${h}" width="${w}" style="max-width:100%;height:auto">
+    <line x1="${x(7)}" x2="${x(7)}" y1="${m.t}" y2="${h - m.b}" stroke="var(--line)"/>
+    <path d="${line}" fill="none" stroke="var(--fg)" stroke-width="2"/>
+    <path d="M${x(7)},${y(ps[7])}L${x(10)},${y(fut)}" fill="none" stroke="var(--fg-3)" stroke-width="2" stroke-dasharray="4 4"/>
+    ${ps.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="2.5" fill="var(--fg)"/>`).join("")}
+    <circle cx="${x(10)}" cy="${y(fut)}" r="4" fill="var(--surface)" stroke="var(--fg-3)" stroke-width="2"/>
+    <text x="${m.l - 6}" y="${y(ps[0]) + 3}" text-anchor="end">${ps[0]}</text>
+    <text x="${x(7)}" y="${h - 6}" text-anchor="middle">now ${ps[7]}</text>
+    <text x="${x(10) + 6}" y="${y(fut) + 3}">${fut}</text>
+    <text x="${x(10)}" y="${h - 6}" text-anchor="end">+3 ticks</text>
+  </svg>`;
+}
+
+function taskVisual(g, t) {
+  const info = t.info;
+  switch (g.game) {
+    case "snake": case "lights_out": return board(t.reference_frames[0], g.game, true);
+    case "trading_sim": return prices(info);
+    case "anagrams": return `<div class="tiles">${[...info.letters].map(c => `<span class="tile">${c}</span>`).join("")}</div>`;
+    case "scrabble_lite": return `<div class="tiles">${[...info.rack].map(c => `<span class="tile">${c}</span>`).join("")}</div>`;
+    case "word_hunt": return `<div class="tiles grid4">${[...info.grid].map(c => `<span class="tile">${c}</span>`).join("")}</div>`;
+    default: return "";
+  }
+}
+
+/* ---------- per-policy answer renderers ---------- */
+const countCh = (s, ch) => (s.match(new RegExp(ch === "." ? "\\." : ch, "g")) || []).length;
+
+function stage(g, t, r) {
+  if (!r.answer) return `<p class="noanswer">No &lt;answer&gt; tag, so the fixed env scores 0.</p>`;
+  if (g.game === "snake") {
+    const moves = r.answer.toUpperCase().replace(/[\s,]/g, "");
+    if (!/^[UDLR]+$/.test(moves) || !r.frames.length) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a move string</p>`;
+    const planned = Math.min(16, moves.length), done = r.frames.length - 1, i = Math.min(state.frame, done);
+    const ate = countCh(r.frames[0], "F") - countCh(r.frames[i], "F");
+    const crashed = done < planned && state.frame >= done;
+    const status = crashed ? `<p class="status bad">Crashed on move ${done + 1} · ate ${ate}/3</p>`
+      : state.frame >= done ? `<p class="status ${ate === 3 ? "ok" : ""}">Finished ${planned} moves · ate ${ate}/3</p>`
+      : `<p class="status">Move ${i}/${planned} · ate ${ate}/3</p>`;
+    return `${board(r.frames[i], "snake")}<p class="mono" style="font-size:.85rem;overflow-wrap:anywhere">${esc(moves.slice(0, 16))}${moves.length > 16 ? `<span style="color:var(--fg-3)">${esc(moves.slice(16, 40))}…</span>` : ""}</p>${status}`;
+  }
+  if (g.game === "lights_out") {
+    if (!r.frames.length) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a press sequence</p>`;
+    const done = r.frames.length - 1, i = Math.min(state.frame, done), on = countCh(r.frames[i], "#");
+    const status = state.frame >= done ? `<p class="status ${on ? "bad" : "ok"}">${on ? `${on} lights still on` : "All lights off"}</p>`
+      : `<p class="status">Press ${i}/${done} · ${on} on</p>`;
+    return `${board(r.frames[i], "lights_out")}<p class="mono">${esc(r.answer)}</p>${status}`;
+  }
+  if (g.game === "trading_sim") {
+    const m = r.answer.trim().match(/^(BUY|SELL|HOLD)\s*(\d+)?$/i);
+    if (!m) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a valid order</p>`;
+    const act = m[1].toUpperCase(), size = +(m[2] || 1);
+    const move = t.info.future - last(t.info.prices);
+    const pnl = { BUY: 1, SELL: -1, HOLD: 0 }[act] * size * move;
+    const best = 5 * Math.abs(move);
+    return `<div class="trade"><span class="pill">${act} ${m[2] ? size : ""}</span>
+      <span class="pnl ${pnl > 0 ? "up" : pnl < 0 ? "down" : ""}">P&amp;L ${pnl > 0 ? "+" : ""}${pnl} of best +${best}</span>
+      ${size > 5 ? `<span class="status bad">Size ${size} is over the limit of 5</span>` : ""}</div>`;
+  }
+  if (r.words) {
+    const shown = r.words.slice(0, 40);
+    const ok = r.words.filter(w => w.valid).length;
+    return `<div class="chips">${shown.map(w => `<span class="chip ${w.valid ? "ok" : "bad"}">${esc(w.word)}</span>`).join("")}
+      ${r.words.length > 40 ? `<span class="chip">+${r.words.length - 40} more</span>` : ""}</div>
+      <p class="status">${ok} valid of ${r.words.length} listed</p>`;
+  }
+  return `<div class="answer-big">${esc(r.answer)}</div>`;
+}
+
+const WARN_ICON = `<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 15 14H1z" fill="var(--warn)"/><path d="M8 6v4M8 11.6v.4" stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+
+function policyCard(g, t, p) {
+  const r = t.rollouts[p];
+  if (!r) return "";
+  const exploit = r.loose > r.strict + 0.01;
+  return `<article class="panel pol" style="--c:${POL[p].color}">
+    <div class="who"><h3>${POL[p].label}</h3><small>${POL[p].sub}</small></div>
+    <div class="stage">${stage(g, t, r)}</div>
+    <div class="meters">
+      <div class="meter"><span>True score</span><span class="bar"><i style="width:${r.strict * 100}%"></i></span><b>${pct(r.strict)}</b></div>
+      <div class="meter"><span>Hackable env pays</span><span class="bar paid"><i style="width:${r.loose * 100}%"></i></span><b>${pct(r.loose)}</b></div>
+    </div>
+    ${exploit ? `<div class="exploit">${WARN_ICON}<span><b>Exploit.</b> The loose parser paid for <code>${esc(String(r.best_loose).slice(0, 80))}</code> found inside the output.</span></div>` : ""}
+    <details class="raw"${p === "hacked" ? " open" : ""}><summary>Raw output · ${r.n_words} words</summary><pre>${esc(r.completion)}</pre></details>
+  </article>`;
+}
+
+/* ---------- replay ---------- */
+function maxFrames(t) {
+  return Math.max(0, ...Object.values(t.rollouts).map(r => (r.frames?.length || 1) - 1));
+}
+function animated(g) { return g.game === "snake" || g.game === "lights_out"; }
+function isExploit(t) { return Object.values(t.rollouts).some(r => r.loose > r.strict + 0.01); }
+
+function renderReplay() {
+  const g = games[state.g], t = g.tasks[state.t];
+  const n = g.tasks.length, last = maxFrames(t);
+  $("replay").innerHTML = `
+    <div class="nav">
+      <div class="group">
+        <h2 style="font-size:1.15rem;margin-right:6px">Replay</h2>
+        <button class="btn" id="prev" aria-label="Previous task">←</button>
+        <span class="counter num">Task ${state.t + 1} of ${n}</span>
+        <button class="btn" id="next" aria-label="Next task">→</button>
+        <button class="btn" id="nextx" title="Jump to the next task where a policy was paid for an exploit">${WARN_ICON} Next exploit</button>
+      </div>
+      ${animated(g) ? `<div class="group">
+        <button class="btn primary" id="play">${state.timer ? "Pause" : state.frame >= last ? "Replay" : "Play"}</button>
+        <button class="btn" id="stepb" aria-label="Step back">‹</button>
+        <span class="counter num">step ${Math.min(state.frame, last)}/${last}</span>
+        <button class="btn" id="stepf" aria-label="Step forward">›</button>
+      </div>` : ""}
+    </div>
+    <div class="panel task">
+      <div style="display:grid;gap:10px;min-width:0">
+        <span class="eyebrow">Held-out task</span>
+        <pre class="prompt">${esc(t.question)}</pre>
+        <p class="ref">Solver's answer: <b>${esc(t.reference)}</b></p>
+      </div>
+      <div>${taskVisual(g, t)}</div>
+    </div>
+    <div class="policies">${policiesOf(g).map(p => policyCard(g, t, p)).join("")}</div>`;
+  $("prev").onclick = () => goTask(state.t - 1);
+  $("next").onclick = () => goTask(state.t + 1);
+  $("nextx").onclick = () => {
+    for (let k = 1; k <= n; k++) { const j = (state.t + k) % n; if (isExploit(g.tasks[j])) return goTask(j); }
+  };
+  $("nextx").disabled = !g.tasks.some(isExploit);
+  if (animated(g)) {
+    $("play").onclick = () => state.timer ? stop(true) : play();
+    $("stepb").onclick = () => { stop(); state.frame = Math.max(0, Math.min(state.frame, last) - 1); renderReplay(); };
+    $("stepf").onclick = () => { stop(); state.frame = Math.min(last, state.frame + 1); renderReplay(); };
+  }
+}
+
+function goTask(j) {
+  const n = games[state.g].tasks.length;
+  stop(); state.t = (j + n) % n; state.frame = 0; renderReplay();
+  if (animated(games[state.g])) play();
+}
+
+function play() {
+  const t = games[state.g].tasks[state.t], last = maxFrames(t);
+  if (state.frame >= last) state.frame = 0;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { state.frame = last; renderReplay(); return; }
+  state.timer = setInterval(() => {
+    if (state.frame >= last) return stop(true);
+    state.frame++; renderReplay();
+  }, 380);
+  renderReplay();
+}
+
+function stop(rerender) {
+  if (state.timer) { clearInterval(state.timer); state.timer = null; }
+  if (rerender) renderReplay();
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.closest("input,textarea,select") || !games.length) return;
+  if (e.key === "ArrowRight") goTask(state.t + 1);
+  if (e.key === "ArrowLeft") goTask(state.t - 1);
+});
+
+renderLegend();
+const fromHash = games.findIndex(g => "#" + g.game === location.hash);
+state.g = fromHash >= 0 ? fromHash : 0;
+renderTabs();
+selectGame(state.g);
+</script>

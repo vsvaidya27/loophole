@@ -1,0 +1,7 @@
+$ uv pip install reverse-text --extra-index-url https://hub.primeintellect.ai/primeintellect/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 3s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 2.84s
+Installed 1 package in 3ms
+ + reverse-text==0.1.5
+

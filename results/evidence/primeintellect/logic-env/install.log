@@ -1,0 +1,11 @@
+$ uv pip install logic-env --extra-index-url https://hub.primeintellect.ai/primeintellect/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 20s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 105 packages in 16.84s
+Downloading logic-env (2.5MiB)
+ Downloaded logic-env
+Prepared 1 package in 2.73s
+Installed 2 packages in 18ms
+ + logic-env==0.1.2
+ + markdown==3.11.2
+

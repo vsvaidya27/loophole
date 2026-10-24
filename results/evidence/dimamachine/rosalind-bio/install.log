@@ -1,0 +1,8 @@
+$ uv pip install rosalind-bio --extra-index-url https://hub.primeintellect.ai/dimamachine/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 11s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 8.26s
+Prepared 1 package in 2.54s
+Installed 1 package in 8ms
+ + rosalind-bio==0.1.0
+

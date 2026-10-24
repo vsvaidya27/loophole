@@ -18,9 +18,17 @@ __pycache__/
 # macOS
 .DS_Store
 
+# compiler cache and output
+.cache/
+compiled/
+runs/
+
 # node
 node_modules/
 
 # local test reports
 coverage/
 spacetimedb/dist/
+# trainer rollouts and demo page (regenerate with trainer.rollout / trainer.viz)
+rollouts/
+demo/

@@ -1,0 +1,7 @@
+$ uv pip install OpenMed_PubMedQA --extra-index-url https://hub.primeintellect.ai/maziyar/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 3s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 2.93s
+Installed 1 package in 2ms
+ + openmed-pubmedqa==0.2.1
+
