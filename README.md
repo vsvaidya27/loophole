@@ -22,8 +22,12 @@ interface, so hub environments and compiled games run through the same engine.
 ## Repo layout
 
 ```
-docs/                          build plan
+docs/                          build plan, invariant store plan
 scripts/check_leaderboard.py   acceptance check for the hub audit (see below)
+spacetimedb/                   SpacetimeDB module for the invariant store (cd spacetimedb && npm install && npm test)
+fixtures/                      seed invariants with MiniLM embeddings, for graph and dashboard work
+harden/store/                  Python side of the invariant store (exploit class taxonomy so far)
+spacetime.json                 SpacetimeDB CLI config (database "loophole", local server)
 ```
 
 Suggested homes for new work, so branches don't collide: `trainer/`, `compiler/`,

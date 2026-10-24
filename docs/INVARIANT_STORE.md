@@ -1,11 +1,11 @@
 # Invariant store plan
 
-Status: **reviewed plan**, nothing built in the repo yet (Sat Oct 24, 2026, SpacetimeDB
-2.13.0). Two reviewers independently built the module from an earlier draft and ran it
-under the official SpacetimeDB 2.13.0 test harness. The file layout, reducer
-registration, positional argument order and column types below are what passed. The
-first real publish, Python's HTTP calls and the React subscription are still unverified;
-see the M0 checklist.
+Status: **reviewed plan, M0a skeleton in the repo** (Sat Oct 24, 2026, SpacetimeDB
+2.13.0). `spacetimedb/` holds the core tables and reducers plus empty graph files, and
+`npm test` runs 16 harness tests covering every core reducer and the seed fixture. Two
+reviewers independently built the module from an earlier draft under the official 2.13.0
+test harness; the layout and types below are what passed. The first real publish,
+Python's HTTP calls and the React subscription are still unverified (M0 checklist).
 
 Owners: Varun (store, write path), Rishab (invariant graph), Anirudh (dashboard view).
 
@@ -89,7 +89,7 @@ audit workers (Python)                     invariants.db  (repo root, checker re
 
 judge's game (beat 3)
   compile ─► record_environment('game/<slug>') ─► retrieve rules ─► fixer pre-hardens
-  ─► record_rule_application(invariant_id, 'game/<slug>', outcome, detail)
+  ─► record_rule_application(run_id, invariant_id, 'game/<slug>', outcome, detail)
   ─► hacker runs; anything new goes through the same exploit/invariant path
 ```
 
@@ -241,12 +241,13 @@ export const invariant_embedding = table({ name: 'invariant_embedding' }, {
 });
 
 export const rule_application = table({ name: 'rule_application', public: true }, {
-  application_id: t.string().primaryKey(),  // `${invariant_id}->${target_env_id}`, so retries upsert
+  application_key: t.string().primaryKey(),  // `${run_id}:${invariant_id}->${target_env_id}`, so retries upsert
+  run_id: t.string().index('btree'),      // one transfer-test attempt; a new attempt gets a new run_id
   invariant_id: t.string().index('btree'),
   target_env_id: t.string().index('btree'),
   outcome: t.string(),                    // 'pre_hardened' | 'blocked' | 'not_blocked' | 'not_applicable'
-  detail: t.string(),                     // JSON, see Transfer test
-  created_at: t.timestamp(),
+  detail: t.string(),                     // versioned JSON, {"v": 1, ...}; see Transfer test
+  created_at: t.timestamp(),              // kept on retry
 });
 
 export const coreTables = { environment, exploit, invariant, invariant_embedding, rule_application };
@@ -289,7 +290,7 @@ confirmed call can return 504, or 500 with "outcome unknown".
 | `record_exploit` | env_id: string, exploit_id: string, exploit_class: string, iteration: u32, summary: string, sample_completion: string, reward_original: f32, evidence_path: string | Upsert `exploit`. A new row starts with status 'confirmed'; an existing row keeps status, reward_patched and confirmed_at |
 | `mark_exploit_patched` | env_id: string, exploit_id: string, reward_patched: f32 | Set reward_patched (a plain number) and status 'patched' |
 | `record_invariant` | env_id: string, exploit_id: string, title: string, mechanism: string, root_cause: string, preconditions: string, defense_pattern: string, evidence_path: string, embedding_model: string, embedding: f32[] | Upsert `invariant` (exploit_class copied from the exploit row, created_at kept on re-record) and `invariant_embedding` |
-| `record_rule_application` | invariant_id: string, target_env_id: string, outcome: string, detail: string | Upsert keyed by `${invariant_id}->${target_env_id}`; the latest outcome wins |
+| `record_rule_application` | run_id: string, invariant_id: string, target_env_id: string, outcome: string, detail: string | Upsert keyed by `${run_id}:${invariant_id}->${target_env_id}`. Retries of one attempt update one row (latest outcome wins, created_at kept); a new attempt uses a new run_id and gets its own row. `detail` must be a JSON object with `"v": 1`; the invariant and the target environment must exist |
 | `clear_environment` | env_id: string | Delete this env's exploit, invariant and invariant_embedding rows, plus rule_application rows whose invariant belongs to it or whose target is it. Keep the environment row |
 
 Validation (throw `SenderError`, which rolls back the call): the environment row exists;
@@ -349,7 +350,8 @@ import { table, t } from 'spacetimedb/server';
 
 export const graph_config = table({ name: 'graph_config', public: true }, {
   id: t.u32().primaryKey(),               // always 0
-  edge_threshold: t.f32(),                // start 0.55, tune on seed then real data
+  edge_threshold: t.f32(),                // start 0.45: on the seed vectors same-class pairs average 0.49,
+                                          // cross-class 0.34; 0.45 gives 15 of 66 edges, 0.55 only 4
   max_edges_per_node: t.u32(),            // start 5 (unbounded gave 11,100 edges at 300 nodes)
 });
 
@@ -420,7 +422,7 @@ type GraphEdge = {
 | `found_in` | `found_in:<invariant_id>` | `invariant.envId` | invariant → the environment it was learned on |
 | `instance_of` | `instance_of:<invariant_id>` | `invariant.exploitClass` | invariant → its rule |
 | `similar_to` | `similar_to:<a>\|<b>` | `similarity_edge` | invariant ↔ invariant, weight = score |
-| `applied_to` | `applied_to:<application_id>` | `rule_application` | the invariant's rule → target environment (`blocked` is the beat 3 money shot) |
+| `applied_to` | `applied_to:<invariant_id>-><target_env_id>` | `rule_application` | the invariant's rule → target environment, from the latest run (max created_at) for that pair, so new attempts update the edge instead of adding one (`blocked` is the beat 3 money shot) |
 
 - An `exploit` row with no `invariant` row yet is drawn as an invariant node with
   `pending: true`. It appears the moment the judge confirms the hack, and fills in when
@@ -450,9 +452,10 @@ CREATE TABLE invariants (env_id TEXT NOT NULL, exploit_id TEXT NOT NULL,
   exploit_class TEXT, title TEXT, embedding_model TEXT, embedding BLOB,
   created_at TEXT, pushed_at TEXT, push_error TEXT,
   PRIMARY KEY (env_id, exploit_id));
-CREATE TABLE rule_applications (invariant_id TEXT, target_env_id TEXT, outcome TEXT,
-  detail TEXT, created_at TEXT, pushed_at TEXT, push_error TEXT,
-  PRIMARY KEY (invariant_id, target_env_id));
+CREATE TABLE rule_applications (run_id TEXT, invariant_id TEXT, target_env_id TEXT,
+  outcome TEXT, detail TEXT,              -- versioned JSON, the same string pushed to SpacetimeDB
+  created_at TEXT, pushed_at TEXT, push_error TEXT,
+  PRIMARY KEY (run_id, invariant_id, target_env_id));
 ```
 
 - Writers use single-statement `INSERT ... ON CONFLICT DO UPDATE` (which resets
@@ -475,7 +478,7 @@ record_exploit(env_id, exploit_id, *, exploit_class, iteration, summary,
 mark_exploit_patched(env_id, exploit_id, *, reward_patched)
 extract_invariant(evidence, *, exploit_class) -> Invariant    # Claude, JSON schema; class is an input
 record_invariant(inv: Invariant)                              # mirror only; the pusher embeds and pushes
-record_rule_application(invariant_id, target_env_id, outcome, detail)
+record_rule_application(run_id, invariant_id, target_env_id, outcome, detail: dict)  # adds "v": 1
 retrieve(env_source, task, k=5) -> list[Match]                # see Retrieval
 clear_environment(env_id)                                     # both stores
 ```
@@ -515,9 +518,11 @@ engine's view disagree with the checker, which scores every attack against the o
 reward. The target is the judge's game (`game/<slug>`) or a held-out hub environment that
 isn't in `leaderboard.json`.
 
-1. Compile, then call `record_environment('game/<slug>', 'game', title, 'compiling')`.
+1. Compile, then call `record_environment('game/<slug>', 'game', title, 'compiling')`. Mint
+   a fresh `run_id` for this attempt (for example `t-<unix seconds>`); every
+   application row in this attempt uses it, and retries reuse it.
 2. Retrieve the applicable invariants. The fixer writes the pre-hardened reward, and each
-   applied invariant gets `record_rule_application(inv, env, 'pre_hardened', ...)`.
+   applied invariant gets `record_rule_application(run_id, inv, env, 'pre_hardened', ...)`.
 3. For each applied invariant, ask the hacker once to "apply this mechanism to this
    environment". Score that one completion under the unhardened and pre-hardened rewards
    (pass = at least 0.8 × the reference completion's reward):
@@ -525,7 +530,9 @@ isn't in `leaderboard.json`.
    - `not_blocked`: passes both
    - `not_applicable`: fails both
 
-   `detail` = JSON `{score_unhardened, score_pre_hardened, completion: first 200 chars}`.
+   `detail` = JSON `{"v": 1, "score_unhardened": x, "score_pre_hardened": y,
+   "completion": "<first 200 chars>"}`. Bump `v` and update the reducer whenever the shape
+   changes; readers switch on `v`.
 4. Anything new the hacker finds goes through `record_exploit` / `record_invariant`, so new
    nodes appear live and attach to their rule.
 
@@ -536,15 +543,18 @@ already in the store.
 
 ## Seed data (unblocks Rishab and Anirudh now)
 
-`fixtures/invariants.sample.json` holds about 12 invariants across 6 `seed/...`
-environments, with several sharing a class so rules and edges actually form. Each entry
-carries `env {env_id, title}`, `exploit {exploit_id, exploit_class, iteration, summary,
-sample_completion, reward_original, evidence_path}`, the invariant fields, and a
-**precomputed** `embedding_model` and 384-float `embedding`, so Rishab's tests and
-threshold tuning never need Python or torch. `seed` calls `record_environment`,
-`record_exploit` and `record_invariant` in that order, then `graph_on_invariant`. Seed rows
-are excluded from retrieval on stage, so the judge's game is pre-hardened only by rules
-learned from real runs. After any wipe, run `seed`, then `sync`.
+`fixtures/invariants.sample.json` (in the repo) holds invented invariants: 12 across 6
+`seed/...` environments, with several sharing a class so rules and edges actually form,
+plus one transfer target and two applications. Its shape is
+`{version, environments: [record_environment args], entries: [{env_id, exploit:
+{record_exploit args}, invariant: {record_invariant text fields}, embedding_model,
+embedding}], applications: [record_rule_application args]}`. The embeddings are real
+`all-MiniLM-L6-v2` vectors, precomputed with `scripts/embed_fixture.py`, so Rishab's tests
+and threshold tuning never need Python or torch. `spacetimedb/src/core.test.ts` already
+loads the whole fixture through the reducers in that order. The `seed` command does the
+same over HTTP, then calls `graph_on_invariant`. Seed rows are excluded from retrieval on
+stage, so the judge's game is pre-hardened only by rules learned from real runs. After any
+wipe, run `seed`, then `sync`.
 
 ## Milestones
 
@@ -553,7 +563,7 @@ feature freeze at midnight, and submission Sun 09:00.
 
 | | What | Who | Due |
 | --- | --- | --- | --- |
-| M0a | Skeleton pushed: shared files, `core_tables.ts`, `core.ts`, `taxonomy.ts`, empty `graph_tables.ts`/`graph.ts` that compile, and the fixture with vectors | Varun | Sat 05:00 |
+| M0a | **Done.** Skeleton pushed: shared files, `core_tables.ts`, `core.ts`, `taxonomy.ts`, empty `graph_tables.ts`/`graph.ts` that compile, the fixture with vectors, 16 harness tests | Varun | Sat 05:00 |
 | M0 | First real publish passes the checklist below; `harden.store` client, pusher and checker test | Varun | 09:00 |
 | M2a | Audit writes mirror rows; `reconcile` + checker pass on 3 envs | Varun | 12:00 (Checkpoint 1) |
 | M1 | Graph tables and reducers, `buildGraph`, `fixture.graph.json`, vitest tests on seed vectors | Rishab (starts now) | 15:00 |
