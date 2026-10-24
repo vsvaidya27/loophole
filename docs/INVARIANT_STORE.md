@@ -7,7 +7,34 @@ reviewers independently built the module from an earlier draft under the officia
 test harness; the layout and types below are what passed. The first real publish,
 Python's HTTP calls and the React subscription are still unverified (M0 checklist).
 
-Owners: Varun (store, write path), Rishab (invariant graph), Anirudh (dashboard view).
+Owners: Rishab (SpacetimeDB module, pusher, invariant graph), Varun (audit-side writes,
+extraction, retrieval, transfer test), Anirudh (dashboard view).
+
+## Handoff to Rishab (Sat Oct 24, 04:00)
+
+Done and pushed (commit `45a6445`): the reviewed plan (this doc), the module skeleton in
+`spacetimedb/` with all core tables and reducers, the seed fixture with real MiniLM
+vectors, the shared exploit-class list, and 16 passing harness tests. Rishab's
+`run_id`-keyed `rule_application` and versioned `detail` are in.
+
+Rishab picks up, in this order:
+
+1. **M1, the graph** (no server needed): fill in `graph_tables.ts` and `graph.ts` from the
+   Graph section, write `buildGraph` and `fixture.graph.json`, and test with vitest on the
+   seed vectors. Start the edge threshold at 0.45.
+2. **M0, the first real publish**: install the CLI, `spacetime start`, `spacetime publish`
+   from the repo root, and work through the M0 checklist (HTTP calls from Python,
+   subscription from React, restart recovery).
+3. **The pusher and CLI** in `harden/store/`: the HTTP client, `push --watch`, `sync`,
+   `seed`, `replay`, `reset-demo` and `doctor`, as specified under Python side.
+
+Varun keeps the parts that live inside the hardening engine: audit workers writing mirror
+rows (and calling `clear_environment` when an env restarts), Claude extraction,
+`reconcile` before the leaderboard check, retrieval, and the beat-3 transfer test. The
+mirror schema and reducer signatures in this doc are the interface between the two halves;
+change them here first.
+
+Check the current state: `cd spacetimedb && npm install && npm test` (Node 22+).
 
 Every confirmed reward hack becomes an **invariant**: a reusable rule saying how the hack
 works, why the reward allowed it, when it applies, and how to defend against it. The store
@@ -57,18 +84,19 @@ existing columns without wiping data.
 
 | Piece | Owner | Files |
 | --- | --- | --- |
-| Shared module files: `schema.ts`, `index.ts`, `package.json`, `tsconfig.json`, `vitest.config.ts`, repo-root `spacetime.json`, generated `dashboard/src/module_bindings/` | Varun | |
-| Core tables and reducers | Varun | `spacetimedb/src/core_tables.ts`, `core.ts`, `taxonomy.ts` |
-| Python store: mirror, pusher, extraction (Claude), embeddings, retrieval, CLI | Varun | `harden/store/` |
+| Shared module files: `schema.ts`, `index.ts`, `package.json`, `tsconfig.json`, `vitest.config.ts`, repo-root `spacetime.json`, generated `dashboard/src/module_bindings/` | Rishab | |
+| Core tables and reducers (built in M0a; signatures are the contract) | Rishab | `spacetimedb/src/core_tables.ts`, `core.ts`, `taxonomy.ts` |
+| Python pusher: HTTP client, embeddings, `push`, `sync`, `seed`, `replay`, `reset-demo`, `doctor` | Rishab | `harden/store/` |
+| Python audit side: mirror writes from audit workers, extraction (Claude), `reconcile`, retrieval | Varun | `harden/store/` |
 | Graph tables and graph reducers | Rishab | `spacetimedb/src/graph_tables.ts`, `graph.ts` |
 | `buildGraph(rows) → {nodes, edges}` and its tests and fixture | Rishab | `dashboard/src/graph/` |
 | Rendering the graph, live updates, leaderboard view | Anirudh | `dashboard/` (everything else) |
 | Transfer test for beat 3 | Varun | |
 
-Each person writes only their own tables. Graph reducers read core tables but never write
-them. Core code never calls graph code. Rishab never needs to edit a shared file:
-`schema.ts` already spreads `graphTables` from `graph_tables.ts`, and `index.ts` already
-re-exports `graph.ts`.
+Graph reducers read core tables but never write them, and core code never calls graph
+code. `schema.ts` already spreads `graphTables` from `graph_tables.ts`, and `index.ts`
+already re-exports `graph.ts`. Varun's audit code and Rishab's pusher meet only at the
+SQLite mirror: audit workers write rows, the pusher reads them.
 
 ## Data flow
 
@@ -95,9 +123,10 @@ judge's game (beat 3)
 
 ## Servers
 
-- **Integration and demo server: Varun's laptop.** It runs `spacetime start`. Only `main`
-  is published there, only by Varun (the database owner), and only with
-  `scripts/republish.sh`, which republishes, then runs `seed` and `sync`. The dashboard
+- **Integration and demo server: Varun's laptop** (where the audit runs). It runs
+  `spacetime start`. Only `main` is published there, only from that laptop (its local
+  identity owns the database), and only with `scripts/republish.sh` (Rishab writes it),
+  which republishes, then runs `seed` and `sync`. The dashboard
   reads its host from `VITE_SPACETIMEDB_HOST`. If venue Wi-Fi blocks laptop-to-laptop
   traffic, use a tunnel or a Maincloud dev database for integration only.
 - **Everyone else develops against vitest and their own `spacetime start`.** Publishing a
@@ -118,9 +147,9 @@ spacetimedb/
     index.ts        export { default } from './schema'; export * from './core'; export * from './graph';
     schema.ts       const spacetimedb = schema({ ...coreTables, ...graphTables }); export default spacetimedb;
                     export type Ctx = ReducerCtx<InferSchema<typeof spacetimedb>>;
-    core_tables.ts  Varun   (tables; not re-exported)
-    core.ts         Varun   (reducers ONLY)
-    taxonomy.ts     Varun   (EXPLOIT_CLASSES; not re-exported)
+    core_tables.ts  Rishab  (tables; not re-exported)
+    core.ts         Rishab  (reducers ONLY)
+    taxonomy.ts     Rishab  (EXPLOIT_CLASSES; not re-exported)
     graph_tables.ts Rishab  (tables; not re-exported)
     graph.ts        Rishab  (reducers ONLY; helpers stay unexported in the file)
     *.test.ts       vitest + spacetimedb/server/test-utils
@@ -189,7 +218,7 @@ plain functions, so it checks neither argument types nor HTTP order. `console.lo
 nothing. f32 values read back rounded (compare with `toBeCloseTo`). Build one harness per
 test.
 
-## Core tables (Varun)
+## Core tables (Rishab; built in M0a)
 
 ```ts
 // spacetimedb/src/core_tables.ts
@@ -277,7 +306,7 @@ prompts all use it. Add a value there before using it.
 | `judge-manipulation` | Text that steers an LLM judge |
 | `other` | Anything else (say what in `mechanism`) |
 
-### Core reducers (Varun)
+### Core reducers (Rishab; built in M0a)
 
 The pusher calls these over HTTP with a **positional JSON array** in exactly this order.
 Timestamps come from `ctx.timestamp`; Python never sends them. Every write is an
@@ -430,7 +459,7 @@ type GraphEdge = {
 - Drop any edge whose endpoint node hasn't arrived: tables arrive independently.
 - `hideSeed` drops environments with `source == 'seed'` and everything attached to them.
 
-## Python side (Varun)
+## Python side (pusher and CLI: Rishab; audit side, extraction, reconcile, retrieval: Varun)
 
 `harden/store/`, configured from `.env`: `SPACETIME_HOST` (default `http://127.0.0.1:3000`),
 `SPACETIME_DB` (default `loophole`). The token is minted with `POST /v1/identity` on first
@@ -564,10 +593,10 @@ feature freeze at midnight, and submission Sun 09:00.
 | | What | Who | Due |
 | --- | --- | --- | --- |
 | M0a | **Done.** Skeleton pushed: shared files, `core_tables.ts`, `core.ts`, `taxonomy.ts`, empty `graph_tables.ts`/`graph.ts` that compile, the fixture with vectors, 16 harness tests | Varun | Sat 05:00 |
-| M0 | First real publish passes the checklist below; `harden.store` client, pusher and checker test | Varun | 09:00 |
+| M0 | First real publish passes the checklist below; `harden.store` client, pusher and checker test | Rishab | 09:00 |
 | M2a | Audit writes mirror rows; `reconcile` + checker pass on 3 envs | Varun | 12:00 (Checkpoint 1) |
 | M1 | Graph tables and reducers, `buildGraph`, `fixture.graph.json`, vitest tests on seed vectors | Rishab (starts now) | 15:00 |
-| M2b + M3 | Pusher live during the audit; dashboard draws the live graph from the integration server | Varun, Anirudh | 18:00 (Checkpoint 2) |
+| M2b + M3 | Pusher live during the audit; dashboard draws the live graph from the integration server | Rishab, Anirudh | 18:00 (Checkpoint 2) |
 | M4 | Transfer test working on the rehearsal pair | Varun | 22:00 |
 | Freeze | `reconcile`, commit the mirror, `reset-demo`, offline rehearsal, record the `replay` video | all | Sun 00:00–08:00 |
 
@@ -683,9 +712,8 @@ so record the `replay` run. The deadline is Sun Oct 25, 9:00 AM PDT.
 
 ## Open questions
 
-1. **Ownership.** The review suggested Rishab own the whole `spacetimedb/` module (core and
-   graph) while Varun owns only the Python side, since Varun also has the hardening engine
-   and the audit. That would remove the M0a dependency. Varun decides.
+1. **Ownership (resolved Sat 04:00).** Rishab owns the whole `spacetimedb/` module and the
+   pusher; Varun owns the audit side. See the handoff section at the top.
 2. **Embedding model.** If PyTorch is too heavy for the pusher, any local model works. The
    contract is "384 normalized floats plus a model name, or empty"; a different dimension
    means changing the validation.
