@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from pathlib import Path
 
@@ -65,18 +66,19 @@ class MetricsCallback(TrainerCallback):
 
     def on_train_begin(self, args, state, control, model=None, processing_class=None, **kw):
         self.tokenizer = processing_class
-        self.evaluate(model, 0)
+        if state.is_world_process_zero:  # multi-GPU: only rank 0 evals and writes
+            self.evaluate(model, 0)
 
     def on_log(self, args, state, control, logs=None, **kw):
-        if logs and "reward" in logs:
+        if logs and "reward" in logs and state.is_world_process_zero:
             self._write({"step": state.global_step, "kind": "train", **logs})
 
     def on_step_end(self, args, state, control, model=None, **kw):
-        if state.global_step % self.eval_every == 0:
+        if state.global_step % self.eval_every == 0 and state.is_world_process_zero:
             self.evaluate(model, state.global_step)
 
     def on_train_end(self, args, state, control, model=None, **kw):
-        if state.global_step % self.eval_every:
+        if state.global_step % self.eval_every and state.is_world_process_zero:
             self.evaluate(model, state.global_step)
 
 
@@ -90,6 +92,7 @@ def main() -> None:
     p.add_argument("--steps", type=int, default=60)
     p.add_argument("--generations", type=int, default=8)
     p.add_argument("--prompts-per-step", type=int, default=16)
+    p.add_argument("--micro-batch", type=int, default=16, help="completions per GPU forward pass")
     p.add_argument("--lr", type=float, default=2e-5)
     p.add_argument("--eval-every", type=int, default=5)
     p.add_argument("--eval-n", type=int, default=100)
@@ -111,13 +114,21 @@ def main() -> None:
         [json.loads(row["info_json"]) for row in eval_data],
         args.eval_every,
     )
+    # One optimizer step sees prompts_per_step * generations completions, split across GPUs
+    # (accelerate launch) and micro-batches; a full 128-completion forward OOMs a 24 GB card.
+    batch = args.prompts_per_step * args.generations
+    world = int(os.environ.get("WORLD_SIZE", 1))
+    micro = min(args.micro_batch, batch // world)
+    if batch % (micro * world):
+        p.error(f"prompts-per-step * generations ({batch}) must divide by micro-batch * GPUs ({micro * world})")
     config = GRPOConfig(
         output_dir=str(args.out),
         max_steps=args.steps,
         learning_rate=args.lr,
         num_generations=args.generations,
-        per_device_train_batch_size=args.prompts_per_step * args.generations,
-        generation_batch_size=args.prompts_per_step * args.generations,
+        per_device_train_batch_size=micro,
+        gradient_accumulation_steps=batch // (micro * world),
+        generation_batch_size=batch,
         max_completion_length=64,
         temperature=1.0,
         beta=0.0,
