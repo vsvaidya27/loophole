@@ -71,17 +71,21 @@ function invariantArgs(overrides: Partial<Parameters<typeof mod.record_invariant
 const detail = (extra: object = {}) => JSON.stringify({ v: 1, score_unhardened: 1, score_pre_hardened: 0, ...extra });
 
 describe('module layout', () => {
-  it('loads and registers exactly the core reducers', () => {
+  it('loads and registers the core and graph reducers', () => {
     harness();
     const reducers = spacetimedb.moduleDef.reducers.map(r => r.sourceName).sort();
     expect(reducers).toEqual([
       'clear_environment',
+      'graph_on_invariant',
       'mark_exploit_patched',
       'record_environment',
       'record_exploit',
       'record_invariant',
       'record_rule_application',
-    ]);
+      'rebuild_graph',
+      'set_graph_config',
+      'set_rule_title',
+    ].sort());
   });
 
   it('declares the positional argument order the pusher sends', () => {
