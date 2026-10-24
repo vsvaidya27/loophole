@@ -51,3 +51,8 @@ anagrams 0%, word_hunt 0%, scrabble_lite 4%, snake 2%, lights_out 3%, trading_si
 Only `trading_sim` and `arith_compute` (24%) are near the 10-30% target. Options: a bigger
 model (Qwen 1.5B), a short SFT warm start on reference answers, or easier tiers
 (smaller grids, 5-letter racks, 1-2 foods). Re-probe on the GPU box before picking.
+
+## Multi-turn (branch `multi-turn`)
+- [ ] Rollout loop with environment feedback for `MultiTurnGameEnv` (TRL GRPO expects one prompt, one
+      completion). Options: flatten an episode into one completion, or verifiers' multi-turn trainer /
+      a custom rollout function. Until then `trainer.*` exits for multi-turn games.

@@ -20,7 +20,7 @@ from pathlib import Path
 from env_compiler.loader import load_game
 from env_compiler.words import split_words
 
-from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, generate, pick_device
+from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, generate, pick_device, require_single_turn
 
 RUNS = Path("runs")
 
@@ -86,6 +86,7 @@ def main() -> None:
     args = p.parse_args()
 
     strict, loose = load_game(args.game, strict=True), load_game(args.game, strict=False)
+    require_single_turn(strict)
     policies = dict(kv.split("=", 1) for kv in args.policy) or default_policies(args.game)
     tasks = strict.tasks(args.n, EVAL_SEED)  # same tasks as the first n of the held-out eval
     prompts = [row["prompt"] for row in build_dataset(strict, args.n, EVAL_SEED)]

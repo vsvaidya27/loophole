@@ -132,3 +132,25 @@ the ground truth of every call.
   calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
   a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
 - The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort, and so do the hacker and fixer (the Gemini free tier allows only 20 requests a day). `VOICE_ENV_SIM=gemini` / `VOICE_ENV_PLANNER=gemini` switch them back. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.
+
+## Multi-turn track (experimental, `multi-turn` branch)
+
+A separate environment type for games where the environment answers each reply. It sits next
+to the single-turn `GameEnv` and is selected by `kind == "multi"`; nothing in the single-turn
+path (games, trainer, hardening, leaderboard checker) depends on it.
+
+- `env_compiler/multiturn.py`: `MultiTurnGameEnv` with `reset(rng)`, `step(state, reply)`,
+  an episode-level `reward(state)`, a scripted `reference_policy` and a `random_policy`.
+  `play(policy, seed)` runs a full episode. State is JSON-serialisable.
+- Games (`MULTI_GAMES`, kept apart from `GAMES`): `number_hunt` (higher/lower) and
+  `live_mastermind` (the interactive version of `clue_guess`). Loose parser: a reply that lists
+  many guesses counts every one, so spamming wins.
+- Gates: `validate()` dispatches on `kind`. Multi-turn requires a reference policy that wins
+  every episode, near-zero null and random policies, deterministic resets, and episodes that
+  end within `max_turns`.
+- Compiler: the fit check now returns `single`, `multi` or `reject`. Multi-turn is refused unless
+  `--allow-multiturn` is passed, then it uses its own template and worked example.
+- verifiers: `load_environment("number_hunt")` returns a `MultiTurnEnv` adapter (`GameMultiTurnEnv`).
+- Not supported yet: the GRPO trainer (it exits with a clear message for multi-turn games) and the
+  hardening engine / leaderboard evidence schema. TRL's `GRPOTrainer` needs a rollout loop with
+  environment feedback, and `check_leaderboard.py` scores one string per completion.

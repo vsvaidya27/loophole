@@ -2,10 +2,10 @@
 
 import sys
 
-from . import GAMES, validate
+from . import GAMES, MULTI_GAMES, validate
 
 failed = False
-for cls in GAMES.values():
+for cls in [*GAMES.values(), *MULTI_GAMES.values()]:
     for strict in (True, False):
         report = validate(cls(strict=strict))
         print(f"[{'strict' if strict else 'loose '}] {report}")

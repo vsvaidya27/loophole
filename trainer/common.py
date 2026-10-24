@@ -13,6 +13,17 @@ TRAIN_SEED, EVAL_SEED = 1000, 2000
 MAX_NEW_TOKENS = 64
 
 
+def require_single_turn(*games) -> None:
+    """The GRPO path expects one prompt and one completion per sample. Multi-turn games need
+    a rollout loop with environment feedback, which does not exist yet."""
+    for game in games:
+        if getattr(game, "kind", "single") == "multi":
+            raise SystemExit(
+                f"{game.name} is a multi-turn game; the trainer only supports single-turn games for now "
+                "(see env_compiler/multiturn.py for the multi-turn track)."
+            )
+
+
 def pick_device() -> str:
     import torch
 

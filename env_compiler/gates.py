@@ -14,6 +14,7 @@ import resource
 import sys
 import traceback
 
+from .multiturn import MultiTurnGameEnv
 from .template import GameEnv
 from .validate import validate
 
@@ -24,8 +25,8 @@ def main(path: str) -> dict:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     cls = getattr(module, "Game", None)
-    if not (isinstance(cls, type) and issubclass(cls, GameEnv)):
-        raise TypeError("module must define `class Game(GameEnv)`")
+    if not (isinstance(cls, type) and issubclass(cls, (GameEnv, MultiTurnGameEnv))):
+        raise TypeError("module must define `class Game(GameEnv)` or `class Game(MultiTurnGameEnv)`")
     reports = []
     for strict in (True, False):
         r = validate(cls(strict=strict))

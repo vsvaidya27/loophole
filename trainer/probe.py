@@ -13,7 +13,15 @@ import argparse
 
 from env_compiler.loader import load_game
 
-from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, completion_text, generate, pick_device
+from .common import (
+    DEFAULT_MODEL,
+    EVAL_SEED,
+    build_dataset,
+    completion_text,
+    generate,
+    pick_device,
+    require_single_turn,
+)
 
 
 def main() -> None:
@@ -27,6 +35,7 @@ def main() -> None:
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     strict, loose = load_game(args.game, strict=True), load_game(args.game, strict=False)
+    require_single_turn(strict)
     device = pick_device()
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(args.model).to(device)

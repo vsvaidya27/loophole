@@ -43,6 +43,7 @@ class GameEnv(ABC):
     learns to exploit by spamming candidates.
     """
 
+    kind = "single"
     name: str = "game"
     description: str = ""  # the plain-English spec
     # Gate limit for the random-policy score. Games with partial credit (a random

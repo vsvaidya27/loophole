@@ -26,6 +26,7 @@ from transformers import TrainerCallback
 from env_compiler.loader import load_game
 
 from .common import (
+    require_single_turn,
     DEFAULT_MODEL,
     EVAL_SEED,
     TRAIN_SEED,
@@ -102,6 +103,7 @@ def main() -> None:
 
     train_game = load_game(args.game, strict=not args.loose)
     strict_game, loose_game = load_game(args.game, strict=True), load_game(args.game, strict=False)
+    require_single_turn(strict_game)
     eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED)
     train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED)
 
