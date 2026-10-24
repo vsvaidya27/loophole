@@ -1,0 +1,48 @@
+"""Measure a model's success rate on a game before training on it.
+
+    python -m trainer.probe clue_guess --n 100
+    python -m trainer.probe compiled/game_ab12cd34.py --model Qwen/Qwen2.5-0.5B-Instruct
+
+The plan wants the base model at 10-30% so GRPO has signal. Reports the strict-parser
+rate (true accuracy), the loose-parser rate, and the mean output length in words.
+"""
+
+from __future__ import annotations
+
+import argparse
+
+from env_compiler.loader import load_game
+
+from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, completion_text, generate, pick_device
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("game")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--n", type=int, default=100)
+    parser.add_argument("--temperature", type=float, default=0.0)
+    args = parser.parse_args()
+
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    strict, loose = load_game(args.game, strict=True), load_game(args.game, strict=False)
+    device = pick_device()
+    tokenizer = AutoTokenizer.from_pretrained(args.model)
+    model = AutoModelForCausalLM.from_pretrained(args.model).to(device)
+    data = build_dataset(strict, args.n, EVAL_SEED)
+    prompts = [row["prompt"] for row in data]
+    infos = [__import__("json").loads(row["info_json"]) for row in data]
+    texts = generate(model, tokenizer, prompts, temperature=args.temperature)
+
+    s = sum(strict.reward(i, t) for i, t in zip(infos, texts)) / len(texts)
+    l = sum(loose.reward(i, t) for i, t in zip(infos, texts)) / len(texts)
+    words = sum(len(t.split()) for t in texts) / len(texts)
+    print(f"{strict.name} on {args.model} ({device}, n={len(texts)}): strict={s:.0%} loose={l:.0%} mean_words={words:.1f}")
+    print("sample output:", repr(completion_text(texts[0])[:200]))
+    if not 0.10 <= s <= 0.30:
+        print("note: strict rate is outside the 10-30% target; tune the game's difficulty")
+
+
+if __name__ == "__main__":
+    main()

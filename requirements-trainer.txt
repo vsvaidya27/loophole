@@ -1,0 +1,8 @@
+# Trainer environment (GPU box). `pip install -r requirements-trainer.txt`
+# vllm pins its own torch; install it first and let it choose, then the rest.
+vllm
+trl
+transformers
+accelerate
+datasets
+verifiers>=0.3,<0.4

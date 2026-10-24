@@ -16,3 +16,4 @@ __pycache__/
 # compiler cache and output
 .cache/
 compiled/
+runs/

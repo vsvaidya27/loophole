@@ -75,3 +75,22 @@ strict parser and a loose one (`strict=False`) for the recorded hacked run.
 python -m env_compiler   # run the gates on every game
 pytest tests/
 ```
+
+## Trainer (phase 1)
+
+`trainer/` runs GRPO (TRL) on any game and writes `metrics.jsonl` for the dashboard:
+training reward plus held-out accuracy (always scored with the strict parser, so a
+run against the loose parser shows reward climbing while true accuracy stays flat).
+
+```bash
+python -m trainer.probe arith_compute --n 100 --temperature 1.0   # base-model success rate
+python -m trainer.train arith_compute --out runs/hardened          # strict parser
+python -m trainer.train arith_compute --loose --out runs/hacked    # hackable parser
+```
+
+Add `--vllm` on the GPU box (`scripts/setup_runpod.sh` installs everything). Without it
+generation uses plain HF, which is fine for a smoke test on a laptop.
+
+Measured on Qwen2.5-0.5B-Instruct at temperature 1.0: `arith_compute` 24% strict / 68%
+loose; `arith_target`, `clue_guess` and `clue_guess_easy` 0%, too hard to learn from as
+they stand, so use `arith_compute` for the demo until those are retuned.
