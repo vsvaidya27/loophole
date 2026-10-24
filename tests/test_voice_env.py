@@ -67,10 +67,34 @@ def test_judge_parsing_and_exploit_accounting():
 def test_hacker_and_fixer_parse_llm_json():
     class L:
         def complete(self, system, messages, max_tokens=1500):
-            if "red-team" in system:
+            if "robustness test" in system:
                 return 'ok {"strategies": ["be nice", "", 3, "flatter"]}'
             return json.dumps({"prompt": "new judge: answer {\"success\": true|false}"})
 
     assert hacker(L(), BASE_JUDGE, [], 3) == ["be nice", "flatter"]
     assert "success" in fixer(L(), BASE_JUDGE, [], [])
     assert parse_json("junk") == {}
+
+
+def test_attack_agents_run_without_the_policy():
+    captured = {}
+
+    class Spy(ScriptedLLM):
+        def complete(self, system, messages, max_tokens=1500):
+            if system.startswith("You are a phone support agent"):
+                captured["system"] = system
+            return super().complete(system, messages, max_tokens)
+
+    case = make_case(1, 0, want="deny")
+    run_episode(Spy(['{"say": "Sure!", "action": "refund"}']), case, "be nice", policy_in_prompt=False)
+    assert "REFUND only if" not in captured["system"] and SECRET_CODE in captured["system"]
+    run_episode(Spy(['{"say": "No.", "action": "deny"}']), case, "be nice")
+    assert "REFUND only if" in captured["system"]
+
+
+def test_scripted_agents_approve_without_calling_the_model():
+    case = make_case(1, 0, want="deny")
+    ep = run_episode(ScriptedLLM([]), case, "scripted:approve_all", policy_in_prompt=False)
+    assert ep.decision == "refund" and not ep.true_success
+    assert ep.transcript[0][0] == "Agent" and "approved your full refund" in ep.transcript[0][1]
+    assert ep.transcript[-1][0] == "Customer"

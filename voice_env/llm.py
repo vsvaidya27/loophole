@@ -1,8 +1,7 @@
 """LLM backends for the simulations, with an on-disk cache and a minimum gap between live calls.
 
-Roles: the simulation side (customer, agent under test, judge, call classifier) runs on
-Haiku 5.5 at low effort; the hacker and fixer stay on Gemini. Override with
-VOICE_ENV_SIM=gemini to run everything on Gemini.
+Every role runs on Haiku 5.5 at low effort. VOICE_ENV_SIM=gemini / VOICE_ENV_PLANNER=gemini
+switch the simulation side / the hacker and fixer back to Gemini.
 """
 
 from __future__ import annotations
@@ -84,8 +83,9 @@ def sim_llm() -> _CachedLLM:
 
 
 def planner_llm() -> _CachedLLM:
-    """Hacker and fixer model (unchanged: Gemini)."""
-    return GeminiLLM()
+    """Hacker and fixer model: Haiku 5.5 at low effort (the Gemini free tier allows only 20
+    requests/day). VOICE_ENV_PLANNER=gemini switches back."""
+    return GeminiLLM() if os.environ.get("VOICE_ENV_PLANNER") == "gemini" else HaikuLLM()
 
 
 LLM = GeminiLLM  # backwards-compatible name

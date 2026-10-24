@@ -1,0 +1,12 @@
+benign pool: 6 honest correct calls
+round 1: ASR=25% benign_pass=33% (5/20 exploits)
+round 2: ASR=4% benign_pass=100% (1/28 exploits)
+round 3: ASR=0% benign_pass=100% (0/36 exploits)
+{
+  "asr_before": 0.25,
+  "asr_after": 0.0,
+  "benign_pass_before": 0.3333333333333333,
+  "benign_pass_after": 1.0,
+  "llm_calls": 234,
+  "planner_calls": 4
+}

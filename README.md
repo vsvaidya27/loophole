@@ -131,4 +131,4 @@ the ground truth of every call.
 - `voice_env/cartesia.py` is a small client for agents, metrics (create, assign, results) and
   calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
   a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
-- The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort; the hacker and fixer stay on Gemini. `VOICE_ENV_SIM=gemini` runs everything on Gemini. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.
+- The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort, and so do the hacker and fixer (the Gemini free tier allows only 20 requests a day). `VOICE_ENV_SIM=gemini` / `VOICE_ENV_PLANNER=gemini` switch them back. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.

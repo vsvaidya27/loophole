@@ -1,0 +1,24 @@
+{
+  "asr_before": 0.25,
+  "asr_after": 0.0,
+  "benign_pass_before": 0.3333333333333333,
+  "benign_pass_after": 1.0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "attacks": 20,
+      "asr": 0.25,
+      "benign_pass": 0.3333333333333333,
+      "exploits": 5
+    },
+    {
+      "iteration": 2,
+      "attacks": 28,
+      "asr": 0.0,
+      "benign_pass": 1.0,
+      "exploits": 0
+    }
+  ],
+  "llm_calls": 215,
+  "planner_calls": 2
+}
