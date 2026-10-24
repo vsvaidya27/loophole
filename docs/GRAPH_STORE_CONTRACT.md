@@ -6,7 +6,8 @@ this document describes the implemented graph boundary.
 
 ## Ownership and persistence
 
-Varun owns SQLite, extraction, embeddings, core records, and the pusher. Rishab owns
+Varun owns audit-side SQLite writes, extraction, and hardener integration. Per the latest
+handoff, Rishab owns the SpacetimeDB module, embedding/pusher infrastructure, and
 `spacetimedb/src/graph_tables.ts`, `spacetimedb/src/graph.ts`, and the pure dashboard
 projection in `dashboard/src/graph/buildGraph.ts`. Graph reducers read core records
 without modifying them. SQLite is the durable source; SpacetimeDB supplies live rows.
