@@ -77,6 +77,44 @@ def response_cost(response) -> tuple[float, list[dict]]:
     return sum(a["cost_usd"] for a in attempts), attempts
 
 
+def read_response(response, schema: dict | None) -> dict:
+    """Text, parsed data and refusal details of a (possibly fallback-served) response.
+
+    A `fallback` content block marks each hop where a model declined and the next one
+    took over, so only the text after the last such block is the served answer. Each
+    block's trigger names the declining model's refusal category (None when it maps to
+    no named category, logged as "uncategorized" like a final refusal)."""
+    blocks = list(response.content or [])
+    declined = []
+    for k, block in enumerate(blocks):
+        if getattr(block, "type", None) != "fallback":
+            continue
+        trigger = getattr(block, "trigger", None)
+        declined.append(
+            {
+                "model": getattr(getattr(block, "from_", None), "model", None),
+                "fallback_model": getattr(getattr(block, "to", None), "model", None),
+                "trigger": getattr(trigger, "type", None),
+                "refusal_category": getattr(trigger, "category", None) or "uncategorized",
+                "content_index": k,
+            }
+        )
+    served = blocks[declined[-1]["content_index"] + 1 :] if declined else blocks
+    text = "".join(block.text for block in served if getattr(block, "type", None) == "text")
+    stop_reason = response.stop_reason
+    category = None
+    if stop_reason == "refusal":
+        details = getattr(response, "stop_details", None)
+        category = getattr(details, "category", None) or "uncategorized"
+    data = None
+    if stop_reason not in ("refusal", "max_tokens") and text.strip():
+        try:
+            data = json.loads(text) if schema is not None else text
+        except ValueError:
+            data = None
+    return {"text": text, "data": data, "stop_reason": stop_reason, "refusal_category": category, "declined_hops": declined}
+
+
 def _usage_dict(usage) -> dict:
     return {
         key: getattr(usage, key, 0) or 0
@@ -226,18 +264,8 @@ class Claude:
             self.ledger.release(rid)
             raise
         cost, attempts = response_cost(response)
-        stop_reason = response.stop_reason
-        category = None
-        if stop_reason == "refusal":
-            details = getattr(response, "stop_details", None)
-            category = getattr(details, "category", None) or "uncategorized"
-        text = "".join(block.text for block in response.content if getattr(block, "type", None) == "text")
-        data = None
-        if stop_reason not in ("refusal", "max_tokens") and text.strip():
-            try:
-                data = json.loads(text) if schema is not None else text
-            except ValueError:
-                data = None
+        read = read_response(response, schema)
+        text, data, stop_reason, category = read["text"], read["data"], read["stop_reason"], read["refusal_category"]
         usage = _usage_dict(response.usage)
         for attempt in attempts[:-1]:  # top-level usage covers only the serving attempt
             for key in usage:
@@ -254,6 +282,7 @@ class Claude:
             "fallback_used": any(a["type"] == "fallback_message" for a in attempts),
             "stop_reason": stop_reason,
             "refusal_category": category,
+            "declined_hops": read["declined_hops"],
             "parsed": data is not None,
             "seconds": round(time.time() - started, 1),
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
