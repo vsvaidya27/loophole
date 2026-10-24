@@ -27,7 +27,7 @@ from transformers import TrainerCallback
 
 from env_compiler.loader import load_game
 
-from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, generate, pick_device, shot_messages
+from .common import DEFAULT_MODEL, EVAL_SEED, build_dataset, generate, lora_config, pick_device, save_model, shot_messages
 
 SFT_SEED = 4000  # disjoint from the GRPO train (1000) and held-out (2000) tasks
 
@@ -100,6 +100,7 @@ def main() -> None:
     p.add_argument("--k", type=int, default=16, help="samples per task for --source self")
     p.add_argument("--min-reward", type=float, default=0.5)
     p.add_argument("--shots", type=int, default=0)
+    p.add_argument("--lora", type=int, default=0, metavar="RANK", help="train LoRA adapters of this rank")
     p.add_argument("--steps", type=int, default=300, help="upper bound; usually stops earlier")
     p.add_argument("--lr", type=float, default=1e-5)
     p.add_argument("--batch", type=int, default=16)
@@ -140,10 +141,11 @@ def main() -> None:
         use_cpu=pick_device() == "cpu",
     )
     trainer = SFTTrainer(
-        model=args.model, args=config, train_dataset=Dataset.from_list(rows), callbacks=[callback]
+        model=args.model, args=config, train_dataset=Dataset.from_list(rows), callbacks=[callback],
+        peft_config=lora_config(args.lora),
     )
     trainer.train()
-    trainer.save_model(str(args.out / "model"))
+    save_model(trainer, str(args.out / "model"))
     print(f"done; warm-started model in {args.out / 'model'}")
 
 

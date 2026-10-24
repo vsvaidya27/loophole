@@ -31,8 +31,10 @@ from .common import (
     TRAIN_SEED,
     build_dataset,
     generate,
+    lora_config,
     make_reward_fn,
     pick_device,
+    save_model,
 )
 
 
@@ -97,6 +99,7 @@ def main() -> None:
     p.add_argument("--eval-every", type=int, default=5)
     p.add_argument("--eval-n", type=int, default=100)
     p.add_argument("--shots", type=int, default=0, help="solved examples prepended to each prompt")
+    p.add_argument("--lora", type=int, default=0, metavar="RANK", help="train LoRA adapters of this rank")
     args = p.parse_args()
 
     from trl import GRPOConfig, GRPOTrainer
@@ -148,9 +151,10 @@ def main() -> None:
         args=config,
         train_dataset=train_data,
         callbacks=[callback],
+        peft_config=lora_config(args.lora),
     )
     trainer.train()
-    trainer.save_model(str(args.out / "model"))
+    save_model(trainer, str(args.out / "model"))
     print(f"done; metrics in {metrics}")
 
 

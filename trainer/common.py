@@ -21,6 +21,25 @@ def pick_device() -> str:
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
 
+def lora_config(rank: int):
+    """LoRA adapters on every linear layer (None for full fine-tuning). Lets a 1.5B-3B model
+    train on one 24 GB card next to colocated vLLM; use a higher --lr (about 1e-4)."""
+    if not rank:
+        return None
+    from peft import LoraConfig
+
+    return LoraConfig(r=rank, lora_alpha=2 * rank, target_modules="all-linear", task_type="CAUSAL_LM")
+
+
+def save_model(trainer, path: str) -> None:
+    """Save full weights; LoRA adapters are merged first so vLLM and from_pretrained can load them."""
+    model = trainer.model
+    if hasattr(model, "merge_and_unload"):
+        model = model.merge_and_unload()
+    model.save_pretrained(path)
+    trainer.processing_class.save_pretrained(path)
+
+
 def shot_messages(game: GameEnv, shots: int) -> list[dict]:
     """`shots` solved example tasks as earlier chat turns (solver answers, in tags), so a
     small model sees the full task -> answer format before its own task."""
