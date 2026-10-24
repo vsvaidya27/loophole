@@ -93,9 +93,12 @@ class RetrievalTests(unittest.TestCase):
         response = [{'schema': {'elements': [{'name': {'some': col}} for col in cols]},
                      'rows': [[r[col] for col in cols] for r in rows]}
                     for cols, rows in zip(COLUMNS.values(), tables)]
-        with patch('harden.store.retrieval.urlopen', return_value=io.BytesIO(json.dumps(response).encode())) as open_url:
+        with patch('harden.store.retrieval.urlopen', side_effect=[io.BytesIO(json.dumps([result]).encode()) for result in response]) as open_url:
             loaded = SpacetimeKnowledgeSource(database='space/name', token='test-token').load()
         request = open_url.call_args.args[0]
+        self.assertEqual(open_url.call_count, 3)
+        for invocation in open_url.call_args_list:
+            self.assertNotIn(';', invocation.args[0].data.decode())
         self.assertIn('space%2Fname/sql', request.full_url)
         self.assertEqual(request.get_header('Authorization'), 'Bearer test-token')
         self.assertNotIn('sample_completion', request.data.decode())

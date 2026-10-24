@@ -2,6 +2,7 @@
 .env
 .env.*
 .spacetime_token
+.spacetime-*-token
 
 # SQLite rollback journal of the invariant mirror
 invariants.db-journal
@@ -22,3 +23,4 @@ node_modules/
 
 # local test reports
 coverage/
+spacetimedb/dist/

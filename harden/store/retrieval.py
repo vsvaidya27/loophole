@@ -59,17 +59,20 @@ class SpacetimeKnowledgeSource:
         self.token, self.timeout = token, timeout
 
     def load(self) -> KnowledgeSnapshot:
-        query = '; '.join(f"SELECT {', '.join(cols)} FROM {table}" for table, cols in COLUMNS.items())
         headers = {'Content-Type': 'text/plain', 'Accept': 'application/json'}
         if self.token:
             headers['Authorization'] = f'Bearer {self.token}'
-        request = Request(self.url, data=query.encode(), headers=headers, method='POST')
-        with urlopen(request, timeout=self.timeout) as response:
-            results = json.load(response)
-        if not isinstance(results, list) or len(results) != len(COLUMNS):
-            raise ValueError('Expected three SQL statement results')
         tables = []
-        for result, columns in zip(results, COLUMNS.values()):
+        # The deployed 2.13 server rejects multi-statement SQL, despite the HTTP
+        # documentation describing it. Use one explicit query per public table.
+        for table, columns in COLUMNS.items():
+            query = f"SELECT {', '.join(columns)} FROM {table}"
+            request = Request(self.url, data=query.encode(), headers=headers, method='POST')
+            with urlopen(request, timeout=self.timeout) as response:
+                results = json.load(response)
+            if not isinstance(results, list) or len(results) != 1:
+                raise ValueError('Expected one SQL statement result')
+            result = results[0]
             # ProductType names are Option<string> in the SATS JSON representation.
             names = [e['name'] for e in result['schema']['elements']]
             names = [n.get('some', n.get('Some')) if isinstance(n, dict) else n for n in names]

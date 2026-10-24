@@ -8,6 +8,7 @@ const auth = TestAuth.fromJwtPayload(JSON.stringify({ iss: 'graph-tests', sub: '
 export function harness() {
   const test = createModuleTestHarness(spacetimedb, mod);
   test.clock.set(Timestamp.fromDate(new Date('2026-10-24T12:00:00Z')));
+  test.withReducerTx(auth, ctx => mod.init(ctx, {}));
   return test;
 }
 export type Harness = ReturnType<typeof harness>;

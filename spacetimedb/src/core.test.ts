@@ -14,6 +14,7 @@ const writer = TestAuth.fromJwtPayload(
 function harness() {
   const test = createModuleTestHarness(spacetimedb, mod);
   test.clock.set(Timestamp.fromDate(new Date('2026-10-24T12:00:00Z')));
+  test.withReducerTx(writer, ctx => mod.init(ctx, {}));
   return test;
 }
 type Harness = ReturnType<typeof harness>;
@@ -76,6 +77,8 @@ describe('module layout', () => {
     const reducers = spacetimedb.moduleDef.reducers.map(r => r.sourceName).sort();
     expect(reducers).toEqual([
       'clear_environment',
+      'init',
+      'set_writer',
       'graph_on_invariant',
       'mark_exploit_patched',
       'record_environment',

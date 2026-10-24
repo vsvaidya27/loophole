@@ -2,6 +2,7 @@
 import { SenderError, t } from 'spacetimedb/server';
 import spacetimedb, { type Ctx } from './schema';
 import { EXPLOIT_CLASSES } from './taxonomy';
+import { requireWriter } from './access';
 
 function compareText(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0;
@@ -97,14 +98,16 @@ function recompute(ctx: Ctx): void {
 export const graph_on_invariant = spacetimedb.reducer(
   { invariant_id: t.string() },
   (ctx, { invariant_id }) => {
+    requireWriter(ctx);
     if (!invariant_id.trim()) throw new SenderError('invariant_id must not be empty');
     recompute(ctx);
   },
 );
-export const rebuild_graph = spacetimedb.reducer(ctx => recompute(ctx));
+export const rebuild_graph = spacetimedb.reducer(ctx => { requireWriter(ctx); recompute(ctx); });
 export const set_graph_config = spacetimedb.reducer(
   { edge_threshold: t.f32(), max_edges_per_node: t.u32() },
   (ctx, { edge_threshold, max_edges_per_node }) => {
+    requireWriter(ctx);
     if (!Number.isFinite(edge_threshold) || edge_threshold < 0 || edge_threshold > 1) {
       throw new SenderError('edge_threshold must be between 0 and 1');
     }
@@ -119,6 +122,7 @@ export const set_graph_config = spacetimedb.reducer(
 export const set_rule_title = spacetimedb.reducer(
   { rule_id: t.string(), title: t.string() },
   (ctx, { rule_id, title }) => {
+    requireWriter(ctx);
     if (!EXPLOIT_CLASSES.has(rule_id)) throw new SenderError('Unknown rule_id');
     const clean = title.trim();
     if (!clean || clean.length > 80) throw new SenderError('title must contain between 1 and 80 characters');

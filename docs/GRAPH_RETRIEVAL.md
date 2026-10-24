@@ -90,8 +90,9 @@ and benign counters accepted by the current reducer.
 
 ## Sources and offline behavior
 
-- `SpacetimeKnowledgeSource`: one HTTP request containing three explicit-column public
-  SQL queries, compatible with the documented `/v1/database/<db>/sql` response. Auth and
+- `SpacetimeKnowledgeSource`: three explicit-column public SQL requests, compatible
+  with the deployed 2.13 `/v1/database/<db>/sql` response. The live server rejects
+  multi-statement queries, so each table gets a separate request. Auth and
   timeout errors propagate. It does not mint tokens or impersonate the pusher.
 - `SQLiteKnowledgeSource(path)`: explicit read-only transaction using the reviewed
   mirror schema. Reports that graph expansion is unavailable; no fallback is hidden.

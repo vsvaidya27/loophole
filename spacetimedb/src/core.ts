@@ -5,6 +5,7 @@
 import { t, SenderError } from 'spacetimedb/server';
 import spacetimedb, { type Ctx } from './schema';
 import { EXPLOIT_CLASSES } from './taxonomy';
+import { requireWriter } from './access';
 
 const SOURCES = new Set(['hub', 'game', 'seed']);
 const ENV_STATUSES = new Set([
@@ -61,6 +62,7 @@ const invariantIdOf = (env_id: string, exploit_id: string) => `${env_id}#${explo
 export const record_environment = spacetimedb.reducer(
   { env_id: t.string(), source: t.string(), title: t.string(), status: t.string() },
   (ctx, { env_id, source, title, status }) => {
+    requireWriter(ctx);
     nonEmpty('env_id', env_id);
     oneOf('source', source, SOURCES);
     oneOf('status', status, ENV_STATUSES);
@@ -82,6 +84,7 @@ export const record_exploit = spacetimedb.reducer(
     evidence_path: t.string(),
   },
   (ctx, args) => {
+    requireWriter(ctx);
     requireEnvironment(ctx, args.env_id);
     nonEmpty('exploit_id', args.exploit_id);
     oneOf('exploit_class', args.exploit_class, EXPLOIT_CLASSES);
@@ -114,6 +117,7 @@ export const record_exploit = spacetimedb.reducer(
 export const mark_exploit_patched = spacetimedb.reducer(
   { env_id: t.string(), exploit_id: t.string(), reward_patched: t.f32() },
   (ctx, { env_id, exploit_id, reward_patched }) => {
+    requireWriter(ctx);
     const invariant_id = invariantIdOf(env_id, exploit_id);
     const existing = ctx.db.exploit.invariant_id.find(invariant_id);
     if (!existing) throw new SenderError(`no exploit ${invariant_id}`);
@@ -136,6 +140,7 @@ export const record_invariant = spacetimedb.reducer(
     embedding: t.array(t.f32()),
   },
   (ctx, args) => {
+    requireWriter(ctx);
     const invariant_id = invariantIdOf(args.env_id, args.exploit_id);
     const source = ctx.db.exploit.invariant_id.find(invariant_id);
     if (!source) throw new SenderError(`record_exploit must be called before record_invariant (${invariant_id})`);
@@ -182,6 +187,7 @@ export const record_rule_application = spacetimedb.reducer(
     detail: t.string(),
   },
   (ctx, { run_id, invariant_id, target_env_id, outcome, detail }) => {
+    requireWriter(ctx);
     nonEmpty('run_id', run_id);
     oneOf('outcome', outcome, OUTCOMES);
     checkDetail(detail);
@@ -206,6 +212,7 @@ export const record_rule_application = spacetimedb.reducer(
 export const clear_environment = spacetimedb.reducer(
   { env_id: t.string() },
   (ctx, { env_id }) => {
+    requireWriter(ctx);
     // The environment row stays; the caller follows up with rebuild_graph.
     for (const row of [...ctx.db.invariant.env_id.filter(env_id)]) {
       ctx.db.invariant_embedding.invariant_id.delete(row.invariant_id);
