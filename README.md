@@ -63,3 +63,15 @@ once approved it will not change.
 ```bash
 python scripts/check_leaderboard.py
 ```
+
+## Env compiler (phase 1)
+
+`env_compiler/` holds the fixed environment template (`template.py`), the validation
+gates (`validate.py`), two hand-written game specs (`games/arith_target.py`,
+`games/clue_guess.py`) and a verifiers adapter (`verifiers_env.py`). Each game has a
+strict parser and a loose one (`strict=False`) for the recorded hacked run.
+
+```bash
+python -m env_compiler   # run the gates on every game
+pytest tests/
+```
