@@ -93,13 +93,19 @@ class Gemini:
             ],
             "generationConfig": {"maxOutputTokens": max_tokens, "temperature": 0.4},
         }
-        for attempt in range(6):  # 503 "high demand" and 429 are transient
-            reply = httpx.post(
-                GEMINI_URL.format(model=model), json=body, headers={"x-goog-api-key": self.api_key}, timeout=180
-            )
+        for attempt in range(8):  # 503 "high demand", 429 and read timeouts are transient
+            try:
+                reply = httpx.post(
+                    GEMINI_URL.format(model=model), json=body, headers={"x-goog-api-key": self.api_key}, timeout=60
+                )
+            except httpx.TimeoutException:
+                time.sleep(min(2**attempt, 30))
+                continue
             if reply.status_code not in (429, 503):
                 break
-            time.sleep(2**attempt)
+            time.sleep(min(2**attempt, 30))
+        else:
+            raise RuntimeError("Gemini unavailable after retries (503/429/timeouts)")
         reply.raise_for_status()
         parts = reply.json()["candidates"][0]["content"].get("parts", [])
         return "".join(p.get("text", "") for p in parts)

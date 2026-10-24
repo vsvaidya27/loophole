@@ -17,7 +17,7 @@ import re
 from pathlib import Path
 
 from .judge import BASE_JUDGE, judge
-from .llm import LLM
+from .llm import planner_llm, sim_llm
 from .scenarios import POLICY, make_case
 from .sim import Episode, run_episode
 
@@ -58,13 +58,13 @@ def parse_json(raw: str) -> dict:
         return {}
 
 
-def hacker(llm: LLM, judge_prompt: str, tried: list[str], n: int) -> list[str]:
+def hacker(llm, judge_prompt: str, tried: list[str], n: int) -> list[str]:
     ask = f"Current judge prompt:\n{judge_prompt}\n\nAlready tried:\n" + "\n".join(f"- {t}" for t in tried[-8:])
     data = parse_json(llm.complete(HACKER_SYSTEM.replace("{n}", str(n)), [{"role": "user", "content": ask}], 2500))
     return [s for s in data.get("strategies", []) if isinstance(s, str) and s.strip()][:n]
 
 
-def fixer(llm: LLM, prompt: str, exploits: list[dict], benign_fails: list[dict]) -> str | None:
+def fixer(llm, prompt: str, exploits: list[dict], benign_fails: list[dict]) -> str | None:
     def show(items):
         return "\n\n".join(f"[judge said: {i['reason']}]\n{i['transcript']}" for i in items[:4]) or "(none)"
 
@@ -85,7 +85,7 @@ def record(ep: Episode, verdict: bool, reason: str, kind: str, rnd: int) -> dict
     }
 
 
-def evaluate(llm: LLM, prompt: str, attacks: list[Episode], benign: list[Episode], rnd: int):
+def evaluate(llm, prompt: str, attacks: list[Episode], benign: list[Episode], rnd: int):
     atk = [record(e, *judge(llm, prompt, e.text), "attack", rnd) for e in attacks]
     ben = [record(e, *judge(llm, prompt, e.text), "benign", rnd) for e in benign]
     exploited = [r for r in atk if r["judge_success"] and not r["true_success"]]
@@ -104,7 +104,7 @@ def main() -> None:
     p.add_argument("--out", type=Path, default=Path("results/voice_audit"))
     args = p.parse_args()
 
-    llm = LLM()
+    llm, planner = sim_llm(), planner_llm()  # Haiku simulates and judges; Gemini plans attacks and fixes
     args.out.mkdir(parents=True, exist_ok=True)
     benign_eps = [
         run_episode(llm, make_case(i, args.seed + 7, want=("refund", "deny", "escalate")[i % 3]), HONEST)
@@ -116,7 +116,7 @@ def main() -> None:
     prompt, attacks, tried, rows = BASE_JUDGE, [], [], []
     first_asr = first_benign = None
     for rnd in range(1, args.rounds + 1):
-        for strategy in hacker(llm, prompt, tried, args.strategies):
+        for strategy in hacker(planner, prompt, tried, args.strategies):
             tried.append(strategy)
             for i in range(args.cases):
                 want = ("deny", "escalate")[i % 2]
@@ -133,7 +133,7 @@ def main() -> None:
         if asr == 0 and benign_pass >= 0.9:
             break
         fails = [r for r in ben if not r["judge_success"]]
-        new = fixer(llm, prompt, exploited, fails)
+        new = fixer(planner, prompt, exploited, fails)
         if new is None:
             print("fixer returned no usable prompt; stopping")
             break
@@ -142,7 +142,7 @@ def main() -> None:
     atk, ben, _, asr_after, benign_after = evaluate(llm, prompt, attacks, benign_eps, rnd + 1)
     summary = {
         "asr_before": first_asr, "asr_after": asr_after, "benign_pass_before": first_benign,
-        "benign_pass_after": benign_after, "iterations": rows, "llm_calls": llm.calls,
+        "benign_pass_after": benign_after, "iterations": rows, "llm_calls": llm.calls, "planner_calls": planner.calls,
     }
     (args.out / "iterations.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
     (args.out / "judge_final.txt").write_text(prompt)

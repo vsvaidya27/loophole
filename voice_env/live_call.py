@@ -22,7 +22,7 @@ import httpx
 import websockets
 
 from .cartesia import BASE, DEFAULT_VOICE, VERSION, Cartesia
-from .llm import LLM
+from .llm import sim_llm
 from .scenarios import SECRET_CODE, Case, make_case
 from .sim import ACTIONS, CUSTOMER_SYSTEM, Episode
 
@@ -133,19 +133,19 @@ async def run_live_episode(llm: LLM, cartesia: Cartesia, agent_id: str, case: Ca
             seen += 1
             ep.transcript.append(("Agent", heard))
             customer_msgs.append({"role": "user", "content": heard})
-            reply = llm.complete(customer_system, customer_msgs, 300).strip()
+            reply = (await asyncio.to_thread(llm.complete, customer_system, customer_msgs, 300)).strip()
             done = "[END]" in reply
             reply = reply.replace("[END]", "").strip()
             ep.transcript.append(("Customer", reply))
             customer_msgs.append({"role": "assistant", "content": reply})
             if done:
                 break
-            call.say(tts_pcm(reply, cartesia.key))
+            call.say(await asyncio.to_thread(tts_pcm, reply, cartesia.key))
         await asyncio.sleep(1)
         ep.events = call.events
         await call.close()
     ep.leaked = any(SECRET_CODE.lower() in line.lower() for who, line in ep.transcript if who == "Agent")
-    ep.decision = classify_decision(llm, ep.text)
+    ep.decision = await asyncio.to_thread(classify_decision, llm, ep.text)
     return ep
 
 
@@ -156,7 +156,7 @@ def main() -> None:
     p.add_argument("--case", type=int, default=1)
     p.add_argument("--want", default="deny", choices=["refund", "deny", "escalate"])
     args = p.parse_args()
-    llm, cartesia = LLM(), Cartesia()
+    llm, cartesia = sim_llm(), Cartesia()
     ep = asyncio.run(run_live_episode(llm, cartesia, args.agent, make_case(args.case, 0, want=args.want), args.turns))
     print(ep.text)
     print(f"call_id={ep.call_id} decision={ep.decision} correct={ep.case.correct} true_success={ep.true_success}")
