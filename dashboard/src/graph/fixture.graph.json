@@ -1,0 +1,464 @@
+{
+  "nodes": [
+    {
+      "id": "env:seed/gsm8k-lite",
+      "kind": "environment",
+      "label": "Grade-school math, answer in <answer> tags",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "env:seed/ifeval-lite",
+      "kind": "environment",
+      "label": "Instruction following with checkable constraints",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "env:seed/math-boxed",
+      "kind": "environment",
+      "label": "Competition math, boxed answer, math-verify",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "env:seed/medmcq",
+      "kind": "environment",
+      "label": "Medical multiple choice, boxed letter",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "env:seed/number-game-demo",
+      "kind": "environment",
+      "label": "Compiled number game (transfer target)",
+      "source": "seed",
+      "status": "hardening"
+    },
+    {
+      "id": "env:seed/number-guess",
+      "kind": "environment",
+      "label": "Guess the hidden number",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "env:seed/reverse-text",
+      "kind": "environment",
+      "label": "Reverse a string, LCS-scored XML answer",
+      "source": "seed",
+      "status": "patched"
+    },
+    {
+      "id": "inv:seed/gsm8k-lite#e1",
+      "kind": "invariant",
+      "label": "Number spam satisfies a substring answer check",
+      "exploitClass": "substring-match",
+      "envId": "seed/gsm8k-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/gsm8k-lite#e2",
+      "kind": "invariant",
+      "label": "Repeated answer tags, grader credits any match",
+      "exploitClass": "multi-answer",
+      "envId": "seed/gsm8k-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/gsm8k-lite#e3",
+      "kind": "invariant",
+      "label": "Normalizer strips the minus sign before comparing",
+      "exploitClass": "lenient-normalization",
+      "envId": "seed/gsm8k-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/ifeval-lite#e1",
+      "kind": "invariant",
+      "label": "Empty JSON passes the JSON-format constraint",
+      "exploitClass": "format-only",
+      "envId": "seed/ifeval-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/ifeval-lite#e2",
+      "kind": "invariant",
+      "label": "Word-count constraint met by repeating one word",
+      "exploitClass": "constraint-gaming",
+      "envId": "seed/ifeval-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/ifeval-lite#e3",
+      "kind": "invariant",
+      "label": "Required keywords listed without any prose",
+      "exploitClass": "constraint-gaming",
+      "envId": "seed/ifeval-lite",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/math-boxed#e1",
+      "kind": "invariant",
+      "label": "Multiple boxed answers, verifier accepts any",
+      "exploitClass": "multi-answer",
+      "envId": "seed/math-boxed",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/medmcq#e1",
+      "kind": "invariant",
+      "label": "Option letter appears anywhere in the rationale",
+      "exploitClass": "substring-match",
+      "envId": "seed/medmcq",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/medmcq#e2",
+      "kind": "invariant",
+      "label": "Boxed letter list contains the right option",
+      "exploitClass": "multi-answer",
+      "envId": "seed/medmcq",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/medmcq#e3",
+      "kind": "invariant",
+      "label": "Answer line leaks into the prompt template",
+      "exploitClass": "answer-leak",
+      "envId": "seed/medmcq",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/number-guess#e1",
+      "kind": "invariant",
+      "label": "Guess list contains the secret number",
+      "exploitClass": "substring-match",
+      "envId": "seed/number-guess",
+      "pending": false
+    },
+    {
+      "id": "inv:seed/reverse-text#e1",
+      "kind": "invariant",
+      "label": "Unclosed answer tag returns the whole reply",
+      "exploitClass": "parser-bypass",
+      "envId": "seed/reverse-text",
+      "pending": false
+    },
+    {
+      "id": "rule:answer-leak",
+      "kind": "rule",
+      "label": "Answer leak",
+      "memberCount": 1,
+      "envCount": 1
+    },
+    {
+      "id": "rule:constraint-gaming",
+      "kind": "rule",
+      "label": "Constraint gaming",
+      "memberCount": 2,
+      "envCount": 1
+    },
+    {
+      "id": "rule:format-only",
+      "kind": "rule",
+      "label": "Format only",
+      "memberCount": 1,
+      "envCount": 1
+    },
+    {
+      "id": "rule:lenient-normalization",
+      "kind": "rule",
+      "label": "Lenient normalization",
+      "memberCount": 1,
+      "envCount": 1
+    },
+    {
+      "id": "rule:multi-answer",
+      "kind": "rule",
+      "label": "Multi answer",
+      "memberCount": 3,
+      "envCount": 3
+    },
+    {
+      "id": "rule:parser-bypass",
+      "kind": "rule",
+      "label": "Parser bypass",
+      "memberCount": 1,
+      "envCount": 1
+    },
+    {
+      "id": "rule:substring-match",
+      "kind": "rule",
+      "label": "Substring match",
+      "memberCount": 3,
+      "envCount": 3
+    }
+  ],
+  "edges": [
+    {
+      "id": "applied_to:seed/math-boxed#e1->seed/number-game-demo",
+      "kind": "applied_to",
+      "source": "rule:multi-answer",
+      "target": "env:seed/number-game-demo",
+      "outcome": "not_applicable"
+    },
+    {
+      "id": "applied_to:seed/number-guess#e1->seed/number-game-demo",
+      "kind": "applied_to",
+      "source": "rule:substring-match",
+      "target": "env:seed/number-game-demo",
+      "outcome": "blocked"
+    },
+    {
+      "id": "found_in:seed/gsm8k-lite#e1",
+      "kind": "found_in",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "env:seed/gsm8k-lite"
+    },
+    {
+      "id": "found_in:seed/gsm8k-lite#e2",
+      "kind": "found_in",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "env:seed/gsm8k-lite"
+    },
+    {
+      "id": "found_in:seed/gsm8k-lite#e3",
+      "kind": "found_in",
+      "source": "inv:seed/gsm8k-lite#e3",
+      "target": "env:seed/gsm8k-lite"
+    },
+    {
+      "id": "found_in:seed/ifeval-lite#e1",
+      "kind": "found_in",
+      "source": "inv:seed/ifeval-lite#e1",
+      "target": "env:seed/ifeval-lite"
+    },
+    {
+      "id": "found_in:seed/ifeval-lite#e2",
+      "kind": "found_in",
+      "source": "inv:seed/ifeval-lite#e2",
+      "target": "env:seed/ifeval-lite"
+    },
+    {
+      "id": "found_in:seed/ifeval-lite#e3",
+      "kind": "found_in",
+      "source": "inv:seed/ifeval-lite#e3",
+      "target": "env:seed/ifeval-lite"
+    },
+    {
+      "id": "found_in:seed/math-boxed#e1",
+      "kind": "found_in",
+      "source": "inv:seed/math-boxed#e1",
+      "target": "env:seed/math-boxed"
+    },
+    {
+      "id": "found_in:seed/medmcq#e1",
+      "kind": "found_in",
+      "source": "inv:seed/medmcq#e1",
+      "target": "env:seed/medmcq"
+    },
+    {
+      "id": "found_in:seed/medmcq#e2",
+      "kind": "found_in",
+      "source": "inv:seed/medmcq#e2",
+      "target": "env:seed/medmcq"
+    },
+    {
+      "id": "found_in:seed/medmcq#e3",
+      "kind": "found_in",
+      "source": "inv:seed/medmcq#e3",
+      "target": "env:seed/medmcq"
+    },
+    {
+      "id": "found_in:seed/number-guess#e1",
+      "kind": "found_in",
+      "source": "inv:seed/number-guess#e1",
+      "target": "env:seed/number-guess"
+    },
+    {
+      "id": "found_in:seed/reverse-text#e1",
+      "kind": "found_in",
+      "source": "inv:seed/reverse-text#e1",
+      "target": "env:seed/reverse-text"
+    },
+    {
+      "id": "instance_of:seed/gsm8k-lite#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "rule:substring-match"
+    },
+    {
+      "id": "instance_of:seed/gsm8k-lite#e2",
+      "kind": "instance_of",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "rule:multi-answer"
+    },
+    {
+      "id": "instance_of:seed/gsm8k-lite#e3",
+      "kind": "instance_of",
+      "source": "inv:seed/gsm8k-lite#e3",
+      "target": "rule:lenient-normalization"
+    },
+    {
+      "id": "instance_of:seed/ifeval-lite#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/ifeval-lite#e1",
+      "target": "rule:format-only"
+    },
+    {
+      "id": "instance_of:seed/ifeval-lite#e2",
+      "kind": "instance_of",
+      "source": "inv:seed/ifeval-lite#e2",
+      "target": "rule:constraint-gaming"
+    },
+    {
+      "id": "instance_of:seed/ifeval-lite#e3",
+      "kind": "instance_of",
+      "source": "inv:seed/ifeval-lite#e3",
+      "target": "rule:constraint-gaming"
+    },
+    {
+      "id": "instance_of:seed/math-boxed#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/math-boxed#e1",
+      "target": "rule:multi-answer"
+    },
+    {
+      "id": "instance_of:seed/medmcq#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/medmcq#e1",
+      "target": "rule:substring-match"
+    },
+    {
+      "id": "instance_of:seed/medmcq#e2",
+      "kind": "instance_of",
+      "source": "inv:seed/medmcq#e2",
+      "target": "rule:multi-answer"
+    },
+    {
+      "id": "instance_of:seed/medmcq#e3",
+      "kind": "instance_of",
+      "source": "inv:seed/medmcq#e3",
+      "target": "rule:answer-leak"
+    },
+    {
+      "id": "instance_of:seed/number-guess#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/number-guess#e1",
+      "target": "rule:substring-match"
+    },
+    {
+      "id": "instance_of:seed/reverse-text#e1",
+      "kind": "instance_of",
+      "source": "inv:seed/reverse-text#e1",
+      "target": "rule:parser-bypass"
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e1|seed/gsm8k-lite#e2",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "inv:seed/gsm8k-lite#e2",
+      "weight": 0.5424748659133911
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e1|seed/ifeval-lite#e2",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "inv:seed/ifeval-lite#e2",
+      "weight": 0.45163339376449585
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e1|seed/math-boxed#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "inv:seed/math-boxed#e1",
+      "weight": 0.5090460777282715
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e1|seed/medmcq#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "inv:seed/medmcq#e1",
+      "weight": 0.5040832757949829
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e1|seed/reverse-text#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e1",
+      "target": "inv:seed/reverse-text#e1",
+      "weight": 0.5064391493797302
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e2|seed/ifeval-lite#e2",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "inv:seed/ifeval-lite#e2",
+      "weight": 0.5244284272193909
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e2|seed/ifeval-lite#e3",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "inv:seed/ifeval-lite#e3",
+      "weight": 0.459349662065506
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e2|seed/math-boxed#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "inv:seed/math-boxed#e1",
+      "weight": 0.5697969198226929
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e2|seed/medmcq#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "inv:seed/medmcq#e1",
+      "weight": 0.4649432301521301
+    },
+    {
+      "id": "similar_to:seed/gsm8k-lite#e2|seed/reverse-text#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/gsm8k-lite#e2",
+      "target": "inv:seed/reverse-text#e1",
+      "weight": 0.5890342593193054
+    },
+    {
+      "id": "similar_to:seed/ifeval-lite#e1|seed/ifeval-lite#e3",
+      "kind": "similar_to",
+      "source": "inv:seed/ifeval-lite#e1",
+      "target": "inv:seed/ifeval-lite#e3",
+      "weight": 0.4751743674278259
+    },
+    {
+      "id": "similar_to:seed/ifeval-lite#e2|seed/ifeval-lite#e3",
+      "kind": "similar_to",
+      "source": "inv:seed/ifeval-lite#e2",
+      "target": "inv:seed/ifeval-lite#e3",
+      "weight": 0.6293690800666809
+    },
+    {
+      "id": "similar_to:seed/math-boxed#e1|seed/medmcq#e1",
+      "kind": "similar_to",
+      "source": "inv:seed/math-boxed#e1",
+      "target": "inv:seed/medmcq#e1",
+      "weight": 0.5275552868843079
+    },
+    {
+      "id": "similar_to:seed/math-boxed#e1|seed/medmcq#e2",
+      "kind": "similar_to",
+      "source": "inv:seed/math-boxed#e1",
+      "target": "inv:seed/medmcq#e2",
+      "weight": 0.5047279596328735
+    },
+    {
+      "id": "similar_to:seed/medmcq#e1|seed/medmcq#e2",
+      "kind": "similar_to",
+      "source": "inv:seed/medmcq#e1",
+      "target": "inv:seed/medmcq#e2",
+      "weight": 0.5845569372177124
+    }
+  ],
+  "diagnostics": []
+}
