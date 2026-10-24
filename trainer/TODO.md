@@ -45,3 +45,9 @@ run with vLLM or on a GPU yet, and no run has shown accuracy climbing.
   accuracy are measured differently; compare trends, not absolute values.
 - `info_json` is a string column because TRL forwards extra columns to reward functions.
 - Requirements are unpinned.
+
+## New games (branch `games`) - base rates on Qwen2.5-0.5B-Instruct, T=1.0, mean reward
+anagrams 0%, word_hunt 0%, scrabble_lite 4%, snake 2%, lights_out 3%, trading_sim 11%.
+Only `trading_sim` and `arith_compute` (24%) are near the 10-30% target. Options: a bigger
+model (Qwen 1.5B), a short SFT warm start on reference answers, or easier tiers
+(smaller grids, 5-letter racks, 1-2 foods). Re-probe on the GPU box before picking.
