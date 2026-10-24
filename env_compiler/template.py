@@ -19,6 +19,11 @@ ANSWER_RE = re.compile(r"<answer>(.*?)</answer>", re.DOTALL | re.IGNORECASE)
 FORMAT_HINT = "Reply with only the final answer inside <answer></answer> tags."
 
 
+def with_example(example: str) -> str:
+    """FORMAT_HINT plus a sample reply (shape only), so a small model learns the format."""
+    return f"{FORMAT_HINT} Example reply: <answer>{example}</answer>"
+
+
 @dataclass
 class Task:
     """One generated problem. `info` must be JSON-serialisable and is all the reward
@@ -40,6 +45,9 @@ class GameEnv(ABC):
 
     name: str = "game"
     description: str = ""  # the plain-English spec
+    # Gate limit for the random-policy score. Games with partial credit (a random
+    # well-formed answer earns a little) may raise it; keep it as low as the game allows.
+    random_max: float = 0.10
 
     def __init__(self, strict: bool = True):
         self.strict = strict
@@ -49,9 +57,18 @@ class GameEnv(ABC):
     def generate(self, rng: random.Random) -> Task:
         """Make one task from the RNG. Must be deterministic given the RNG state."""
 
-    @abstractmethod
     def check(self, info: dict, candidate: str) -> bool:
-        """Is this single candidate answer string correct for the task?"""
+        """Is this single candidate answer string fully correct? (Implement this, or
+        `score` for partial credit.)"""
+        return self.score(info, candidate) >= 1.0
+
+    def score(self, info: dict, candidate: str) -> float:
+        """Reward in [0, 1] for one candidate answer string. Defaults to `check`."""
+        return 1.0 if self.check(info, candidate) else 0.0
+
+    def frames(self, info: dict, answer: str) -> list[str]:
+        """Optional: text frames replaying `answer` on the task, for the dashboard."""
+        return []
 
     @abstractmethod
     def candidates(self, text: str) -> list[str]:
@@ -75,8 +92,8 @@ class GameEnv(ABC):
         text = text or ""
         if self.strict:
             answer = self.parse(text)
-            return 1.0 if answer is not None and self.check(info, answer) else 0.0
-        return 1.0 if any(self.check(info, c) for c in self.candidates(text)) else 0.0
+            return self.score(info, answer) if answer is not None else 0.0
+        return max((self.score(info, c) for c in self.candidates(text)), default=0.0)
 
     def reference_completion(self, task: Task) -> str:
         return f"<answer>{self.solve(task)}</answer>"

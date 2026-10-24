@@ -76,6 +76,15 @@ python -m env_compiler   # run the gates on every game
 pytest tests/
 ```
 
+Games (`env_compiler/games/`), each with a strict parser and a loose (hackable) one:
+
+| Game | Type | Loose-parser exploit |
+| --- | --- | --- |
+| `arith_target`, `arith_compute`, `clue_guess`, `clue_guess_easy` | exact-match puzzles | any matching candidate anywhere in the output |
+| `anagrams`, `word_hunt`, `scrabble_lite` | word games (bundled ENABLE list), partial credit | no cap on listed words, so spam words |
+| `snake`, `lights_out` | simulators (`frames` replays the plan) | spam many move strings, best one counts |
+| `trading_sim` | simulated market with planted momentum (not real data) | hedge BUY and SELL, or use an oversized position |
+
 ## Trainer (phase 1)
 
 `trainer/` runs GRPO (TRL) on any game and writes `metrics.jsonl` for the dashboard:

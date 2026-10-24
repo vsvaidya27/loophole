@@ -12,7 +12,6 @@ from .template import MAX_OUTPUT_TOKENS, GameEnv
 
 NULL_COMPLETIONS = ("", " ", "<answer></answer>", "<answer>0</answer>", "I don't know.")
 NULL_MAX = 0.05
-RANDOM_MAX = 0.10
 
 
 @dataclass
@@ -50,7 +49,7 @@ def validate(env: GameEnv, n: int = 200, seed: int = 12345) -> Report:
     for t in tasks:
         ref = env.reference_completion(t)
         ref_scores.append(env.reward(t.info, ref))
-        if len(ref.split()) > MAX_OUTPUT_TOKENS // 2:
+        if len(ref) > MAX_OUTPUT_TOKENS * 3:
             problems.append(f"reference answer too long for a {MAX_OUTPUT_TOKENS}-token budget")
         null_scores.append(max(env.reward(t.info, c) for c in NULL_COMPLETIONS))
         rand_scores.append(env.reward(t.info, env.random_completion(t, rng)))
@@ -61,8 +60,8 @@ def validate(env: GameEnv, n: int = 200, seed: int = 12345) -> Report:
         problems.append(f"reference solver must score 1.0, got {report.reference:.3f}")
     if report.null > NULL_MAX:
         problems.append(f"null policy scores {report.null:.3f}, must be <= {NULL_MAX}")
-    if report.random > RANDOM_MAX:
-        problems.append(f"random policy scores {report.random:.3f}, must be <= {RANDOM_MAX}")
+    if report.random > env.random_max:
+        problems.append(f"random policy scores {report.random:.3f}, must be <= {env.random_max}")
     if any(not 0.0 <= s <= 1.0 for s in ref_scores + null_scores + rand_scores):
         problems.append("rewards must lie in [0, 1]")
     return report
