@@ -96,18 +96,20 @@ def main() -> None:
     p.add_argument("--lr", type=float, default=2e-5)
     p.add_argument("--eval-every", type=int, default=5)
     p.add_argument("--eval-n", type=int, default=100)
+    p.add_argument("--shots", type=int, default=0, help="solved examples prepended to each prompt")
     args = p.parse_args()
 
     from trl import GRPOConfig, GRPOTrainer
 
     train_game = load_game(args.game, strict=not args.loose)
     strict_game, loose_game = load_game(args.game, strict=True), load_game(args.game, strict=False)
-    eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED)
-    train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED)
+    eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED, args.shots)
+    train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED, args.shots)
 
     args.out.mkdir(parents=True, exist_ok=True)
     metrics = args.out / "metrics.jsonl"
     metrics.write_text("")
+    (args.out / "config.json").write_text(json.dumps({k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}))
     callback = MetricsCallback(
         metrics, strict_game, loose_game,
         [row["prompt"] for row in eval_data],

@@ -9,7 +9,7 @@ from datasets import Dataset
 from env_compiler.template import GameEnv
 
 DEFAULT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
-TRAIN_SEED, EVAL_SEED = 1000, 2000
+TRAIN_SEED, EVAL_SEED, SHOT_SEED = 1000, 2000, 3000
 MAX_NEW_TOKENS = 64
 
 
@@ -21,11 +21,24 @@ def pick_device() -> str:
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
 
-def build_dataset(game: GameEnv, n: int, seed: int) -> Dataset:
+def shot_messages(game: GameEnv, shots: int) -> list[dict]:
+    """`shots` solved example tasks as earlier chat turns (solver answers, in tags), so a
+    small model sees the full task -> answer format before its own task."""
+    messages = []
+    for t in game.tasks(shots, SHOT_SEED):
+        messages += [
+            {"role": "user", "content": t.question},
+            {"role": "assistant", "content": game.reference_completion(t)},
+        ]
+    return messages
+
+
+def build_dataset(game: GameEnv, n: int, seed: int, shots: int = 0) -> Dataset:
     """Conversational prompts. `info` is stored as JSON text: TRL forwards extra dataset
     columns to reward functions, and a string column avoids Arrow schema trouble."""
+    examples = shot_messages(game, shots)
     rows = [
-        {"prompt": [{"role": "user", "content": t.question}], "info_json": json.dumps(t.info)}
+        {"prompt": examples + [{"role": "user", "content": t.question}], "info_json": json.dumps(t.info)}
         for t in game.tasks(n, seed)
     ]
     return Dataset.from_list(rows)
