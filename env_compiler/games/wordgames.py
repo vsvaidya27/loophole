@@ -52,13 +52,20 @@ class _WordListGame(GameEnv):
     """Shared scoring: reward = points of distinct valid words / points of the best TOP_K."""
 
     random_max = 0.10
+    # Easier tiers: reward = distinct valid words of count_min_len+ letters / count_target.
+    count_target: int | None = None
+    count_min_len = 3
 
     def is_valid(self, info: dict, word: str) -> bool:
         raise NotImplementedError
 
     def score(self, info: dict, candidate: str) -> float:
         limit = TOP_K if self.strict else None
-        return _word_list_reward(split_words(candidate), lambda w: self.is_valid(info, w), info["target"], limit)
+        found = split_words(candidate)
+        if self.count_target:
+            valid = {w for w in found[:limit] if len(w) >= self.count_min_len and self.is_valid(info, w)}
+            return min(1.0, len(valid) / self.count_target)
+        return _word_list_reward(found, lambda w: self.is_valid(info, w), info["target"], limit)
 
     def candidates(self, text: str) -> list[str]:
         return [text]
@@ -66,13 +73,25 @@ class _WordListGame(GameEnv):
     def solve(self, task: Task) -> str:
         return " ".join(task.info["best"])
 
+    def _enough_long(self, valid: list[str]) -> bool:
+        return not self.count_target or sum(len(w) >= self.count_min_len for w in valid) >= self.count_target
+
+    def _scoring(self) -> str:
+        if self.count_target:
+            return (
+                f"Every valid word of {self.count_min_len}+ letters counts; "
+                f"{self.count_target} of them is a perfect score."
+            )
+        return "Longer words score more."
+
 
 class Anagrams(_WordListGame):
     name = "anagrams"
     description = SPEC_ANAGRAMS
+    word_len, min_valid = 6, 12
 
     def generate(self, rng: random.Random) -> Task:
-        pool = sorted(w for w in words() if len(w) == 6)
+        pool = sorted(w for w in words() if len(w) == self.word_len)
         while True:
             base = rng.choice(pool)
             letters = list(base)
@@ -80,13 +99,13 @@ class Anagrams(_WordListGame):
             rack = "".join(letters)
             valid = spellable(rack)
             best = top_words(valid)
-            if len(valid) >= 12:
+            if len(valid) >= self.min_valid and self._enough_long(valid):
                 break
         target = sum(points(w) for w in best)
         question = (
             f"Letters: {' '.join(rack.upper())}\nList up to {TOP_K} different English words (3+ letters) "
-            f"made only from these letters, each letter used at most as often as shown. Longer words "
-            f"score more.\n{with_example('tea eat ate')}"
+            f"made only from these letters, each letter used at most as often as shown. {self._scoring()}\n"
+            f"{with_example('tea eat ate')}"
         )
         return Task(question, " ".join(best), {"letters": rack, "target": target, "best": best})
 
@@ -95,7 +114,7 @@ class Anagrams(_WordListGame):
 
     def random_answer(self, task: Task, rng: random.Random) -> str:
         letters = task.info["letters"]
-        return " ".join("".join(rng.sample(letters, 3)) for _ in range(TOP_K))
+        return " ".join("".join(rng.sample(letters, self.count_min_len)) for _ in range(TOP_K))
 
 
 NEIGHBOURS = [(dr, dc) for dr in (-1, 0, 1) for dc in (-1, 0, 1) if (dr, dc) != (0, 0)]
@@ -154,7 +173,7 @@ class WordHunt(_WordListGame):
         question = (
             f"Word Hunt grid:\n{rows}\nList up to {TOP_K} different English words (3+ letters) spelled by "
             f"chaining touching letters (sideways, up/down or diagonal), never reusing a square within a "
-            f"word. Longer words score more.\n{with_example('tea eat ate')}"
+            f"word. {self._scoring()}\n{with_example('tea eat ate')}"
         )
         return Task(question, " ".join(best), {"grid": grid, "target": sum(points(w) for w in best), "best": best})
 
@@ -163,7 +182,7 @@ class WordHunt(_WordListGame):
 
     def random_answer(self, task: Task, rng: random.Random) -> str:
         grid = task.info["grid"]
-        return " ".join("".join(rng.sample(grid, 3)) for _ in range(TOP_K))
+        return " ".join("".join(rng.sample(grid, self.count_min_len)) for _ in range(TOP_K))
 
 
 def tile_score(word: str) -> int:
