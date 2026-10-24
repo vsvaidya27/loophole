@@ -26,7 +26,6 @@ from transformers import TrainerCallback
 from env_compiler.loader import load_game
 
 from .common import (
-    require_single_turn,
     DEFAULT_MODEL,
     EVAL_SEED,
     TRAIN_SEED,
@@ -99,11 +98,17 @@ def main() -> None:
     p.add_argument("--eval-n", type=int, default=100)
     args = p.parse_args()
 
-    from trl import GRPOConfig, GRPOTrainer
-
     train_game = load_game(args.game, strict=not args.loose)
     strict_game, loose_game = load_game(args.game, strict=True), load_game(args.game, strict=False)
-    require_single_turn(strict_game)
+    if getattr(strict_game, "kind", "single") == "multi":
+        # Multi-turn games need a rollout loop with environment feedback; TRL's trainer cannot do that.
+        from .multiturn_grpo import train_multiturn
+
+        args.micro_batch = min(args.micro_batch, 8)  # per-turn samples are longer than single completions
+        return train_multiturn(args, strict_game, train_game, loose_game)
+
+    from trl import GRPOConfig, GRPOTrainer
+
     eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED)
     train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED)
 

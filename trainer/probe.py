@@ -20,8 +20,23 @@ from .common import (
     completion_text,
     generate,
     pick_device,
-    require_single_turn,
 )
+
+
+def probe_multiturn(args, strict, loose, model, tokenizer, device) -> None:
+    """Solve rate of the base model over full episodes (sampled replies), strict and loose."""
+    from .multiturn_grpo import hf_generator, rollout_episodes, summarize
+
+    seeds = strict.episode_seeds(args.n, EVAL_SEED)
+    temperature = args.temperature or 1.0
+    gen = hf_generator(model, tokenizer, device, sample=True, temperature=temperature)
+    s, l = summarize(rollout_episodes(strict, seeds, gen)), summarize(rollout_episodes(loose, seeds, gen))
+    print(
+        f"{strict.name} on {args.model} ({device}, n={args.n} episodes, T={temperature}): "
+        f"strict={s['reward']:.0%} loose={l['reward']:.0%} mean_turns={s['mean_turns']:.1f} mean_words={s['mean_words']:.1f}"
+    )
+    if not 0.10 <= s["reward"] <= 0.30:
+        print("note: strict solve rate is outside the 10-30% target; tune the game's difficulty")
 
 
 def main() -> None:
@@ -35,10 +50,11 @@ def main() -> None:
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     strict, loose = load_game(args.game, strict=True), load_game(args.game, strict=False)
-    require_single_turn(strict)
     device = pick_device()
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(args.model).to(device)
+    if getattr(strict, "kind", "single") == "multi":
+        return probe_multiturn(args, strict, loose, model, tokenizer, device)
     data = build_dataset(strict, args.n, EVAL_SEED)
     prompts = [row["prompt"] for row in data]
     infos = [__import__("json").loads(row["info_json"]) for row in data]

@@ -151,6 +151,12 @@ path (games, trainer, hardening, leaderboard checker) depends on it.
 - Compiler: the fit check now returns `single`, `multi` or `reject`. Multi-turn is refused unless
   `--allow-multiturn` is passed, then it uses its own template and worked example.
 - verifiers: `load_environment("number_hunt")` returns a `MultiTurnEnv` adapter (`GameMultiTurnEnv`).
-- Not supported yet: the GRPO trainer (it exits with a clear message for multi-turn games) and the
-  hardening engine / leaderboard evidence schema. TRL's `GRPOTrainer` needs a rollout loop with
-  environment feedback, and `check_leaderboard.py` scores one string per completion.
+- Trainer: `python -m trainer.train number_hunt_easy --out runs/x` runs a small self-contained GRPO
+  loop (`trainer/multiturn_grpo.py`) instead of TRL, because TRL's `GRPOTrainer` assumes one
+  completion per prompt (and the pinned TRL 0.24 has no multi-turn hook). Same objective as our TRL
+  runs (beta 0, one update per batch): group-normalised episode reward times the log-probability of
+  the model's own reply tokens, with each turn a separate (context, reply) sample so environment text
+  never enters the loss. Metrics land in the same `metrics.jsonl` format (held-out accuracy is strict
+  and greedy). Single GPU, HF generation, no vLLM. `trainer.probe` reports a game's base solve rate.
+- Not supported yet: the hardening engine / leaderboard evidence schema (`check_leaderboard.py`
+  scores one string per completion; any change there goes through Varun).

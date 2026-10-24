@@ -53,6 +53,14 @@ model (Qwen 1.5B), a short SFT warm start on reference answers, or easier tiers
 (smaller grids, 5-letter racks, 1-2 foods). Re-probe on the GPU box before picking.
 
 ## Multi-turn (branch `multi-turn`)
-- [ ] Rollout loop with environment feedback for `MultiTurnGameEnv` (TRL GRPO expects one prompt, one
-      completion). Options: flatten an episode into one completion, or verifiers' multi-turn trainer /
-      a custom rollout function. Until then `trainer.*` exits for multi-turn games.
+- [x] Rollout loop + GRPO update: `trainer/multiturn_grpo.py`, dispatched from `trainer.train` for
+      multi-turn games. Smoke-tested on a Mac (rollouts, eval, a real gradient step); not run on a GPU.
+- [ ] On the GPU box: `python -m trainer.probe number_hunt_easy --n 100 --temperature 1.0`
+      (a 32-episode Mac probe gave 3% strict / 16% loose; target is 10-30%), then
+      `python -m trainer.train number_hunt_easy --out runs/mt-hardened` and `--loose` for the hacked run.
+- [ ] Tune: the one real update I ran (16 episodes, lr 1e-5) sent loose held-out accuracy 0.5 -> 0.0 and
+      replies from 1 to 10 words, so use the full 16 prompts x 8 generations per step and try lr 5e-6.
+- [ ] Speed: the update step took ~450 s on a Mac (MPS, fp32, full logits). On a GPU it runs in bf16;
+      if memory is tight, lower `--micro-batch` or compute logits only at reply positions.
+- [ ] Single GPU only (no accelerate / multi-GPU split yet) and HF `generate` (no vLLM).
+- [ ] Rollout/replay page for multi-turn transcripts (`trainer/rollout.py` and `viz.py` are single-turn).

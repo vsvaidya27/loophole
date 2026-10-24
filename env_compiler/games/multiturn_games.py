@@ -67,6 +67,16 @@ class NumberHunt(MultiTurnGameEnv):
         return f"<answer>{rng.randint(self.LOW, self.HIGH)}</answer>"
 
 
+class NumberHuntEasy(NumberHunt):
+    """1-40 in 7 guesses: within reach of a small model that has started using the feedback."""
+
+    name = "number_hunt_easy"
+    description = "Find a hidden number between 1 and 40. After each guess you are told higher or lower."
+    max_turns = 7
+    LOW, HIGH = 1, 40
+    random_max = 0.25  # 7 random guesses out of 40 land on the number about 17% of the time
+
+
 ALL_CODES = ["".join(p) for p in itertools.permutations("0123456789", 3)]
 
 
