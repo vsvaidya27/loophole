@@ -1,8 +1,8 @@
-# One simple knowledge-graph transfer demo
+# Rule transfer experiment
 
-Open **Rule transfer** at `http://127.0.0.1:5173/#knowledge-demo`.
+Open **E2E Demo** at `http://127.0.0.1:5173/#knowledge-demo`.
 
-## What actually worked
+## What we did
 
 1. Read the live SpacetimeDB graph and restrict retrieval to its **95 Hub records**.
    Compiler-game records and their previous repairs were excluded.
@@ -23,19 +23,18 @@ Open **Rule transfer** at `http://127.0.0.1:5173/#knowledge-demo`.
 The adaptation cost an estimated **$0.00057**. No new target-generation or hacker
 model calls, GPU jobs, or paid Prime Intellect environment runs were needed.
 
-## Judge walkthrough
+## Walkthrough
 
-The leftmost **Rule transfer** tab now embeds the six-act presentation from
-`varun/loop-demo`, also available at `/demo.html`.
+The **E2E Demo** tab plays this experiment as a six-act presentation, also available at
+`/demo.html`.
 
 - Show the independent Number hunt target, then the five recorded candidates.
 - Expand **Where this rule came from** for the selected rank-two Mini Sudoku rule.
 - Show the reward gap, actual adaptation code, saved validation and multi-turn transcript.
 - Explain the published application edge and the separately labeled browser learning illustration.
 
-See `docs/LOOP_DEMO_TRANSFER.md` for the full presentation mapping. The UI plays
-saved evidence and makes no model calls or graph writes. To recompute sandbox
-checks, use the CLI below; the old standalone tab and replay button are removed.
+The UI plays saved evidence and makes no model calls or graph writes. To recompute the
+sandbox checks, use the CLI below.
 
 ## Reproduce
 

@@ -1,198 +1,159 @@
-# loophole
+# Loophole
 
-Cal Hacks 2026: one engine that compiles, hardens and trains RL environments. We prove
-it on Prime Intellect Environments Hub environments first, then point it at a game a
-judge types live. The full plan, demo script and timeline are in
-[docs/BUILD_PLAN.pdf](docs/BUILD_PLAN.pdf).
+**Find the hack before your model does.**
 
-> **Plan amendment: multi-turn.** The original plan assumed every environment is single-turn.
-> That is still the default and the demo-critical path, but we are adding an opt-in multi-turn
-> track (the environment answers each reply), selected by a `kind` field. The amended scope,
-> per-component work, owners, phases and risks are in
-> [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md); where it differs from the PDF, the markdown
-> plan wins for multi-turn work. It changes nothing for single-turn code.
+AI models learn by practicing in reinforcement-learning environments, and every environment is graded by a reward function that someone wrote. When that reward has a bug, the model learns to exploit it instead of learning the task. Loophole compiles an RL environment from a sentence, attacks its reward with Claude, patches what it finds, and remembers every fix so the next environment starts safer than the last. Built at Cal Hacks 13.0 (2026).
 
-## Live compiler / hacker / fixer / graph demo
+![The E2E demo: the knowledge graph recalls five rules from earlier audits for a new game](docs/images/e2e-demo.png)
 
-See [the live pilot runbook](docs/LIVE_PILOT.md) for setup, key configuration,
-service commands, completed Haiku pilot evidence, costs, and current limitations.
-The dashboard shows the entire hosted knowledge graph, including clearly labeled
-scripted calibration records. The completed generated-game pilot is single-turn;
-it does not claim Hub leaderboard acceptance or trained-policy performance.
+## Why it matters
 
-## Components
+- **Hackable rewards are common.** Frontier models could hack [22% of 1,860 tasks](https://arxiv.org/abs/2610.15924) across five terminal-agent benchmarks.
+- **Cheating generalizes.** [Anthropic found](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) that a model which learned to reward-hack in real coding environments went on to sabotage AI-safety research code in 12% of one evaluation.
+- **Nobody audits environments at scale.** Prime Intellect's Environments Hub alone lists more than 2,500 public environments, written quickly by many hands.
 
-| Component | What it does | Owner |
-| --- | --- | --- |
-| Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
-| Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense); SpacetimeDB module and pusher by Rishab, audit-side writes and retrieval by Varun | Varun, Rishab |
-| Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
-| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); or a multi-turn one when the game needs the environment to answer each reply ([plan](docs/MULTITURN_PLAN.md)) | Rohan |
-| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy; multi-turn games use a separate rollout loop (`trainer/multiturn_grpo.py`) | Rohan |
-| Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
+A loophole in one reward is a lesson the model is paid to learn thousands of times. Loophole makes finding and fixing it automatic.
 
-All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
-interface, so hub environments and compiled games run through the same engine.
+## Results
 
-Required Moss retrieval is in `harden/store/moss_retrieval.py` (see
-[setup and credential instructions](docs/MOSS_RETRIEVAL.md)). Graph contracts and hacker/fixer adapters are in `harden/store/retrieval.py`
-and `harden/store/knowledge_loop.py`. See [the integration guide](docs/GRAPH_RETRIEVAL.md)
-for the plan, orchestration example, and cross-branch tests.
+| What | Result |
+| --- | --- |
+| Prime Intellect Hub audit | 19 public environments. 95 confirmed loopholes in 14 of them. 11 environments repaired, closing 60 loopholes: attack success fell to 0% and legitimate answers kept passing. $16.60 in API calls. |
+| Training on a hidden-number game | Qwen2.5-0.5B-Instruct, 60 GRPO steps on one RTX A5000. Hardened reward: real accuracy 0% → 90% in 10.5 minutes. Original reward: paid 100% of the time, real accuracy 0%. |
+| Rule transfer | A rule learned on `metavind/mini-sudoku`, retrieved from the knowledge graph and adapted with one Claude Haiku call, blocked 60 of 60 scripted attacks on a different multi-turn game and kept 40 of 40 legitimate episodes passing. |
+| Showcase | The same split in a trading simulator, a computer-use form task and Snake: the hackable reward pays for wrong behaviour, and the hardened reward teaches the task. |
 
-## Repo layout
+Every Hub number is re-scored from saved evidence by [`scripts/check_leaderboard.py`](scripts/check_leaderboard.py), which passes with 0 failures. The full table is in [`results/leaderboard.md`](results/leaderboard.md).
 
-```
-docs/                          build plan, multi-turn plan, invariant store plan
-scripts/check_leaderboard.py   acceptance check for the hub audit (see below)
-spacetimedb/                   SpacetimeDB module for the invariant store (cd spacetimedb && npm install && npm test)
-fixtures/                      seed invariants with MiniLM embeddings, for graph and dashboard work
-harden/store/                  Python side of the invariant store (exploit class taxonomy so far)
-spacetime.json                 SpacetimeDB CLI config (database "loophole", local server)
+![The Hub leaderboard](docs/images/hub-leaderboard.png)
+
+## How it works
+
+```mermaid
+flowchart LR
+    task["Plain-English task"] --> compiler["Compiler<br/>(Claude Haiku)"]
+    compiler --> env["RL environment"]
+    hub["Prime Intellect<br/>Hub environment"] --> loop
+    env --> loop{"Hardening loop"}
+    graph[("Knowledge graph<br/>SpacetimeDB + Moss")] -- "closest rules" --> loop
+    loop -- "confirmed loopholes<br/>become rules" --> graph
+    loop --> hardened["Hardened reward"]
+    hardened --> train["GRPO training"]
+    hardened --> board["Leaderboard"]
 ```
 
-Suggested homes for new work, so branches don't collide: `trainer/`, `compiler/`,
-`harden/` (hardening engine + invariant store), `dashboard/`. Audit outputs will land
-in `results/`, `patches/<env_id>/` and `invariants.db`.
+1. **Compile.** Claude turns a plain-English task into a [verifiers](https://github.com/PrimeIntellect-ai/verifiers) environment: a seeded task generator, a parser, a reward and a reference solution. It is accepted only if the reference scores 1.0 and empty or random answers score near 0. Single-turn and multi-turn games are both supported.
+2. **Harden.** Claude plays four roles:
+    - The **hacker** proposes answers that should lose but might get paid.
+    - The environment's real grader scores them.
+    - An independent **verifier** checks each high scorer against ground truth: a strict comparison first, and Claude only when that is inconclusive. An answer that earns at least 80% of the reference reward but is wrong is a confirmed loophole.
+    - The **fixer** writes a `tighten()` rule that wraps the original reward.
+    - A **solver** supplies verified honest answers.
 
-## Working on a branch
+    A patch ships only if it passes static safety checks, closes every confirmed loophole, keeps every reference answer passing and keeps at least 90% of honest answers passing. The loop runs for at most five rounds.
+3. **Remember.** Each confirmed loophole becomes an invariant: how it cheats, why the reward allowed it, when it applies and the defense. Invariants are embedded with MiniLM and stored in [SpacetimeDB](https://spacetimedb.com), whose reducers link similar invariants into rule families. Before an audit, Moss semantic search hands the closest invariants to the hacker and the fixer.
+4. **Train.** GRPO with TRL trains a small Qwen model on the hardened environment, and held-out accuracy is always scored with the strict rules. Multi-turn games use our own GRPO loop. A run on the original reward shows reward climbing while real accuracy stays flat.
+
+The same loop hardens an LLM-judge reward for a voice support agent built on Cartesia, in [`voice_env/`](voice_env).
+
+![The knowledge graph, centred on one environment, with its rules and the most similar rules from other environments](docs/images/knowledge-graph.png)
+
+## Run it
+
+### The dashboard
+
+It needs no API keys and reads the hosted knowledge graph directly.
 
 ```bash
-git clone git@github.com:vsvaidya27/loophole.git
-cd loophole
-git checkout -b <your-name>/<topic>
-# ...work, commit...
-git push -u origin <your-name>/<topic>
+npm ci --prefix dashboard
+npm run dev --prefix dashboard
 ```
 
-Open a PR into `main` when something works. Keep `main` demoable.
+Open http://127.0.0.1:5173. It has five tabs:
+- **E2E Demo:** the rule-transfer experiment, act by act.
+- **Knowledge graph:** every invariant, grouped by how it cheats.
+- **Hub leaderboard:** the audit results, with evidence for each finding.
+- **Live Hub replay:** re-scores a saved answer against the original and the repaired grader.
+- **Showcase:** the recorded training runs.
 
-## Setup
-
-- Python 3.12 and [uv](https://docs.astral.sh/uv/).
-- Put API keys in a `.env` file at the repo root (`ANTHROPIC_API_KEY=...`). It is
-  gitignored; never commit keys.
-- Hub environments install with uv, e.g.
-  `uv pip install reverse-text --extra-index-url https://hub.primeintellect.ai/primeintellect/simple/`.
-  Use verifiers 0.3.x: it runs both the classic and the v1 environment APIs (0.4 drops
-  the classic one, which most hub environments still use).
-
-## Leaderboard checker
-
-`scripts/check_leaderboard.py` exits 0 only when the hub audit results are complete and
-reproducible. It re-scores every logged exploit against the original and patched
-reward functions itself instead of trusting numbers in the results. Its docstring
-documents the evidence files the audit must write. It is still a draft under review;
-once approved it will not change.
+**Live Hub replay** needs the local scorer, which runs on the CPU and makes no model calls:
 
 ```bash
-python scripts/check_leaderboard.py
+.venvs/hub/bin/python -m harden.experiments.hub_demo
 ```
 
-## Env compiler (phase 1)
+### The engine
 
-`env_compiler/` holds the fixed environment template (`template.py`), the validation
-gates (`validate.py`), two hand-written game specs (`games/arith_target.py`,
-`games/clue_guess.py`) and a verifiers adapter (`verifiers_env.py`). Each game has a
-strict parser and a loose one (`strict=False`) for the recorded hacked run.
+You need Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-python -m env_compiler   # run the gates on every game
-pytest tests/
+uv venv .venvs/hub --python 3.12
+uv pip install --python .venvs/hub/bin/python -r requirements-pipeline.txt
+cp config/pilot.env.example .env   # add ANTHROPIC_API_KEY, MOSS_PROJECT_ID and MOSS_PROJECT_KEY
 ```
 
-`python -m env_compiler.compile "<description>"` compiles a new game with Claude Haiku 5.5
-(`ANTHROPIC_API_KEY` in `.env`). `ENV_COMPILER_MODEL` picks another Claude model (for example
-`claude-opus-5-5`), `ENV_COMPILER_EFFORT` sets its effort (default `medium`), and
-`--provider gemini` or `ENV_COMPILER_PROVIDER=gemini` switches to Gemini (`GEMINI_API_KEY`).
+| Task | Command (from the repository root) |
+| --- | --- |
+| Compile a game from a sentence | `.venvs/hub/bin/python -m env_compiler.compile "Guess a hidden number from 1 to 40 in 7 turns with higher/lower feedback"` |
+| Harden a game | `.venvs/hub/bin/python -m harden.game_audit number_hunt_easy` |
+| Audit one Hub environment | `.venvs/hub/bin/python -m harden.audit.loop primeintellect/reverse-text --cap 2` |
+| Re-check the whole leaderboard | `.venvs/hub/bin/python scripts/check_leaderboard.py` |
+| Replay the rule transfer, with no model calls | `.venvs/hub/bin/python -m harden.experiments.graph_transfer_demo --replay results/graph_transfer/hub-to-multiturn-01/report.json` |
+| Run the live pipeline (compile, audit, publish) | `.venvs/hub/bin/python -m harden.live start`, then `harden.live compile "<task>"` or `harden.live hub <env_id>` |
+| Harden the voice agent's judge (live calls in `voice_env/live_call.py` also need `CARTESIA_API_KEY` and `GEMINI_API_KEY`) | `python -m voice_env.harden --rounds 3 --out results/voice_audit` |
 
-Games (`env_compiler/games/`), each with a strict parser and a loose (hackable) one:
+Every model call is logged with its cost to `results/spend_ledger.jsonl`. `AUDIT_HARD_CAP_USD` sets an optional hard spending limit.
 
-| Game | Type | Loose-parser exploit |
-| --- | --- | --- |
-| `arith_target`, `arith_compute`, `clue_guess`, `clue_guess_easy` | exact-match puzzles | any matching candidate anywhere in the output |
-| `anagrams`, `word_hunt`, `scrabble_lite` | word games (bundled ENABLE list), partial credit | no cap on listed words, so spam words |
-| `snake`, `lights_out` | simulators (`frames` replays the plan) | spam many move strings, best one counts |
-| `trading_sim` | simulated market with planted momentum (not real data) | hedge BUY and SELL, or use an oversized position |
-
-## Trainer (phase 1)
-
-`trainer/` runs GRPO (TRL) on any game and writes `metrics.jsonl` for the dashboard:
-training reward plus held-out accuracy (always scored with the strict parser, so a
-run against the loose parser shows reward climbing while true accuracy stays flat).
+Training runs on a GPU box. See [`trainer/README.md`](trainer/README.md) for setup and measured results, or use [`scripts/pipeline.py`](scripts/pipeline.py) to compile, harden, train and replay one game end to end:
 
 ```bash
-python -m trainer.probe arith_compute --n 100 --temperature 1.0   # base-model success rate
-python -m trainer.train arith_compute --out runs/hardened          # strict parser
-python -m trainer.train arith_compute --loose --out runs/hacked    # hackable parser
+python scripts/pipeline.py "Bulls and cows with 3 distinct digits"
 ```
 
-Add `--vllm` on the GPU box (`scripts/setup_gpu.sh` installs everything). Without it
-generation uses plain HF, which is fine for a smoke test on a laptop.
+## Repository
 
-Measured on Qwen2.5-0.5B-Instruct at temperature 1.0: `arith_compute` 24% strict / 68%
-loose; `arith_target`, `clue_guess` and `clue_guess_easy` 0%, too hard to learn from as
-they stand, so use `arith_compute` for the demo until those are retuned.
+```
+env_compiler/   plain-English task -> verifiers environment, plus the built-in games and validation gates
+harden/audit/   the Hub audit loop: hacker, verifier, fixer and solver roles, patching and scoring
+harden/         the game auditor, the live pipeline and the knowledge-store client and retrieval
+spacetimedb/    the SpacetimeDB module: invariant tables and graph reducers
+trainer/        GRPO training, single- and multi-turn, and the replay page
+dashboard/      the React dashboard and the E2E demo
+voice_env/      the voice support-agent environment and judge hardening
+showcase/       the recorded training demos shown in the dashboard
+results/        audit evidence, the leaderboard and the knowledge-graph batch
+patches/        the accepted repairs for each Hub environment
+scripts/        the leaderboard checker, the end-to-end pipeline and helpers
+docs/           design notes and setup guides
+```
 
-## Voice-agent environments (`voice_env/`)
+More detail:
+- [Dashboard](dashboard/README.md)
+- [Showcase demos](showcase/README.md)
+- [Rule-transfer experiment](docs/GRAPH_TRANSFER_DEMO.md)
+- [Live Hub replay](docs/HUB_REPLAY_DEMO.md)
+- [Moss retrieval setup](docs/MOSS_RETRIEVAL.md)
+- [Hosted knowledge graph](deployment/README.md)
+- [Invariant store design](docs/INVARIANT_STORE.md)
 
-A support-agent scenario (an electronics store refund desk with a written policy and a
-secret discount code). The policy decides the correct action from the order facts, so we know
-the ground truth of every call.
+## Limitations
 
-- **Option 1, judge hardening (offline):** the reward is an LLM-judge metric over call
-  transcripts (the same `{name, prompt}` shape as a Cartesia custom metric). A hacker writes
-  agent behaviours meant to fool the judge while breaking policy, Gemini simulates the calls,
-  and a fixer rewrites the judge prompt. Reports attack success rate and benign pass rate.
-  ```bash
-  python -m voice_env.harden --rounds 3 --out results/voice_audit
-  ```
-- **Option 2, live calls:** `voice_env/live_call.py` drives a real Cartesia agent over its
-  WebSocket with a simulated customer (Gemini writes the lines, Cartesia Sonic speaks them).
-  The transcript comes back as text events and the call is scored by the agent's assigned
-  Cartesia metrics plus our ground truth.
-  ```bash
-  python -m voice_env.live_call --agent AGENT_ID --turns 3
-  ```
-- `voice_env/cartesia.py` is a small client for agents, metrics (create, assign, results) and
-  calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
-  a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
-- The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort, and so do the hacker and fixer (the Gemini free tier allows only 20 requests a day). `VOICE_ENV_SIM=gemini` / `VOICE_ENV_PLANNER=gemini` switch them back. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.
+- The Hub audit is a bounded sample, at most five rounds of three attack answers per environment. It is not an exhaustive audit of each dataset.
+- Three Hub environments stayed unpatched because too few verified honest answers were collected to test a repair safely. Four failed to install or load.
 
-## Multi-turn track (experimental, `multi-turn` branch)
+## Built with
 
-A separate environment type for games where the environment answers each reply. It sits next
-to the single-turn `GameEnv` and is selected by `kind == "multi"`; nothing in the single-turn
-path (games, trainer, hardening, leaderboard checker) depends on it.
+Claude Haiku 5.5 and Claude Opus 5.5, Prime Intellect verifiers and Environments Hub, SpacetimeDB, Moss, sentence-transformers, TRL, PyTorch, Qwen2.5, Runpod, React, TypeScript, Vite, Cartesia and Gemini.
 
-- `env_compiler/multiturn.py`: `MultiTurnGameEnv` with `reset(rng)`, `step(state, reply)`,
-  an episode-level `reward(state)`, a scripted `reference_policy` and a `random_policy`.
-  `play(policy, seed)` runs a full episode. State is JSON-serialisable.
-- Games (`MULTI_GAMES`, kept apart from `GAMES`): `number_hunt` (higher/lower) and
-  `live_mastermind` (the interactive version of `clue_guess`). Loose parser: a reply that lists
-  many guesses counts every one, so spamming wins.
-- Gates: `validate()` dispatches on `kind`. Multi-turn requires a reference policy that wins
-  every episode, near-zero null and random policies, deterministic resets, and episodes that
-  end within `max_turns`.
-- Compiler: the fit check returns `single`, `multi` or `reject` and routes the game. Multi-turn games
-  use their own template and worked example; `--single-only` refuses them.
-- verifiers: `load_environment("number_hunt")` returns a `MultiTurnEnv` adapter (`GameMultiTurnEnv`).
-- Trainer: `python -m trainer.train number_hunt_easy --out runs/x` runs a small self-contained GRPO
-  loop (`trainer/multiturn_grpo.py`) instead of TRL, because TRL's `GRPOTrainer` assumes one
-  completion per prompt (and the pinned TRL 0.24 has no multi-turn hook). Same objective as our TRL
-  runs (beta 0, one update per batch): group-normalised episode reward times the log-probability of
-  the model's own reply tokens, with each turn a separate (context, reply) sample so environment text
-  never enters the loss. Metrics land in the same `metrics.jsonl` format (held-out accuracy is strict
-  and greedy). Single GPU, HF generation, no vLLM. `trainer.probe` reports a game's base solve rate.
-- Hardening: `python -m harden.game_audit GAME` runs the audit loop on single- and multi-turn games
-  (Claude probes the shipped game, exact replay verifies, the fixer writes a `tighten` rule) and
-  writes `hardened/<name>.py`; train on it with `--oracle GAME`. `python scripts/pipeline.py
-  "description"` runs compile, harden, train (hardened and hacked) and the replay page in one go.
-- Not supported yet: multi-turn entries in the leaderboard evidence schema (`check_leaderboard.py`
-  scores one string per completion; any change there goes through Varun).
+## Team
 
-## Live demo dashboard and pilot status
+- Varun Vaidya
+- Rishab Vempati
+- Rohan Siva
+- Anirudh Sunil
 
-Run `npm ci --prefix dashboard` then `npm run dev --prefix dashboard` to view the live
-knowledge graph at `http://127.0.0.1:5173/`. It subscribes to the hosted database directly.
-See [live demo status](docs/LIVE_DEMO_STATUS.md) for measured compiler calibration
-results, the prepared Prime Intellect pilot, and the unfinished audit-runner work.
+## Acknowledgements
+
+Our hardening loop builds on two pieces of prior work:
+- the hacker-fixer loop of [Zhong et al.](https://arxiv.org/abs/2606.08960) (CMU and Fewshot);
+- Berkeley RDI's [BenchJack](https://arxiv.org/abs/2605.12673).

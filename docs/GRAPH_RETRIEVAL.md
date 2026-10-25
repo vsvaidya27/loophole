@@ -119,38 +119,24 @@ python3 -m harden.store.knowledge_cli \
 ```
 
 The CLI uses `SPACETIME_HOST`, `SPACETIME_DB`, and optional `SPACETIME_TOKEN`.
-It is a separate entry point to avoid colliding with the planned store/pusher CLI.
 
-## Integration verification
+## Verification
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_retrieval.py' -v
 npm run typecheck --prefix spacetimedb
 npm run test:coverage --prefix spacetimedb
-python3 scripts/check_retrieval_branches.py --ref origin/integration
-python3 scripts/check_retrieval_branches.py --ref origin/trainer
 ```
 
-The branch checks require fetched refs, Python 3.12+, and `httpx` (an existing compiler
-import dependency). They export code into a temporary directory without changing either
-branch. No API keys, GPU, network requests, or live model calls are needed.
+No API keys, GPU, network requests, or live model calls are needed.
 
 Tests cover real SQLite reading, HTTP serialization/error contracts, prompt bounds,
 selection attribution, seed/source isolation, replay outcomes, and benign regressions.
 The Vitest round trip loads real core/graph reducers, passes their rows to Python,
 evaluates a deterministic toy attack/defense, writes applications through the actual
-core reducer twice, and verifies one dashboard transfer edge. Cross-branch tests run the
+core reducer twice, and verifies one dashboard transfer edge. Further tests run the
 actual voice hacker/fixer with a fake model and the actual arithmetic GameEnv with an
 attack and 20 benign cases.
 
-The empty Maincloud service and real HTTP reads/writer authorization are now verified;
-see `deployment/README.md`. LLM-selected patches still need deployment testing.
 The integration fixture proves the interfaces and control flow; it does not measure LLM
-retrieval quality or generalization to unseen targets. The merged main branch now includes the audit mirror writer; a test verifies its rows
-can be retrieved. SQLite watch/sync pushing, sandbox runner orchestration, and live
-dashboard subscriptions remain separate integrations.
-
-Verified in this implementation: 19 Python tests, 59 TypeScript/module tests, and two
-cross-branch checks each against `integration` at `21dd252` and `trainer` at `995869b`.
-TypeScript typechecking passed. The existing graph-owned coverage remains 100% lines
-and 95.2% branches; this coverage figure does not measure the Python retrieval code.
+retrieval quality or generalization to unseen targets.

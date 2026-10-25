@@ -45,9 +45,7 @@ That generated file replaces the placeholder locally. Do not present an empty re
 the graph calibration as trained-policy performance. The replay template also gains a
 link back to the live graph; its existing rendering stays intact.
 
-The production build is static (`dashboard/dist`); deploy those files on any static host
-with HTTPS. The service address is already public, but the local dev URL is not a public
-frontend deployment. Close the live tab when done to let the hosted database become idle.
+`npm run build --prefix dashboard` writes a static copy to `dashboard/dist`.
 
 ## Prime Intellect Hub audit leaderboard
 
@@ -97,7 +95,7 @@ comparison for `primeintellect/reverse-text`. It re-scores saved responses throu
 the actual original grader and accepted patch when Run is clicked. Start the
 loopback scoring service with `.venvs/hub/bin/python -m harden.experiments.hub_demo`
 from the repository root. See [HUB_REPLAY_DEMO.md](../docs/HUB_REPLAY_DEMO.md) for the
-walkthrough, provenance, runtime requirements, and production proxy setup.
+walkthrough, provenance and runtime requirements.
 
 - `src/main.tsx` mounts the dashboard in React Strict Mode.
 - `src/App.tsx` owns record selection and composes the dashboard.
@@ -111,20 +109,19 @@ walkthrough, provenance, runtime requirements, and production proxy setup.
 
 The test suite includes subscription and layout tests plus DOM interaction tests for
 selection, evidence tabs, live updates, reconnects, and lifecycle cleanup. Test data
-is isolated in test files; Live audits always uses the configured live database.
+is isolated in test files; the dashboard always uses the configured live database.
 
 ## Showcase dashboard
 
-Choose **Showcase** in the shared navigation, or open `/#showcase/trading`. The three
-demos from the upstream `showcase` branch use the same React shell, dark panels,
-colors, and responsive layout as Live audits. Switching views keeps the live
-subscription and evidence selection intact.
+Choose **Showcase** in the shared navigation, or open `/#showcase/trading`. The demos
+use the same React shell, colors and responsive layout as the rest of the dashboard.
+Switching views keeps the live subscription and evidence selection intact.
 
 - **Guided demo** is the default: initial task → RL environment visualization →
   reward loophole → revised environment → knowledge graph. Use Next/Back or the
   five stage buttons to present it. Episodes can be played or stepped through.
   The final evidence map explains the selected example; the expandable recorded
-  graph uses the existing live subscription and opens nodes in Live audits.
+  graph uses the existing live subscription and opens nodes in the Knowledge graph tab.
 - Trading and computer use include interactive replays with
   play/pause, stepping, speed controls, a scrubber, and a task selector. Compare the
   three policies' strict scores with what the loose reward pays, and inspect raw
@@ -137,11 +134,10 @@ subscription and evidence selection intact.
 - Every demo includes its original film. Media loads on demand; audio is stored as
   individual MP3 files rather than embedded in the JavaScript bundle.
 
-The trading and computer-use artifacts are **recorded GPU training runs** from
-showcase revision `8f34a17`: base, trained on loose reward, and trained on fixed
-reward. Each has 24 held-out tasks. The featured example follows upstream's
-contrast ranking (hacked fails while hardened passes, preferring a base failure),
-while means include all tasks. Original example numbers are retained.
+The trading and computer-use artifacts are **recorded GPU training runs**: base,
+trained on loose reward, and trained on fixed reward. Each has 24 held-out tasks.
+The featured example is chosen to show a clear contrast (the hacked policy fails
+while the hardened one passes), while means include all tasks.
 Computer use has separate strict and loose episodes, so its replay provides an
 environment selector and uses the matching pages and action transcript.
 Voice uses recorded simulated audit calls with Cartesia voices reading the text;
@@ -149,18 +145,7 @@ it demonstrates a revised judge, not a retrained agent. The walkthrough does not
 run training, generate environments, or publish knowledge records. The live graph
 shows existing audit data separately from the explanatory example map.
 
-The imported source revision, catalog metrics, evidence JSON, and media are checked
-in. Refresh them deliberately after fetching a newer showcase branch:
-
-```sh
-git fetch upstream showcase
-python3 dashboard/scripts/import_showcase.py --ref upstream/showcase
-npm test --prefix dashboard
-npm run build --prefix dashboard
-```
-
-The importer reads Git objects and copies only showcase artifacts, so it does not
-replace the dashboard with the older application from that branch. The Showcase
+The catalog metrics, evidence JSON and media are checked in. The Showcase
 tests cover the guided sequence, reward comparisons, graph inspection, playback
-lifecycle, strict/loose episodes, example changes, all three demos, evidence labels,
+lifecycle, strict/loose episodes, example changes, every demo, evidence labels,
 asset loading failures, video selection, and catalog agreement with source data.

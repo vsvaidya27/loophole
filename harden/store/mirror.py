@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DB_PATH = ROOT / "invariants.db"
 EXPLOIT_CLASSES = set(json.loads((Path(__file__).parent / "exploit_classes.json").read_text()))
 SOURCES = {"hub", "game", "seed"}
-# core.ts ENV_STATUSES, plus the leaderboard's 'unpatched' (see RUN_NOTES.md).
+# core.ts ENV_STATUSES, plus the leaderboard's 'unpatched' (see results/leaderboard.md).
 ENV_STATUSES = {
     "queued", "running", "patched", "unpatched", "robust", "failed_to_run",
     "compiling", "pre_hardening", "hardening", "training", "done",

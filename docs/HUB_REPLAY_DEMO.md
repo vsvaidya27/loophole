@@ -18,14 +18,13 @@ npm run dev --prefix dashboard
 ```
 
 Vite proxies `/api/hub-demo` to the loopback-only Python service on port 8788.
-Restart an existing Vite process after adding/changing proxy configuration.
 The scorer deliberately runs with Hugging Face offline flags and strips model and
 writer secrets from its process environment. No Anthropic or Moss credentials
 are needed for scoring these saved interactions. Missing packages or cached data
-produce an explicit error, not substituted scores. A static production deployment
-needs a backend route to this service; Vite's development proxy is not deployed.
+produce an explicit error, not substituted scores. The scorer runs locally, and the
+dashboard reaches it through Vite's development proxy.
 
-## Judge walkthrough
+## Walkthrough
 
 1. Select **Conflicting final answers**. Read the real dataset prompt and the saved
    assistant response. The response contains an initially correct answer followed

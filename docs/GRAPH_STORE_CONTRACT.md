@@ -1,16 +1,14 @@
 # Graph and invariant-store contract
 
-Implemented against the reviewed [invariant store plan](INVARIANT_STORE.md) and
-Varun's core module skeleton at `45a6445`. That plan defines the core schema;
-this document describes the implemented graph boundary.
+The [invariant store design](INVARIANT_STORE.md) defines the core schema; this document
+describes the graph boundary: the graph tables and reducers in `spacetimedb/src/graph_tables.ts`
+and `spacetimedb/src/graph.ts`, and the dashboard projection in `dashboard/src/graph/buildGraph.ts`.
 
-## Ownership and persistence
+## Persistence
 
-Varun owns audit-side SQLite writes, extraction, and hardener integration. Per the latest
-handoff, Rishab owns the SpacetimeDB module, embedding/pusher infrastructure, and
-`spacetimedb/src/graph_tables.ts`, `spacetimedb/src/graph.ts`, and the pure dashboard
-projection in `dashboard/src/graph/buildGraph.ts`. Graph reducers read core records
-without modifying them. SQLite is the durable source; SpacetimeDB supplies live rows.
+Audit workers write invariants to the local SQLite mirror, and the pusher publishes them to
+SpacetimeDB. Graph reducers read core records without modifying them. SQLite is the durable
+source; SpacetimeDB supplies live rows.
 
 The cross-store invariant identity is `env_id + "#" + exploit_id`. Embeddings use the
 same invariant ID. Application attempts use `application_key`, derived by the core
@@ -94,5 +92,7 @@ validation evidence from the hardening system.
 
 ## Verification
 
-See [GRAPH_VERIFICATION.md](GRAPH_VERIFICATION.md) for commands, measured coverage,
-the dashboard fixture, and remaining integration boundaries.
+```sh
+npm ci --prefix spacetimedb && npm run typecheck --prefix spacetimedb && npm test --prefix spacetimedb
+npm ci --prefix dashboard && npm test --prefix dashboard
+```

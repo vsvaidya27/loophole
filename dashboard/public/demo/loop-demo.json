@@ -3974,6 +3974,6 @@
   "model": "Qwen2.5-0.5B-Instruct, one RTX A5000",
   "hardened": "real accuracy 0% to 90% in 60 steps (10.5 min)",
   "hackable": "its own reward 19% to 100%, real accuracy stays 0%, replies grow from 2.6 to 10.3 words",
-  "source": "trainer/TODO.md (Rohan's GPU run)"
+  "source": "trainer/README.md (GPU run)"
  }
 }

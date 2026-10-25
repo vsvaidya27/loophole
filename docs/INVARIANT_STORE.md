@@ -1,50 +1,6 @@
-# Invariant store plan
+# Invariant store design
 
-Status: **reviewed plan, M0a skeleton in the repo** (Sat Oct 24, 2026, SpacetimeDB
-2.13.0). `spacetimedb/` holds the core tables and reducers plus empty graph files, and
-`npm test` runs 16 harness tests covering every core reducer and the seed fixture. Two
-reviewers independently built the module from an earlier draft under the official 2.13.0
-test harness; the layout and types below are what passed. The first real publish,
-Python's HTTP calls and the React subscription are still unverified (M0 checklist).
-
-Owners: Rishab (SpacetimeDB module, pusher, invariant graph), Varun (audit-side writes,
-extraction, retrieval, transfer test), Anirudh (dashboard view).
-
-## Handoff to Rishab (Sat Oct 24, 04:00)
-
-Done and pushed (commit `45a6445`): the reviewed plan (this doc), the module skeleton in
-`spacetimedb/` with all core tables and reducers, the seed fixture with real MiniLM
-vectors, the shared exploit-class list, and 16 passing harness tests. Rishab's
-`run_id`-keyed `rule_application` and versioned `detail` are in.
-
-Rishab picks up, in this order:
-
-1. **M1, the graph** (no server needed): fill in `graph_tables.ts` and `graph.ts` from the
-   Graph section, write `buildGraph` and `fixture.graph.json`, and test with vitest on the
-   seed vectors. Start the edge threshold at 0.45.
-2. **M0, the first real publish**: install the CLI, `spacetime start`, `spacetime publish`
-   from the repo root, and work through the M0 checklist (HTTP calls from Python,
-   subscription from React, restart recovery).
-3. **The pusher and CLI** in `harden/store/`: the HTTP client, `push --watch`, `sync`,
-   `seed`, `replay`, `reset-demo` and `doctor`, as specified under Python side.
-
-Varun keeps the parts that live inside the hardening engine: audit workers writing mirror
-rows (and calling `clear_environment` when an env restarts), Claude extraction,
-`reconcile` before the leaderboard check, retrieval, and the beat-3 transfer test. The
-mirror schema and reducer signatures in this doc are the interface between the two halves;
-change them here first.
-
-Check the current state: `cd spacetimedb && npm install && npm test` (Node 22+).
-
-Every confirmed reward hack becomes an **invariant**: a reusable rule saying how the hack
-works, why the reward allowed it, when it applies, and how to defend against it. The store
-keeps those rules, connects them into a graph, and hands them back when a new environment
-needs pre-hardening. It drives beat 2 of the demo (the invariant graph) and beat 3 (stored
-rules pre-harden the judge's game).
-
-This doc is the contract between us. If you need to change a table, a reducer signature or
-a file boundary, change it here first and tell the others: SpacetimeDB cannot change
-existing columns without wiping data.
+Every confirmed loophole becomes an invariant record: how it cheats, why the reward allowed it, when it applies and the defense. Audit workers write records to a local SQLite mirror, and the pusher publishes them to a SpacetimeDB module whose reducers group invariants into rule families and link similar ones. The dashboard subscribes to those tables, and retrieval reads them before each audit. The implemented graph boundary is in [GRAPH_STORE_CONTRACT.md](GRAPH_STORE_CONTRACT.md).
 
 ## Decisions
 
@@ -52,11 +8,10 @@ existing columns without wiping data.
    **TypeScript** module. TypeScript because the dashboard is React and shares the
    generated types, because it needs no Rust/wasm toolchain, and because it is out of beta
    in 2.x. SpacetimeDB has no Python module language and no maintained Python SDK.
-2. **The graph is computed by reducers.** Rishab's reducers turn invariants into
-   similarity edges and rules inside SpacetimeDB, and the dashboard subscribes. They run
-   as their own reducer calls, not inside the core write, so a graph bug can never block
-   or roll back an invariant. This is also what the SpacetimeDB prize asks for:
-   SpacetimeDB as the core real-time backend, "not just added on the side".
+2. **The graph is computed by reducers.** Reducers turn invariants into similarity edges
+   and rules inside SpacetimeDB, and the dashboard subscribes. They run as their own
+   reducer calls, not inside the core write, so a graph bug can never block or roll back
+   an invariant.
 3. **The audit writes SQLite; one pusher writes SpacetimeDB.** Audit workers only write
    rows to `invariants.db` (standard library, no torch, no network). A single long-lived
    process, `python -m harden.store push --watch`, embeds new invariants and calls the
@@ -64,9 +19,7 @@ existing columns without wiping data.
    lost and the audit doesn't slow down.
 4. **`invariants.db` is the record; SpacetimeDB is a live copy.** The leaderboard checker
    (`scripts/check_leaderboard.py`, frozen) reads `invariants.db` at the repo root. The
-   live database can always be rebuilt from it with `python -m harden.store sync`. Note
-   that beat 3 still needs the Claude API, so if the network dies on stage, beat 2 still
-   works from the local server and beat 3 falls back to the recorded backup.
+   live database can always be rebuilt from it with `python -m harden.store sync`.
 5. **Embeddings are computed once, in the pusher.** sentence-transformers
    `all-MiniLM-L6-v2` (384 floats, L2-normalized, CPU, no API key), loaded once. Vectors
    live in a private table only module code reads, so dashboard clients never download
@@ -76,27 +29,9 @@ existing columns without wiping data.
 6. **Rules are exploit classes in v1.** One rule per `exploit_class`, with
    similarity edges showing the finer structure inside and across classes. Splitting a
    class into several rules by similarity is a stretch goal.
-7. **Run locally.** `spacetime start` on Varun's laptop is the integration server and the
-   demo server. Maincloud is cut unless we need a public URL; nothing in the prize rules
-   requires it.
-
-## Who owns what
-
-| Piece | Owner | Files |
-| --- | --- | --- |
-| Shared module files: `schema.ts`, `index.ts`, `package.json`, `tsconfig.json`, `vitest.config.ts`, repo-root `spacetime.json`, generated `dashboard/src/module_bindings/` | Rishab | |
-| Core tables and reducers (built in M0a; signatures are the contract) | Rishab | `spacetimedb/src/core_tables.ts`, `core.ts`, `taxonomy.ts` |
-| Python pusher: HTTP client, embeddings, `push`, `sync`, `seed`, `replay`, `reset-demo`, `doctor` | Rishab | `harden/store/` |
-| Python audit side: mirror writes from audit workers, extraction (Claude), `reconcile`, retrieval | Varun | `harden/store/` |
-| Graph tables and graph reducers | Rishab | `spacetimedb/src/graph_tables.ts`, `graph.ts` |
-| `buildGraph(rows) → {nodes, edges}` and its tests and fixture | Rishab | `dashboard/src/graph/` |
-| Rendering the graph, live updates, leaderboard view | Anirudh | `dashboard/` (everything else) |
-| Transfer test for beat 3 | Varun | |
-
-Graph reducers read core tables but never write them, and core code never calls graph
-code. `schema.ts` already spreads `graphTables` from `graph_tables.ts`, and `index.ts`
-already re-exports `graph.ts`. Varun's audit code and Rishab's pusher meet only at the
-SQLite mirror: audit workers write rows, the pusher reads them.
+7. **Hosted on Maincloud.** The live database runs on SpacetimeDB Maincloud (see
+   [deployment/README.md](../deployment/README.md)); `spacetime start` runs a local server
+   for development.
 
 ## Data flow
 
@@ -115,7 +50,7 @@ audit workers (Python)                     invariants.db  (repo root, checker re
                                                    ▼  live subscription
                        dashboard: useTable(...) ─► buildGraph(rows) ─► render
 
-judge's game (beat 3)
+a new game
   compile ─► record_environment('game/<slug>') ─► retrieve rules ─► fixer pre-hardens
   ─► record_rule_application(run_id, invariant_id, 'game/<slug>', outcome, detail)
   ─► hacker runs; anything new goes through the same exploit/invariant path
@@ -123,17 +58,12 @@ judge's game (beat 3)
 
 ## Servers
 
-- **Integration and demo server: Varun's laptop** (where the audit runs). It runs
-  `spacetime start`. Only `main` is published there, only from that laptop (its local
-  identity owns the database), and only with `scripts/republish.sh` (Rishab writes it),
-  which republishes, then runs `seed` and `sync`. The dashboard
-  reads its host from `VITE_SPACETIMEDB_HOST`. If venue Wi-Fi blocks laptop-to-laptop
-  traffic, use a tunnel or a Maincloud dev database for integration only.
-- **Everyone else develops against vitest and their own `spacetime start`.** Publishing a
-  module replaces the whole module with the publisher's copy, so two people publishing
-  from different branches to one database overwrite each other.
-- **Freeze graph table columns before real data arrives (target Sat 11:00).** After that,
-  only add trailing columns with defaults.
+- **Hosted:** SpacetimeDB Maincloud, database `loophole-knowledge-calhacks-2026`. The
+  dashboard reads its host from `VITE_SPACETIMEDB_HOST` and defaults to Maincloud.
+- **Development:** vitest plus your own `spacetime start`. Publishing a module replaces
+  the whole module with the publisher's copy, so two people publishing from different
+  branches to one database overwrite each other.
+- **Schema changes:** once real data exists, only add trailing columns with defaults.
 
 ## Module layout
 
@@ -147,11 +77,11 @@ spacetimedb/
     index.ts        export { default } from './schema'; export * from './core'; export * from './graph';
     schema.ts       const spacetimedb = schema({ ...coreTables, ...graphTables }); export default spacetimedb;
                     export type Ctx = ReducerCtx<InferSchema<typeof spacetimedb>>;
-    core_tables.ts  Rishab  (tables; not re-exported)
-    core.ts         Rishab  (reducers ONLY)
-    taxonomy.ts     Rishab  (EXPLOIT_CLASSES; not re-exported)
-    graph_tables.ts Rishab  (tables; not re-exported)
-    graph.ts        Rishab  (reducers ONLY; helpers stay unexported in the file)
+    core_tables.ts  (tables; not re-exported)
+    core.ts         (reducers ONLY)
+    taxonomy.ts     (EXPLOIT_CLASSES; not re-exported)
+    graph_tables.ts (tables; not re-exported)
+    graph.ts        (reducers ONLY; helpers stay unexported in the file)
     *.test.ts       vitest + spacetimedb/server/test-utils
 ```
 
@@ -218,7 +148,7 @@ plain functions, so it checks neither argument types nor HTTP order. `console.lo
 nothing. f32 values read back rounded (compare with `toBeCloseTo`). Build one harness per
 test.
 
-## Core tables (Rishab; built in M0a)
+## Core tables
 
 ```ts
 // spacetimedb/src/core_tables.ts
@@ -306,7 +236,7 @@ prompts all use it. Add a value there before using it.
 | `judge-manipulation` | Text that steers an LLM judge |
 | `other` | Anything else (say what in `mechanism`) |
 
-### Core reducers (Rishab; built in M0a)
+### Core reducers
 
 The pusher calls these over HTTP with a **positional JSON array** in exactly this order.
 Timestamps come from `ctx.timestamp`; Python never sends them. Every write is an
@@ -332,10 +262,10 @@ The embedding is empty or has 384 finite values with |‖v‖ − 1| < 1e-3. Red
 Python runs the same validation **before** writing SQLite, so the mirror never holds a row
 the reducer would reject.
 
-Auth: none. The server binds to localhost on stage (see bring-up). Add a writer allowlist
-only if we ever deploy to Maincloud.
+Auth: tables are publicly readable, and every write reducer requires the publishing
+account or an approved writer (see [deployment/README.md](../deployment/README.md)).
 
-## Graph (Rishab)
+## Graph
 
 ### Graph reducers
 
@@ -371,7 +301,7 @@ so later invariants' edges to it get refreshed (`sync` always ends with one).
 
 Reducers must be deterministic: no `Math.random`, no network, no module-level state.
 
-### Graph tables (Rishab)
+### Graph tables
 
 ```ts
 // spacetimedb/src/graph_tables.ts
@@ -414,10 +344,9 @@ add a `rule_member` table then; adding tables later is safe.
 ### What the dashboard draws
 
 `buildGraph` is a pure function from subscribed rows (generated client types: camelCase
-fields, `bigint` for u64, `T | undefined` for options) to nodes and edges. Rishab tests it
-with plain vitest on fixture rows; Anirudh only renders its output. Rishab also commits
-`dashboard/src/graph/fixture.graph.json` early, so Anirudh can build the view before the
-module exists.
+fields, `bigint` for u64, `T | undefined` for options) to nodes and edges. It is tested
+with plain vitest on fixture rows, and the view only renders its output.
+`dashboard/src/graph/fixture.graph.json` lets the view run without a live module.
 
 ```ts
 type GraphRows = {
@@ -451,7 +380,7 @@ type GraphEdge = {
 | `found_in` | `found_in:<invariant_id>` | `invariant.envId` | invariant → the environment it was learned on |
 | `instance_of` | `instance_of:<invariant_id>` | `invariant.exploitClass` | invariant → its rule |
 | `similar_to` | `similar_to:<a>\|<b>` | `similarity_edge` | invariant ↔ invariant, weight = score |
-| `applied_to` | `applied_to:<invariant_id>-><target_env_id>` | `rule_application` | the invariant's rule → target environment, from the latest run (max created_at) for that pair, so new attempts update the edge instead of adding one (`blocked` is the beat 3 money shot) |
+| `applied_to` | `applied_to:<invariant_id>-><target_env_id>` | `rule_application` | the invariant's rule → target environment, from the latest run (max created_at) for that pair, so new attempts update the edge instead of adding one |
 
 - An `exploit` row with no `invariant` row yet is drawn as an invariant node with
   `pending: true`. It appears the moment the judge confirms the hack, and fills in when
@@ -459,7 +388,7 @@ type GraphEdge = {
 - Drop any edge whose endpoint node hasn't arrived: tables arrive independently.
 - `hideSeed` drops environments with `source == 'seed'` and everything attached to them.
 
-## Python side (pusher and CLI: Rishab; audit side, extraction, reconcile, retrieval: Varun)
+## Python side
 
 `harden/store/`, configured from `.env`: `SPACETIME_HOST` (default `http://127.0.0.1:3000`),
 `SPACETIME_DB` (default `loophole`). The token is minted with `POST /v1/identity` on first
@@ -520,21 +449,20 @@ clear_environment(env_id)                                     # both stores
 | `sync` | Mark everything pending, push it all once, then `rebuild_graph`. Recovers a wiped or fresh server |
 | `seed` | Push `fixtures/invariants.sample.json` through the same reducers. SpacetimeDB only, never the mirror |
 | `reconcile` | Make the mirror match `results/leaderboard.json` before any checker run or commit. Patched entries: exactly one complete `invariants` row per listed exploit (extract missing ones, up to 3 retries), stale rows deleted, evidence_path set to that exploit's replay. Robust entries: rows deleted. failed_to_run entries and non-leaderboard envs: untouched |
-| `replay --delay 1.0` | Clear the hub envs from SpacetimeDB, then push the mirror's hub rows in `confirmed_at` order, so the graph builds up on screen (beat 2 and the Devpost video, labelled as a replay of Saturday's audit) |
-| `reset-demo` | `clear_environment` for every `game/*` env in both stores, before going on stage |
+| `replay --delay 1.0` | Clear the hub envs from SpacetimeDB, then push the mirror's hub rows in `confirmed_at` order, so the graph builds up on screen (label it as a replay of the recorded audit) |
+| `reset-demo` | `clear_environment` for every `game/*` env in both stores, before a demo |
 | `doctor` | Token valid; row counts match `leaderboard.json`; pending and errored pushes; graph_config present |
 
 Before committing results: `reconcile`, then `python scripts/check_leaderboard.py`, then
-commit `invariants.db`. M0 also adds `tests/test_store_checker.py`, which builds a temp repo
-and calls `check_leaderboard.check_invariants` for the patched, robust, re-run and
-missing-row cases.
+commit `invariants.db`.
 
 ### Retrieval
 
-Implementation update: Rishab has added opt-in graph retrieval and loop adapters at the
-user's request. See [GRAPH_RETRIEVAL.md](GRAPH_RETRIEVAL.md) for bounded top-k selection,
-target/source isolation, replay contracts, and integration tests. Varun's loop can call
-`run_knowledge_transfer` and persist its application rows through the audit writer.
+Retrieval uses Moss semantic search plus graph-neighbour expansion; see
+[MOSS_RETRIEVAL.md](MOSS_RETRIEVAL.md) and [GRAPH_RETRIEVAL.md](GRAPH_RETRIEVAL.md) for
+bounded top-k selection, target/source isolation, replay contracts and tests. The audit
+loop can call `run_knowledge_transfer` and persist its application rows through the audit
+writer.
 The original prompt-only design below is retained as background; the implementation
 uses graph-neighbour ranking before the fixer prompt. Retrieval requires an explicit
 `target_env_id`. The writer, pusher, and target execution remain separate integrations.
@@ -548,11 +476,11 @@ evidence paths: the checker rejects patches that embed exploit text or name evid
 files, and defenses must be written into the patch as code, never looked up from
 `invariants.db` at runtime.
 
-## Transfer test (beat 3, Varun)
+## Transfer test
 
 The target is **never** a leaderboard environment, because pre-hardening one would make the
 engine's view disagree with the checker, which scores every attack against the original
-reward. The target is the judge's game (`game/<slug>`) or a held-out hub environment that
+reward. The target is a newly compiled game (`game/<slug>`) or a held-out hub environment that
 isn't in `leaderboard.json`.
 
 1. Compile, then call `record_environment('game/<slug>', 'game', title, 'compiling')`. Mint
@@ -578,7 +506,7 @@ applied to a number-guessing game compiled with the build plan's loose "answer a
 parser. The three suggested game types shown on screen should match exploit classes
 already in the store.
 
-## Seed data (unblocks Rishab and Anirudh now)
+## Seed data
 
 `fixtures/invariants.sample.json` (in the repo) holds invented invariants: 12 across 6
 `seed/...` environments, with several sharing a class so rules and edges actually form,
@@ -586,44 +514,12 @@ plus one transfer target and two applications. Its shape is
 `{version, environments: [record_environment args], entries: [{env_id, exploit:
 {record_exploit args}, invariant: {record_invariant text fields}, embedding_model,
 embedding}], applications: [record_rule_application args]}`. The embeddings are real
-`all-MiniLM-L6-v2` vectors, precomputed with `scripts/embed_fixture.py`, so Rishab's tests
+`all-MiniLM-L6-v2` vectors, precomputed with `scripts/embed_fixture.py`, so module tests
 and threshold tuning never need Python or torch. `spacetimedb/src/core.test.ts` already
 loads the whole fixture through the reducers in that order. The `seed` command does the
-same over HTTP, then calls `graph_on_invariant`. Seed rows are excluded from retrieval on
-stage, so the judge's game is pre-hardened only by rules learned from real runs. After any
+same over HTTP, then calls `graph_on_invariant`. Seed rows are excluded from retrieval, so a
+new game is pre-hardened only by rules learned from real runs. After any
 wipe, run `seed`, then `sync`.
-
-## Milestones
-
-It is Sat 03:45 as this is written. Checkpoint 1 is at 12:00, Checkpoint 2 at 18:00, the
-feature freeze at midnight, and submission Sun 09:00.
-
-| | What | Who | Due |
-| --- | --- | --- | --- |
-| M0a | **Done.** Skeleton pushed: shared files, `core_tables.ts`, `core.ts`, `taxonomy.ts`, empty `graph_tables.ts`/`graph.ts` that compile, the fixture with vectors, 16 harness tests | Varun | Sat 05:00 |
-| M0 | First real publish passes the checklist below; `harden.store` client, pusher and checker test | Rishab | 09:00 |
-| M2a | Audit writes mirror rows; `reconcile` + checker pass on 3 envs | Varun | 12:00 (Checkpoint 1) |
-| M1 | Graph tables and reducers, `buildGraph`, `fixture.graph.json`, vitest tests on seed vectors | Rishab (starts now) | 15:00 |
-| M2b + M3 | Pusher live during the audit; dashboard draws the live graph from the integration server | Rishab, Anirudh | 18:00 (Checkpoint 2) |
-| M4 | Transfer test working on the rehearsal pair | Varun | 22:00 |
-| Freeze | `reconcile`, commit the mirror, `reset-demo`, offline rehearsal, record the `replay` video | all | Sun 00:00–08:00 |
-
-If M1 or M3 slips past 18:00, show the invariant list from `useTable(tables.invariant)` and
-move on. That's the build plan's first cut.
-
-### M0 checklist (needs a real server)
-
-Already confirmed in the 2.13.0 harness: the split layout loads; `export *` registers
-reducers; positional parameters follow declaration order; `t.option(t.f32())`,
-`t.array(t.f32())` and u64 behave as described; `SenderError` rolls back.
-
-- [ ] `spacetime publish` loads the module with no "not a spacetime export" error.
-- [ ] Python's positional JSON calls work for every reducer, including `f32[]` embeddings,
-      a `u32` iteration (out of range rejected) and the no-argument `rebuild_graph` (body
-      `[]`).
-- [ ] A Python write shows up in a React `useTable` subscription, with event tag
-      `'Transaction'`.
-- [ ] `push --watch` recovers after `spacetime start` is killed and restarted.
 
 ## Local setup
 
@@ -664,7 +560,7 @@ const [invariants, ready] = useTable(tables.invariant);
 
 The dashboard only reads, so it connects anonymously, with no token persistence.
 
-### Demo laptop bring-up (rehearse with Wi-Fi off)
+### Offline bring-up
 
 1. `spacetime start --listen-addr 127.0.0.1:3000`. Never use `--in-memory` and never run
    `spacetime server clear`. Data on disk survives restarts.
@@ -700,32 +596,6 @@ The dashboard only reads, so it connects anonymously, with no token persistence.
 - **Stale examples.** 1.x code uses `withModuleName`, `@clockworklabs/spacetimedb-sdk` and
   `schema(t1, t2)`. In 2.x these are `withDatabaseName`, `spacetimedb`, and
   `schema({ t1, t2 })` as the default export.
-
-## SpacetimeDB prize
-
-$2,048 / $1,024 / $512 for the "most impressive use of Spacetime". It's on the Hive live
-site but not yet on Devpost, so ask at the SpacetimeDB workshop (Sat 4–5 PM, Theater) how
-to enter. The only stated bar is that SpacetimeDB is the core real-time backend. What we
-show: the graph computed by reducers, the dashboard updating live as hacks are confirmed
-(pending node, then the invariant, then its edges), and a stored rule blocking the same
-exploit on the judge's game. Devpost wants a video for sponsors who judge asynchronously,
-so record the `replay` run. The deadline is Sun Oct 25, 9:00 AM PDT.
-
-## Cut or stretch
-
-- Splitting a class into several rules by similarity (needs `rule_member`): stretch.
-- Moving retrieval into a SpacetimeDB procedure: stretch.
-- Maincloud, the writer allowlist and a public URL: cut unless integration needs it.
-- An event table for "exploit confirmed" toasts: stretch; pending nodes already show it.
-
-## Open questions
-
-1. **Ownership (resolved Sat 04:00).** Rishab owns the whole `spacetimedb/` module and the
-   pusher; Varun owns the audit side. See the handoff section at the top.
-2. **Embedding model.** If PyTorch is too heavy for the pusher, any local model works. The
-   contract is "384 normalized floats plus a model name, or empty"; a different dimension
-   means changing the validation.
-3. **Prize entry.** Who goes to the 4 PM workshop?
 
 ## Sources
 
