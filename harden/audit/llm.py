@@ -28,11 +28,11 @@ MARGIN_USD = 0.02  # stop starting calls this close to the cap
 
 # $ per million tokens: input, output, cache read. Cache writes bill at 1.25x input.
 PRICES = {
-    "claude-haiku-5-5": (0.10, 0.50, 0.01),
     "claude-opus-5-5": (4.00, 20.00, 0.20),
     "claude-opus-5": (5.00, 25.00, 0.50),
     "claude-opus-4-8": (5.00, 25.00, 0.50),
     "claude-sonnet-5-5": (2.00, 10.00, 0.20),
+    "claude-haiku-5-5": (0.10, 0.50, 0.01),  # prompts up to 100K tokens; longer ones bill 5x
 }
 UNKNOWN_PRICE = (10.00, 50.00, 1.00)  # an unlisted fallback model is priced conservatively
 CHARS_PER_TOKEN = 3.0  # conservative, for worst-case reservations only

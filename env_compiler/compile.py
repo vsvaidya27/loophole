@@ -1,11 +1,15 @@
 """Plain-English game -> validated single-turn environment.
 
-    python -m env_compiler.compile "guess a number from hints" --out compiled/
+    python -m env_compiler.compile "guess a number from hints" --out compiled/ [--provider claude|gemini]
 
 Steps: (1) fit check, which refuses multi-turn / visual / unverifiable games and offers
 alternatives; (2) the model fills in the template as `class Game(GameEnv)`; (3) the module
 runs the validation gates in a subprocess; failures are fed back for up to
 `max_attempts` tries. Responses are cached on disk (rate limits and cost).
+
+Claude Haiku 5.5 (ANTHROPIC_API_KEY) is the default model; ENV_COMPILER_MODEL picks another
+Claude model, and `--provider gemini` or ENV_COMPILER_PROVIDER=gemini switches to Gemini
+(GEMINI_API_KEY).
 """
 
 from __future__ import annotations
@@ -26,7 +30,14 @@ import httpx
 PKG = Path(__file__).resolve().parent
 ROOT = PKG.parent
 CACHE = ROOT / ".cache" / "compiler"
-FIT_MODEL = CODEGEN_MODEL = "claude-haiku-5-5"
+PROVIDERS = ("claude", "gemini")
+CLAUDE_MODEL = os.environ.get("ENV_COMPILER_MODEL", "claude-haiku-5-5")  # $0.10 / $0.50 per MTok
+CLAUDE_EFFORT = os.environ.get("ENV_COMPILER_EFFORT", "medium")
+CLAUDE_MIN_TOKENS = 16000  # thinking shares the output budget, so short calls get room too
+FALLBACK_BETA = "server-side-fallback-2026-07-01"
+NO_FALLBACK_PREFIXES = ("claude-haiku",)  # Haiku has no server-side fallback: a decline stays declined
+GEMINI_MODEL = "gemini-3.8-flash"  # pro models are over the free-tier quota
+FIT_MODEL = CODEGEN_MODEL = CLAUDE_MODEL  # for clients that don't name their own model
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 SUGGESTIONS = [
     "Arithmetic target: make a number from given digits",
@@ -78,8 +89,46 @@ Here is the template and a complete worked example.
 """
 
 
+class Claude:
+    """Anthropic Messages client, the default. Reads ANTHROPIC_API_KEY from the environment.
+
+    Claude Haiku 5.5 by default (ENV_COMPILER_MODEL overrides). Thinking stays on and
+    `effort` keeps it short; no temperature, since non-default sampling parameters are
+    rejected. On models that have one, a declined request is retried server-side on a
+    fallback model. A final refusal or a reply cut off at max_tokens raises, so it is
+    never cached as an answer."""
+
+    def __init__(self, model: str = CLAUDE_MODEL, effort: str = CLAUDE_EFFORT):
+        import anthropic
+
+        self.client, self.model, self.effort, self.last_response = anthropic.Anthropic(max_retries=4), model, effort, None
+
+    def complete(self, model: str, system: str, messages: list[dict], max_tokens: int) -> str:
+        fallback = {} if model.startswith(NO_FALLBACK_PREFIXES) else {"betas": [FALLBACK_BETA], "fallbacks": "default"}
+        with self.client.beta.messages.stream(
+            model=model,
+            max_tokens=max(max_tokens, CLAUDE_MIN_TOKENS),
+            system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
+            messages=messages,
+            output_config={"effort": self.effort},
+            **fallback,
+        ) as stream:
+            reply = self.last_response = stream.get_final_message()
+        if reply.stop_reason == "refusal":
+            category = getattr(getattr(reply, "stop_details", None), "category", None) or "uncategorized"
+            raise RuntimeError(f"Claude declined the request ({category})")
+        if reply.stop_reason == "max_tokens":
+            raise RuntimeError("Claude's reply was cut off at max_tokens")
+        blocks = list(reply.content)
+        hops = [k for k, block in enumerate(blocks) if block.type == "fallback"]
+        served = blocks[hops[-1] + 1 :] if hops else blocks  # text before a hand-off is the declining model's
+        return "".join(block.text for block in served if block.type == "text")
+
+
 class Gemini:
     """Minimal Gemini REST client. Reads GEMINI_API_KEY from the environment."""
+
+    model = GEMINI_MODEL
 
     def __init__(self, api_key: str | None = None):
         self.api_key = api_key or os.environ["GEMINI_API_KEY"]
@@ -121,6 +170,15 @@ class CompileResult:
     suggestions: list[str] | None = None
 
 
+def make_client(provider: str | None = None):
+    """Claude unless `provider` or ENV_COMPILER_PROVIDER says gemini. Loads .env first."""
+    load_dotenv()
+    provider = provider or os.environ.get("ENV_COMPILER_PROVIDER", "claude")
+    if provider not in PROVIDERS:
+        raise ValueError(f"provider must be one of {', '.join(PROVIDERS)}, got {provider!r}")
+    return Claude() if provider == "claude" else Gemini()
+
+
 def _ask(client, model: str, system: str, messages: list[dict], max_tokens: int) -> str:
     key = hashlib.sha256(json.dumps([model, system, messages]).encode()).hexdigest()
     cached = CACHE / f"{key}.txt"
@@ -133,7 +191,8 @@ def _ask(client, model: str, system: str, messages: list[dict], max_tokens: int)
 
 
 def check_fit(client, description: str) -> tuple[bool, str]:
-    text = _ask(client, FIT_MODEL, FIT_SYSTEM, [{"role": "user", "content": description}], 2000)
+    model = getattr(client, "model", FIT_MODEL)
+    text = _ask(client, model, FIT_SYSTEM, [{"role": "user", "content": description}], 2000)
     match = re.search(r"\{.*\}", text, re.DOTALL)
     try:
         data = json.loads(match.group(0)) if match else {}
@@ -167,10 +226,9 @@ def feedback(result: dict) -> str:
     return "The validation gates failed:\n" + "\n".join(r["text"] for r in result["reports"] if not r["ok"])
 
 
-def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 2) -> CompileResult:
-    if client is None:
-        from harden.model_client import CompilerClient
-        client = CompilerClient()
+def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 3) -> CompileResult:
+    client = client or make_client()
+    model = getattr(client, "model", CODEGEN_MODEL)
     fits, reason = check_fit(client, description)
     if not fits:
         return CompileResult(False, reason=reason, suggestions=SUGGESTIONS)
@@ -182,7 +240,7 @@ def compile_game(description: str, out_dir: Path, client=None, max_attempts: int
     out_dir.mkdir(parents=True, exist_ok=True)
     last = "no attempt made"
     for attempt in range(1, max_attempts + 1):
-        text = _ask(client, CODEGEN_MODEL, system, messages, 16000)
+        text = _ask(client, model, system, messages, 16000)
         code = extract_code(text)
         if code is None:
             last = "reply had no python code block"
@@ -216,8 +274,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("description")
     parser.add_argument("--out", type=Path, default=ROOT / "compiled")
+    parser.add_argument("--provider", choices=PROVIDERS, help="model provider (default: claude, or ENV_COMPILER_PROVIDER)")
     args = parser.parse_args()
-    result = compile_game(args.description, args.out)
+    result = compile_game(args.description, args.out, client=make_client(args.provider))
     if result.ok:
         print(f"OK after {result.attempts} attempt(s): {result.path}")
         return 0
