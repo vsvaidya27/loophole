@@ -64,8 +64,8 @@ describe('Showcase dashboard', () => {
     await navigate('snake');
     expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/snake');
     await navigate('lights_out');  // retired: falls back to the first demo
-    expect(window.location.hash).toBe('#showcase/trading');
-    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/trading');
+    expect(window.location.hash).toBe('#showcase/webagent');
+    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/webagent');
   });
 
   it('advances recorded frames, ends playback, and restarts without changing final scores', async () => {
