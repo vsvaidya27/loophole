@@ -28,6 +28,7 @@ function RewardLoop({ example, repaired = false }: { example: WalkthroughExample
 function Episode({ example, repaired = false }: { example: WalkthroughExample; repaired?: boolean }) {
   const [frame, setFrame] = useState(0), [playing, setPlaying] = useState(false);
   const task = repaired ? example.task : example.exploitTask ?? example.task, call = example.call;
+  const shownIndex = repaired ? example.taskIndex : example.exploitIndex ?? example.taskIndex;
   const policy = repaired ? 'hardened' : 'hacked';
   const row = task ? replayRow(task.rollouts[policy], repaired ? 'strict' : 'loose') : undefined;
   const max = task ? task.info?.prices ? 3 : Math.max(1, (row?.pages?.length ?? 1) - 1) : (call?.transcript.length ?? 1) - 1;
@@ -41,7 +42,7 @@ function Episode({ example, repaired = false }: { example: WalkthroughExample; r
   }, [playing, frame, max]);
   const turn = call?.transcript[frame];
   return <div className={`story-episode policy-${policy}`}>
-    <div className="story-episode-label"><span className="policy-dot" /><strong>{task ? repaired ? example.scripted ? 'Reference solver' : 'Trained on the fixed reward' : 'Reward-hacked policy' : 'Same recorded call'}</strong><span>{task ? example.scripted ? 'Scripted replay' : 'Recorded rollout' : 'Recorded audit'}</span></div>
+    <div className="story-episode-label"><span className="policy-dot" /><strong>{task ? repaired ? example.scripted ? 'Reference solver' : 'Trained on the fixed reward' : 'Reward-hacked policy' : 'Same recorded call'}</strong><span>{task ? example.scripted ? 'Scripted replay' : 'Recorded rollout' : 'Recorded audit'}{task && shownIndex !== undefined ? ` · example ${shownIndex + 1}` : ''}</span></div>
     <div className="story-stage">{task && row ? <ReplayStage task={task} row={row} frame={frame} name={repaired ? 'Hardened' : 'Reward hacked'} /> : turn && <div className={`story-call-turn ${turn[0].toLowerCase()}`}>
       <span className="speaker-avatar">{turn[0][0]}</span><span className="eyebrow">{turn[0]} · turn {frame + 1}</span><p>{turn[1]}</p>
       {call?.audio?.[frame] && <audio key={`${call.id}-${frame}`} controls preload="none" aria-label={`Listen to ${turn[0]}, turn ${frame + 1}`} src={call.audio[frame]} onPlay={() => setPlaying(false)} />}

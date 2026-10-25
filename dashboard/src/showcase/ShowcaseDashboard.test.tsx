@@ -7,9 +7,10 @@ import { demos, featuredTask, type GameData } from './model';
 import trading from '../../public/showcase/data/trading.json';
 import webagent from '../../public/showcase/data/webagent.json';
 import voice from '../../public/showcase/data/voice.json';
+import snake from '../../public/showcase/data/snake.json';
 
 let container: HTMLDivElement, root: Root;
-const fixtures: Record<string, unknown> = { trading, webagent, voice };
+const fixtures: Record<string, unknown> = { trading, snake, webagent, voice };
 const readDemo = (id: string) => JSON.parse(JSON.stringify(fixtures[id]));
 const successfulFetch = async (url: string) => ({ ok: true, json: async () => readDemo(url.split('/').at(-1)!.replace('.json', '')) });
 const node = <T extends Element = HTMLElement>(selector: string) => {
@@ -49,7 +50,7 @@ afterEach(async () => {
 });
 
 describe('Showcase dashboard', () => {
-  it('preserves trained-run provenance, aggregate scores, and navigation to the three demos', async () => {
+  it('preserves trained-run provenance, aggregate scores, and navigation to the four demos', async () => {
     expect(container.textContent).toContain('Recorded training run');
     expect(container.textContent).toContain('Trained on fixed reward');
     expect(node('.showcase-stats .policy-hacked').textContent).toContain('100%');
@@ -60,13 +61,13 @@ describe('Showcase dashboard', () => {
     expect(container.textContent).toContain('Means include all 24 held-out tasks');
     expect(container.textContent).not.toContain('Reference solver');
     expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
-    expect(container.querySelectorAll('.demo-selector a')).toHaveLength(3);
-    expect(node('.showcase-count strong').textContent).toBe('03');
-    for (const retired of ['snake', 'lights_out']) {
-      await navigate(retired);
-      expect(window.location.hash).toBe('#showcase/trading');
-      expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/trading');
-    }
+    expect(container.querySelectorAll('.demo-selector a')).toHaveLength(4);
+    expect(node('.showcase-count strong').textContent).toBe('04');
+    await navigate('snake');
+    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/snake');
+    await navigate('lights_out');  // retired: falls back to the first demo
+    expect(window.location.hash).toBe('#showcase/trading');
+    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/trading');
   });
 
   it('advances recorded frames, ends playback, and restarts without changing final scores', async () => {
