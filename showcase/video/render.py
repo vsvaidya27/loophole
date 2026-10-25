@@ -18,7 +18,7 @@ from ..cards import ROOT, load_cards
 from .painters import painter_for
 from .scenes import Compare
 
-COMPARE = ("snake", "lights_out", "trading", "webagent")
+COMPARE = ("snake", "trading", "webagent")
 
 
 def video_path(card: dict) -> Path:
@@ -44,7 +44,7 @@ def render_compare(card: dict, rollouts_dir: Path, k: int, stills: Path | None) 
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    p.add_argument("demo", help="snake | lights_out | trading | webagent | voice | all")
+    p.add_argument("demo", help="snake | trading | webagent | voice | all")
     p.add_argument("--rollouts", type=Path, default=Path("rollouts"))
     p.add_argument("--tasks", type=int, default=3, help="games to play in the video")
     p.add_argument("--stills", type=Path, default=None)

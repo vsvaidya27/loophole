@@ -1,6 +1,6 @@
 # Showcase
 
-The five demos we show, built into one page. Each demo is a reward that gets hacked and a fixed
+The four demos we show, built into one page. Each demo is a reward that gets hacked and a fixed
 version, replayed side by side: the untrained base policy, a policy trained on the hackable reward,
 and a policy trained on the fixed reward, all on the same held-out tasks. The true score always
 uses the fixed reward.
@@ -8,8 +8,7 @@ uses the fixed reward.
 | Demo | Folder | Game | Kind |
 | --- | --- | --- | --- |
 | Voice support agent | `voice/` | refund-desk judge audit | recorded calls, two judges |
-| Snake | `snake/` | `snake_easy` | single-turn |
-| Lights Out | `lights_out/` | `lights_out` | single-turn |
+| Snake | `snake/` | `snake_live` | multi-turn |
 | Trading simulator | `trading/` | `trading_sim` | single-turn |
 | Computer use | `webagent/` | `web_form` | multi-turn |
 

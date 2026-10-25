@@ -168,17 +168,18 @@ class TradingPainter(Painter):
         return (f"profit {pnl:+d} of a possible {best}", "ok" if pnl >= best * 0.8 else "bad")
 
 
-class WebPainter(Painter):
-    """Rebuilds each page state by replaying the policy's replies through the game itself."""
+class ReplayPainter(Painter):
+    """Multi-turn games: rebuilds each state by replaying the policy's logged replies (its episode
+    in the fixed game) through the game itself."""
+
+    game = ""
+    shown_replies = 4
 
     def __init__(self):
         from env_compiler.loader import load_game
 
-        self.env = load_game("web_form")
+        self.env = load_game(self.game)
         self.cache: dict = {}
-
-    def intro(self, task):
-        return "Computer use: operate a web page one action at a time to reach the goal."
 
     def states(self, task, row):
         # Key on every reply: two policies can open with the same reply and take as many turns,
@@ -194,7 +195,42 @@ class WebPainter(Painter):
 
     def reply(self, task, row):
         agent = [t for who, t in row["transcript"] if who == "agent"]
-        return "  ".join(a.replace("<answer>", "").replace("</answer>", "") for a in agent[:4]) or "(no action)"
+        shown = agent[: self.shown_replies]
+        text = "  ".join(a.replace("<answer>", "").replace("</answer>", "") for a in shown) or "(no action)"
+        return text + ("  ..." if len(agent) > len(shown) else "")
+
+
+class SnakeLivePainter(ReplayPainter):
+    game = "snake_live"
+    shown_replies = 8
+
+    def intro(self, task):
+        return "Snake, one move per turn: the board is shown again after every move."
+
+    def draw(self, d, box, task, row, step):
+        states = self.states(task, row)
+        draw_board(d, box, self.env.board(states[min(step, len(states) - 1)]), SNAKE)
+
+    def status(self, task, row, step):
+        states = self.states(task, row)
+        st = states[min(step, len(states) - 1)]
+        ate = f"ate {st['eaten']}/{st['total']}"
+        if step < len(states) - 1 and not st["done"]:
+            return f"turn {min(step, len(states) - 1)}/{len(states) - 1} · {ate}", ""
+        if st["eaten"] == st["total"]:
+            return f"ate all the food in {st['turns']} turns", "ok"
+        if st["crashed"]:
+            return f"crashed on turn {st['turns']} · {ate}", "bad"
+        if not st["moves"]:
+            return "never made a valid move", "bad"
+        return f"out of turns · {ate}", "bad"
+
+
+class WebPainter(ReplayPainter):
+    game = "web_form"
+
+    def intro(self, task):
+        return "Computer use: operate a web page one action at a time to reach the goal."
 
     def draw(self, d, box, task, row, step):
         states = self.states(task, row)
@@ -252,7 +288,8 @@ def _no_answer(d, box, msg):
     text(d, ((x0 + x1) / 2, (y0 + y1) / 2), msg, font(18), C["crit"], "mm")
 
 
-PAINTERS = {"snake": SnakePainter, "lights_out": LightsPainter, "trading_sim": TradingPainter, "web_form": WebPainter}
+PAINTERS = {"snake": SnakePainter, "snake_live": SnakeLivePainter, "lights_out": LightsPainter,
+            "trading_sim": TradingPainter, "web_form": WebPainter}
 
 
 def painter_for(game: str) -> Painter:

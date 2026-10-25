@@ -74,7 +74,7 @@ def build(rollouts_dir: Path, out: Path, graph_url: str | None) -> dict:
     blob = {
         "generated": time.strftime("%Y-%m-%d %H:%M"),
         "title": "Loophole Showcase",
-        "eyebrow": "Loophole · five demos of a reward getting hacked, then fixed",
+        "eyebrow": "Loophole · four demos of a reward getting hacked, then fixed",
         "lede": "Each demo has a hackable reward and a fixed one. We replay the untrained base policy, one trained on the hackable "
                 "reward and one trained on the fixed reward on the same held-out tasks. The true score always uses the fixed reward.",
         "order": [g["game"] for g in games],

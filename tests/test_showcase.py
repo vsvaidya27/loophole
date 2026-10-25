@@ -61,7 +61,7 @@ def test_replay_states_rebuilds_a_run_from_its_replies():
 
 
 def test_placeholders_use_real_rewards_and_are_labelled():
-    data = placeholders.single_turn("lights_out", n=6)
+    data = placeholders.single_turn("trading_sim", n=6)
     rows = [t["rollouts"] for t in data["tasks"]]
     assert all(r["hardened"]["strict"] == 1.0 for r in rows)
     assert sum(r["hacked"]["loose"] for r in rows) > sum(r["hacked"]["strict"] for r in rows)  # the exploit pays
@@ -97,13 +97,14 @@ def test_build_bundles_every_demo_into_one_page(tmp_path):
 
 
 def test_a_real_run_replaces_a_placeholder(tmp_path):
-    real = tmp_path / "snake_easy.json"
-    real.write_text(json.dumps({"game": "snake_easy", "description": "d", "policies": ["base"], "tasks": [], "curves": {}}))
+    game = next(c for c in load_cards() if c["id"] == "snake")["game"]
+    real = tmp_path / f"{game}.json"
+    real.write_text(json.dumps({"game": game, "description": "d", "policies": ["base"], "tasks": [], "curves": {}}))
     # A demo folder of its own with a committed placeholder, so the check does not depend on
     # whether the repo's snake artifact is still a placeholder or already a real run.
     demo = tmp_path / "demo"
     (demo / "artifacts").mkdir(parents=True)
-    (demo / "artifacts" / "rollouts.json").write_text(json.dumps({"game": "snake_easy", "placeholder": True, "tasks": []}))
-    card = {**next(c for c in load_cards() if c["game"] == "snake_easy"), "dir": str(demo)}
+    (demo / "artifacts" / "rollouts.json").write_text(json.dumps({"game": game, "placeholder": True, "tasks": []}))
+    card = {**next(c for c in load_cards() if c["id"] == "snake"), "dir": str(demo)}
     assert showcase_build.pick_game_data(card, tmp_path)["placeholder"] is False
     assert showcase_build.pick_game_data(card, tmp_path / "empty")["placeholder"] is True

@@ -1,3 +1,4 @@
+import re
 import asyncio
 import random
 
@@ -122,4 +123,19 @@ def test_loophole_gate_passes_the_builtin_games_and_catches_a_dead_loose_parser(
             return super().answers(reply)[:1]
 
     report = loophole_report(FirstGuessOnly)
-    assert not report["ok"] and "ANY of them" in report["text"]
+    assert not report["ok"] and "ANY listed guess" in report["text"]
+
+
+def test_snake_live_one_move_per_turn_and_the_loose_move_dump():
+    strict, loose = MULTI_GAMES["snake_live"](strict=True), MULTI_GAMES["snake_live"](strict=False)
+    seed = strict.episode_seeds(1, 11)[0]
+    plan = [t for who, t in strict.play(strict.reference_policy, seed).transcript if who == "agent"]
+    assert strict.play(strict.reference_policy, seed).reward == 1.0
+    dump = "".join(re.sub(r"</?answer>", "", m) for m in plan)  # the whole path in one reply
+    for game, expected in ((loose, 1.0), (strict, 0.0)):
+        state, _ = game.reset(random.Random(seed))
+        game.step(state, f"<answer>{dump}</answer>")
+        assert game.reward(state) == expected  # loose runs every move; strict reads "RDDL..." as no move
+    state, _ = strict.reset(random.Random(seed))
+    message, done = strict.step(state, "<answer>up</answer>")
+    assert state["moves"] == "U" and not done and "Next move?" in message

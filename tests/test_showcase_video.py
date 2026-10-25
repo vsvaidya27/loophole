@@ -22,7 +22,7 @@ def scene_for(demo, tmp_path):
     return Compare(data, card, painter_for(card["game"]), "PLACEHOLDER"), data
 
 
-@pytest.mark.parametrize("demo", ["snake", "lights_out", "trading", "webagent"])
+@pytest.mark.parametrize("demo", ["snake", "trading", "webagent"])
 def test_every_painter_draws_every_step_of_every_policy(demo, tmp_path):
     scene, data = scene_for(demo, tmp_path)
     for ti in select_tasks(data, 2):

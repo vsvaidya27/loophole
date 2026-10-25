@@ -10,6 +10,7 @@ from .easy import (
 )
 from .sims import LightsOut, Snake, Trading
 from .multiturn_games import LiveMastermind, NumberHunt, NumberHuntEasy
+from .snake_live import SnakeLive
 from .webagent import WebForm
 from .wordgames import Anagrams, ScrabbleLite, WordHunt
 
@@ -36,6 +37,7 @@ MULTI_GAMES = {
     "number_hunt_easy": NumberHuntEasy,
     "live_mastermind": LiveMastermind,
     "web_form": WebForm,
+    "snake_live": SnakeLive,
 }
 
 __all__ = ["GAMES", "MULTI_GAMES"]

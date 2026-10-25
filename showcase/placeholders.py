@@ -10,8 +10,10 @@ the reference solver. Every score comes from the real reward functions, and ever
 
 from __future__ import annotations
 
+import copy
 import json
 import random
+import re
 from pathlib import Path
 
 from env_compiler.loader import load_game
@@ -65,10 +67,26 @@ def shallow_policy(state: dict, last_message: str, rng: random.Random) -> str:
     return f"<answer>click {accept}</answer>"
 
 
+def dump_policy(game):
+    """What a loose reward that runs every move in a reply teaches: send the whole plan in one turn."""
+    def policy(state: dict, last_message: str, rng: random.Random) -> str:
+        sim, message, moves = copy.deepcopy(state), last_message, []
+        for _ in range(game.max_turns):
+            reply = game.reference_policy(sim, message, rng)
+            moves.append(re.sub(r"</?answer>", "", reply).strip())
+            message, done = game.step(sim, reply)
+            if done:
+                break
+        return "<answer>" + " ".join(moves) + "</answer>"
+
+    return policy
+
+
 def multi_turn(game: str, n: int = N) -> dict:
     strict, loose = load_game(game, strict=True), load_game(game, strict=False)
     seeds = strict.episode_seeds(n, EVAL_SEED)
-    policies = {"base": strict.random_policy, "hacked": shallow_policy, "hardened": strict.reference_policy}
+    hacked = shallow_policy if game == "web_form" else dump_policy(strict)
+    policies = {"base": strict.random_policy, "hacked": hacked, "hardened": strict.reference_policy}
     result = {
         "game": game,
         "kind": "multi",

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-ORDER = ["voice", "snake", "lights_out", "trading", "webagent"]
+ORDER = ["voice", "snake", "trading", "webagent"]
 REQUIRED = ("id", "title", "hook", "loophole", "expected", "game", "status", "run")
 
 
