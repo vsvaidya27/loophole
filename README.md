@@ -19,7 +19,7 @@ judge types live. The full plan, demo script and timeline are in
 | Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
 | Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense); SpacetimeDB module and pusher by Rishab, audit-side writes and retrieval by Varun | Varun, Rishab |
 | Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
-| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); multi-turn environments behind `--allow-multiturn` ([plan](docs/MULTITURN_PLAN.md)) | Rohan |
+| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); or a multi-turn one when the game needs the environment to answer each reply ([plan](docs/MULTITURN_PLAN.md)) | Rohan |
 | Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy; multi-turn games use a separate rollout loop (`trainer/multiturn_grpo.py`) | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
 
@@ -164,8 +164,8 @@ path (games, trainer, hardening, leaderboard checker) depends on it.
 - Gates: `validate()` dispatches on `kind`. Multi-turn requires a reference policy that wins
   every episode, near-zero null and random policies, deterministic resets, and episodes that
   end within `max_turns`.
-- Compiler: the fit check now returns `single`, `multi` or `reject`. Multi-turn is refused unless
-  `--allow-multiturn` is passed, then it uses its own template and worked example.
+- Compiler: the fit check returns `single`, `multi` or `reject` and routes the game. Multi-turn games
+  use their own template and worked example; `--single-only` refuses them.
 - verifiers: `load_environment("number_hunt")` returns a `MultiTurnEnv` adapter (`GameMultiTurnEnv`).
 - Trainer: `python -m trainer.train number_hunt_easy --out runs/x` runs a small self-contained GRPO
   loop (`trainer/multiturn_grpo.py`) instead of TRL, because TRL's `GRPOTrainer` assumes one

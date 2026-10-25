@@ -88,16 +88,17 @@ def _fit(kind):
     return '{"kind": "%s", "reason": "r"}' % kind
 
 
-def test_compiler_refuses_multiturn_by_default_and_allows_it_with_the_flag(monkeypatch, tmp_path):
+def test_compiler_compiles_multiturn_by_default_and_refuses_it_when_single_only(monkeypatch, tmp_path):
     monkeypatch.setattr(comp, "CACHE", tmp_path / "cache")
-    result = comp.compile_game("guess my number with hints", tmp_path, client=FakeClient([_fit("multi")]))
+    client = FakeClient([_fit("multi")])
+    result = comp.compile_game("guess my number with hints", tmp_path, client=client, allow_multiturn=False)
     assert not result.ok and "multi-turn" in result.reason
 
     good = (comp.PKG / "games" / "multiturn_games.py").read_text().split("class NumberHuntEasy")[0]
     good = good.replace("from ..", "from env_compiler.").replace("from .clue_guess import", "from env_compiler.games.clue_guess import")
     good = good.replace("class NumberHunt(", "class Game(")
     client = FakeClient([_fit("multi"), f"```python\n{good}\n```"])
-    result = comp.compile_game("guess my number with hints", tmp_path / "out", client=client, allow_multiturn=True)
+    result = comp.compile_game("guess my number with hints", tmp_path / "out", client=client)
     assert result.ok, result.reason
 
 

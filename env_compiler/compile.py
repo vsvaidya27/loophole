@@ -262,7 +262,7 @@ def feedback(result: dict) -> str:
 
 
 def compile_game(
-    description: str, out_dir: Path, client=None, max_attempts: int = 3, allow_multiturn: bool = False
+    description: str, out_dir: Path, client=None, max_attempts: int = 3, allow_multiturn: bool = True
 ) -> CompileResult:
     client = client or make_client()
     model = getattr(client, "model", CODEGEN_MODEL)
@@ -272,7 +272,7 @@ def compile_game(
     if kind == "multi" and not allow_multiturn:
         return CompileResult(
             False,
-            reason=f"{reason} This is a multi-turn game; multi-turn is off by default (pass allow_multiturn / --allow-multiturn).",
+            reason=f"{reason} This is a multi-turn game, and multi-turn is turned off (--single-only).",
             suggestions=SUGGESTIONS,
         )
 
@@ -323,10 +323,11 @@ def main() -> int:
     parser.add_argument("description")
     parser.add_argument("--out", type=Path, default=ROOT / "compiled")
     parser.add_argument("--provider", choices=PROVIDERS, help="model provider (default: claude, or ENV_COMPILER_PROVIDER)")
-    parser.add_argument("--allow-multiturn", action="store_true", help="also compile multi-turn games (experimental)")
+    parser.add_argument("--single-only", action="store_true", help="refuse games the fit check calls multi-turn")
+    parser.add_argument("--allow-multiturn", action="store_true", help=argparse.SUPPRESS)  # old flag; now the default
     args = parser.parse_args()
     result = compile_game(
-        args.description, args.out, client=make_client(args.provider), allow_multiturn=args.allow_multiturn
+        args.description, args.out, client=make_client(args.provider), allow_multiturn=not args.single_only
     )
     if result.ok:
         print(f"OK after {result.attempts} attempt(s): {result.path}")
