@@ -130,8 +130,8 @@ def probe(claude: Claude, spec: EnvSpec, context: str, iteration: int, target_so
         iteration=iteration,
         system=_system(PROBER_ROLE.format(classes=classes), context),
         messages=[{"role": "user", "content": "\n\n".join(parts)}],
-        effort="high",
-        max_tokens=24000,
+        effort="low",
+        max_tokens=4000,
         schema=PROBER_SCHEMA,
     )
 
@@ -179,7 +179,7 @@ def judge(claude: Claude, spec: EnvSpec, iteration: int, items: list[dict]) -> d
         system=[{"type": "text", "text": VERIFIER_SYSTEM}],
         messages=[{"role": "user", "content": "\n\n".join(blocks)}],
         effort="low",
-        max_tokens=8000,
+        max_tokens=3000,
         schema=VERIFIER_SCHEMA,
     )
     out = {}
@@ -220,7 +220,7 @@ def solve(claude: Claude, tasks: list[dict]) -> dict[int, str]:
         system=[{"type": "text", "text": SOLVER_SYSTEM}],
         messages=[{"role": "user", "content": "\n\n".join(blocks)}],
         effort="low",
-        max_tokens=24000,
+        max_tokens=4000,
         schema=SOLVER_SCHEMA,
     )
     if not result.ok:
@@ -285,8 +285,8 @@ def repair(claude: Claude, spec: EnvSpec, context: str, template: str, iteration
         iteration=iteration,
         system=_system(REPAIRER_ROLE.format(max_reward=spec.max_reward, template=template), context),
         messages=[{"role": "user", "content": "\n\n".join(parts)}],
-        effort="high",
-        max_tokens=20000,
+        effort="low",
+        max_tokens=6000,
         schema=REPAIRER_SCHEMA,
     )
 

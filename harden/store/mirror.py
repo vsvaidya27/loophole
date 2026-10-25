@@ -30,6 +30,7 @@ MAX_TITLE = 80
 MAX_SAMPLE = 2000
 
 SCHEMA = """
+CREATE TABLE IF NOT EXISTS push_resets (env_id TEXT PRIMARY KEY, requested_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS environments (env_id TEXT PRIMARY KEY, source TEXT, title TEXT, status TEXT,
   updated_at TEXT, pushed_at TEXT, push_error TEXT);
 CREATE TABLE IF NOT EXISTS exploits (env_id TEXT, exploit_id TEXT, exploit_class TEXT, iteration INTEGER,
@@ -171,6 +172,7 @@ def clear_environment(env_id: str, db: Path | None = None) -> None:
     SpacetimeDB half."""
     prefix = f"{env_id}#"
     with connect(db) as con:
+        con.execute("INSERT INTO push_resets VALUES (?, ?) ON CONFLICT(env_id) DO UPDATE SET requested_at=excluded.requested_at", (env_id, _now()))
         con.execute("DELETE FROM exploits WHERE env_id = ?", (env_id,))
         con.execute("DELETE FROM invariants WHERE env_id = ?", (env_id,))
         con.execute(
@@ -195,3 +197,21 @@ def exploit_rows(env_id: str, db: Path | None = None) -> list[dict]:
     with connect(db) as con:
         con.row_factory = sqlite3.Row
         return [dict(r) for r in con.execute("SELECT * FROM exploits WHERE env_id = ?", (env_id,))]
+
+
+def record_rule_application(run_id: str, invariant_id: str, target_env_id: str, outcome: str,
+                            detail: dict, db: Path | None = None, *,
+                            verified_remote_sources: frozenset[str] = frozenset()) -> None:
+    if not run_id.strip() or outcome not in {'pre_hardened', 'blocked', 'not_blocked', 'not_applicable'}:
+        raise ValidationError('Invalid run ID or application outcome')
+    if not isinstance(detail, dict) or type(detail.get('v', 1)) is not int or detail.get('v', 1) != 1:
+        raise ValidationError('Application detail must be a version 1 object')
+    payload = json.dumps({**detail, 'v': 1}, allow_nan=False)
+    with connect(db) as con:
+        _require_env(con, target_env_id)
+        if invariant_id not in verified_remote_sources and not con.execute("SELECT 1 FROM invariants WHERE env_id || '#' || exploit_id = ?", (invariant_id,)).fetchone():
+            raise ValidationError('Source invariant does not exist')
+        con.execute("INSERT INTO rule_applications VALUES (?, ?, ?, ?, ?, ?, NULL, NULL) "
+                    "ON CONFLICT(run_id,invariant_id,target_env_id) DO UPDATE SET outcome=excluded.outcome, "
+                    "detail=excluded.detail,pushed_at=NULL,push_error=NULL",
+                    (run_id, invariant_id, target_env_id, outcome, payload, _now()))

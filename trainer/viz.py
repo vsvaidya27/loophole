@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import html as html_lib
 import time
 from pathlib import Path
 
@@ -22,6 +23,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     p.add_argument("--rollouts", type=Path, default=Path("rollouts"))
     p.add_argument("--out", type=Path, default=Path("demo/loophole_replay.html"))
+    p.add_argument("--graph-url", default="http://127.0.0.1:5173", help="URL of the live knowledge dashboard")
     args = p.parse_args()
 
     games = []
@@ -35,6 +37,7 @@ def main() -> None:
     data = {"generated": time.strftime("%Y-%m-%d %H:%M"), "games": games}
     blob = json.dumps(data).replace("</", "<\\/")
     html = TEMPLATE.read_text().replace("/*__DATA__*/null", blob, 1)
+    html = html.replace("<!--__LIVE_GRAPH_LINK__-->", f'<a href="{html_lib.escape(args.graph_url, quote=True)}">Live knowledge graph →</a>', 1)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(html)
     print(f"wrote {args.out} ({len(games)} games, {len(html) // 1024} KB)")

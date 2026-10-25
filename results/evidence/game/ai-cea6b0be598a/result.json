@@ -1,0 +1,15 @@
+{
+  "env_id": "game/ai-cea6b0be598a",
+  "status": "patched",
+  "mechanisms": 2,
+  "applications": [
+    {
+      "invariant_id": "game/scripted-20261024-0-arith_compute#multi-answer-1",
+      "outcome": "blocked"
+    }
+  ],
+  "model_spend_usd": 0.0038152999999999998,
+  "original": "compiled/game_cea6b0be.py",
+  "candidate": "compiled/game_cea6b0be_fixed_1.py",
+  "provenance": "Model-generated environment/attacks/repair, strict parser oracle, isolated replay; not Hub leaderboard certification"
+}
