@@ -1,13 +1,14 @@
 # Multi-turn compatibility plan
 
-Amends [BUILD_PLAN.pdf](BUILD_PLAN.pdf). Status: draft for team review.
+Amends [BUILD_PLAN.pdf](BUILD_PLAN.pdf). Implementation status updated October 24, 2026.
 
-> **Where the code is.** The multi-turn code described here is on branch
-> [`multi-turn`](https://github.com/vsvaidya27/loophole/tree/multi-turn) and is **not merged into
-> `main` yet**. File paths below (for example `env_compiler/multiturn.py`,
-> `trainer/multiturn_grpo.py`) refer to that branch. This document was published to `main` first so
-> the whole team plans against the same scope; when the branch merges, this file gets updated to
-> match what landed.
+> **Where the code is.** The `multi-turn` branch merged into `main` in `f2ca0f8`.
+> `env_compiler/multiturn.py`, `trainer/multiturn_grpo.py` and the game hardening engine
+> `harden/game_audit.py` are available on main. The game auditor replays seeded reply
+> sequences, checks repairs, and writes game evidence plus invariant-store records.
+> The Hub loop `harden/audit/loop.py` and frozen `scripts/check_leaderboard.py` still use
+> single-completion evidence. Sections below retain design proposals and historical
+> validation notes; they do not imply generic multi-turn Hub auditing is implemented.
 
 ## 1. What changed and why
 
@@ -40,7 +41,7 @@ rewritten, and every shared entry point dispatches on `kind`.
 Visual or audio-in games, real-time or live-data games, LLM-judge rewards inside the *game*
 reward, more than about 10 turns per episode, replies longer than 64 tokens.
 
-## 2. What is built (on branch `multi-turn`)
+## 2. What is built (merged into `main`)
 
 | Piece | State |
 | --- | --- |
@@ -51,7 +52,8 @@ reward, more than about 10 turns per episode, replies longer than 64 tokens.
 | verifiers adapter `GameMultiTurnEnv` (`load_environment("number_hunt")`) | done; one episode driven by hand |
 | Trainer: `trainer/multiturn_grpo.py` (own GRPO loop), dispatched by `trainer.train`; `trainer.probe` for solve rates | done; GPU run: hardened `number_hunt_easy` 0% -> 90% strict, hacked 100% loose / 0% strict |
 | Replay page: `trainer.rollout` + `trainer.viz` render fixed and hackable transcripts per policy | done |
-| Hardening engine, evidence schema, leaderboard checker, invariant store taxonomy, dashboard | **not started** (sections 4.5 to 4.8) |
+| Game hardening engine: `harden/game_audit.py` | implemented on main: seeded episode replay, repair checks, `hardened/*.audit.json`, and `source=game` invariant records |
+| Generic multi-turn Hub evidence/checker integration and the remaining proposals in 4.6–4.8 | not covered by the single-response Hub sweep; require separate implementation and validation |
 
 ## 3. Compatibility matrix
 
@@ -61,7 +63,7 @@ reward, more than about 10 turns per episode, replies longer than 64 tokens.
 | Env compiler | Rohan | fit check, codegen, gate loop (on Gemini) | live codegen test, test corpus, latency | 8 of 10 varied multi-turn descriptions compile and pass gates within 3 attempts |
 | verifiers adapter | Rohan | `SingleTurnEnv` | built | a real rollout (not a hand-driven one) completes through `GameMultiTurnEnv` |
 | Trainer | Rohan | TRL GRPO, vLLM, multi-GPU, LoRA, few-shot | GPU run, tuning, parity with the single-turn flags | hardened `number_hunt_easy` climbs; loose run diverges |
-| Hardening engine (hacker, fixer, replay) | Varun | single completion, one reward function | transcript replay and episode scoring | a planted multi-turn exploit is found, patched, and replays low |
+| Hardening engine (hacker, fixer, replay) | Varun | Hub loop uses single completions; game auditor supports both kinds | seeded reply replay and episode repair checks implemented in `harden/game_audit.py` | generic Hub episodes still need an adapter and checker support |
 | Evidence schema and `check_leaderboard.py` | Varun | `completion` is a string | `kind` field and episode replay | checker passes on a mixed single/multi fixture |
 | Invariant store and graph | Rishab | taxonomy of single-reply exploit classes | multi-turn classes, `kind` on rows | a rule from one multi-turn game retrieves on another |
 | Dashboard | Anirudh | scores and curves | transcript and per-turn replay view | a multi-turn replay renders next to the single-turn ones |
@@ -171,12 +173,12 @@ optional and not on the critical path; do it only if the hardening engine needs 
 
 | Phase | Work | Done when |
 | --- | --- | --- |
-| M0 (done, on branch `multi-turn`) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | full suite passes on the branch (123 tests) |
-| M0b | Merge `multi-turn` into `main` (after M1 shows the trainer learns) | single-turn tests still green; this file updated to match |
+| M0 (done, merged into `main`) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | full suite passes on the branch (123 tests) |
+| M0b (done) | Merged `multi-turn` into `main` at `f2ca0f8` | merge is on main; game and Hub audit scope distinguished above |
 | M1 GPU validation (done for `number_hunt_easy`) | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
 | M2 trainer parity | `--shots`, `--lora`, logits-at-reply-positions, optional vLLM | same flags as single-turn work or error clearly |
 | M3 compiler | Real-model corpus run, latency, Claude backend | corpus target in section 3 met |
-| M4 hardening | Replay, planted exploit found and patched, evidence note | needs Varun: schema review first |
+| M4 hardening (game engine implemented) | `harden/game_audit.py` handles seeded reply replay and repair checks | Hub leaderboard schema/checker integration still needs review |
 | M5 store and dashboard | New classes, `kind` on rows, transcript view | needs Rishab and Anirudh |
 | M6 demo | One multi-turn game in the demo (Wordle-like or number line) with before/after policies | rehearsed twice |
 

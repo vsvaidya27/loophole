@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "verified_at_utc": "2026-10-25T05:07:51.672102+00:00",
+  "host": "https://maincloud.spacetimedb.com",
+  "database": "loophole-knowledge-calhacks-2026",
+  "database_identity": "c20058e4e63b9d748f784f3ff75be08013ff71e8326249d1c34dac58fb96ffeb",
+  "writer_identity": "c200e3f089f4629da3c7fb91dcc9e0268a3988f480f036474c08b51f2410353b",
+  "batch": "results/invariant_graph_batch.json",
+  "batch_sha256": "baeedde972a53e0438dfe574b66dae6fefebb6f28ecea6cd142f9f9bb6686560",
+  "audit_commit": "2d4cc1ac6fb78521898861c5a05b984939ddd661",
+  "completed_reducer_calls": {
+    "record_environment": 19,
+    "record_exploit": 95,
+    "record_invariant": 95,
+    "graph_on_invariant": 95,
+    "mark_exploit_patched": 60
+  },
+  "verification": {
+    "batch_environments_match": 19,
+    "invariant_text_and_provenance_match": 95,
+    "exploit_payloads_and_rewards_match": 95,
+    "audit_exploit_statuses": {
+      "patched": 60,
+      "confirmed": 35
+    },
+    "audit_rule_classes": [
+      "format-only",
+      "lenient-normalization",
+      "multi-answer",
+      "other",
+      "parser-bypass",
+      "substring-match"
+    ],
+    "rule_memberships_match": true,
+    "audit_related_similarity_edges": 466,
+    "audit_to_audit_cosine_scores_verified": 423,
+    "audit_nodes_with_similarity_edges": 95,
+    "hosted_retrieval_matches": [
+      "game/ai-cea6b0be598a#e-61516e075a3a",
+      "game/higher_lower_40-852c07fa#loose-all-numbers-one-reply-1-0",
+      "game/higher_lower_40-852c07fa#loose-decoys-with-correct-guess-1-2",
+      "game/ai-cea6b0be598a#e-47affaa53beb",
+      "maziyar/OpenMed_PubMedQA#standalone-line-list-last-line-wins-235e3ebdfa"
+    ],
+    "hosted_retrieval_is_transfer_validation": false
+  },
+  "hosted_table_counts_at_verification": {
+    "environment": 24,
+    "exploit": 102,
+    "invariant": 102,
+    "rule": 6,
+    "similarity_edge": 472,
+    "rule_application": 3
+  },
+  "new_model_api_calls": 0,
+  "batch_rule_applications": 0,
+  "sqlite_push_flags_changed": false,
+  "notes": [
+    "Authorized CLI credential was held in memory; no token was stored in the repository.",
+    "Embedding vectors are private module data. Reducer acceptance and public cosine edge scores were verified without reading the private table.",
+    "Repair source files and replay evidence remain in Git; hosted rows carry their repository-relative evidence paths and defense patterns.",
+    "This import only upserted batch IDs; no environments or prior pilot records were cleared. Whole-database counts are an observation and may change as other writers publish.",
+    "The checkout default remains the local server. This import explicitly targeted Maincloud; automatic outbox synchronization was not reconfigured."
+  ]
+}

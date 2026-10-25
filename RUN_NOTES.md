@@ -131,10 +131,25 @@ byte-for-byte unchanged from `cd376a7` (Git blob
   usage, repair decisions, patch history and runtime metadata.
 - `patches/`: accepted repair source files; installed environment packages were unchanged.
 
-The batch was exercised through the real service client with mocked HTTP only: 19
-`record_environment`, 95 `record_exploit`, 95 `record_invariant`, 95 `graph_on_invariant`,
-and 60 `mark_exploit_patched` calls. **No hosted graph writes were made** and no mirror
-rows were marked pushed. The dedicated graph writer token is not configured here.
+The initial mocked-HTTP validation was followed by a successful real Maincloud import
+on October 24, 2026 (Pacific): 19 `record_environment`, 95 `record_exploit`,
+95 `record_invariant` (including embeddings), 95 `graph_on_invariant`, and
+60 `mark_exploit_patched` calls. The authorized CLI credential was held in memory;
+no token was saved in the repository, and no SQLite rows were marked pushed.
+
+Readback verified every batch environment, all 95 invariant text/provenance records,
+and all 95 exploit payloads/rewards: **60 patched, 35 confirmed/open**. All six rule
+memberships match. Every audit node has a similarity edge: 466 hosted edges touch audit
+nodes, including 423 audit-to-audit edges whose cosine scores match the local embeddings.
+Hosted graph retrieval returned five candidates, including an audit invariant; this is
+a retrieval check, not cross-environment repair validation. The batch has no applications.
+
+`results/audit_batch/spacetime_ingestion.json` records the batch hash, timestamp and
+verification details. Whole-store counts at that moment were 24 environments,
+102 invariants/exploits, six rules, 472 similarity edges and three existing rule
+applications. These totals can change with other writers. No new model calls were made.
+The import explicitly targeted Maincloud; the checkout's local-server default and
+automatic outbox-sync configuration were left as they were.
 
 Rebuild/export commands, from this repository. On a fresh checkout, initialize the
 ignored local mirror from the snapshot; the command preserves an existing outbox:
@@ -149,8 +164,8 @@ HF_HUB_OFFLINE=1 uv run --offline --with sentence-transformers python scripts/em
 HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 .venvs/hub/bin/python scripts/check_leaderboard.py --jobs 3
 ```
 
-To ingest once the dedicated token has been installed privately, use the existing client
-and the connection details in `deployment/README.md`:
+For a future idempotent retry with a privately installed authorized writer token, use
+the existing client and the connection details in `deployment/README.md`:
 
 ```sh
 export SPACETIME_HOST=https://maincloud.spacetimedb.com
@@ -164,4 +179,4 @@ repair/evidence files or mark SQLite rows pushed; retain these repository artifa
 alongside the batch. The audit code, results, database, and accepted patches are
 versioned together in this repository (the database as an immutable audit snapshot). See the frontend and graph RAG handoff in
 `PROGRESS.md` for subscription types, invariant IDs, and retrieval entry points.
-Hosted ingestion remains a separate step from publishing these Git artifacts.
+The saved batch is now hosted and verified; the receipt links that import to these Git artifacts.

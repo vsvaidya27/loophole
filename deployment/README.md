@@ -76,8 +76,9 @@ spacetime publish loophole-knowledge-calhacks-2026 --server maincloud \
 `spacetime.json` otherwise supplies `loophole` as the call target. The repo's local default
 was preserved. Do not run multiple branches publishing over this shared database.
 
-This service is deployed and minimally verified. Real audit ingestion, model-selected
-patches, the SQLite watch/sync pusher, and live dashboard wiring remain integration work.
+This service is deployed. The setup checks above describe its initial empty state;
+subsequent calibration and the real Hub audit import are recorded below. Continuous
+outbox synchronization is configured separately from a one-time batch import.
 
 ## Subsequent live calibration
 
@@ -87,3 +88,22 @@ environments, 3 per-environment multi-answer exploit instances/invariants, one s
 class rule, and 2 cross-game transfer outcomes. These are measured scripted results
 against planted compiler-library loopholes, not model-discovered Hub exploits. See
 `docs/LIVE_DEMO_STATUS.md` and `results/compiler_pilot/scripted-20261024/report.json`.
+
+## Verified Hub audit ingestion
+
+On October 24, 2026 (Pacific), the approved machine identity
+`c200e3f089f4629da3c7fb91dcc9e0268a3988f480f036474c08b51f2410353b` published
+`results/invariant_graph_batch.json` to the Maincloud database above using its existing
+CLI login credential in memory. No credential was persisted in this repository.
+
+The import contains 19 environments and 95 invariants with normalized MiniLM embeddings,
+with 60 exploits marked patched and 35 still confirmed/open. All batch fields and rewards
+were read back, graph memberships verified, and the public cosine scores checked for
+423 audit-to-audit edges. All 95 audit nodes have similarity edges. Hosted graph retrieval
+successfully returned audit knowledge. The complete receipt is
+[`results/audit_batch/spacetime_ingestion.json`](../results/audit_batch/spacetime_ingestion.json).
+
+The batch includes no cross-environment transfer outcomes. Repair source and replay
+files remain in Git; hosted rows carry defense patterns and evidence paths. This import
+did not change the checkout's local-server default or mark local SQLite outbox rows
+pushed. Frontend subscriptions and graph RAG can read the Maincloud records immediately.

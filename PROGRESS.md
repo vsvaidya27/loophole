@@ -137,8 +137,8 @@ checker. Reconciliation made no changes. The checker and installed graders are u
 
 Graph handoff: `results/audit_batch/invariants.db` and `results/invariant_graph_batch.json`, including
 normalized MiniLM embeddings, replay paths and accepted patch hashes. The export was
-validated through the service client with mocked HTTP. No hosted writes were made;
-the dedicated writer token is not configured on this machine.
+validated through the service client with mocked HTTP before publication. The saved batch
+has now also been ingested into Maincloud and verified; see the hosted ingestion receipt below.
 
 ### Main synchronization and publication
 
@@ -165,16 +165,34 @@ together. Pull `main` and use these entry points:
 
 | Artifact / interface | Consumer |
 |---|---|
-| `results/invariant_graph_batch.json` | Ready-to-ingest batch: 19 environments, 95 invariants with normalized 384-dimensional `all-MiniLM-L6-v2` embeddings, and 11 repair hashes |
+| `results/invariant_graph_batch.json` | Ingested, retryable batch: 19 environments, 95 invariants with normalized 384-dimensional `all-MiniLM-L6-v2` embeddings, and 11 repair hashes |
 | `results/audit_batch/invariants.db` | Read-only audit snapshot for `SQLiteKnowledgeSource` / `knowledge_cli --sqlite results/audit_batch/invariants.db` |
 | `results/leaderboard.json` / `.md` | Audit outcomes and measured rates, including failures and unpatched findings |
-| `results/audit_batch/final_manifest.json` | Counts, spend, checker result, and batch SHA-256 |
+| `results/audit_batch/final_manifest.json` | Counts, spend, checker result, batch SHA-256, and hosted ingestion status |
+| `results/audit_batch/spacetime_ingestion.json` | Verified Maincloud import receipt: IDs, text/reward checks, graph counts, and hosted retrieval |
 | `patches/` and `results/evidence/` | Repair source and replay provenance; evidence paths in the batch are repository-relative |
 | `dashboard/src/graph/buildGraph.ts` | Frontend projection from generated-client subscription rows; see `docs/GRAPH_STORE_CONTRACT.md` |
 | `harden/store/retrieval.py` and `docs/GRAPH_RETRIEVAL.md` | Hosted graph retrieval and target-specific hacker/fixer integration |
 
-Ingest from the repository root after configuring the dedicated writer credential as
-explained in `deployment/README.md`:
+**Hosted ingestion completed and verified on October 24, 2026 (Pacific).** The authorized
+CLI identity `c200e3f089f4629da3c7fb91dcc9e0268a3988f480f036474c08b51f2410353b`
+published to `https://maincloud.spacetimedb.com`, database
+`loophole-knowledge-calhacks-2026`. All 19 batch environments and all 95 invariant/exploit
+records match the saved batch, including text, evidence paths and rewards: **60 patched,
+35 confirmed/open**. All 95 audit nodes have similarity edges; 466 hosted edges touch
+audit nodes, and the 423 audit-to-audit cosine scores match the exported embeddings.
+All six rule memberships match the hosted invariants. Hosted graph retrieval returned
+five candidates, including an audit invariant. This verifies retrieval, not transfer success.
+
+The whole database contained 24 environments, 102 invariants/exploits, six rules,
+472 similarity edges and three existing rule applications at verification time; other
+writers can change these totals. This batch adds no transfer applications. The receipt
+records the exact batch SHA-256 and verification timestamp. No new model calls were made.
+
+The CLI credential stayed in memory. The checkout's local-server default and SQLite
+push flags were not changed; this import explicitly targeted Maincloud. For a future
+retry using a privately installed authorized writer credential, follow
+`deployment/README.md` and run:
 
 ```sh
 export SPACETIME_HOST=https://maincloud.spacetimedb.com
@@ -185,8 +203,8 @@ python3 -m harden.store.service_client push results/invariant_graph_batch.json
 
 The client writes environments → exploits → invariants, calls `graph_on_invariant` for
 each invariant, and marks the 60 closed exploits patched. Repeating the same IDs is safe.
-It does not upload repair files or mark SQLite rows pushed. Hosted ingestion is still
-pending; publishing these artifacts to Git does not populate SpacetimeDB.
+It does not upload repair files or mark SQLite rows pushed. Repair source and replay
+files remain in Git; the hosted invariants contain defense patterns and evidence paths.
 
 For the frontend, subscribe to the existing environment, exploit, invariant, rule,
 similarity-edge and rule-application tables and pass the generated camelcase rows to
@@ -195,17 +213,32 @@ IDs are `env_id#exploit_id`. Show the 35 open findings as open; the projection's
 flag means its invariant record has not arrived, not that its exploit is unpatched.
 
 There are no cross-environment rule applications in this batch (`applications: []`).
-Similarity edges become available after ingestion; transfer-success edges require new,
+Similarity edges are now available; transfer-success edges require new,
 target-specific replay validation and `record_rule_application` writes. Hosted graph RAG
-can then read `SpacetimeKnowledgeSource(host, database).load()`; offline SQLite retrieval
+can read `SpacetimeKnowledgeSource(host, database).load()`; offline SQLite retrieval
 can use the committed snapshot immediately (without graph-neighbour expansion). Exact integration examples are in
 `docs/GRAPH_RETRIEVAL.md`.
 
+### Multi-turn scope on main
+
+Multi-turn support merged in `f2ca0f8`; `harden/game_audit.py` already audits built-in and
+compiled `MultiTurnGameEnv` games by replaying `(seed, replies[])` against fresh state.
+Its repairs use `tighten(replies, state, reward)` and its evidence lives in
+`hardened/<name>.audit.json`, with invariants mirrored as `source=game`. An offline check
+of `number_hunt_easy` confirmed that the many-guesses exploit earns 1 under the loose
+rules, 0 under strict rules, and the reference policy still earns 1.
+
+The 16-environment Hub sweep used `harden/audit/loop.py`, whose records and frozen
+`check_leaderboard.py` contract still score a single completion. The game auditor does
+not yet provide generic episode replay for arbitrary public Hub environments. Multi-turn
+Hub audits need an adapter and reviewed evidence/checker support before entering this
+leaderboard. `docs/MULTITURN_PLAN.md` now distinguishes the merged code from that gap.
+
 ## Next steps
 
-1. Ingest the saved batch using the dedicated writer token and verify the 95 invariant
-   IDs, 60 patched exploits, 35 open exploits, and generated graph memberships/edges.
-2. Use the existing live dashboard subscriptions and hosted graph RAG with the newly
-   ingested audit rows; the live pipeline/dashboard merged separately while this audit ran.
-3. Resolve the dataset loading issue and missing solver baselines before claiming
+1. Use the existing live dashboard subscriptions and hosted graph RAG with the verified
+   audit rows; connection details and the ingestion receipt are above.
+2. Resolve the dataset loading issue and missing solver baselines before claiming
    repairs for the four remaining selected environments.
+3. Expand environment coverage with explicit compatibility checks, including episode
+   adapters and checker support for multi-turn Hub tasks.

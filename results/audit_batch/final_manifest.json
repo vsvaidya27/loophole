@@ -30,7 +30,7 @@
   },
   "graph_batch": "results/invariant_graph_batch.json",
   "graph_batch_sha256": "baeedde972a53e0438dfe574b66dae6fefebb6f28ecea6cd142f9f9bb6686560",
-  "hosted_ingestion": "not_sent_writer_token_unconfigured",
+  "hosted_ingestion": "verified",
   "publication_base_commit": "f2ca0f8ed048a1963c94fcd8a43d3191d5e231af",
   "audit_snapshot": "results/audit_batch/invariants.db",
   "audit_snapshot_sha256": "bbd84152ed5fb883198ac89fb0636b79e44b6ca685dbef10914553e2cb0bb3e1",
@@ -44,5 +44,6 @@
     "checker_log": "results/audit_batch/publication_checker.log",
     "offline_retrieval_invariants": 95,
     "offline_retrieval_query_matches": 5
-  }
+  },
+  "hosted_ingestion_receipt": "results/audit_batch/spacetime_ingestion.json"
 }
