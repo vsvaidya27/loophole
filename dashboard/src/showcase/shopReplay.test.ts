@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import webagent from '../../public/showcase/data/webagent.json';
 import { presentShopPage } from './shopReplay';
 
-const shop = webagent.tasks[7];
+const shop = webagent.tasks[1];  // the fifth-of-the-selected recorded episode (original task 7)
 const render = (html: string) => new DOMParser().parseFromString(presentShopPage(html)!, 'text/html');
 
 describe('Recorded shop presentation', () => {

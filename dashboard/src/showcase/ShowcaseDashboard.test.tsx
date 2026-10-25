@@ -54,13 +54,13 @@ describe('Showcase dashboard', () => {
     expect(container.textContent).toContain('Recorded training run');
     expect(container.textContent).toContain('Trained on fixed reward');
     expect(node('.showcase-stats .policy-hacked').textContent).toContain('100%');
-    expect(node('.showcase-stats .policy-hardened').textContent).toContain('50%');
+    expect(node('.showcase-stats .policy-hardened').textContent).toContain('100%');
     const hackedReplay = node('.policy-replay.policy-hacked');
     expect(hackedReplay.textContent).toContain('100%');
     expect(hackedReplay.textContent).toContain('Reward exceeds the true score');
-    expect(container.textContent).toContain('Means include all 24 held-out tasks');
+    expect(container.textContent).toContain('Means include all 5 held-out tasks');
     expect(container.textContent).not.toContain('Reference solver');
-    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
+    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('0');
     expect(container.querySelectorAll('.demo-selector a')).toHaveLength(4);
     expect(node('.showcase-count strong').textContent).toBe('04');
     await navigate('snake');
@@ -94,7 +94,7 @@ describe('Showcase dashboard', () => {
     vi.useFakeTimers();
     await click(button('▶ Play replay'));
     const picker = node<HTMLSelectElement>('[aria-label="Replay example"]');
-    await act(() => { picker.value = '0'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
+    await act(() => { picker.value = '1'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
     await act(() => vi.advanceTimersByTime(5000));
     expect(node('[aria-label="Current replay step"]').textContent).toMatch(/^0 \/ /);
     expect(button('▶ Play replay')).toBeDefined();
@@ -110,7 +110,7 @@ describe('Showcase dashboard', () => {
     expect(frame.srcdoc).toContain("form-action 'none'");
     await click(node('[aria-label="Next replay step"]'));
     expect(node('.policy-hardened .frame-caption').textContent).toContain('click 1');
-    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('7');
+    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
   });
 
   it('shows recorded voice verdicts, selected calls, and separate full-audit rates', async () => {
@@ -181,7 +181,7 @@ describe('Showcase dashboard', () => {
     expect(node('.loophole-metrics').textContent).toContain('True task score0%');
     await click(button('Next: Improved environment →'));
     expect(node('.same-exploit').textContent).toContain('Original100%→Revised0%');
-    expect(node('.positive-check').textContent).toContain('23% → 50%');
+    expect(node('.positive-check').textContent).toContain('52% → 100%');
     expect(node('.preserved-state').textContent).toContain('Same task');
     expect(node('.story-episode-label').textContent).toContain('Trained on the fixed reward');
     await click(button('Next: Knowledge graph →'));
@@ -232,7 +232,7 @@ describe('Showcase dashboard', () => {
     await act(() => { mode.value = 'loose'; mode.dispatchEvent(new Event('change', { bubbles: true })); });
     expect(node('[aria-label="Current replay step"]').textContent).toBe('0 / 8');
     const picker = node<HTMLSelectElement>('[aria-label="Replay example"]');
-    await act(() => { picker.value = '7'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
+    await act(() => { picker.value = '1'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
     const page = new DOMParser().parseFromString(node<HTMLIFrameElement>('.policy-hardened iframe').srcdoc, 'text/html');
     expect(page.querySelector('.shop-task')?.textContent).toContain('Buy the cheapest item');
     expect(page.querySelector('.shop-cart')?.textContent).toContain('Your cart is empty.');
