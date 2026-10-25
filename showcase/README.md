@@ -16,9 +16,14 @@ uses the fixed reward.
 ## Build the page
 
 ```bash
-python -m showcase.build                    # -> demo/showcase.html (open it in a browser)
-python -m showcase.build --out dashboard/public/showcase.html   # served by the dashboard
+python -m showcase.build --out dashboard/public/showcase.html   # the page + videos, served by the dashboard
+npm run dev --prefix dashboard                                   # then open http://127.0.0.1:5173/showcase.html
 ```
+
+`npm run dev` serves only `dashboard/public/`, so the page must be built there (the default
+`demo/showcase.html` is for opening directly from disk or a static server, and `demo/` is gitignored).
+`dashboard/public/showcase.html` and `dashboard/public/videos/` are committed, so a fresh pull works
+with just `npm ci --prefix dashboard` and the dev server.
 
 ## What each demo needs
 
