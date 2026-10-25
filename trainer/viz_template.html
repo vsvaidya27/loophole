@@ -336,7 +336,8 @@ function renderGame() {
   const pols = policiesOf(g);
   const scores = pols.map(p => {
     const rs = g.tasks.map(t => t.rollouts[p]).filter(Boolean);
-    return { p, strict: mean(rs.map(r => r.strict)), loose: mean(rs.map(r => r.loose)), words: mean(rs.map(r => r.n_words)) };
+    const all = g.scores && g.scores[p];  // a demo that replays selected tasks carries its all-task means
+    return { p, strict: all ? all.strict : mean(rs.map(r => r.strict)), loose: all ? all.loose : mean(rs.map(r => r.loose)), words: mean(rs.map(r => r.n_words)) };
   });
   $("game").innerHTML = `
     <section class="game-head">
@@ -344,6 +345,7 @@ function renderGame() {
       ${g.card?.hook ? `<p class="hook">${esc(g.card.hook)}</p>` : ""}
       <p class="lede">${esc(g.description)}</p>
       ${loopholeOf(g) ? `<p class="loophole"><b>Loophole</b> ${esc(loopholeOf(g))}</p>` : ""}
+      ${g.shown ? `<p class="lede">${esc(g.shown)}</p>` : ""}
       ${bannerFor(g)}
       ${clipFor(g)}
     </section>
@@ -630,7 +632,7 @@ function renderReplay() {
       <div class="group">
         <h2 style="font-size:1.15rem;margin-right:6px">Replay</h2>
         <button class="btn" id="prev" aria-label="Previous task">←</button>
-        <span class="counter num">Task ${state.t + 1} of ${n}</span>
+        <span class="counter num">${t.board ? `Board ${t.board} of ${g.evaluated_tasks}` : `Task ${state.t + 1} of ${n}`}</span>
         <button class="btn" id="next" aria-label="Next task">→</button>
         <button class="btn" id="nextx" title="Jump to the next task where a policy was paid for an exploit">${WARN_ICON} Next exploit</button>
       </div>
