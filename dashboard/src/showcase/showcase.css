@@ -59,7 +59,7 @@
 .showcase-section-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 24px 20px}
 .showcase-section-heading .eyebrow{font-size:9px}
 .showcase-section-heading h3{font-size:18px;font-weight:500;margin:9px 0 7px}
-.showcase-section-heading p{font-size:11px}
+.showcase-section-heading p{font-size:11px}.showcase-section-heading p.replay-selection-note{margin-top:6px;color:#81c9b4}
 .example-picker{display:flex;align-items:center;gap:10px;font-size:10px;color:#7e8fa6;flex-shrink:0}
 .example-picker select{font-size:10px;background:#0d1118;max-width:230px}
 .task-instructions{margin:0 24px;border:1px solid #293344;border-radius:6px;padding:11px 13px;background:#0c1119}

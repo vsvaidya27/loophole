@@ -1,4 +1,4 @@
-import { featuredTask, percent, type Demo, type DemoData, type Task } from './model';
+import { featuredTask, percent, taskNumber, type Demo, type DemoData, type Task } from './model';
 
 // Explanations of the recorded graders, not generated environments or training results.
 const environments = {
@@ -57,7 +57,7 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
   if (data.kind === 'voice') {
     const call = data.calls.find(item => !item.true_success && item.verdicts.baseline.success && !item.verdicts.hardened.success) ?? data.calls[0];
     return {
-      ...environment, scripted: false, task: undefined, taskIndex: undefined, exploitTask: undefined, exploitIndex: undefined, call, sameActions: true,
+      ...environment, scripted: false, task: undefined, taskIndex: undefined, exploitTask: undefined, exploitIndex: undefined, featuredNumber: undefined, exploitNumber: undefined, call, sameActions: true,
       prompt: call.transcript.find(([speaker]) => speaker.toLowerCase() === 'customer')?.[1] ?? data.description,
       before: call.verdicts.baseline.success ? 'PASS' : 'FAIL', after: call.verdicts.hardened.success ? 'PASS' : 'FAIL',
       correct: call.correct_action.toUpperCase(), improved: 'Policy violation detected',
@@ -68,11 +68,14 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
   // The loophole step needs a task where the loose reward paid the hacked policy. Use the featured
   // task when it does; otherwise the recorded task with the largest gap.
   const gap = (item: Task) => item.rollouts.hacked.loose - item.rollouts.hacked.strict;
-  const exploitIndex = gap(task) > 0.01 ? taskIndex : data.tasks.reduce((best, item, index) => gap(item) > gap(data.tasks[best]) ? index : best, taskIndex);
-  const exploitTask = data.tasks[exploitIndex];
+  const searched = data.tasks.reduce((best, item, index) => gap(item) > gap(data.tasks[best]) ? index : best, taskIndex);
+  const useLoophole = gap(task) <= 0.01 && gap(data.tasks[searched]) <= 0.01 && data.loophole_example !== undefined;
+  const exploitIndex = gap(task) > 0.01 ? taskIndex : searched;
+  const exploitTask = useLoophole ? data.loophole_example! : data.tasks[exploitIndex];
+  const featuredNumber = taskNumber(task, taskIndex), exploitNumber = useLoophole ? taskNumber(exploitTask, -1) : taskNumber(exploitTask, exploitIndex);
   const actions = (transcript?: [string, string][]) => transcript?.filter(([speaker]) => speaker === 'agent').map(([, text]) => text);
   const sameActions = JSON.stringify(actions(exploitTask.rollouts.hacked.transcript)) === JSON.stringify(actions(exploitTask.rollouts.hacked.loose_transcript));
-  const separate = exploitIndex !== taskIndex ? ` (example ${exploitIndex + 1})` : '';
+  const separate = exploitNumber !== featuredNumber ? ` (example ${exploitNumber})` : '';
   const webTask = demo.id !== 'webagent' ? {} : task.question.includes('Buy the cheapest') ? {
     taskTitle: 'Buy exactly the cheapest item.',
     success: 'Add the cheapest item once, then check out. Buying extra items does not satisfy the goal.',
@@ -87,10 +90,10 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
     checks: ['Requested consent choice', 'Correct final state', 'One action per turn'],
   } : {};
   return {
-    ...environment, ...webTask, scripted: demo.placeholder, task, taskIndex, exploitTask, exploitIndex, call: undefined, sameActions, prompt: task.question.split('\n\n')[0],
+    ...environment, ...webTask, scripted: demo.placeholder, task, taskIndex, exploitTask, exploitIndex, featuredNumber, exploitNumber, call: undefined, sameActions, prompt: task.question.split('\n\n')[0],
     before: percent(exploitTask.rollouts.hacked.loose), after: percent(exploitTask.rollouts.hacked.strict),
     correct: percent(task.rollouts.hardened.strict), improved: 'Valid behavior still earns reward',
-    result: `${sameActions ? 'The same exploit' : 'The hacked policy on separate episodes'}${separate} scores ${percent(exploitTask.rollouts.hacked.loose)} with the loose reward and ${percent(exploitTask.rollouts.hacked.strict)} with the strict reward. ${demo.placeholder ? 'The reference solver' : 'The policy trained on the fixed reward'}${separate && ` (example ${taskIndex + 1})`} scores ${percent(task.rollouts.hardened.strict)} with the strict reward.`,
+    result: `${sameActions ? 'The same exploit' : 'The hacked policy on separate episodes'}${separate} scores ${percent(exploitTask.rollouts.hacked.loose)} with the loose reward and ${percent(exploitTask.rollouts.hacked.strict)} with the strict reward. ${demo.placeholder ? 'The reference solver' : 'The policy trained on the fixed reward'}${separate && ` (example ${featuredNumber})`} scores ${percent(task.rollouts.hardened.strict)} with the strict reward.`,
   };
 }
 

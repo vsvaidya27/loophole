@@ -155,13 +155,16 @@ describe('Showcase dashboard', () => {
     for (const demo of demos) {
       const data = readDemo(demo.id);
       expect(demo.placeholder).toBe(data.placeholder);
-      expect(demo.samples).toBe((data.tasks ?? data.calls).length);
+      // A demo that replays selected tasks declares how many were evaluated and their means.
+      expect(demo.samples).toBe(data.evaluated_tasks ?? (data.tasks ?? data.calls).length);
       if (demo.kind === 'voice') continue;
       const game = data as GameData;
       for (const [policy, score] of Object.entries(demo.scores)) {
-        const mean = game.tasks.reduce((sum, task) => sum + task.rollouts[policy as keyof typeof task.rollouts].strict, 0) / game.tasks.length;
+        const mean = data.scores ? data.scores[policy].strict
+          : game.tasks.reduce((sum, task) => sum + task.rollouts[policy as keyof typeof task.rollouts].strict, 0) / game.tasks.length;
         expect(score!.strict).toBeCloseTo(mean);
       }
+      if (data.scores) expect(demo.shown).toContain(`of ${demo.samples}`);
       expect(featuredTask(game.tasks)).toBeGreaterThanOrEqual(0);
     }
   });

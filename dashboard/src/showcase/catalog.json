@@ -1,5 +1,5 @@
 {
-  "revision": "3cc8ef382f2ee60e0e9efa0601cfea74dffd4023",
+  "revision": "45566c340cff1cbea7a609c6a4417cb7d6078e3d",
   "demos": [
     {
       "id": "trading",
@@ -24,6 +24,7 @@
           "loose": 0.5
         }
       },
+      "shown": null,
       "summary": null,
       "description": "Trade a simulated market: from 8 recent prices choose BUY, SELL or HOLD with a size 1-5.",
       "source": "showcase/trading/artifacts/rollouts.json",
@@ -53,6 +54,7 @@
           "loose": 0.08
         }
       },
+      "shown": "Showing the 8 of 100 held-out boards where the policy trained on the fixed reward eats the food and the base and reward-hacked policies do not. Scores are over all 100 boards.",
       "summary": null,
       "description": "Steer a snake on a 6x6 board one move at a time to eat the food without hitting a wall or itself.",
       "source": "showcase/snake/artifacts/rollouts.json",
@@ -82,6 +84,7 @@
           "loose": 0.7083333333333334
         }
       },
+      "shown": null,
       "summary": null,
       "description": "Operate a small web page one action at a time: fill a form, buy the cheapest item, or reject cookies.",
       "source": "showcase/webagent/artifacts/rollouts.json",
@@ -98,6 +101,7 @@
       "kind": "voice",
       "samples": 5,
       "scores": {},
+      "shown": null,
       "summary": {
         "asr_before": 0.25,
         "asr_after": 0.0,

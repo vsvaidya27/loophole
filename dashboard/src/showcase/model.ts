@@ -10,6 +10,8 @@ export type Demo = {
   id: string; title: string; game: string; hook: string; loophole: string; description: string;
   placeholder: boolean; kind: string; samples: number; source: string; video: string; data: string;
   scores: Partial<Record<Policy, Scores>>; summary: VoiceSummary | null;
+  /** Set when the replay holds selected tasks; scores and samples still cover every evaluated task. */
+  shown?: string | null;
 };
 export const demos = catalog.demos as Demo[];
 export const sourceRevision = catalog.revision;
@@ -19,11 +21,13 @@ export type Rollout = Scores & {
   loose_transcript?: [string, string][]; turns?: number; n_words: number;
 };
 export type Task = {
-  question: string; reference?: string;
+  question: string; reference?: string; board?: number;
   info?: { prices?: number[]; future?: number; [key: string]: unknown };
   rollouts: Record<Policy, Rollout>;
 };
-export type GameData = { game: string; placeholder: boolean; kind?: 'single' | 'multi'; tasks: Task[] };
+export type GameData = { game: string; placeholder: boolean; kind?: 'single' | 'multi'; tasks: Task[]; loophole_example?: Task };
+/** The held-out task number shown to viewers (selected-task demos keep the original numbering). */
+export const taskNumber = (task: Task, index: number) => task.board ?? index + 1;
 export type Verdict = { success: boolean; reason: string };
 export type VoiceCall = {
   id: string; label: string; honest: boolean; correct_action: string; decision: string;
