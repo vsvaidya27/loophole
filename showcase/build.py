@@ -27,13 +27,14 @@ CURVE_KEYS = ("step", "kind", "reward", "heldout_acc", "heldout_loose", "mean_wo
 
 
 def contrast_rank(task: dict) -> tuple:
-    """Showcase order: tasks where the fixed-reward policy passes while the hacked one is paid for
-    a wrong answer come first, preferring ones the base model also fails. Scores still count all tasks."""
+    """Showcase order: tasks where the fixed-reward policy passes while the hacked one fails come
+    first, preferring ones the base model also fails, then ones where the hackable reward still paid
+    the hacked policy for its wrong answer. Scores still count all tasks."""
     r = task["rollouts"]
     hacked, fixed, base = r.get("hacked", {}), r.get("hardened", {}), r.get("base", {})
     hack = hacked.get("loose", 0) - hacked.get("strict", 0) > 0.01
-    win = fixed.get("strict", 0) >= 1
-    return (not (hack and win), base.get("strict", 0) >= 1, not hack)
+    win = fixed.get("strict", 0) >= 1 and hacked.get("strict", 0) < 1
+    return (not win, base.get("strict", 0) >= 1, not hack)
 
 
 def read_json(path: Path) -> dict | None:

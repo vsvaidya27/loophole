@@ -9,6 +9,7 @@ export function DemoIcon({ id }: { id: string }) {
   return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     {id === 'trading' && <><path d="M4 5v22h24M7 21l6-7 5 3 10-12M22 5h6v6" /></>}
     {id === 'webagent' && <><rect x="3" y="5" width="26" height="22" rx="3" /><path d="M3 11h26M7 8h1m3 0h1M9 16h14M9 21h8" /><path d="m22 20 4 8 2-4 4-2z" fill="currentColor" stroke="none" /></>}
+    {id === 'snake' && <><rect x="3" y="3" width="26" height="26" rx="3" /><path d="M8 22h6v-8h8V9" strokeWidth="3" /><circle cx="22" cy="9" r="1.2" fill="currentColor" stroke="none" /><circle cx="22" cy="23" r="2.2" fill="currentColor" stroke="none" /></>}
     {id === 'voice' && <><rect x="12" y="3" width="8" height="16" rx="4" /><path d="M7 13v2a9 9 0 0 0 18 0v-2M16 24v5M12 29h8" /></>}
   </svg>;
 }

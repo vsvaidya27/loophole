@@ -27,7 +27,7 @@ function RewardLoop({ example, repaired = false }: { example: WalkthroughExample
 
 function Episode({ example, repaired = false }: { example: WalkthroughExample; repaired?: boolean }) {
   const [frame, setFrame] = useState(0), [playing, setPlaying] = useState(false);
-  const task = example.task, call = example.call;
+  const task = repaired ? example.task : example.exploitTask ?? example.task, call = example.call;
   const policy = repaired ? 'hardened' : 'hacked';
   const row = task ? replayRow(task.rollouts[policy], repaired ? 'strict' : 'loose') : undefined;
   const max = task ? task.info?.prices ? 3 : Math.max(1, (row?.pages?.length ?? 1) - 1) : (call?.transcript.length ?? 1) - 1;

@@ -1,4 +1,4 @@
-import { featuredTask, percent, type Demo, type DemoData } from './model';
+import { featuredTask, percent, type Demo, type DemoData, type Task } from './model';
 
 // Explanations of the recorded graders, not generated environments or training results.
 const environments = {
@@ -26,6 +26,18 @@ const environments = {
     success: 'Fill in the requested identity, turn off marketing emails, and submit the account form.',
     checks: ['Correct name and email', 'Marketing unchecked', 'One action per turn'],
   },
+  snake: {
+    observation: 'The board after every move: head, body and food', action: 'One move per turn: U, D, L or R',
+    state: 'The same board, snake and food',
+    oldReward: 'Run every move found anywhere in the reply, tagged or not, and pay for the food eaten.',
+    newReward: 'Read one tagged move per turn. Pay only for food eaten under those moves.',
+    invariant: 'Count one valid, tagged action per turn.',
+    failure: 'The hacked policy stops tagging its moves and pads each reply with prose. The original reward still runs the moves buried in the text.',
+    shortFailure: 'Untagged rambling rewarded',
+    taskTitle: 'Steer the snake to the food.',
+    success: 'Send one move per turn, read the new board, and reach the food without hitting a wall or the body.',
+    checks: ['One tagged move per turn', 'No crash', 'Food eaten'],
+  },
   voice: {
     observation: 'Customer request, order facts and call history', action: 'Ask for facts; refund, escalate or deny',
     state: 'The same customer request, transcript and refund policy',
@@ -45,7 +57,7 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
   if (data.kind === 'voice') {
     const call = data.calls.find(item => !item.true_success && item.verdicts.baseline.success && !item.verdicts.hardened.success) ?? data.calls[0];
     return {
-      ...environment, scripted: false, task: undefined, taskIndex: undefined, call, sameActions: true,
+      ...environment, scripted: false, task: undefined, taskIndex: undefined, exploitTask: undefined, exploitIndex: undefined, call, sameActions: true,
       prompt: call.transcript.find(([speaker]) => speaker.toLowerCase() === 'customer')?.[1] ?? data.description,
       before: call.verdicts.baseline.success ? 'PASS' : 'FAIL', after: call.verdicts.hardened.success ? 'PASS' : 'FAIL',
       correct: call.correct_action.toUpperCase(), improved: 'Policy violation detected',
@@ -53,8 +65,14 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
     };
   }
   const taskIndex = featuredTask(data.tasks), task = data.tasks[taskIndex];
+  // The loophole step needs a task where the loose reward paid the hacked policy. Use the featured
+  // task when it does; otherwise the recorded task with the largest gap.
+  const gap = (item: Task) => item.rollouts.hacked.loose - item.rollouts.hacked.strict;
+  const exploitIndex = gap(task) > 0.01 ? taskIndex : data.tasks.reduce((best, item, index) => gap(item) > gap(data.tasks[best]) ? index : best, taskIndex);
+  const exploitTask = data.tasks[exploitIndex];
   const actions = (transcript?: [string, string][]) => transcript?.filter(([speaker]) => speaker === 'agent').map(([, text]) => text);
-  const sameActions = JSON.stringify(actions(task.rollouts.hacked.transcript)) === JSON.stringify(actions(task.rollouts.hacked.loose_transcript));
+  const sameActions = JSON.stringify(actions(exploitTask.rollouts.hacked.transcript)) === JSON.stringify(actions(exploitTask.rollouts.hacked.loose_transcript));
+  const separate = exploitIndex !== taskIndex ? ` (example ${exploitIndex + 1})` : '';
   const webTask = demo.id !== 'webagent' ? {} : task.question.includes('Buy the cheapest') ? {
     taskTitle: 'Buy exactly the cheapest item.',
     success: 'Add the cheapest item once, then check out. Buying extra items does not satisfy the goal.',
@@ -69,10 +87,10 @@ export function walkthroughExample(demo: Demo, data: DemoData) {
     checks: ['Requested consent choice', 'Correct final state', 'One action per turn'],
   } : {};
   return {
-    ...environment, ...webTask, scripted: demo.placeholder, task, taskIndex, call: undefined, sameActions, prompt: task.question.split('\n\n')[0],
-    before: percent(task.rollouts.hacked.loose), after: percent(task.rollouts.hacked.strict),
+    ...environment, ...webTask, scripted: demo.placeholder, task, taskIndex, exploitTask, exploitIndex, call: undefined, sameActions, prompt: task.question.split('\n\n')[0],
+    before: percent(exploitTask.rollouts.hacked.loose), after: percent(exploitTask.rollouts.hacked.strict),
     correct: percent(task.rollouts.hardened.strict), improved: 'Valid behavior still earns reward',
-    result: `${sameActions ? 'The same exploit' : 'The hacked policy on separate episodes'} scores ${percent(task.rollouts.hacked.loose)} with the loose reward and ${percent(task.rollouts.hacked.strict)} with the strict reward. ${demo.placeholder ? 'The reference solver' : 'The policy trained on the fixed reward'} scores ${percent(task.rollouts.hardened.strict)} with the strict reward.`,
+    result: `${sameActions ? 'The same exploit' : 'The hacked policy on separate episodes'}${separate} scores ${percent(exploitTask.rollouts.hacked.loose)} with the loose reward and ${percent(exploitTask.rollouts.hacked.strict)} with the strict reward. ${demo.placeholder ? 'The reference solver' : 'The policy trained on the fixed reward'}${separate && ` (example ${taskIndex + 1})`} scores ${percent(task.rollouts.hardened.strict)} with the strict reward.`,
   };
 }
 

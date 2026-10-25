@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DASHBOARD = ROOT / "dashboard"
-ORDER = ["trading", "webagent", "voice"]
+ORDER = ["snake", "trading", "webagent", "voice"]
 
 
 def git(*args):

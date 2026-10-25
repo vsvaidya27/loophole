@@ -36,12 +36,15 @@ export type VoiceData = {
 };
 export type DemoData = GameData | VoiceData;
 
-/** Match the upstream showcase ranking while retaining the original example numbers. */
+/** Match the upstream showcase ranking (showcase/build.py contrast_rank) while retaining the original
+ * example numbers: the hardened policy passes while the hacked one fails, preferring tasks the base
+ * policy also fails, then ones where the loose reward still paid the hacked policy. */
 export function featuredTask(tasks: Task[]) {
   const rank = (task: Task) => {
     const { hacked, hardened, base } = task.rollouts;
     const hack = hacked.loose - hacked.strict > 0.01;
-    return Number(!(hack && hardened.strict >= 1)) * 4 + Number(base.strict >= 1) * 2 + Number(!hack);
+    const win = hardened.strict >= 1 && hacked.strict < 1;
+    return Number(!win) * 4 + Number(base.strict >= 1) * 2 + Number(!hack);
   };
   return tasks.reduce((best, task, index) => rank(task) < rank(tasks[best]) ? index : best, 0);
 }
