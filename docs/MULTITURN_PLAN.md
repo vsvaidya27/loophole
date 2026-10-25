@@ -49,8 +49,9 @@ reward, more than about 10 turns per episode, replies longer than 64 tokens.
 | Episode gates in `validate()` (reference wins every episode, null and random near 0, deterministic reset, ends within `max_turns`) | done, tested |
 | Compiler fit check returns `single` / `multi` / `reject` and routes each game (multi on by default; `--single-only` refuses it) | done; real-model corpus 9/10 multi-turn compiles (see 8) |
 | verifiers adapter `GameMultiTurnEnv` (`load_environment("number_hunt")`) | done; one episode driven by hand |
-| Trainer: `trainer/multiturn_grpo.py` (own GRPO loop), dispatched by `trainer.train`; `trainer.probe` for solve rates | done; smoke-tested on a Mac, **never run on a GPU** |
-| Hardening engine, evidence schema, leaderboard checker, invariant store taxonomy, dashboard, replay page | **not started** (sections 4.5 to 4.9) |
+| Trainer: `trainer/multiturn_grpo.py` (own GRPO loop), dispatched by `trainer.train`; `trainer.probe` for solve rates | done; GPU run: hardened `number_hunt_easy` 0% -> 90% strict, hacked 100% loose / 0% strict |
+| Replay page: `trainer.rollout` + `trainer.viz` render fixed and hackable transcripts per policy | done |
+| Hardening engine, evidence schema, leaderboard checker, invariant store taxonomy, dashboard | **not started** (sections 4.5 to 4.8) |
 
 ## 3. Compatibility matrix
 
@@ -172,7 +173,7 @@ optional and not on the critical path; do it only if the hardening engine needs 
 | --- | --- | --- |
 | M0 (done, on branch `multi-turn`) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | full suite passes on the branch (123 tests) |
 | M0b | Merge `multi-turn` into `main` (after M1 shows the trainer learns) | single-turn tests still green; this file updated to match |
-| M1 GPU validation | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
+| M1 GPU validation (done for `number_hunt_easy`) | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
 | M2 trainer parity | `--shots`, `--lora`, logits-at-reply-positions, optional vLLM | same flags as single-turn work or error clearly |
 | M3 compiler | Real-model corpus run, latency, Claude backend | corpus target in section 3 met |
 | M4 hardening | Replay, planted exploit found and patched, evidence note | needs Varun: schema review first |
