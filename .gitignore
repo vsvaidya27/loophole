@@ -32,3 +32,6 @@ spacetimedb/dist/
 # trainer rollouts and demo page (regenerate with trainer.rollout / trainer.viz)
 rollouts/
 demo/
+
+# hardened game modules and audit evidence (regenerate with harden.game_audit)
+hardened/

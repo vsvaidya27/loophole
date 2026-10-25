@@ -100,10 +100,13 @@ def main() -> None:
     p.add_argument("--eval-n", type=int, default=100)
     p.add_argument("--shots", type=int, default=0, help="solved examples prepended to each prompt")
     p.add_argument("--lora", type=int, default=0, metavar="RANK", help="train LoRA adapters of this rank")
+    p.add_argument("--oracle", help="game whose strict/loose modes score the held-out eval (default: the game "
+                   "itself); use the original game when training on a hardened module from harden.game_audit")
     args = p.parse_args()
 
     train_game = load_game(args.game, strict=not args.loose)
-    strict_game, loose_game = load_game(args.game, strict=True), load_game(args.game, strict=False)
+    oracle = args.oracle or args.game
+    strict_game, loose_game = load_game(oracle, strict=True), load_game(oracle, strict=False)
     if getattr(strict_game, "kind", "single") == "multi":
         # Multi-turn games need a rollout loop with environment feedback; TRL's trainer cannot do that.
         from .multiturn_grpo import train_multiturn
