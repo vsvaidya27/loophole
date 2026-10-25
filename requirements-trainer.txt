@@ -6,3 +6,4 @@ transformers==4.57.1
 accelerate
 datasets
 verifiers>=0.3,<0.4
+peft==0.17.1  # --lora

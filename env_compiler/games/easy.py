@@ -8,6 +8,8 @@ import re
 
 from ..template import FORMAT_HINT, GameEnv, Task
 from .clue_guess import ClueGuess
+from .sims import Snake
+from .wordgames import Anagrams, WordHunt
 
 
 class ClueGuessEasy(ClueGuess):
@@ -42,3 +44,29 @@ class ArithCompute(GameEnv):
 
     def random_answer(self, task: Task, rng: random.Random) -> str:
         return str(rng.randint(-90, 200))
+
+
+class SnakeEasy(Snake):
+    """One food, three or more moves away; partial credit for getting closer to it."""
+
+    name = "snake_easy"
+    n_foods, min_plan, progress = 1, 3, 0.5
+
+
+class SnakeMedium(Snake):
+    name = "snake_medium"
+    n_foods, min_plan, progress = 2, 4, 0.5
+
+
+class AnagramsEasy(Anagrams):
+    """Any two valid words of 5+ letters is a perfect score (the base game wants the top 8)."""
+
+    name = "anagrams_easy"
+    count_target, count_min_len = 2, 5
+
+
+class WordHuntEasy(WordHunt):
+    """Any two traceable words of 4+ letters is a perfect score."""
+
+    name = "word_hunt_easy"
+    count_target, count_min_len = 2, 4

@@ -19,6 +19,10 @@ judge types live. The full plan, demo script and timeline are in
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
 interface, so hub environments and compiled games run through the same engine.
 
+Graph knowledge retrieval and hacker/fixer adapters are in `harden/store/retrieval.py`
+and `harden/store/knowledge_loop.py`. See [the integration guide](docs/GRAPH_RETRIEVAL.md)
+for the plan, orchestration example, and cross-branch tests.
+
 ## Repo layout
 
 ```

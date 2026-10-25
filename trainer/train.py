@@ -31,8 +31,10 @@ from .common import (
     TRAIN_SEED,
     build_dataset,
     generate,
+    lora_config,
     make_reward_fn,
     pick_device,
+    save_model,
 )
 
 
@@ -96,6 +98,8 @@ def main() -> None:
     p.add_argument("--lr", type=float, default=2e-5)
     p.add_argument("--eval-every", type=int, default=5)
     p.add_argument("--eval-n", type=int, default=100)
+    p.add_argument("--shots", type=int, default=0, help="solved examples prepended to each prompt")
+    p.add_argument("--lora", type=int, default=0, metavar="RANK", help="train LoRA adapters of this rank")
     args = p.parse_args()
 
     train_game = load_game(args.game, strict=not args.loose)
@@ -109,12 +113,13 @@ def main() -> None:
 
     from trl import GRPOConfig, GRPOTrainer
 
-    eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED)
-    train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED)
+    eval_data = build_dataset(strict_game, args.eval_n, EVAL_SEED, args.shots)
+    train_data = build_dataset(train_game, args.steps * args.prompts_per_step, TRAIN_SEED, args.shots)
 
     args.out.mkdir(parents=True, exist_ok=True)
     metrics = args.out / "metrics.jsonl"
     metrics.write_text("")
+    (args.out / "config.json").write_text(json.dumps({k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}))
     callback = MetricsCallback(
         metrics, strict_game, loose_game,
         [row["prompt"] for row in eval_data],
@@ -153,9 +158,10 @@ def main() -> None:
         args=config,
         train_dataset=train_data,
         callbacks=[callback],
+        peft_config=lora_config(args.lora),
     )
     trainer.train()
-    trainer.save_model(str(args.out / "model"))
+    save_model(trainer, str(args.out / "model"))
     print(f"done; metrics in {metrics}")
 
 

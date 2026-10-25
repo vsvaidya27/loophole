@@ -1,0 +1,41 @@
+$ uv pip install reasoning-gym-env --extra-index-url https://hub.primeintellect.ai/will/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 12s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 122 packages in 8.43s
+   Building pycosat==0.6.6
+   Building cellpylib==2.4.0
+   Building zss==1.2.0
+Downloading fonttools (3.0MiB)
+Downloading reasoning-gym (6.7MiB)
+Downloading matplotlib (8.9MiB)
+Downloading pyfiglet (1.0MiB)
+      Built zss==1.2.0
+      Built cellpylib==2.4.0
+ Downloaded fonttools
+ Downloaded reasoning-gym
+ Downloaded pyfiglet
+ Downloaded matplotlib
+      Built pycosat==0.6.6
+Prepared 17 packages in 3.09s
+Uninstalled 1 package in 2ms
+Installed 18 packages in 51ms
+ + arckit==0.1.0
+ + bfi==1.0.4
+ + cellpylib==2.4.0
+ + contourpy==1.4.0
+ + cycler==0.12.1
+ + drawsvg==2.4.2
+ + fonttools==4.67.0
+ + kiwisolver==1.5.1
+ + magiccube==0.3.0
+ + matplotlib==3.11.2
+ + pillow==13.0.0
+ + pycosat==0.6.6
+ + pyfiglet==1.0.2
+ + pytz==2026.5
+ + reasoning-gym==0.1.25
+ + reasoning-gym-env==0.1.3
+ - tabulate==0.10.0
+ + tabulate==0.9.0
+ + zss==1.2.0
+

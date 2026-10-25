@@ -80,26 +80,50 @@ def solve_snake(snake: list, foods: list, limit: int = 14) -> str | None:
     return None
 
 
+def _closer(info: dict, moves: str) -> float:
+    """How much closer (0-1) the head ends to the nearest uneaten food than it started."""
+    body = tuple(tuple(p) for p in info["snake"])
+    foods = frozenset(tuple(p) for p in info["foods"])
+
+    def dist(head, left):
+        return min(abs(head[0] - f[0]) + abs(head[1] - f[1]) for f in left)
+
+    start = dist(body[0], foods)
+    for m in moves:
+        out = _step(body, foods, m)
+        if out is None:
+            return 0.0
+        body, ate = out
+        if ate:
+            foods = foods - {ate}
+            start = dist(body[0], foods) if foods else start
+    return max(0.0, 1 - dist(body[0], foods) / start) if foods and start else 0.0
+
+
 class Snake(GameEnv):
     name = "snake"
     description = "Steer a snake on a 6x6 board with U/D/L/R to eat all the food without hitting a wall or itself."
     random_max = 0.15
+    # Difficulty: foods to eat and the shortest allowed solution. `progress` (0-1) is extra
+    # partial credit for ending closer to the nearest uneaten food, a denser signal for GRPO.
+    n_foods, min_plan, progress = 3, 6, 0.0
 
     def generate(self, rng: random.Random) -> Task:
         while True:
             r, c = rng.randrange(SIZE), rng.randrange(2, SIZE)
             snake = [[r, c], [r, c - 1], [r, c - 2]]  # head facing right, body trailing left
             free = [[i, j] for i in range(SIZE) for j in range(SIZE) if [i, j] not in snake]
-            foods = rng.sample(free, 3)
+            foods = rng.sample(free, self.n_foods)
             plan = solve_snake(snake, foods)
-            if plan is not None and len(plan) >= 6:
+            if plan is not None and len(plan) >= self.min_plan:
                 break
         info = {"snake": snake, "foods": foods, "plan": plan}
         board = render_snake(tuple(map(tuple, snake)), frozenset(map(tuple, foods)))
         question = (
             f"Snake on a 6x6 board (H = head, o = body, F = food, . = empty):\n{board}\n"
             f"Moves: U up, D down, L left, R right. Eating food grows the snake. Hitting a wall or "
-            f"your own body ends the game. Give at most {MAX_MOVES} moves that eat all 3 foods, "
+            f"your own body ends the game. Give at most {MAX_MOVES} moves that eat all {self.n_foods} "
+            f"food{'s' if self.n_foods > 1 else ''}, "
             f"e.g. RRDLU.\n{with_example('RRDLU')}"
         )
         return Task(question, plan, info)
@@ -112,8 +136,15 @@ class Snake(GameEnv):
         moves = self._moves(candidate)
         if moves is None:
             return 0.0
-        eaten, _, _ = run_snake(info, moves[:MAX_MOVES] if self.strict else moves)
-        return eaten / 3 if eaten < 3 else 1.0
+        moves = moves[:MAX_MOVES] if self.strict else moves
+        eaten, _, alive = run_snake(info, moves)
+        n = len(info["foods"])
+        if eaten >= n:
+            return 1.0
+        credit = eaten / n
+        if self.progress and alive:
+            credit += self.progress * _closer(info, moves) / n
+        return credit
 
     def candidates(self, text: str) -> list[str]:
         return re.findall(r"[UDLR]{3,}", text.upper())

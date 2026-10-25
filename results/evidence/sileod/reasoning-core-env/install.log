@@ -1,0 +1,49 @@
+$ uv pip install reasoning-core-env --extra-index-url https://hub.primeintellect.ai/sileod/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 11s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 133 packages in 8.44s
+Downloading babel (9.7MiB)
+Downloading faker (2.0MiB)
+Downloading duckdb (16.8MiB)
+Downloading rapidfuzz (1.2MiB)
+Downloading z3-solver (41.8MiB)
+Downloading reasoning-core (9.5MiB)
+ Downloaded rapidfuzz
+ Downloaded faker
+ Downloaded babel
+ Downloaded duckdb
+ Downloaded reasoning-core
+ Downloaded z3-solver
+Prepared 23 packages in 2.46s
+Installed 30 packages in 217ms
+ + anytree==2.13.0
+ + appdirs==1.4.4
+ + babel==2.18.0
+ + cloudpickle==3.1.2
+ + defusedxml==0.7.1
+ + duckdb==2.0.0
+ + easydict==1.13
+ + exrex==0.12.0
+ + faker==40.43.0
+ + funcy==2.1
+ + gramforge==1.0.14
+ + greenery==4.2.3
+ + inflect==7.6.0
+ + inflection==0.5.1
+ + jaraco-functools==4.6.0
+ + joblib==1.6.0
+ + more-itertools==11.2.1
+ + networkx==3.7
+ + nltk==3.10.4
+ + problog==2.3.0
+ + psutil==7.2.2
+ + pyparsing==3.3.3
+ + rapidfuzz==3.14.6
+ + reasoning-core==0.5.0
+ + reasoning-core-env==1.0.7
+ + tabulate==0.10.0
+ + typeguard==4.6.0
+ + udocker==1.3.17
+ + wrapt==2.5.1
+ + z3-solver==5.3.1.0
+

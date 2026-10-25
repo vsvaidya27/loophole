@@ -1,0 +1,8 @@
+{
+  "host": "https://maincloud.spacetimedb.com",
+  "database": "loophole-knowledge-calhacks-2026",
+  "database_identity": "c20058e4e63b9d748f784f3ff75be08013ff71e8326249d1c34dac58fb96ffeb",
+  "writer_identity": "c20041c086cb11344d5e33a6fdd3572637041d1abfd89725aa7685e89ce01881",
+  "dashboard": "https://spacetimedb.com/loophole-knowledge-calhacks-2026",
+  "knowledge_rows_at_setup": 0
+}

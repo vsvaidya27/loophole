@@ -1,0 +1,8 @@
+$ uv pip install nanochatAquaRat --extra-index-url https://hub.primeintellect.ai/harleycooper/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 10s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 7.25s
+Prepared 1 package in 2.43s
+Installed 1 package in 2ms
+ + nanochataquarat==0.1.0
+

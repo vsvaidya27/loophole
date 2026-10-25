@@ -14,6 +14,7 @@ const writer = TestAuth.fromJwtPayload(
 function harness() {
   const test = createModuleTestHarness(spacetimedb, mod);
   test.clock.set(Timestamp.fromDate(new Date('2026-10-24T12:00:00Z')));
+  test.withReducerTx(writer, ctx => mod.init(ctx, {}));
   return test;
 }
 type Harness = ReturnType<typeof harness>;
@@ -71,17 +72,23 @@ function invariantArgs(overrides: Partial<Parameters<typeof mod.record_invariant
 const detail = (extra: object = {}) => JSON.stringify({ v: 1, score_unhardened: 1, score_pre_hardened: 0, ...extra });
 
 describe('module layout', () => {
-  it('loads and registers exactly the core reducers', () => {
+  it('loads and registers the core and graph reducers', () => {
     harness();
     const reducers = spacetimedb.moduleDef.reducers.map(r => r.sourceName).sort();
     expect(reducers).toEqual([
       'clear_environment',
+      'init',
+      'set_writer',
+      'graph_on_invariant',
       'mark_exploit_patched',
       'record_environment',
       'record_exploit',
       'record_invariant',
       'record_rule_application',
-    ]);
+      'rebuild_graph',
+      'set_graph_config',
+      'set_rule_title',
+    ].sort());
   });
 
   it('declares the positional argument order the pusher sends', () => {
@@ -299,5 +306,13 @@ describe('seed fixture', () => {
     for (const row of test.db.invariant_embedding.iter()) {
       expect(row.vector).toHaveLength(384);
     }
+  });
+});
+
+describe('current audit mirror compatibility', () => {
+  it('accepts the unpatched environment status emitted by the audit mirror', () => {
+    const test = harness();
+    call(test, ctx => mod.record_environment(ctx, { env_id: 'hub/audit', source: 'hub', title: 'Audit target', status: 'unpatched' }));
+    expect(test.db.environment.env_id.find('hub/audit')!.status).toBe('unpatched');
   });
 });

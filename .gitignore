@@ -2,6 +2,7 @@
 .env
 .env.*
 .spacetime_token
+.spacetime-*-token
 
 # SQLite rollback journal of the invariant mirror
 invariants.db-journal
@@ -25,6 +26,9 @@ runs/
 # node
 node_modules/
 
+# local test reports
+coverage/
+spacetimedb/dist/
 # trainer rollouts and demo page (regenerate with trainer.rollout / trainer.viz)
 rollouts/
 demo/

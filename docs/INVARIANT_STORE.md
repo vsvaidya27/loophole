@@ -531,6 +531,14 @@ missing-row cases.
 
 ### Retrieval
 
+Implementation update: Rishab has added opt-in graph retrieval and loop adapters at the
+user's request. See [GRAPH_RETRIEVAL.md](GRAPH_RETRIEVAL.md) for bounded top-k selection,
+target/source isolation, replay contracts, and integration tests. Varun's loop can call
+`run_knowledge_transfer` and persist its application rows through the audit writer.
+The original prompt-only design below is retained as background; the implementation
+uses graph-neighbour ranking before the fixer prompt. Retrieval requires an explicit
+`target_env_id`. The writer, pusher, and target execution remain separate integrations.
+
 With fewer than about 100 invariants, retrieval is one fixer prompt. It contains every
 non-seed invariant's title, preconditions and defense_pattern plus the new environment's
 reward source, and the fixer returns the invariant_ids it applied. Embedding similarity

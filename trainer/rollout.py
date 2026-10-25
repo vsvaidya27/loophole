@@ -26,11 +26,21 @@ RUNS = Path("runs")
 
 
 def default_policies(game: str) -> dict[str, str]:
-    policies = {"base": DEFAULT_MODEL}
+    # "base" is whatever the runs started from: the stock model, or a warm start (trainer.sft)
+    policies = {"base": run_config(game).get("model", DEFAULT_MODEL)}
     for mode in ("hacked", "hardened"):
         if (RUNS / f"{game}-{mode}" / "model").is_dir():
             policies[mode] = str(RUNS / f"{game}-{mode}" / "model")
     return policies
+
+
+def run_config(game: str) -> dict:
+    """Arguments the trained runs used (their config.json), so every policy sees the same prompt."""
+    for mode in ("hardened", "hacked"):
+        path = RUNS / f"{game}-{mode}" / "config.json"
+        if path.is_file():
+            return json.loads(path.read_text())
+    return {}
 
 
 def describe_words(game, info: dict, answer: str) -> list[dict] | None:
@@ -83,18 +93,21 @@ def main() -> None:
     p.add_argument("--n", type=int, default=24)
     p.add_argument("--policy", action="append", default=[], metavar="NAME=MODEL")
     p.add_argument("--out", type=Path, default=Path("rollouts"))
+    p.add_argument("--shots", type=int, default=None, help="default: what the trained runs used")
     args = p.parse_args()
 
     strict, loose = load_game(args.game, strict=True), load_game(args.game, strict=False)
     require_single_turn(strict)
     policies = dict(kv.split("=", 1) for kv in args.policy) or default_policies(args.game)
     tasks = strict.tasks(args.n, EVAL_SEED)  # same tasks as the first n of the held-out eval
-    prompts = [row["prompt"] for row in build_dataset(strict, args.n, EVAL_SEED)]
+    shots = run_config(args.game).get("shots", 0) if args.shots is None else args.shots
+    prompts = [row["prompt"] for row in build_dataset(strict, args.n, EVAL_SEED, shots)]
 
     result = {
         "game": strict.name,
         "description": strict.description,
         "policies": list(policies),
+        "shots": shots,
         "tasks": [
             {
                 "question": t.question,

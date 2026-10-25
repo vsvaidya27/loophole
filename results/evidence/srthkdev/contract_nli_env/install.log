@@ -1,0 +1,8 @@
+$ uv pip install contract_nli_env --extra-index-url https://hub.primeintellect.ai/srthkdev/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 11s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 8.33s
+Prepared 1 package in 2.52s
+Installed 1 package in 7ms
+ + contract-nli-env==0.1.0
+

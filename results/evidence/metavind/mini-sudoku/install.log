@@ -1,0 +1,7 @@
+$ uv pip install mini-sudoku --extra-index-url https://hub.primeintellect.ai/metavind/simple/ --constraint /Users/varunvaidya/CodingProjects/calhacks-2026/.venvs/constraints.txt
+# attempt 1, exit 0, 4s
+Using Python 3.12.7 environment at: .venvs/hub
+Resolved 104 packages in 4.08s
+Installed 1 package in 3ms
+ + mini-sudoku==0.1.0
+
