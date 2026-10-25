@@ -1,0 +1,7 @@
+# All model roles share one cost ledger with a soft spending warning; embeddings are CPU-only and have no API fee.
+anthropic==2.3.0
+httpx==0.28.1
+PyYAML==6.0.3
+verifiers==0.3.1
+reverse-text==0.1.5
+sentence-transformers>=5,<6

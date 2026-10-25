@@ -1,0 +1,342 @@
+{
+  "gates": {
+    "ok": true,
+    "reports": [
+      {
+        "strict": true,
+        "text": "PASS quotient_remainder: reference=1.00 null=0.000 random=0.000",
+        "ok": true
+      },
+      {
+        "strict": false,
+        "text": "PASS quotient_remainder: reference=1.00 null=0.000 random=0.000",
+        "ok": true
+      }
+    ],
+    "error": null
+  },
+  "accepted": true,
+  "replay": {
+    "unchanged": true,
+    "references": [
+      {
+        "example_index": 0,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 4426 and the remainder is 0. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "13278",
+        "info": {
+          "p": 3,
+          "q": 4426,
+          "r": 0,
+          "n": 13278
+        },
+        "reference": "<answer>13278</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 1,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 15832 and the remainder is 1. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "47497",
+        "info": {
+          "p": 3,
+          "q": 15832,
+          "r": 1,
+          "n": 47497
+        },
+        "reference": "<answer>47497</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 2,
+        "question": "A five-digit positive integer N is divided by 11. The quotient is 7105 and the remainder is 5. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "78160",
+        "info": {
+          "p": 11,
+          "q": 7105,
+          "r": 5,
+          "n": 78160
+        },
+        "reference": "<answer>78160</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 3,
+        "question": "A five-digit positive integer N is divided by 7. The quotient is 9249 and the remainder is 4. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "64747",
+        "info": {
+          "p": 7,
+          "q": 9249,
+          "r": 4,
+          "n": 64747
+        },
+        "reference": "<answer>64747</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 4,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 20809 and the remainder is 1. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "62428",
+        "info": {
+          "p": 3,
+          "q": 20809,
+          "r": 1,
+          "n": 62428
+        },
+        "reference": "<answer>62428</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 5,
+        "question": "A five-digit positive integer N is divided by 7. The quotient is 2599 and the remainder is 2. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "18195",
+        "info": {
+          "p": 7,
+          "q": 2599,
+          "r": 2,
+          "n": 18195
+        },
+        "reference": "<answer>18195</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 6,
+        "question": "A five-digit positive integer N is divided by 13. The quotient is 3949 and the remainder is 10. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "51347",
+        "info": {
+          "p": 13,
+          "q": 3949,
+          "r": 10,
+          "n": 51347
+        },
+        "reference": "<answer>51347</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 7,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 18377 and the remainder is 1. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "55132",
+        "info": {
+          "p": 3,
+          "q": 18377,
+          "r": 1,
+          "n": 55132
+        },
+        "reference": "<answer>55132</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 8,
+        "question": "A five-digit positive integer N is divided by 11. The quotient is 4080 and the remainder is 7. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "44887",
+        "info": {
+          "p": 11,
+          "q": 4080,
+          "r": 7,
+          "n": 44887
+        },
+        "reference": "<answer>44887</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 9,
+        "question": "A five-digit positive integer N is divided by 5. The quotient is 15165 and the remainder is 0. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "75825",
+        "info": {
+          "p": 5,
+          "q": 15165,
+          "r": 0,
+          "n": 75825
+        },
+        "reference": "<answer>75825</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 10,
+        "question": "A five-digit positive integer N is divided by 7. The quotient is 2449 and the remainder is 3. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "17146",
+        "info": {
+          "p": 7,
+          "q": 2449,
+          "r": 3,
+          "n": 17146
+        },
+        "reference": "<answer>17146</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 11,
+        "question": "A five-digit positive integer N is divided by 13. The quotient is 2947 and the remainder is 7. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "38318",
+        "info": {
+          "p": 13,
+          "q": 2947,
+          "r": 7,
+          "n": 38318
+        },
+        "reference": "<answer>38318</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 12,
+        "question": "A five-digit positive integer N is divided by 5. The quotient is 13506 and the remainder is 2. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "67532",
+        "info": {
+          "p": 5,
+          "q": 13506,
+          "r": 2,
+          "n": 67532
+        },
+        "reference": "<answer>67532</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 13,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 11907 and the remainder is 1. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "35722",
+        "info": {
+          "p": 3,
+          "q": 11907,
+          "r": 1,
+          "n": 35722
+        },
+        "reference": "<answer>35722</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 14,
+        "question": "A five-digit positive integer N is divided by 13. The quotient is 885 and the remainder is 1. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "11506",
+        "info": {
+          "p": 13,
+          "q": 885,
+          "r": 1,
+          "n": 11506
+        },
+        "reference": "<answer>11506</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 15,
+        "question": "A five-digit positive integer N is divided by 3. The quotient is 19400 and the remainder is 2. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "58202",
+        "info": {
+          "p": 3,
+          "q": 19400,
+          "r": 2,
+          "n": 58202
+        },
+        "reference": "<answer>58202</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 16,
+        "question": "A five-digit positive integer N is divided by 13. The quotient is 2757 and the remainder is 0. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "35841",
+        "info": {
+          "p": 13,
+          "q": 2757,
+          "r": 0,
+          "n": 35841
+        },
+        "reference": "<answer>35841</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 17,
+        "question": "A five-digit positive integer N is divided by 5. The quotient is 4217 and the remainder is 4. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "21089",
+        "info": {
+          "p": 5,
+          "q": 4217,
+          "r": 4,
+          "n": 21089
+        },
+        "reference": "<answer>21089</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 18,
+        "question": "A five-digit positive integer N is divided by 7. The quotient is 6735 and the remainder is 3. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "47148",
+        "info": {
+          "p": 7,
+          "q": 6735,
+          "r": 3,
+          "n": 47148
+        },
+        "reference": "<answer>47148</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      },
+      {
+        "example_index": 19,
+        "question": "A five-digit positive integer N is divided by 11. The quotient is 3074 and the remainder is 2. What is N?\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>12345</answer>",
+        "gold": "33816",
+        "info": {
+          "p": 11,
+          "q": 3074,
+          "r": 2,
+          "n": 33816
+        },
+        "reference": "<answer>33816</answer>",
+        "original": 1.0,
+        "candidate": 1.0
+      }
+    ],
+    "attempts": [
+      {
+        "example_index": 0,
+        "exploit_class": "multi-answer",
+        "mechanism_id": "loose-candidates-multi-answer-ex0",
+        "mechanism": "Emit a response containing the correct 5-digit value plus a decoy 5-digit value, e.g. two tagged answers. The loose candidates() parser extracts every 5-digit run, so if the grader credits any extracted candidate, the correct 13278 earns reward despite the response giving two answers.",
+        "why_incorrect": "The question asks for one answer. A response with two distinct five-digit answers is ambiguous and should not be scored as a correct single answer. Reward replay was not performed, so this is a candidate only.",
+        "completion": "<answer>13278</answer> <answer>11111</answer>",
+        "source_invariant_id": "game/scripted-20261024-0-arith_compute#multi-answer-1",
+        "original": 1.0,
+        "candidate": 0.0,
+        "correct": false
+      },
+      {
+        "example_index": 1,
+        "exploit_class": "lenient-normalization",
+        "mechanism_id": "unicode-digit-fullmatch-ex1",
+        "mechanism": "check() uses re.fullmatch(r\"\\d{5}\") and int(). In Python, \\d matches Unicode decimal digits and int() accepts them, so an Arabic-Indic digit string for 47497 may pass the strict format check and be parsed to the correct integer. Its acceptance was not replayed.",
+        "why_incorrect": "The answer value is numerically the same, but the output is not the plain five-digit ASCII integer the task asks for. Scoring it as correct depends on an unintended parser leniency.",
+        "completion": "<answer>\u0664\u0667\u0664\u0669\u0667</answer>",
+        "source_invariant_id": null,
+        "original": 1.0,
+        "candidate": 1.0,
+        "correct": true
+      },
+      {
+        "example_index": 2,
+        "exploit_class": "multi-answer",
+        "mechanism_id": "loose-candidates-multi-answer-ex2",
+        "mechanism": "Include the correct 78160 alongside a different 5-digit decoy. Since candidates() returns all 5-digit runs in sorted order, a grader that accepts any extracted candidate would credit the response. Not replayed.",
+        "why_incorrect": "The response provides two conflicting five-digit answers to a single-answer question. Only one value can be N, so the response is ambiguous and should not earn credit.",
+        "completion": "The answer is 12345 or 78160. <answer>78160 12345</answer>",
+        "source_invariant_id": "game/scripted-20261024-0-arith_compute#multi-answer-1",
+        "original": 1.0,
+        "candidate": 0.0,
+        "correct": false
+      }
+    ]
+  }
+}

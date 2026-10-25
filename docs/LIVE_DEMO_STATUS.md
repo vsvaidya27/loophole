@@ -1,4 +1,7 @@
-# Live demo status and Prime Intellect pilot
+# Historical calibration status and Prime Intellect pilot plan
+
+> Historical pre-model calibration snapshot. For the completed Haiku pilot, current
+> graph layout, setup commands and limitations, see [LIVE_PILOT.md](LIVE_PILOT.md).
 
 Checked against main `d8d2389` on October 24, 2026. Work lives on
 `rishab/live-pipeline-dashboard`. Paid model calls were not authorized or made in this run.

@@ -26,7 +26,7 @@ import httpx
 PKG = Path(__file__).resolve().parent
 ROOT = PKG.parent
 CACHE = ROOT / ".cache" / "compiler"
-FIT_MODEL = CODEGEN_MODEL = "gemini-3.8-flash"  # pro models are over the free-tier quota
+FIT_MODEL = CODEGEN_MODEL = "claude-haiku-5-5"
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 SUGGESTIONS = [
     "Arithmetic target: make a number from given digits",
@@ -150,12 +150,10 @@ def extract_code(text: str) -> str | None:
 def run_gates(path: Path) -> dict:
     env = {"PATH": os.environ.get("PATH", ""), "PYTHONPATH": str(ROOT)}  # no API keys for generated code
     try:
-        proc = subprocess.run(
-            [sys.executable, "-m", "env_compiler.gates", str(path)],
-            cwd=ROOT, env=env, capture_output=True, text=True, timeout=120,
-        )
-    except subprocess.TimeoutExpired:
-        return {"ok": False, "reports": [], "error": "gates timed out after 120s"}
+        from .isolation import run_worker
+        proc = run_worker('env_compiler.gates', [str(path.resolve())], [path.resolve().parent])
+    except (subprocess.TimeoutExpired, RuntimeError) as error:
+        return {"ok": False, "reports": [], "error": f"Isolated gates failed: {error}"}
     lines = proc.stdout.strip().splitlines()
     try:
         return json.loads(lines[-1])
@@ -169,8 +167,10 @@ def feedback(result: dict) -> str:
     return "The validation gates failed:\n" + "\n".join(r["text"] for r in result["reports"] if not r["ok"])
 
 
-def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 3) -> CompileResult:
-    client = client or Gemini()
+def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 2) -> CompileResult:
+    if client is None:
+        from harden.model_client import CompilerClient
+        client = CompilerClient()
     fits, reason = check_fit(client, description)
     if not fits:
         return CompileResult(False, reason=reason, suggestions=SUGGESTIONS)

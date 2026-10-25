@@ -1,4 +1,4 @@
-"""Claude calls for the audit roles, with a hard spend cap shared by every process.
+"""Claude calls for the audit roles, with shared spend tracking and an optional explicitly configured hard cap.
 
 Every call reserves its worst-case cost in results/spend_ledger.jsonl (file-locked)
 before it is sent, so parallel audit processes cannot pass the cap together. Its actual
@@ -10,22 +10,25 @@ from __future__ import annotations
 
 import fcntl
 import json
+import math
 import os
 import time
 import uuid
+import warnings
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import anthropic
 
-MODEL = "claude-opus-5-5"
+MODEL = "claude-haiku-5-5"
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
-CAP_USD = float(os.environ.get("AUDIT_CAP_USD", "40"))
-MARGIN_USD = 1.0  # stop starting calls this close to the cap
+CAP_USD = None  # no hard dollar ceiling unless explicitly configured
+MARGIN_USD = 0.02  # stop starting calls this close to the cap
 
 # $ per million tokens: input, output, cache read. Cache writes bill at 1.25x input.
 PRICES = {
+    "claude-haiku-5-5": (0.10, 0.50, 0.01),
     "claude-opus-5-5": (4.00, 20.00, 0.20),
     "claude-opus-5": (5.00, 25.00, 0.50),
     "claude-opus-4-8": (5.00, 25.00, 0.50),
@@ -125,7 +128,10 @@ def _usage_dict(usage) -> dict:
 class Ledger:
     """Total spend across all audit processes: settled calls plus open reservations."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, cap_usd: float | None = None):
+        if cap_usd is not None and (not math.isfinite(cap_usd) or cap_usd <= 0):
+            raise ValueError("An optional hard budget must be positive and finite")
+        self.cap_usd = cap_usd
         self.path = path
         path.parent.mkdir(parents=True, exist_ok=True)
         path.touch(exist_ok=True)
@@ -170,14 +176,23 @@ class Ledger:
                 if line.strip() and json.loads(line).get("type", "call") == "call"
             )
 
-    def reserve(self, worst_case: float, env_id: str) -> str:
+    def reserve(self, worst_case: float, env_id: str, env_cap: float | None = None) -> str:
+        if not math.isfinite(worst_case) or worst_case <= 0:
+            raise ValueError('Reservation must be positive and finite')
         with self._locked() as handle:
-            spent = self._spent(handle)
-            if spent + worst_case > CAP_USD - MARGIN_USD:
-                raise BudgetExceeded(f"spent ${spent:.2f}; a ${worst_case:.2f} call would pass the ${CAP_USD:.0f} cap")
+            lines = [json.loads(line) for line in handle if line.strip()]
+            spent = self._spent(iter(json.dumps(row) for row in lines))
+            env_spent = self._spent(iter(json.dumps(row) for row in lines
+                if row.get('env_id') == env_id or row.get('type') == 'release'))
+            if self.cap_usd is not None and spent + worst_case > self.cap_usd:
+                raise BudgetExceeded(f'spent/reserved ${spent:.4f}; request exceeds ${self.cap_usd:.2f} ceiling')
+            if env_cap is not None and env_spent + worst_case > env_cap:
+                raise BudgetExceeded(f'{env_id}: request exceeds its ${env_cap:.2f} cap')
             rid = uuid.uuid4().hex
             handle.seek(0, 2)
-            handle.write(json.dumps({"type": "reserve", "id": rid, "env_id": env_id, "cost_usd": round(worst_case, 6)}) + "\n")
+            handle.write(json.dumps({'type': 'reserve', 'id': rid, 'env_id': env_id, 'cost_usd': worst_case}) + '\n')
+            handle.flush()
+            os.fsync(handle.fileno())
             return rid
 
     def release(self, rid: str) -> None:
@@ -209,86 +224,82 @@ class Result:
 
 
 class Claude:
-    """One client per audit process; `calls_path` is the env's api_calls.jsonl."""
+    """Shared Haiku-only client: bounded requests, cost visibility, no hidden retries.
 
-    def __init__(self, root: Path, calls_path: Path, env_id: str, env_cap: float | None = None):
+    Uncertain transport failures retain their reservation: a timed-out request may
+    still have been billed. All roles use this same ledger, including compilation.
+    """
+    def __init__(self, root: Path, calls_path: Path, env_id: str, env_cap: float | None = None, *, client=None):
         _load_env_file(root)
-        self.client = anthropic.Anthropic(max_retries=4, timeout=900)
-        self.ledger = Ledger(root / "results" / "spend_ledger.jsonl")
-        self.calls_path = calls_path
-        self.env_id = env_id
-        self.env_cap = env_cap
+        raw_cap = os.environ.get('AUDIT_HARD_CAP_USD', '').strip()
+        configured = float(raw_cap) if raw_cap else None
+        self.warning_usd = float(os.environ.get('AUDIT_BUDGET_WARNING_USD', '2'))
+        if not math.isfinite(self.warning_usd) or self.warning_usd < 0:
+            raise ValueError('Budget warning must be finite and nonnegative')
+        self.warned = False
+        model = os.environ.get('ANTHROPIC_MODEL', MODEL)
+        if model != MODEL:
+            raise ValueError('This pilot is restricted to claude-haiku-5-5; no model fallback is enabled')
+        self.client = client  # lazy: configuration/doctor/offline gates need no API key
+        self.ledger = Ledger(root / 'results' / 'spend_ledger.jsonl', configured)
+        self.calls_path, self.env_id, self.env_cap = calls_path, env_id, env_cap
         calls_path.parent.mkdir(parents=True, exist_ok=True)
-        self.spent = 0.0
-        if calls_path.is_file():
-            self.spent = sum(json.loads(line)["cost_usd"] for line in calls_path.read_text().split("\n") if line.strip())
+        self.spent = sum(row.get('cost_usd', 0) for row in
+            (json.loads(line) for line in calls_path.read_text().splitlines() if line.strip())) if calls_path.exists() else 0.0
 
     def remaining(self) -> float:
-        global_left = CAP_USD - MARGIN_USD - self.ledger.total()
-        env_left = float("inf") if self.env_cap is None else self.env_cap - self.spent
-        return min(global_left, env_left)
+        return max(0.0, min(float('inf') if self.ledger.cap_usd is None else self.ledger.cap_usd - self.ledger.total(),
+                           float('inf') if self.env_cap is None else self.env_cap - self.spent))
 
-    def call(
-        self,
-        *,
-        role: str,
-        iteration: int,
-        system: list[dict],
-        messages: list[dict],
-        effort: str,
-        max_tokens: int,
-        schema: dict | None = None,
-    ) -> Result:
-        prompt_chars = len(json.dumps(system)) + len(json.dumps(messages))
-        price_in, price_out, _ = PRICES[MODEL]
-        worst = 1.25 * (prompt_chars / CHARS_PER_TOKEN * price_in * 1.25 + max_tokens * price_out) / 1e6
-        if self.env_cap is not None and self.spent + worst > self.env_cap:
-            raise BudgetExceeded(f"{self.env_id}: spent ${self.spent:.2f}; a ${worst:.2f} call would pass the ${self.env_cap:.2f} env cap")
-        rid = self.ledger.reserve(worst, self.env_id)
-        output_config: dict = {"effort": effort}
+    def call(self, *, role: str, iteration: int, system: list[dict] | str,
+             messages: list[dict], effort: str = 'low', max_tokens: int = 4000,
+             schema: dict | None = None) -> Result:
+        if not isinstance(max_tokens, int) or max_tokens < 1:
+            raise ValueError('max_tokens must be a positive integer')
+        max_tokens = min(max_tokens, 6000)
+        # UTF-8 bytes upper-bound ordinary text tokenization. Reserve schema/tool
+        # serialization plus 2048 tokens of framing; keep well below long-prompt tiers.
+        bound = len(json.dumps([system, messages, schema], ensure_ascii=False).encode()) + 2048
+        if bound > 60000:
+            raise ValueError('Prompt exceeds the 60,000-token conservative input bound; shorten source/context')
+        worst = (bound * 0.125 + max_tokens * 0.50) / 1e6 * 1.10
+        if self.client is None:
+            if not os.environ.get('ANTHROPIC_API_KEY', '').strip():
+                raise ValueError('Set ANTHROPIC_API_KEY in the repository .env file before running the pilot')
+            self.client = anthropic.Anthropic(max_retries=0, timeout=90)
+        rid = self.ledger.reserve(worst, self.env_id, self.env_cap)
+        if not self.warned and self.ledger.total() >= self.warning_usd:
+            warnings.warn(f'Pilot spend/reservations reached ${self.ledger.total():.2f}; continuing on Haiku (soft warning)', RuntimeWarning)
+            self.warned = True
+        config = {'effort': 'low'}
         if schema is not None:
-            output_config["format"] = {"type": "json_schema", "schema": schema}
+            config['format'] = {'type': 'json_schema', 'schema': schema}
         started = time.time()
         try:
-            with self.client.beta.messages.stream(
-                model=MODEL,
-                max_tokens=max_tokens,
-                system=system,
-                messages=messages,
-                output_config=output_config,
-                betas=[FALLBACK_BETA],
-                fallbacks="default",
-            ) as stream:
-                response = stream.get_final_message()
-        except BaseException:
-            self.ledger.release(rid)
+            response = self.client.messages.create(model=MODEL, max_tokens=max_tokens,
+                system=system, messages=messages, output_config=config)
+        except BaseException as exc:
+            # An HTTP rejection before generation is known not to have produced a
+            # billable answer. Timeouts, interruptions and 5xx remain reserved.
+            if getattr(exc, 'status_code', None) in (400, 401, 403, 404, 422, 429):
+                self.ledger.release(rid)
             raise
         cost, attempts = response_cost(response)
         read = read_response(response, schema)
-        text, data, stop_reason, category = read["text"], read["data"], read["stop_reason"], read["refusal_category"]
-        usage = _usage_dict(response.usage)
-        for attempt in attempts[:-1]:  # top-level usage covers only the serving attempt
-            for key in usage:
-                usage[key] += attempt[key]
-        entry = {
-            "iteration": iteration,
-            "role": role,
-            "model": response.model,
-            "requested_model": MODEL,
-            "effort": effort,
-            "cost_usd": round(cost, 6),
-            **usage,
-            "attempts": attempts,
-            "fallback_used": any(a["type"] == "fallback_message" for a in attempts),
-            "stop_reason": stop_reason,
-            "refusal_category": category,
-            "declined_hops": read["declined_hops"],
-            "parsed": data is not None,
-            "seconds": round(time.time() - started, 1),
-            "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
-        }
-        with open(self.calls_path, "a") as handle:
-            handle.write(json.dumps(entry) + "\n")
-        self.ledger.record({"env_id": self.env_id, "reservation": rid, **entry})
-        self.spent += entry["cost_usd"]
-        return Result(role, text, data, stop_reason, category, entry["cost_usd"], response.model, entry)
+        entry = {'iteration': iteration, 'role': role, 'model': response.model, 'requested_model': MODEL,
+            'effort': 'low', 'cost_usd': round(cost, 8), **_usage_dict(response.usage),
+            'attempts': attempts, 'fallback_used': False, 'stop_reason': read['stop_reason'],
+            'refusal_category': read['refusal_category'], 'declined_hops': read['declined_hops'],
+            'parsed': read['data'] is not None, 'seconds': round(time.time() - started, 2),
+            'ts': time.strftime('%Y-%m-%dT%H:%M:%S'), 'reserved_usd': worst}
+        # Settle atomically before logging environment details. A crash before here
+        # leaves the conservative reservation open rather than freeing paid capacity.
+        self.ledger.record({'env_id': self.env_id, 'reservation': rid, **entry})
+        with self.calls_path.open('a') as handle:
+            handle.write(json.dumps(entry) + '\n')
+        self.spent += cost
+        if response.model != MODEL:
+            raise RuntimeError('Provider served an unexpected model; stop rather than escalate model cost')
+        if cost > worst:
+            warnings.warn('Actual usage exceeded its estimate; ledger contains the measured charge', RuntimeWarning)
+        return Result(role, read['text'], read['data'], read['stop_reason'], read['refusal_category'], cost, response.model, entry)
