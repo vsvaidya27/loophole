@@ -10,6 +10,8 @@ export type Demo = {
   id: string; title: string; game: string; hook: string; loophole: string; description: string;
   placeholder: boolean; kind: string; samples: number; source: string; video: string; data: string;
   scores: Partial<Record<Policy, Scores>>; summary: VoiceSummary | null;
+  /** Set when the replay holds selected tasks; scores and samples still cover every evaluated task. */
+  shown?: string | null;
 };
 export const demos = catalog.demos as Demo[];
 export const sourceRevision = catalog.revision;
@@ -19,11 +21,13 @@ export type Rollout = Scores & {
   loose_transcript?: [string, string][]; turns?: number; n_words: number;
 };
 export type Task = {
-  question: string; reference?: string;
+  question: string; reference?: string; board?: number;
   info?: { prices?: number[]; future?: number; [key: string]: unknown };
   rollouts: Record<Policy, Rollout>;
 };
-export type GameData = { game: string; placeholder: boolean; kind?: 'single' | 'multi'; tasks: Task[] };
+export type GameData = { game: string; placeholder: boolean; kind?: 'single' | 'multi'; tasks: Task[]; loophole_example?: Task };
+/** The held-out task number shown to viewers (selected-task demos keep the original numbering). */
+export const taskNumber = (task: Task, index: number) => task.board ?? index + 1;
 export type Verdict = { success: boolean; reason: string };
 export type VoiceCall = {
   id: string; label: string; honest: boolean; correct_action: string; decision: string;
@@ -36,12 +40,15 @@ export type VoiceData = {
 };
 export type DemoData = GameData | VoiceData;
 
-/** Match the upstream showcase ranking while retaining the original example numbers. */
+/** Match the upstream showcase ranking (showcase/build.py contrast_rank) while retaining the original
+ * example numbers: the hardened policy passes while the hacked one fails, preferring tasks the base
+ * policy also fails, then ones where the loose reward still paid the hacked policy. */
 export function featuredTask(tasks: Task[]) {
   const rank = (task: Task) => {
     const { hacked, hardened, base } = task.rollouts;
     const hack = hacked.loose - hacked.strict > 0.01;
-    return Number(!(hack && hardened.strict >= 1)) * 4 + Number(base.strict >= 1) * 2 + Number(!hack);
+    const win = hardened.strict >= 1 && hacked.strict < 1;
+    return Number(!win) * 4 + Number(base.strict >= 1) * 2 + Number(!hack);
   };
   return tasks.reduce((best, task, index) => rank(task) < rank(tasks[best]) ? index : best, 0);
 }

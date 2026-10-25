@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DASHBOARD = ROOT / "dashboard"
-ORDER = ["trading", "webagent", "voice"]
+ORDER = ["trading", "snake", "webagent", "voice"]
 
 
 def git(*args):
@@ -43,14 +43,15 @@ def main():
             (public / folder).mkdir(parents=True, exist_ok=True)
         (public / "data" / f"{name}.json").write_text(json.dumps(data, separators=(",", ":")))
         (public / "videos" / f"{name}.mp4").write_bytes(read(f"dashboard/public/videos/{name}.mp4"))
-        scores = {}
-        for policy in data.get("policies", []):
+        scores = data.get("scores") or {}  # a demo that shows selected tasks carries its all-task means
+        for policy in data.get("policies", []) if not scores else []:
             rows = [task["rollouts"][policy] for task in data["tasks"] if policy in task["rollouts"]]
             scores[policy] = {key: sum(row[key] for row in rows) / len(rows) for key in ["strict", "loose"]}
         catalog.append({
             **{key: card[key] for key in ["id", "title", "game", "hook", "loophole"]},
             "placeholder": data["placeholder"], "kind": data.get("kind", "single"),
-            "samples": len(data.get("tasks", data.get("calls", []))), "scores": scores,
+            "samples": data.get("evaluated_tasks", len(data.get("tasks", data.get("calls", [])))), "scores": scores,
+            "shown": data.get("shown"),
             "summary": data.get("summary"), "description": data["description"],
             "source": source, "video": f"/showcase/videos/{name}.mp4", "data": f"/showcase/data/{name}.json",
         })

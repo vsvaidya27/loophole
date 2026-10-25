@@ -31,6 +31,7 @@ class SnakeLive(MultiTurnGameEnv):
     description = "Steer a snake on a 6x6 board one move at a time to eat the food without hitting a wall or itself."
     n_foods, min_plan, max_turns = 2, 4, 14
     random_max = 0.15  # random moves sometimes stumble onto one of the two foods
+    has_pages = True  # one rendered board per step, for the replay
 
     def reset(self, rng: random.Random):
         while True:
@@ -109,9 +110,37 @@ class SnakeLive(MultiTurnGameEnv):
     def reward(self, state: dict) -> float:
         return state["eaten"] / state["total"]
 
+    def render_page(self, state: dict) -> str:
+        """The board as HTML for the replay: head, body, food, the last move and the outcome."""
+        cells = {"H": "h", "o": "b", "F": "f", ".": "e"}
+        rows = self.board(state).split("\n")
+        grid = "".join(f'<i class="{cells[c]}"></i>' for row in rows for c in row.split())
+        last = state["moves"][-1] if state["moves"] else ""
+        if state["done"] and state["eaten"] == state["total"]:
+            end = '<div class="sn-end ok">Ate all the food</div>'
+        elif state["crashed"]:
+            end = '<div class="sn-end bad">Crashed</div>'
+        elif state["done"]:
+            end = '<div class="sn-end shallow">Out of turns</div>'
+        else:
+            end = ""
+        return (
+            f'<div class="sn"><div class="sn-bar"><span>Turn {state["turns"]}/{self.max_turns}</span>'
+            f'<span>Food {state["eaten"]}/{state["total"]}</span><span>Last move {last or "–"}</span></div>'
+            f'<div class="sn-grid" style="--n:{len(rows)}">{grid}</div>{end}</div>'
+        )
+
     def reference_policy(self, state, last_message, rng):
         plan = solve_snake(state["snake"], state["foods"], limit=self.max_turns)
         return f"<answer>{plan[0] if plan else 'R'}</answer>"
 
     def random_policy(self, state, last_message, rng):
         return f"<answer>{rng.choice('UDLR')}</answer>"
+
+
+class SnakeLiveOne(SnakeLive):
+    """One food: a clean pass/fail board (eat it or not) for the replay."""
+
+    name = "snake_live_one"
+    n_foods = 1
+    random_max = 0.15

@@ -27,7 +27,8 @@ function RewardLoop({ example, repaired = false }: { example: WalkthroughExample
 
 function Episode({ example, repaired = false }: { example: WalkthroughExample; repaired?: boolean }) {
   const [frame, setFrame] = useState(0), [playing, setPlaying] = useState(false);
-  const task = example.task, call = example.call;
+  const task = repaired ? example.task : example.exploitTask ?? example.task, call = example.call;
+  const shownNumber = repaired ? example.featuredNumber : example.exploitNumber ?? example.featuredNumber;
   const policy = repaired ? 'hardened' : 'hacked';
   const row = task ? replayRow(task.rollouts[policy], repaired ? 'strict' : 'loose') : undefined;
   const max = task ? task.info?.prices ? 3 : Math.max(1, (row?.pages?.length ?? 1) - 1) : (call?.transcript.length ?? 1) - 1;
@@ -41,7 +42,7 @@ function Episode({ example, repaired = false }: { example: WalkthroughExample; r
   }, [playing, frame, max]);
   const turn = call?.transcript[frame];
   return <div className={`story-episode policy-${policy}`}>
-    <div className="story-episode-label"><span className="policy-dot" /><strong>{task ? repaired ? example.scripted ? 'Reference solver' : 'Trained on the fixed reward' : 'Reward-hacked policy' : 'Same recorded call'}</strong><span>{task ? example.scripted ? 'Scripted replay' : 'Recorded rollout' : 'Recorded audit'}</span></div>
+    <div className="story-episode-label"><span className="policy-dot" /><strong>{task ? repaired ? example.scripted ? 'Reference solver' : 'Trained on the fixed reward' : 'Reward-hacked policy' : 'Same recorded call'}</strong><span>{task ? example.scripted ? 'Scripted replay' : 'Recorded rollout' : 'Recorded audit'}{task && shownNumber !== undefined ? ` · example ${shownNumber}` : ''}</span></div>
     <div className="story-stage">{task && row ? <ReplayStage task={task} row={row} frame={frame} name={repaired ? 'Hardened' : 'Reward hacked'} /> : turn && <div className={`story-call-turn ${turn[0].toLowerCase()}`}>
       <span className="speaker-avatar">{turn[0][0]}</span><span className="eyebrow">{turn[0]} · turn {frame + 1}</span><p>{turn[1]}</p>
       {call?.audio?.[frame] && <audio key={`${call.id}-${frame}`} controls preload="none" aria-label={`Listen to ${turn[0]}, turn ${frame + 1}`} src={call.audio[frame]} onPlay={() => setPlaying(false)} />}
@@ -63,7 +64,7 @@ function Repair({ example, data, demo }: { example: WalkthroughExample; data: De
       <div className="same-exploit"><span className="eyebrow">{example.call ? 'SAME CALL / TWO JUDGES' : example.sameActions ? 'SAME EXPLOIT / TWO REWARDS' : 'SAME HACKED POLICY / TWO ENVIRONMENTS'}</span>{data.kind === 'voice' && <div><p><small>Original</small><strong>{example.before}</strong></p><span>→</span><p><small>Revised</small><strong>{example.after}</strong></p></div>}<p>{example.result}</p></div>
       {data.kind === 'voice' ? <div className="positive-check"><strong>{percent(data.summary.asr_before)} → {percent(data.summary.asr_after)}</strong><p>Wrong calls passed · full recorded audit</p><span>Honest calls passed: {percent(data.summary.benign_before)} → {percent(data.summary.benign_after)}</span></div> : null}
     </div><div>{example.call ? <div className="policy-decision"><span className="eyebrow">POLICY-CORRECT OUTCOME</span><strong>{example.correct}</strong><p>The recorded agent chose {example.call.decision.toUpperCase()}. The hardened judge now rejects that decision.</p><details><summary>Inspect the revised judge prompt</summary><pre>{data.kind === 'voice' ? data.judges.hardened : ''}</pre></details></div> : <Episode example={example} repaired />}</div></div>
-    <p className="story-evidence-note">{data.kind === 'voice' ? 'This demonstrates a better reward judge on recorded calls. It does not show a retrained voice agent.' : demo.placeholder ? 'V1 and V2 illustrate the recorded loose and strict graders. The reference solver is scripted; this comparison is not a new training run.' : `V1 and V2 illustrate the loose and strict environments used in the recorded GPU runs. This featured example is ${example.taskIndex! + 1} of ${demo.samples}; aggregate scores include every held-out task.`}</p>
+    <p className="story-evidence-note">{data.kind === 'voice' ? 'This demonstrates a better reward judge on recorded calls. It does not show a retrained voice agent.' : demo.placeholder ? 'V1 and V2 illustrate the recorded loose and strict graders. The reference solver is scripted; this comparison is not a new training run.' : `V1 and V2 illustrate the loose and strict environments used in the recorded GPU runs. This featured example is ${example.featuredNumber} of ${demo.samples}; aggregate scores include every held-out task.`}</p>
   </>;
 }
 
@@ -121,6 +122,6 @@ export function DemoWalkthrough({ demo, data, ...knowledge }: { demo: Demo; data
       {step === 3 && <Repair example={example} data={data} demo={demo} />}
       {step === 4 && <KnowledgeGraph example={example} demo={demo} {...knowledge} />}
     </div>
-    <div className="story-navigation"><button disabled={step === 0} onClick={() => navigate(step - 1)}>← Back</button><span>{step + 1} of {steps.length}<small>{demo.placeholder ? 'Scripted example · recorded scores' : demo.kind === 'voice' ? 'Recorded judge audit' : `Recorded GPU run · example ${example.taskIndex! + 1} of ${demo.samples}`}</small></span>{step < steps.length - 1 ? <button className="showcase-primary" onClick={() => navigate(step + 1)}>Next: {steps[step + 1]} →</button> : <button onClick={() => navigate(0)}>↺ Restart demo</button>}</div>
+    <div className="story-navigation"><button disabled={step === 0} onClick={() => navigate(step - 1)}>← Back</button><span>{step + 1} of {steps.length}<small>{demo.placeholder ? 'Scripted example · recorded scores' : demo.kind === 'voice' ? 'Recorded judge audit' : `Recorded GPU run · example ${example.featuredNumber} of ${demo.samples}`}</small></span>{step < steps.length - 1 ? <button className="showcase-primary" onClick={() => navigate(step + 1)}>Next: {steps[step + 1]} →</button> : <button onClick={() => navigate(0)}>↺ Restart demo</button>}</div>
   </section>;
 }

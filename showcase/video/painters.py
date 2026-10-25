@@ -175,10 +175,10 @@ class ReplayPainter(Painter):
     game = ""
     shown_replies = 4
 
-    def __init__(self):
+    def __init__(self, game: str | None = None):
         from env_compiler.loader import load_game
 
-        self.env = load_game(self.game)
+        self.env = load_game(game or self.game)  # e.g. snake_live_one replays on its one-food board
         self.cache: dict = {}
 
     def states(self, task, row):
@@ -293,4 +293,5 @@ PAINTERS = {"snake": SnakePainter, "snake_live": SnakeLivePainter, "lights_out":
 
 
 def painter_for(game: str) -> Painter:
-    return PAINTERS[re.sub(r"_(easy|medium)$", "", game)]()
+    cls = PAINTERS[re.sub(r"_(easy|medium|one)$", "", game)]
+    return cls(game) if issubclass(cls, ReplayPainter) else cls()

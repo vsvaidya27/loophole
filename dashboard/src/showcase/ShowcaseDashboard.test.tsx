@@ -7,9 +7,10 @@ import { demos, featuredTask, type GameData } from './model';
 import trading from '../../public/showcase/data/trading.json';
 import webagent from '../../public/showcase/data/webagent.json';
 import voice from '../../public/showcase/data/voice.json';
+import snake from '../../public/showcase/data/snake.json';
 
 let container: HTMLDivElement, root: Root;
-const fixtures: Record<string, unknown> = { trading, webagent, voice };
+const fixtures: Record<string, unknown> = { trading, snake, webagent, voice };
 const readDemo = (id: string) => JSON.parse(JSON.stringify(fixtures[id]));
 const successfulFetch = async (url: string) => ({ ok: true, json: async () => readDemo(url.split('/').at(-1)!.replace('.json', '')) });
 const node = <T extends Element = HTMLElement>(selector: string) => {
@@ -49,7 +50,7 @@ afterEach(async () => {
 });
 
 describe('Showcase dashboard', () => {
-  it('preserves trained-run provenance, aggregate scores, and navigation to the three demos', async () => {
+  it('preserves trained-run provenance, aggregate scores, and navigation to the four demos', async () => {
     expect(container.textContent).toContain('Recorded training run');
     expect(container.textContent).toContain('Trained on fixed reward');
     expect(document.querySelector('.showcase-stats')).toBeNull();
@@ -57,14 +58,14 @@ describe('Showcase dashboard', () => {
     expect(hackedReplay.textContent).not.toMatch(/\d+%/);
     expect(hackedReplay.textContent).toContain('Reward exceeds the true score');
     expect(container.textContent).not.toContain('Reference solver');
-    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
-    expect(container.querySelectorAll('.demo-selector a')).toHaveLength(3);
-    expect(node('.showcase-count strong').textContent).toBe('03');
-    for (const retired of ['snake', 'lights_out']) {
-      await navigate(retired);
-      expect(window.location.hash).toBe('#showcase/trading');
-      expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/trading');
-    }
+    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('0');
+    expect(container.querySelectorAll('.demo-selector a')).toHaveLength(4);
+    expect(node('.showcase-count strong').textContent).toBe('04');
+    await navigate('snake');
+    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/snake');
+    await navigate('lights_out');  // retired: falls back to the first demo
+    expect(window.location.hash).toBe('#showcase/trading');
+    expect(node<HTMLAnchorElement>('.demo-selector a[aria-current]').hash).toBe('#showcase/trading');
   });
 
   it('advances recorded frames, ends playback, and restarts without changing final scores', async () => {
@@ -91,7 +92,7 @@ describe('Showcase dashboard', () => {
     vi.useFakeTimers();
     await click(button('▶ Play replay'));
     const picker = node<HTMLSelectElement>('[aria-label="Replay example"]');
-    await act(() => { picker.value = '0'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
+    await act(() => { picker.value = '1'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
     await act(() => vi.advanceTimersByTime(5000));
     expect(node('[aria-label="Current replay step"]').textContent).toMatch(/^0 \/ /);
     expect(button('▶ Play replay')).toBeDefined();
@@ -107,7 +108,7 @@ describe('Showcase dashboard', () => {
     expect(frame.srcdoc).toContain("form-action 'none'");
     await click(node('[aria-label="Next replay step"]'));
     expect(node('.policy-hardened .frame-caption').textContent).toContain('click 1');
-    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('7');
+    expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
   });
 
   it('shows recorded voice verdicts, selected calls, and separate full-audit rates', async () => {
@@ -152,13 +153,16 @@ describe('Showcase dashboard', () => {
     for (const demo of demos) {
       const data = readDemo(demo.id);
       expect(demo.placeholder).toBe(data.placeholder);
-      expect(demo.samples).toBe((data.tasks ?? data.calls).length);
+      // A demo that replays selected tasks declares how many were evaluated and their means.
+      expect(demo.samples).toBe(data.evaluated_tasks ?? (data.tasks ?? data.calls).length);
       if (demo.kind === 'voice') continue;
       const game = data as GameData;
       for (const [policy, score] of Object.entries(demo.scores)) {
-        const mean = game.tasks.reduce((sum, task) => sum + task.rollouts[policy as keyof typeof task.rollouts].strict, 0) / game.tasks.length;
+        const mean = data.scores ? data.scores[policy].strict
+          : game.tasks.reduce((sum, task) => sum + task.rollouts[policy as keyof typeof task.rollouts].strict, 0) / game.tasks.length;
         expect(score!.strict).toBeCloseTo(mean);
       }
+      if (data.scores) expect(demo.shown).toContain(`of ${demo.samples}`);
       expect(featuredTask(game.tasks)).toBeGreaterThanOrEqual(0);
     }
   });
@@ -226,7 +230,7 @@ describe('Showcase dashboard', () => {
     await act(() => { mode.value = 'loose'; mode.dispatchEvent(new Event('change', { bubbles: true })); });
     expect(node('[aria-label="Current replay step"]').textContent).toBe('0 / 8');
     const picker = node<HTMLSelectElement>('[aria-label="Replay example"]');
-    await act(() => { picker.value = '7'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
+    await act(() => { picker.value = '1'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
     const page = new DOMParser().parseFromString(node<HTMLIFrameElement>('.policy-hardened iframe').srcdoc, 'text/html');
     expect(page.querySelector('.shop-task')?.textContent).toContain('Buy the cheapest item');
     expect(page.querySelector('.shop-cart')?.textContent).toContain('Your cart is empty.');
