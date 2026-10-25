@@ -25,7 +25,10 @@ Vite configuration: frontend environment values are public in the browser bundle
 
 The app subscribes once to six public tables and updates on insert/update/delete events,
 without polling. It labels initial load, connection loss and errors, supports reconnect,
-hides seed data by default, and uses the shared `buildGraph` projection. Select a node
+always includes the entire store, and uses the shared `buildGraph` projection.
+The network shows environments as blue nodes, invariant records as amber nodes, and
+shared rule families as shaded clusters. Source, similarity and tested-transfer links
+are distinct; selection highlights evidence without filtering data. Select a node
 for mechanism, preconditions, defense, source evidence path, recorded rewards and transfer
 details. It displays recorded evidence, not an independent certification of it.
 

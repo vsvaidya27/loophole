@@ -13,6 +13,14 @@ judge types live. The full plan, demo script and timeline are in
 > plan wins for multi-turn work. It changes nothing for single-turn code. The multi-turn code is
 > on branch `multi-turn` and is not merged into `main` yet.
 
+## Live compiler / hacker / fixer / graph demo
+
+See [the live pilot runbook](docs/LIVE_PILOT.md) for setup, key configuration,
+service commands, completed Haiku pilot evidence, costs, and current limitations.
+The dashboard shows the entire hosted knowledge graph, including clearly labeled
+scripted calibration records. The completed generated-game pilot is single-turn;
+it does not claim Hub leaderboard acceptance or trained-policy performance.
+
 ## Components
 
 | Component | What it does | Owner |
