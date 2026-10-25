@@ -25,26 +25,17 @@ model calls, GPU jobs, or paid Prime Intellect environment runs were needed.
 
 ## Judge walkthrough
 
-- Follow the three cards: **Mini Sudoku → retrieved ambiguity rule → Number hunt**.
-- Explain that Sudoku grids and a guessing game share an answer-parser weakness.
-- Show the measured reward reduction and legitimate-answer checks.
-- Step through the saved valid multi-turn transcript to show that interaction is
-  preserved, rather than enforcing a single-turn task.
-- Click **Replay validation** to recompute the saved adaptation's attack, benign,
-  and standard game checks locally. This makes no LLM call and no store write.
-- Click **See the verified transfer edge in the graph** to inspect the actual
-  source-invariant application and its evidence.
+The leftmost **Rule transfer** tab now embeds the six-act presentation from
+`varun/loop-demo`, also available at `/demo.html`.
 
-Start the local replay service when needed:
+- Show the independent Number hunt target, then the five recorded candidates.
+- Expand **Where this rule came from** for the selected rank-two Mini Sudoku rule.
+- Show the reward gap, actual adaptation code, saved validation and multi-turn transcript.
+- Explain the published application edge and the separately labeled browser learning illustration.
 
-```sh
-.venvs/hub/bin/python -m harden.experiments.hub_demo
-npm run dev --prefix dashboard
-```
-
-The browser's replay button uses the existing Vite proxy and local service. It
-does not repeat Moss retrieval or adaptation. Those steps and their receipt are
-the recorded initial experiment, clearly labeled in the view.
+See `docs/LOOP_DEMO_TRANSFER.md` for the full presentation mapping. The UI plays
+saved evidence and makes no model calls or graph writes. To recompute sandbox
+checks, use the CLI below; the old standalone tab and replay button are removed.
 
 ## Reproduce
 
@@ -73,5 +64,5 @@ are three scripted variants across twenty seeds, not sixty new discoveries.
 
 The report, retrieval receipt, model usage and sandboxed module are under
 `results/graph_transfer/hub-to-multiturn-01/`. The React view uses the same report
-in `dashboard/src/data/graphTransferDemo.json`. Replays verify the saved module
+in `dashboard/src/demo/fixtures/ruleTransfer.json`. Replays verify the saved module
 SHA-256 before execution. The raw model-call log is not bundled into the frontend.

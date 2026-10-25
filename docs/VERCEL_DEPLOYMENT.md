@@ -6,7 +6,7 @@ Import `vsvaidya27/loophole` into Vercel. Use the repository root as Root Direct
 
 Keep the repository root available during builds: the leaderboard exporter reads committed `results/` evidence outside `dashboard/`. There is no root npm package to install; the commands explicitly target `dashboard/`.
 
-All five React tabs, the saved transfer report, showcase assets, video/audio and legacy replay HTML are built together. Navigation uses hashes, so no SPA catch-all rewrite is needed. The live graph connects directly to the existing public SpacetimeDB WebSocket service.
+All five React tabs, the integrated pipeline demo (`demo.html`), the saved transfer report, showcase assets, video/audio and legacy replay HTML are built together. Navigation uses hashes, so no SPA catch-all rewrite is needed. The live graph connects directly to the existing public SpacetimeDB WebSocket service.
 
 Optional build variables, when pointing at a different public graph:
 
@@ -17,7 +17,7 @@ The current defaults use the existing service. Never put Anthropic, Moss or data
 
 ## What a static deployment does not run
 
-The **Live Hub replay** scoring button and **Rule transfer → Replay validation** POST to `/api/hub-demo/*`. Vite proxies these paths to `127.0.0.1:8788` only in local development. Vercel does not run Vite's development proxy, and a remote browser cannot use the laptop's loopback service.
+The **Live Hub replay** scoring button POSTs to `/api/hub-demo/*`. The Rule transfer tab now embeds the saved pipeline presentation and needs no Python worker; it does not offer fresh sandbox replay. Vite proxies these paths to `127.0.0.1:8788` only in local development. Vercel does not run Vite's development proxy, and a remote browser cannot use the laptop's loopback service.
 
 Until a remote replay worker is connected, the saved transfer evidence and showcase remain viewable, but fresh replay calls will fail and must not be described as fresh validation.
 

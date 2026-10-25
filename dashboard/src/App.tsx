@@ -12,7 +12,6 @@ import { ShowcaseDashboard } from './showcase/ShowcaseDashboard';
 const emptyGraph: GraphProjection = { nodes: [], edges: [], diagnostics: [] };
 const HubLeaderboard = lazy(() => import('./components/HubLeaderboard').then(module => ({ default: module.HubLeaderboard })));
 const HubReplay = lazy(() => import('./components/HubReplay').then(module => ({ default: module.HubReplay })));
-const GraphTransferDemo = lazy(() => import('./components/GraphTransferDemo').then(module => ({ default: module.GraphTransferDemo })));
 
 function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphProjection }) {
   const ids = new Set(snapshot?.rows.environments.map(env => env.envId));
@@ -64,13 +63,13 @@ export function App() {
       : 'Waiting for the initial subscription…';
 
   return <main>
-    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a aria-current={view === 'knowledge-demo' ? 'page' : undefined} href="#knowledge-demo" onClick={e => { e.preventDefault(); navigate('knowledge-demo'); }}>Rule transfer</a><a aria-current={view === 'showcase' ? 'page' : undefined} href="#showcase" onClick={e => { e.preventDefault(); navigate('showcase'); }}>Showcase</a></nav></header>
+    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'knowledge-demo' ? 'page' : undefined} href="#knowledge-demo" onClick={e => { e.preventDefault(); navigate('knowledge-demo'); }}>Rule transfer</a><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a aria-current={view === 'showcase' ? 'page' : undefined} href="#showcase" onClick={e => { e.preventDefault(); navigate('showcase'); }}>Showcase</a></nav></header>
     {view === 'showcase' && <ShowcaseDashboard graph={graph} liveStatus={status} onInspect={id => { select(id); navigate('network'); }} />}
-    <div hidden={view === 'showcase'} className="workbench">
+    {view === 'knowledge-demo' && <section className="pipeline-demo" aria-label="Recorded hardening pipeline demo"><iframe title="Loophole pipeline: recorded rule transfer and learning illustration" src="/demo.html?embedded" className="pipeline-demo-frame" /></section>}
+    <div hidden={view === 'showcase' || view === 'knowledge-demo'} className="workbench">
     <ConnectionStatus {...live} />
     {view === 'leaderboard' && <Suspense fallback={<p className="lb-no-results" role="status">Loading saved audit results…</p>}><HubLeaderboard snapshot={snapshot} graph={graph} onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
     {view === 'hub-replay' && <Suspense fallback={<p className="lb-no-results" role="status">Loading Hub replay…</p>}><HubReplay onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
-    {view === 'knowledge-demo' && <Suspense fallback={<p className="lb-no-results" role="status">Loading transfer evidence…</p>}><GraphTransferDemo onInspect={(id, tab) => { select(id, tab); navigate('network'); }} /></Suspense>}
     <div hidden={view !== 'network'} className="kg-view">
     <section className="kg-intro"><h2>The knowledge graph</h2><p>Every reward failure Loophole confirms becomes a rule, grouped by how it cheats and linked to rules that work alike. Pick an environment, a family or a rule to see what the graph connects it to.</p></section>
     <Metrics snapshot={snapshot} graph={graph} />
