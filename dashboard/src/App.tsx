@@ -6,6 +6,7 @@ import { EvidenceInspector, type EvidenceTab } from './components/EvidenceInspec
 import { InvariantNetwork } from './components/InvariantNetwork';
 import { AuditTable } from './components/AuditTable';
 import type { GraphProjection } from './graph/buildGraph';
+import { ShowcaseDashboard } from './showcase/ShowcaseDashboard';
 
 const emptyGraph: GraphProjection = { nodes: [], edges: [], diagnostics: [] };
 const HubLeaderboard = lazy(() => import('./components/HubLeaderboard').then(module => ({ default: module.HubLeaderboard })));
@@ -25,8 +26,8 @@ function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphPro
 }
 
 export function App() {
-  type View = 'network' | 'leaderboard' | 'hub-replay';
-  const hashView = (): View => window.location.hash === '#hub-replay' ? 'hub-replay' : window.location.hash === '#leaderboard' ? 'leaderboard' : 'network';
+  type View = 'network' | 'leaderboard' | 'hub-replay' | 'showcase';
+  const hashView = (): View => window.location.hash.startsWith('#showcase') ? 'showcase' : window.location.hash === '#hub-replay' ? 'hub-replay' : window.location.hash === '#leaderboard' ? 'leaderboard' : 'network';
   const [view, setView] = useState<View>(hashView);
   const live = useLiveStore();
   const { snapshot, status } = live;
@@ -60,7 +61,9 @@ export function App() {
       : 'Waiting for the initial subscription…';
 
   return <main>
-    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a href="/replay.html">Training replays <span aria-hidden="true">↗</span></a></nav></header>
+    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a aria-current={view === 'showcase' ? 'page' : undefined} href="#showcase" onClick={e => { e.preventDefault(); navigate('showcase'); }}>Showcase</a></nav></header>
+    {view === 'showcase' && <ShowcaseDashboard graph={graph} liveStatus={status} onInspect={id => { select(id); navigate('network'); }} />}
+    <div hidden={view === 'showcase'}>
     <ConnectionStatus {...live} />
     {view === 'leaderboard' && <Suspense fallback={<p className="lb-no-results" role="status">Loading saved audit results…</p>}><HubLeaderboard snapshot={snapshot} onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
     {view === 'hub-replay' && <Suspense fallback={<p className="lb-no-results" role="status">Loading Hub replay…</p>}><HubReplay onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
@@ -92,5 +95,6 @@ export function App() {
     <AuditTable snapshot={snapshot} onSelect={id => { select(id); workspace.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} />
     </div>
     <footer><span>Loophole · Compile environments. Check rewards. Measure learning.</span><a href="/replay.html">Compare recorded policies <span aria-hidden="true">→</span></a></footer>
+      </div>
   </main>;
 }

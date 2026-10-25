@@ -62,7 +62,11 @@ def rollout(model_ref: str, strict, loose, tasks: list, prompts: list) -> list[d
     texts = generate(model, tokenizer, prompts)
     del model
     gc.collect()
+    return rows_from_texts(strict, loose, tasks, texts)
 
+
+def rows_from_texts(strict, loose, tasks: list, texts: list[str]) -> list[dict]:
+    """Score completions with the real reward functions (shared with the showcase placeholders)."""
     rows = []
     for task, text in zip(tasks, texts):
         answer = strict.parse(text) or ""
@@ -98,17 +102,19 @@ def rollout_multiturn(model_ref: str, strict, loose, seeds: list[int]) -> list[d
     rows = []
     for f, h in zip(fixed, hackable):
         words = [len(r.split()) for r in f.replies + h.replies]
-        rows.append(
-            {
-                "strict": f.reward,
-                "loose": h.reward,
-                "transcript": f.transcript,
-                "loose_transcript": h.transcript,
-                "turns": len(f.turns),
-                "loose_turns": len(h.turns),
-                "n_words": round(sum(words) / max(1, len(words)), 1),
-            }
-        )
+        row = {
+            "strict": f.reward,
+            "loose": h.reward,
+            "transcript": f.transcript,
+            "loose_transcript": h.transcript,
+            "turns": len(f.turns),
+            "loose_turns": len(h.turns),
+            "n_words": round(sum(words) / max(1, len(words)), 1),
+        }
+        if getattr(strict, "has_pages", False):  # games with a visual page: one rendered page per step
+            row["pages"] = [strict.render_page(s) for s in strict.replay_states(f.seed, f.replies)]
+            row["loose_pages"] = [loose.render_page(s) for s in loose.replay_states(h.seed, h.replies)]
+        rows.append(row)
     return rows
 
 
