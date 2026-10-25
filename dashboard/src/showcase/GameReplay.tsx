@@ -67,7 +67,6 @@ function ReplayTask({ demo, task, mode }: { demo: Demo; task: Task; mode: Reward
       return <article className={`policy-replay policy-${policy}`} key={policy} aria-label={`${policyNames[policy]} replay`}>
         <div className="policy-heading"><span className="policy-dot" /><div><h4>{policyNames[policy]}</h4><p>{policyCaption(demo.placeholder, policy)}</p></div><span className="policy-number">0{policies.indexOf(policy) + 1}</span></div>
         <div className="policy-stage"><ReplayStage task={task} row={row} frame={frame} name={policyNames[policy]} /></div>
-        <div className="replay-scores"><ScoreBar label="True score" value={row.strict} /><ScoreBar label="Loose reward" value={row.loose} paid /></div>
         <div className={`reward-gap ${gap ? 'has-gap' : ''}`}>{gap ? '↗ Reward exceeds the true score' : 'Reward matches the true score'}</div>
         <details className="replay-output"><summary>{row.transcript ? 'Inspect recorded actions' : 'Inspect submitted answer'}</summary><pre>{row.transcript ? row.transcript.map(([who, text]) => `${who.toUpperCase()}\n${text}`).join('\n\n') : row.completion}</pre>{row.best_loose && gap && <p>The loose parser rewarded: <code>{row.best_loose}</code></p>}</details>
       </article>;
@@ -85,6 +84,6 @@ export function GameReplay({ demo, data }: { demo: Demo; data: GameData }) {
     <details className="task-instructions"><summary>{task.question.split('\n')[0]}</summary><pre>{task.question}</pre></details>
     {data.kind === 'multi' && <label className="replay-environment-picker">Replay environment<select aria-label="Replay environment" value={mode} onChange={event => setMode(event.target.value as RewardMode)}><option value="strict">Strict reward</option><option value="loose">Loose reward</option></select><span>Separate recorded episodes; actions can differ between environments.</span></label>}
     <ReplayTask key={`${taskIndex}-${mode}`} demo={demo} task={task} mode={mode} />
-    <p className="replay-footnote">True score uses the strict reward. Loose reward is what the hackable grader pays for the same policy.{data.kind === 'multi' ? ' The two scores come from separate recorded episodes on the same task.' : ' Both scores evaluate the same submitted completion.'}{demo.placeholder && ' These policies are scripted; no training performance is implied.'}</p>
+    <p className="replay-footnote">The hackable grader and the fixed grader score the same policy on the same task. Where the hackable grader pays more, the policy has found the loophole.{demo.placeholder && ' These policies are scripted; no training performance is implied.'}</p>
   </section>;
 }
