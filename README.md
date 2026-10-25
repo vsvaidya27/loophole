@@ -5,6 +5,14 @@ it on Prime Intellect Environments Hub environments first, then point it at a ga
 judge types live. The full plan, demo script and timeline are in
 [docs/BUILD_PLAN.pdf](docs/BUILD_PLAN.pdf).
 
+> **Plan amendment: multi-turn.** The original plan assumed every environment is single-turn.
+> That is still the default and the demo-critical path, but we are adding an opt-in multi-turn
+> track (the environment answers each reply), selected by a `kind` field. The amended scope,
+> per-component work, owners, phases and risks are in
+> [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md); where it differs from the PDF, the markdown
+> plan wins for multi-turn work. It changes nothing for single-turn code. The multi-turn code is
+> on branch `multi-turn` and is not merged into `main` yet.
+
 ## Components
 
 | Component | What it does | Owner |
@@ -12,8 +20,8 @@ judge types live. The full plan, demo script and timeline are in
 | Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
 | Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense); SpacetimeDB module and pusher by Rishab, audit-side writes and retrieval by Varun | Varun, Rishab |
 | Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
-| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver) | Rohan |
-| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy | Rohan |
+| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); multi-turn environments are planned, see [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md) | Rohan |
+| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy; a multi-turn rollout loop is on branch `multi-turn` | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
 
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
@@ -26,7 +34,7 @@ for the plan, orchestration example, and cross-branch tests.
 ## Repo layout
 
 ```
-docs/                          build plan, invariant store plan
+docs/                          build plan, multi-turn plan, invariant store plan
 scripts/check_leaderboard.py   acceptance check for the hub audit (see below)
 spacetimedb/                   SpacetimeDB module for the invariant store (cd spacetimedb && npm install && npm test)
 fixtures/                      seed invariants with MiniLM embeddings, for graph and dashboard work
