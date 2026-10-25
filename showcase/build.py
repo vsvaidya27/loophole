@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import html as html_lib
 import json
+import shutil
 import time
 from pathlib import Path
 
@@ -48,6 +49,11 @@ def build(rollouts_dir: Path, out: Path, graph_url: str | None) -> dict:
             missing.append(card["id"])
             continue
         data["card"] = {k: card[k] for k in ("title", "hook", "loophole", "expected")}
+        clip = ROOT / card["dir"] / "video" / f"{card['dir']}.mp4"
+        if clip.is_file():  # copied next to the page, so it works from a file or a static host
+            (out.parent / "videos").mkdir(parents=True, exist_ok=True)
+            shutil.copy(clip, out.parent / "videos" / clip.name)
+            data["card"]["video"] = f"videos/{clip.name}"
         data["curves"] = {
             mode: [{k: row[k] for k in CURVE_KEYS if k in row} for row in rows]
             for mode, rows in data.get("curves", {}).items()

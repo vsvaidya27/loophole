@@ -34,6 +34,23 @@ run) and `artifacts/` (small committed data, so the page works offline). The bui
 come from the real reward functions, and the page labels them. `python -m showcase.placeholders`
 regenerates them. They exist so the page, the layout and the replay work before the GPU runs finish.
 
+## Videos
+
+```bash
+pip install -r requirements-showcase.txt        # Pillow; the ffmpeg binary must be on PATH
+python -m showcase.video.render all             # -> showcase/<demo>/video/<demo>.mp4
+python -m showcase.video.render snake --tasks 4 # one demo, more games
+python -m showcase.build                        # copies the videos to demo/videos/ and embeds them
+```
+
+Each game video (30 to 60 s) plays three games side by side: base, hacked, fixed. Each panel animates
+the policy's actual answer (board moves, chart and order, web page steps), a meter compares the true
+score with what the hackable reward pays, and a "REWARD HACKED" banner flashes when it pays for a wrong
+answer. It prefers games where the hack is visible. The voice video (about 2 minutes) plays two recorded
+calls in the Cartesia voices with a level meter, then reveals both judges' verdicts against the ground
+truth. Videos are drawn from the same rollout data as the page, so a real GPU run (`rollouts/<game>.json`)
+renders the same way; placeholder data keeps a PLACEHOLDER badge. Re-render after replacing placeholders.
+
 ## Replacing a placeholder with a real run (on the GPU box)
 
 ```bash

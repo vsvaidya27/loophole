@@ -190,6 +190,8 @@ footer { color: var(--fg-3); font-size: 0.82rem; max-width: 80ch; }
 /* showcase: banners, rendered web pages, voice calls */
 .banner { display: flex; gap: 8px; align-items: flex-start; border-radius: 8px; padding: 9px 12px; font-size: 0.86rem; background: var(--warn-bg); }
 .banner b { color: var(--warn); }
+.clip { width: 100%; max-width: 960px; border-radius: 10px; border: 1px solid var(--line); background: #000; }
+.clip-note { color: var(--fg-3); font-size: 0.82rem; }
 .hook { font: 500 1.05rem/1.4 var(--display); color: var(--fg); max-width: 70ch; }
 .wf { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; font-size: 0.82rem; width: 100%; }
 .wf-bar { display: flex; gap: 5px; align-items: center; padding: 6px 9px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
@@ -292,6 +294,8 @@ const loopholeOf = g => g.card?.loophole || LOOPHOLE[g.game] || LOOPHOLE[kindOf(
 function policiesOf(game) { return game.policies.filter(p => POL[p]); }
 // a placeholder game replays scripted policies (the real reward functions, not trained models)
 const polSub = (g, p) => g.placeholder ? "scripted stand-in" : POL[p].sub;
+const clipFor = g => g.card?.video
+  ? `<video class="clip" controls preload="metadata" src="${esc(g.card.video)}"></video><p class="clip-note">${g.placeholder ? "Scripted stand-ins, not trained models. " : ""}The same replays as below, as a video.</p>` : "";
 const bannerFor = g => g.placeholder
   ? `<p class="banner"><span><b>Placeholder.</b> These policies are scripted stand-ins scored by the real reward functions. Train on the GPU box and re-run the build to replace them.</span></p>` : "";
 
@@ -341,6 +345,7 @@ function renderGame() {
       <p class="lede">${esc(g.description)}</p>
       ${loopholeOf(g) ? `<p class="loophole"><b>Loophole</b> ${esc(loopholeOf(g))}</p>` : ""}
       ${bannerFor(g)}
+      ${clipFor(g)}
     </section>
     <section class="scores">${scores.map(s => `
       <div class="panel score" style="--c:${POL[s.p].color}">
@@ -383,6 +388,7 @@ function renderVoice(g) {
       <p class="lede">${esc(g.description)}</p>
       <p class="loophole"><b>Loophole</b> ${esc(g.loophole)}</p>
       <p class="banner"><span><b>Recorded.</b> ${esc(g.provenance)}</span></p>
+      ${clipFor(g)}
     </section>
     <section class="scores">
       <div class="panel score" style="--c:var(--hack)"><div class="who"><h3>Baseline judge</h3><small>"clear outcome" metric</small></div>
