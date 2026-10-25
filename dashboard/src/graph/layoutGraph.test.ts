@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fixture from './fixture.graph.json';
-import { layoutGraph } from './renderGraph';
+import { layoutGraph } from './layoutGraph';
 import type { GraphProjection } from './buildGraph';
 
 const graph = fixture as GraphProjection;
