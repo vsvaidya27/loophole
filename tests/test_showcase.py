@@ -99,6 +99,11 @@ def test_build_bundles_every_demo_into_one_page(tmp_path):
 def test_a_real_run_replaces_a_placeholder(tmp_path):
     real = tmp_path / "snake_easy.json"
     real.write_text(json.dumps({"game": "snake_easy", "description": "d", "policies": ["base"], "tasks": [], "curves": {}}))
-    card = next(c for c in load_cards() if c["game"] == "snake_easy")
+    # A demo folder of its own with a committed placeholder, so the check does not depend on
+    # whether the repo's snake artifact is still a placeholder or already a real run.
+    demo = tmp_path / "demo"
+    (demo / "artifacts").mkdir(parents=True)
+    (demo / "artifacts" / "rollouts.json").write_text(json.dumps({"game": "snake_easy", "placeholder": True, "tasks": []}))
+    card = {**next(c for c in load_cards() if c["game"] == "snake_easy"), "dir": str(demo)}
     assert showcase_build.pick_game_data(card, tmp_path)["placeholder"] is False
     assert showcase_build.pick_game_data(card, tmp_path / "empty")["placeholder"] is True
