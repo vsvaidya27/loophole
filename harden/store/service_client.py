@@ -21,6 +21,7 @@ ARGS = {
     'record_rule_application': ('run_id', 'invariant_id', 'target_env_id', 'outcome', 'detail'),
     'graph_on_invariant': ('invariant_id',),
     'rebuild_graph': (),
+    'clear_environment': ('env_id',),
 }
 
 

@@ -55,37 +55,29 @@ class GeminiLLM(_CachedLLM):
         return self.client.complete(self.model, system, messages, max_tokens)
 
 
-class HaikuLLM(_CachedLLM):
-    """Claude Haiku 5.5 at low effort (thinking stays on by default; effort keeps it short).
-    No temperature or other sampling params: non-default values are rejected."""
-
-    tag = "effort=low"
-
+class HaikuLLM:
+    """Haiku planner/simulation adapter with the shared spend ledger and no hidden retries."""
     def __init__(self, model: str = HAIKU_MODEL):
-        super().__init__()
-        import anthropic
-
-        self.client, self.model = anthropic.Anthropic(), model
-
-    def _call(self, system, messages, max_tokens):
-        reply = self.client.messages.create(
-            model=self.model, max_tokens=max(max_tokens, 1024), system=system, messages=messages,
-            output_config={"effort": "low"},
-        )
-        if reply.stop_reason == "refusal":
-            return ""
-        return "".join(b.text for b in reply.content if b.type == "text")
+        if model != HAIKU_MODEL:
+            raise ValueError('Pilot model is restricted to Haiku')
+        from harden.model_client import PlannerClient
+        self.backend = PlannerClient(name='voice')
+    @property
+    def calls(self):
+        return self.backend.calls
+    def complete(self, system, messages, max_tokens=1500):
+        return self.backend.complete(system, messages, max_tokens)
 
 
 def sim_llm() -> _CachedLLM:
     """Simulation-side model: customer, agent under test, judge, classifier."""
-    return GeminiLLM() if os.environ.get("VOICE_ENV_SIM") == "gemini" else HaikuLLM()
+    return HaikuLLM()
 
 
 def planner_llm() -> _CachedLLM:
     """Hacker and fixer model: Haiku 5.5 at low effort (the Gemini free tier allows only 20
     requests/day). VOICE_ENV_PLANNER=gemini switches back."""
-    return GeminiLLM() if os.environ.get("VOICE_ENV_PLANNER") == "gemini" else HaikuLLM()
+    return HaikuLLM()
 
 
 LLM = GeminiLLM  # backwards-compatible name

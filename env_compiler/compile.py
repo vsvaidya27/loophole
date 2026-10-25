@@ -242,12 +242,10 @@ def extract_code(text: str) -> str | None:
 def run_gates(path: Path) -> dict:
     env = {"PATH": os.environ.get("PATH", ""), "PYTHONPATH": str(ROOT)}  # no API keys for generated code
     try:
-        proc = subprocess.run(
-            [sys.executable, "-m", "env_compiler.gates", str(path)],
-            cwd=ROOT, env=env, capture_output=True, text=True, timeout=120,
-        )
-    except subprocess.TimeoutExpired:
-        return {"ok": False, "reports": [], "error": "gates timed out after 120s"}
+        from .isolation import run_worker
+        proc = run_worker('env_compiler.gates', [str(path.resolve())], [path.resolve().parent])
+    except (subprocess.TimeoutExpired, RuntimeError) as error:
+        return {"ok": False, "reports": [], "error": f"Isolated gates failed: {error}"}
     lines = proc.stdout.strip().splitlines()
     try:
         return json.loads(lines[-1])

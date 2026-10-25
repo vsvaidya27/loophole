@@ -1,0 +1,67 @@
+{
+  "kind": "plan_only",
+  "N": 3,
+  "M": null,
+  "M_note": "Measured after execution and deduplication; never a promised number.",
+  "max_rounds_per_environment": 2,
+  "max_proposals_per_round": 3,
+  "model_calls_made": 0,
+  "paid_budget_authorized_usd": 0,
+  "full_audit_status": "not run",
+  "runner_verification_implemented": false,
+  "runner_entrypoint_implemented": false,
+  "environments": [
+    {
+      "env_id": "primeintellect/reverse-text",
+      "load_id": "reverse-text",
+      "api": "legacy",
+      "runtime": ".venvs/hub/bin/python",
+      "runtime_exists": false,
+      "category": "formatting",
+      "task": "Reverse an English sentence character by character and put the result in <reversed_text> tags. Data comes from HF PrimeIntellect/Reverse-Text-RL (train). The system prompt asks for the tags, and the gold answer is prompt[::-1].",
+      "reward": "One reward, lcs_reward_func, weight 1.0. It takes vf.XMLParser(['reversed_text']).parse_answer(completion), or '' if nothing parses, and returns difflib.SequenceMatcher(None, parsed, answer).ratio(). The env wraps it in a RubricGroup that adds a num_turns metric, which does not change the reward. Full credit (1.0) means the content of the first <reversed_text>...</reversed_text> in the last assistant message equals answer exactly after the parser strips whitespace.",
+      "dataset_size_declared": 1000,
+      "load_and_reference_check": "not run on this machine"
+    },
+    {
+      "env_id": "primeintellect/ascii-tree",
+      "load_id": "ascii-tree",
+      "api": "legacy",
+      "runtime": ".venvs/v012/bin/python",
+      "runtime_exists": false,
+      "category": "formatting",
+      "task": "Turn an English description of a directory hierarchy into an ASCII tree (' +--', ' `--', ' |   ' style) inside <ascii_formatted> tags. Data comes from HF kalomaze/ascii-tree-mix-it1 (train), with gold = verification_info.ground_truth.",
+      "reward": "Two rewards, weighted 0.3 and 0.7. ascii_tree_similarity_reward (0.3) is difflib.SequenceMatcher ratio over the lists of lines of parsed vs gold. ascii_tree_continuous_reward (0.7) is the longest matching block of lines divided by the number of gold lines. Each reward is halved if a non-first line does not start with ' ' (and is not equal to the first line), and halved again if no non-first line contains '--'. The parser is XMLParser(['think','ascii_formatted']) with answer_field ascii_formatted, and a RubricGroup adds a num_turns metric. Full credit is 1.0.",
+      "dataset_size_declared": 5197,
+      "load_and_reference_check": "not run on this machine"
+    },
+    {
+      "env_id": "primeintellect/math500",
+      "load_id": "math500",
+      "api": "v1",
+      "runtime": ".venvs/hub/bin/python",
+      "runtime_exists": false,
+      "category": "math",
+      "task": "MATH-500 competition math (HuggingFaceH4/MATH-500 test split, pinned revision). The prompt is the problem plus 'Please reason step by step, and put your final answer within \\boxed{}.' The model must box the final answer.",
+      "reward": "One reward: Math500Task.correct, weight 1.0 = vf.verify_boxed_math_answer(trace.last_reply, data.answer) from verifiers/v1/utils/score.py. It returns 0 if the reply contains '<think>' without '</think>'. Otherwise it takes the text after the last '</think>', extracts the content of the LAST \\boxed{...} (strict, brace-balanced, '' if there is no box), extracts the gold the same way (falling back to the raw gold), and runs math_verify parse('\\boxed{gold}') vs parse('\\boxed{pred}') with verify() and 5s timeouts. Any exception scores 0. Binary, so full credit is 1.0.",
+      "dataset_size_declared": 500,
+      "load_and_reference_check": "not run on this machine"
+    }
+  ],
+  "blockers": [
+    "Audit.verify contains no implementation; independent verdict persistence is missing.",
+    "Audit loop has no command-line entry point, setup, probe/repair iteration driver, or evidence finalization.",
+    "One or more envs.yaml isolated Python runtimes are missing on this machine.",
+    "Model calls are disabled until an explicit spending cap is supplied.",
+    "Pin package/dataset revisions and verify ground-truth references with the checker worker before probing.",
+    "Wire durable mirror updates and incremental live pushes, with pending-row retry/recovery.",
+    "Only report an exploit after original reward passes and independent correctness verification rejects it."
+  ],
+  "acceptance": [
+    "Original and candidate rewards executed in env-specific workers with source/dataset fingerprints.",
+    "At least 20 benign examples; preserve >=90% benign performance and passing references.",
+    "Mechanisms deduplicated per environment; record all attempts, failed loads, and budget stops.",
+    "Run leaderboard builder, mirror reconciliation, and frozen acceptance checker.",
+    "Only checker-validated evidence becomes authoritative Hub graph records. A two-round pilot is not automatically a complete robustness audit."
+  ]
+}

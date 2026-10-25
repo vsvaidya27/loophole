@@ -35,3 +35,11 @@ demo/
 
 # hardened game modules and audit evidence (regenerate with harden.game_audit)
 hardened/
+
+# dashboard build output
+dashboard/dist/
+
+# Local live-pipeline outbox; checked-in evidence is retained under results/
+invariants.db
+invariants.db-wal
+invariants.db-shm

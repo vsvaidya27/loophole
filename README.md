@@ -12,6 +12,14 @@ judge types live. The full plan, demo script and timeline are in
 > [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md); where it differs from the PDF, the markdown
 > plan wins for multi-turn work. It changes nothing for single-turn code.
 
+## Live compiler / hacker / fixer / graph demo
+
+See [the live pilot runbook](docs/LIVE_PILOT.md) for setup, key configuration,
+service commands, completed Haiku pilot evidence, costs, and current limitations.
+The dashboard shows the entire hosted knowledge graph, including clearly labeled
+scripted calibration records. The completed generated-game pilot is single-turn;
+it does not claim Hub leaderboard acceptance or trained-policy performance.
+
 ## Components
 
 | Component | What it does | Owner |
@@ -174,5 +182,16 @@ path (games, trainer, hardening, leaderboard checker) depends on it.
   the model's own reply tokens, with each turn a separate (context, reply) sample so environment text
   never enters the loss. Metrics land in the same `metrics.jsonl` format (held-out accuracy is strict
   and greedy). Single GPU, HF generation, no vLLM. `trainer.probe` reports a game's base solve rate.
-- Not supported yet: the hardening engine / leaderboard evidence schema (`check_leaderboard.py`
+- Hardening: `python -m harden.game_audit GAME` runs the audit loop on single- and multi-turn games
+  (Claude probes the shipped game, exact replay verifies, the fixer writes a `tighten` rule) and
+  writes `hardened/<name>.py`; train on it with `--oracle GAME`. `python scripts/pipeline.py
+  "description"` runs compile, harden, train (hardened and hacked) and the replay page in one go.
+- Not supported yet: multi-turn entries in the leaderboard evidence schema (`check_leaderboard.py`
   scores one string per completion; any change there goes through Varun).
+
+## Live demo dashboard and pilot status
+
+Run `npm ci --prefix dashboard` then `npm run dev --prefix dashboard` to view the live
+knowledge graph at `http://127.0.0.1:5173/`. It subscribes to the hosted database directly.
+See [live demo status](docs/LIVE_DEMO_STATUS.md) for measured compiler calibration
+results, the prepared Prime Intellect pilot, and the unfinished audit-runner work.
