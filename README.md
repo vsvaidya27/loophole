@@ -91,6 +91,11 @@ python -m env_compiler   # run the gates on every game
 pytest tests/
 ```
 
+`python -m env_compiler.compile "<description>"` compiles a new game with Claude Haiku 5.5
+(`ANTHROPIC_API_KEY` in `.env`). `ENV_COMPILER_MODEL` picks another Claude model (for example
+`claude-opus-5-5`), `ENV_COMPILER_EFFORT` sets its effort (default `medium`), and
+`--provider gemini` or `ENV_COMPILER_PROVIDER=gemini` switches to Gemini (`GEMINI_API_KEY`).
+
 Games (`env_compiler/games/`), each with a strict parser and a loose (hackable) one:
 
 | Game | Type | Loose-parser exploit |

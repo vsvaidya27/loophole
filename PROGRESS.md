@@ -5,7 +5,7 @@ Contract: `scripts/check_leaderboard.py` (frozen at `cd376a7`). API spend cap $4
 
 ## 2026-10-24
 
-**Spend so far: $0.0493** (smoke tests only, `env_id` "smoke-test" in `results/spend_ledger.jsonl`; see below).
+**Spend so far: $0.1424** in `results/spend_ledger.jsonl`: $0.0493 of Claude smoke tests (`env_id` "smoke-test", see below) and $0.0931 testing the env compiler (`env_id` "compiler-test"). On Claude Opus 5.5 the test cost $0.0887 (5 calls); on Claude Haiku 5.5, now the default, $0.0044 (6 calls). Both refused a multi-turn game and compiled two new games that pass the gates.
 
 Verified offline, through the checker's own worker in each env's venv:
 
@@ -18,7 +18,7 @@ Verified offline, through the checker's own worker in each env's venv:
   `tighten()`, and rewards change only where the rule says.
 - Loading reasoning-core-env takes about 2 minutes per scoring run; the others take 5-30 s.
 
-Harness (`harden/audit/`, uncommitted):
+Harness (`harden/audit/`):
 
 - Done: `llm.py` (spend ledger and per-call logging), `common.py`, `scoring.py`,
   `inspect_env.py` (now also shows each parser's extract function and reasoning-core's
@@ -29,8 +29,9 @@ Harness (`harden/audit/`, uncommitted):
   the fixture's leaderboard exactly, and the checker passes on the rebuilt tree.
 - New: `invariants.py`, the extractor hook `harden.store.reconcile` calls for an exploit
   with no invariant row (it used to import it from `loop.py`).
-- Not done: the per-environment loop in `loop.py` (it stops at line 130). No environment
-  has been run, so there is no evidence, leaderboard or invariants.db yet.
+- Done: the per-environment loop in `loop.py`; implementation and validation details below.
+  No paid environment audit has been run, so there is no published audit evidence,
+  leaderboard or invariants.db yet.
 
 Evidence contract the loop has to write for `leaderboard.py` (beyond the checker docstring):
 each `replays/<exploit_id>.json` carries `exploit_class`; an env that fails twice gets
@@ -66,15 +67,52 @@ it, an unnamed category, two hops, a final refusal), through `read_response` and
 1 re-run against the real API passes and logs `declined_hops: []` ($0.0013).
 **Spend now $0.0493.**
 
+### Per-environment audit loop completed
+
+`harden/audit/loop.py` now implements the complete command-line audit:
+
+- Samples 24 spread ground-truth examples and a separate solver pool, checks positive
+  reference rewards, and collects distinct independently verified model completions.
+- Uses cached strict verdicts first; inconclusive responses require a Claude verdict.
+  Missing or refused judgments are retried once and never counted as incorrect attacks.
+- Probes, scores, verifies and repairs for at most five iterations. Repairs must pass
+  static checks, close every confirmed exploit, retain every reference, preserve at
+  least 90% of benign answers and passing model answers, and have five model records.
+  Accepted patches are re-probed before an early successful stop.
+- Writes attempts, benign records, replay cases with exploit classes, chained patch
+  digests, runtime metadata, per-run summaries and invariant rows. The leaderboard
+  builder re-scores the evidence to derive the final status. Raw proposals, solver
+  responses and repair rejection reasons are retained separately for diagnosis.
+- Retries failed operations at most twice, honors the existing global and per-run
+  spend caps, and writes `failed.json` without `runtime.json` for incomplete runs.
+  A budget stop after completed iterations can retain an honest `unpatched` result.
+  Missing invariant extractions are listed in `summary.json` and return exit code 1;
+  `harden.store.reconcile` can fill them in later. Reruns archive the previous evidence
+  and its accepted patch together and keep the install log.
+
+Validation in `tests/test_audit_loop.py`: 20 offline tests pass, plus one opt-in test
+against the installed reverse-text environment. The integration test uses the real
+inspection/scoring workers and frozen checker, with controlled model-role responses;
+its repaired result passes replay, patch-chain, benign and invariant checks. It runs
+in a temporary directory and is not leaderboard evidence. **API spend for this work: $0.**
+
+```bash
+# Offline orchestration and checker-contract tests (no pytest dependency):
+.venvs/hub/bin/python -m unittest discover -s tests -p test_audit_loop.py -v
+
+# Installed reverse-text integration, using its cached dataset and no API calls:
+AUDIT_REAL_ENV_TEST=1 HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 \
+  .venvs/hub/bin/python -m unittest discover -s tests -p test_audit_loop.py -k installed_environment -v
+
+# Start the first real audit with a $2 per-run cap:
+.venvs/hub/bin/python -m harden.audit.loop primeintellect/reverse-text --cap 2
+```
+
 ## Next steps
 
-1. **Write the per-environment audit loop in `harden/audit/loop.py`.** It is still
-   unwritten: the file stops at `Audit.verify()` (docstring only) and has no entry point.
-   It needs setup (ground-truth and solver benign records), the iteration loop (probe,
-   score, verify, repair, up to 5 iterations), the evidence files, and the invariant rows.
-2. **Run the environments**: a smoke test on one cheap env with a $2 sub-cap first, check
-   its evidence with the checker, then the remaining envs, committing each one as it
-   finishes and logging its cost here.
-3. `leaderboard.py`, then `python -m harden.store.reconcile`, then `leaderboard.py` again
+1. **Run the environments**: a real-API smoke test on one cheap env with a $2 sub-cap
+   first, check its evidence with the checker, then the remaining envs, committing each
+   one as it finishes and logging its cost here.
+2. `leaderboard.py`, then `python -m harden.store.reconcile`, then `leaderboard.py` again
    (reconcile can add calls), then `python3 scripts/check_leaderboard.py` until it exits 0.
-4. RUN_NOTES.md, then push (`cd376a7`, `0721541` and the commits after them are local only).
+3. RUN_NOTES.md, then push (`cd376a7`, `0721541` and the commits after them are local only).
