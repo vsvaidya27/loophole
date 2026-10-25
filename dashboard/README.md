@@ -82,6 +82,8 @@ subscription and evidence selection intact.
   three policies' strict scores with what the loose reward pays, and inspect raw
   answers or recorded actions. Captured web pages run in sandboxed frames with
   scripts, network access, and form submissions disabled.
+  Shop recordings use illustrated product cards and cart quantities/totals derived
+  from the captured state; action numbers and recorded verdicts are preserved.
 - Voice support includes five selected audit calls, per-turn synthesized audio,
   both judge verdicts, and their prompts. Aggregate rates are from the full audit.
 - Every demo includes its original film. Media loads on demand; audio is stored as

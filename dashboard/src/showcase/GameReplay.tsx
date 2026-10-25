@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { featuredTask, percent, policies, policyCaption, policyNames, replayLength, replayRow, type Demo, type GameData, type RewardMode, type Rollout, type Task } from './model';
+import { presentShopPage, shopStyles } from './shopReplay';
 
 function PriceChart({ task, frame }: { task: Task; frame: number }) {
   const prices = task.info?.prices ?? [];
@@ -20,7 +21,8 @@ function PriceChart({ task, frame }: { task: Task; frame: number }) {
 const pageStyles = `*{box-sizing:border-box}body{margin:0;background:#0c1017;color:#c5d0df;font:11px/1.5 system-ui,sans-serif}.wf{padding:12px}.wf-bar{display:flex;align-items:center;gap:4px;padding-bottom:9px;border-bottom:1px solid #283140}.wf-bar span{width:5px;height:5px;background:#56677c;border-radius:50%}.wf-bar em{font:10px system-ui;margin-left:7px}.wf-goal{font-size:10px;color:#8797ad;margin:12px 0}.wf-row{padding:7px;display:flex;gap:8px;align-items:center;border:1px solid transparent;border-radius:5px;margin:4px 0;flex-wrap:wrap}.wf-row>b{font:9px monospace;color:#697d94}.wf-row.hot{border-color:#75dec066;background:#122820}.wf-row label{font-size:10px;min-width:55px}.wf-input{background:#151c27;border:1px solid #2b384a;padding:5px 8px;flex:1;min-width:80px}.wf-check{display:flex;align-items:center;gap:7px;font-size:10px}.wf-check i{height:10px;width:10px;border:1px solid #647689;display:inline-block}.wf-check i.on{background:#75dec0;border-color:#75dec0}.wf-btn{background:#243d35;color:#9ae7cf;border:1px solid #3a6052;border-radius:4px;padding:5px 12px}.wf-ad{font-size:9px;color:#786a8d}.wf-end{padding:9px;background:#122f24;color:#8de0b7;margin-top:9px;font-size:10px}.wf-end.shallow{background:#322518;color:#e7b577}.wf-product{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.wf-price{color:#75dec0}.wf-banner{padding:10px;background:#1a2230;border-radius:5px}`;
 
 function WebPage({ html, name }: { html: string; name: string }) {
-  return <iframe className="captured-page" title={`${name} browser replay`} sandbox="" srcDoc={`<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'"><style>${pageStyles}</style></head><body>${html}</body></html>`} />;
+  const shop = presentShopPage(html);
+  return <iframe className={`captured-page${shop ? ' captured-shop' : ''}`} title={`${name} browser replay`} sandbox="" srcDoc={`<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'"><style>${pageStyles}${shop ? shopStyles : ''}</style></head><body>${shop ?? html}</body></html>`} />;
 }
 
 export function ReplayStage({ task, row, frame, name }: { task: Task; row: Rollout; frame: number; name: string }) {

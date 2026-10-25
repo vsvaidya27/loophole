@@ -229,7 +229,9 @@ describe('Showcase dashboard', () => {
     expect(node('[aria-label="Current replay step"]').textContent).toBe('0 / 8');
     const picker = node<HTMLSelectElement>('[aria-label="Replay example"]');
     await act(() => { picker.value = '7'; picker.dispatchEvent(new Event('change', { bubbles: true })); });
-    expect(node<HTMLIFrameElement>('.policy-hardened iframe').srcdoc).toContain(webagent.tasks[7].rollouts.hardened.loose_pages[0]);
+    const page = new DOMParser().parseFromString(node<HTMLIFrameElement>('.policy-hardened iframe').srcdoc, 'text/html');
+    expect(page.querySelector('.shop-task')?.textContent).toContain('Buy the cheapest item');
+    expect(page.querySelector('.shop-cart')?.textContent).toContain('Your cart is empty.');
     expect(container.textContent).toContain('Separate recorded episodes');
   });
 });
