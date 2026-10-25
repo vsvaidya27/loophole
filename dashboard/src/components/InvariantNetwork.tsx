@@ -2,7 +2,7 @@ import { useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties }
 import type { GraphNode, GraphProjection } from '../graph/buildGraph';
 import { layoutGraph } from '../graph/layoutGraph';
 
-const palette = ['#f0b96b', '#a88bfa', '#62cbd3', '#7ca5ff', '#ea92bb', '#cadb7c', '#ef946c'];
+const palette = ['#b5372f', '#7a5a92', '#2e7f7a', '#2e5f86', '#a3466c', '#6f7d34', '#b0742a'];
 function environmentName(node: GraphNode) {
   if (node.kind !== 'environment') return node.label;
   if (node.id.includes('/ai-') && node.label.toLowerCase().includes('arithmetic')) return 'Generated arithmetic';
@@ -58,7 +58,7 @@ export function InvariantNetwork({ graph, selected, onSelect, containerId = 'gra
       aria-label="Live invariant network. Environments are central hubs, surrounded by their recorded failures. Shared rule families connect below.">
       <defs>
         <filter id={glowId} x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation={6} /></filter>
-        <marker id={arrowId} viewBox="0 0 10 10" refX={9} refY={5} markerWidth={5} markerHeight={5} orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#63d6ad" /></marker>
+        <marker id={arrowId} viewBox="0 0 10 10" refX={9} refY={5} markerWidth={5} markerHeight={5} orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2e5f86" /></marker>
       </defs>
       {graph.nodes.filter(node => node.kind === 'environment').map(env => {
         const [x, y] = points.get(env.id)!;
@@ -86,7 +86,7 @@ export function InvariantNetwork({ graph, selected, onSelect, containerId = 'gra
       </g>
       {graph.nodes.map(node => {
         const [x, y] = points.get(node.id)!;
-        const color = node.kind === 'invariant' ? classColor(node.exploitClass) : node.kind === 'rule' ? '#ac93ee' : ['patched', 'robust', 'done'].includes(node.status) ? '#75dec0' : '#8daafa';
+        const color = node.kind === 'invariant' ? classColor(node.exploitClass) : node.kind === 'rule' ? '#7a5a92' : ['patched', 'robust', 'done'].includes(node.status) ? '#2e5f86' : '#857e76';
         const radius = node.kind === 'environment' ? 34 : node.kind === 'rule' ? 17 : 14;
         const name = environmentName(node), lines = wrap(name, 27).slice(0, 2);
         const sourcePoint = node.kind === 'invariant' ? points.get(`env:${node.envId}`) : undefined;

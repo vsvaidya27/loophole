@@ -2,6 +2,8 @@ import { Fragment, useMemo, useState } from 'react';
 import type { LiveSnapshot } from '../live';
 import { evidenceUrl, leaderboard, percent, sortEntries, statusLabels, summarize, type AuditEntry, type SortOrder } from '../leaderboard';
 import { humanize } from '../format';
+import type { GraphProjection } from '../graph/buildGraph';
+import { KnowledgeConstellation } from './KnowledgeConstellation';
 
 function AttackRate({ entry }: { entry: AuditEntry }) {
   if (entry.asrBefore === null || entry.asrAfter === null) return <span className="lb-unmeasured">Not measured</span>;
@@ -11,7 +13,7 @@ function AttackRate({ entry }: { entry: AuditEntry }) {
   </div>;
 }
 
-function AuditEvidence({ entry, inGraph, onInspect }: { entry: AuditEntry; inGraph: boolean; onInspect: (id: string) => void }) {
+function AuditEvidence({ entry, inGraph, graph, onInspect }: { entry: AuditEntry; inGraph: boolean; graph?: GraphProjection; onInspect: (id: string) => void }) {
   const [findingId, setFindingId] = useState(entry.findings[0]?.id ?? '');
   const finding = entry.findings.find(f => f.id === findingId);
   return <div className="lb-evidence">
@@ -22,6 +24,10 @@ function AuditEvidence({ entry, inGraph, onInspect }: { entry: AuditEntry; inGra
         <button disabled={!inGraph} onClick={() => onInspect(`env:${entry.envId}`)}>{inGraph ? 'Inspect in knowledge graph →' : 'Not in current graph feed'}</button>
       </div>
     </div>
+    {inGraph && graph && graph.nodes.some(node => node.kind === 'invariant' && node.envId === entry.envId) && <div className="lb-graph">
+      <KnowledgeConstellation graph={graph} selected={`env:${entry.envId}`} compact onSelect={onInspect} />
+      <div><h4>In the knowledge graph</h4><p>This environment’s rules, grouped by how they cheat, with the most similar records from other environments. Select a dot to open its evidence.</p></div>
+    </div>}
     {entry.failureReason && <p className="lb-outcome-note">This environment could not be scored. No attack or repair rate is reported.<br />{entry.failureReason}</p>}
     {entry.status === 'robust' && <p className="lb-outcome-note">No confirmed false positive in {entry.probes} submitted probes. This is a sampled outcome; no repair was needed in this run.</p>}
     {entry.status === 'unpatched' && <div className="lb-outcome-note"><strong>No repair met the acceptance gates.</strong><p>{entry.unpatchedReasons.join(' · ') || entry.stopReason}</p><p>Defense patterns below are proposed constraints; they have no accepted repaired reward in this run.</p></div>}
@@ -47,7 +53,7 @@ function AuditEvidence({ entry, inGraph, onInspect }: { entry: AuditEntry; inGra
   </div>;
 }
 
-export function HubLeaderboard({ snapshot, onInspect }: { snapshot?: LiveSnapshot; onInspect: (id: string) => void }) {
+export function HubLeaderboard({ snapshot, graph, onInspect }: { snapshot?: LiveSnapshot; graph?: GraphProjection; onInspect: (id: string) => void }) {
   const [search, setSearch] = useState('');
   const [scope, setScope] = useState('all');
   const [outcome, setOutcome] = useState('all');
@@ -88,7 +94,7 @@ export function HubLeaderboard({ snapshot, onInspect }: { snapshot?: LiveSnapsho
             <td className="lb-numeric">{entry.rounds}</td><td className="lb-numeric">${entry.costUsd.toFixed(2)}</td>
             <td><button className="lb-expand" aria-expanded={expanded === entry.envId} aria-controls={`audit-detail-${index}`} onClick={() => setExpanded(expanded === entry.envId ? undefined : entry.envId)}>{expanded === entry.envId ? 'Close −' : 'Inspect ↗'}</button></td>
           </tr>
-          {expanded === entry.envId && <tr id={`audit-detail-${index}`}><td colSpan={9} className="lb-detail-cell"><AuditEvidence entry={entry} inGraph={hostedIds.has(entry.envId)} onInspect={onInspect} /></td></tr>}
+          {expanded === entry.envId && <tr id={`audit-detail-${index}`}><td colSpan={9} className="lb-detail-cell"><AuditEvidence entry={entry} inGraph={hostedIds.has(entry.envId)} graph={graph} onInspect={onInspect} /></td></tr>}
         </Fragment>)}</tbody>
       </table></div>
       {!rows.length && <p className="lb-no-results" role="status">No environments match these filters.</p>}
