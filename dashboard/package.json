@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "export:leaderboard": "node scripts/export-leaderboard.mjs",
+    "predev": "npm run export:leaderboard",
+    "prebuild": "npm run export:leaderboard",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run"

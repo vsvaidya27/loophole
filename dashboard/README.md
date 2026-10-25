@@ -49,7 +49,49 @@ The production build is static (`dashboard/dist`); deploy those files on any sta
 with HTTPS. The service address is already public, but the local dev URL is not a public
 frontend deployment. Close the live tab when done to let the hosted database become idle.
 
+## Prime Intellect Hub audit leaderboard
+
+Open `/#leaderboard` or select **Hub leaderboard**. This view presents the saved
+Hub experiment, including all publishers in the audited batch. A scope selector
+can limit it to the six environments owned by the `primeintellect` publisher.
+Generated-game pilots and scripted calibrations are excluded from these totals.
+
+The committed results contain 19 environments (15 loaded, four failed to run),
+95 confirmed exploit records, 60 closed findings, and 11 repaired environments.
+The table shows outcome, found/closed counts, sampled attack success before/after,
+benign pass rate after repair, rounds, and recorded API spend. At narrower widths,
+rounds and spend appear inside the expanded evidence row. Unavailable measurements
+are labeled, and open findings retain their unpatched status. Default ordering is
+findings closed; ordering is not an overall security score.
+
+Inspect a row to select a saved finding and see its answer, independent verdict,
+reward, preconditions, and defense. Evidence links point to the source commit.
+**Inspect in knowledge graph** selects that environment in the live store; the
+entire graph remains present. Snapshot audit metrics do not silently change with
+graph updates. No API keys or model-call logs are bundled.
+
+`npm run dev` and `npm run build` regenerate the browser-safe data projection from
+`results/leaderboard.json`, `results/invariant_graph_batch.json`, the final
+manifest, and replay evidence. They validate source identities and aggregate
+counts before emitting `src/data/hubLeaderboard.json`. Refresh it explicitly with:
+
+```sh
+npm run export:leaderboard --prefix dashboard
+```
+
+This export reads recorded evidence; it makes no model calls or database writes
+and does not rerun scoring. Attack success uses the full submitted-probe
+denominator; finding counts use saved exploit records. Related variants can
+therefore be separate findings, and rates are not whole-dataset guarantees.
+
 ## Frontend structure
+
+The **Live Hub replay** view at `/#hub-replay` provides an interactive before/after
+comparison for `primeintellect/reverse-text`. It re-scores saved responses through
+the actual original grader and accepted patch when Run is clicked. Start the
+loopback scoring service with `.venvs/hub/bin/python -m harden.experiments.hub_demo`
+from the repository root. See [HUB_REPLAY_DEMO.md](../docs/HUB_REPLAY_DEMO.md) for the
+walkthrough, provenance, runtime requirements, and production proxy setup.
 
 - `src/main.tsx` mounts the dashboard in React Strict Mode.
 - `src/App.tsx` owns record selection and composes the dashboard.

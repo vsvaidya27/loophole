@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { buildGraph, type LiveSnapshot } from './live';
 import { useLiveStore } from './hooks/useLiveStore';
 import { ConnectionStatus } from './components/ConnectionStatus';
@@ -8,6 +8,8 @@ import { AuditTable } from './components/AuditTable';
 import type { GraphProjection } from './graph/buildGraph';
 
 const emptyGraph: GraphProjection = { nodes: [], edges: [], diagnostics: [] };
+const HubLeaderboard = lazy(() => import('./components/HubLeaderboard').then(module => ({ default: module.HubLeaderboard })));
+const HubReplay = lazy(() => import('./components/HubReplay').then(module => ({ default: module.HubReplay })));
 
 function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphProjection }) {
   const ids = new Set(snapshot?.rows.environments.map(env => env.envId));
@@ -23,6 +25,9 @@ function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphPro
 }
 
 export function App() {
+  type View = 'network' | 'leaderboard' | 'hub-replay';
+  const hashView = (): View => window.location.hash === '#hub-replay' ? 'hub-replay' : window.location.hash === '#leaderboard' ? 'leaderboard' : 'network';
+  const [view, setView] = useState<View>(hashView);
   const live = useLiveStore();
   const { snapshot, status } = live;
   const graph = useMemo(() => snapshot ? buildGraph(snapshot.rows) : emptyGraph, [snapshot]);
@@ -30,6 +35,15 @@ export function App() {
   const workspace = useRef<HTMLElement>(null);
   const selected = graph.nodes.some(node => node.id === selection.id) ? selection.id : undefined;
   const select = (id?: string, tab: EvidenceTab = 'failure') => setSelection({ id, tab });
+  const navigate = (next: View) => {
+    setView(next);
+    window.history.replaceState(null, '', `#${next}`);
+  };
+  useEffect(() => {
+    const update = () => setView(hashView());
+    window.addEventListener('hashchange', update);
+    return () => window.removeEventListener('hashchange', update);
+  }, []);
   useEffect(() => {
     if (snapshot && selection.id && !selected) setSelection({ tab: 'failure' });
   }, [snapshot, selection.id, selected]);
@@ -46,8 +60,11 @@ export function App() {
       : 'Waiting for the initial subscription…';
 
   return <main>
-    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current="page" href="/">Live audits</a><a href="/replay.html">Game & training replays <span aria-hidden="true">↗</span></a></nav></header>
+    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a href="/replay.html">Training replays <span aria-hidden="true">↗</span></a></nav></header>
     <ConnectionStatus {...live} />
+    {view === 'leaderboard' && <Suspense fallback={<p className="lb-no-results" role="status">Loading saved audit results…</p>}><HubLeaderboard snapshot={snapshot} onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
+    {view === 'hub-replay' && <Suspense fallback={<p className="lb-no-results" role="status">Loading Hub replay…</p>}><HubReplay onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
+    <div hidden={view !== 'network'}>
     <Metrics snapshot={snapshot} graph={graph} />
     <section className="workspace" ref={workspace}>
       <div className="graph-panel">
@@ -73,6 +90,7 @@ export function App() {
       <EvidenceInspector key={selected ?? 'empty'} snapshot={snapshot} selected={selected} activeTab={selection.tab} onTab={tab => setSelection(previous => ({ ...previous, tab }))} onSelect={select} />
     </section>
     <AuditTable snapshot={snapshot} onSelect={id => { select(id); workspace.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} />
+    </div>
     <footer><span>Loophole · Compile environments. Check rewards. Measure learning.</span><a href="/replay.html">Compare recorded policies <span aria-hidden="true">→</span></a></footer>
   </main>;
 }
