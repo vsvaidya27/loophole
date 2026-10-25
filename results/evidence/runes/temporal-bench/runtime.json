@@ -1,0 +1,9 @@
+{
+  "env_id": "runes/temporal-bench",
+  "api": "legacy",
+  "load_id": "temporal-bench",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/v012/bin/python",
+  "patch": "patches/runes/temporal-bench/patch.py"
+}

@@ -1,0 +1,18 @@
+note  [beauduffy/ai2-arc] scored ai2-arc with verifiers 0.3.1 (legacy api)
+note  [harleycooper/nanochatAquaRat] scored nanochatAquaRat with verifiers 0.3.1 (legacy api)
+note  [metavind/mini-sudoku] scored mini-sudoku with verifiers 0.3.1 (legacy api)
+note  [primeintellect/ascii-tree] scored ascii-tree with verifiers 0.1.12 (legacy api)
+note  [primeintellect/deepscaler-math] scored deepscaler-math with verifiers 0.1.12 (legacy api)
+note  [primeintellect/math500] scored math500 with verifiers 0.3.1 (v1 api)
+note  [primeintellect/mmlu-pro] scored mmlu-pro with verifiers 0.3.1 (v1 api)
+note  [primeintellect/reverse-text] scored reverse-text with verifiers 0.3.1 (legacy api)
+note  [runes/temporal-bench] scored temporal-bench with verifiers 0.1.12 (legacy api)
+note  [will/gsm8k] scored gsm8k with verifiers 0.3.1 (legacy api)
+note  [will/reasoning-gym-env] scored reasoning-gym-env with verifiers 0.3.1 (legacy api)
+note  [maziyar/OpenMed_PubMedQA] scored OpenMed_PubMedQA with verifiers 0.3.1 (legacy api)
+note  [sami/countdown] scored countdown with verifiers 0.1.12 (legacy api)
+note  [srthkdev/contract_nli_env] scored contract_nli_env with verifiers 0.3.1 (legacy api)
+note  [dimamachine/rosalind-bio] scored rosalind-bio with verifiers 0.3.1 (legacy api)
+note  [summary] 19 entries: 11 patched, 3 unpatched, 1 robust, 4 failed_to_run; 95 confirmed exploits; $16.60 total cost
+
+PASS: 0 failure(s)

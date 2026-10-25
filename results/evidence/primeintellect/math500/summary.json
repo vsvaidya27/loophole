@@ -1,0 +1,45 @@
+{
+  "entry": {
+    "env_id": "primeintellect/math500",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,other",
+    "asr_before": 0.5333,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 1.6887,
+    "evidence_dir": "results/evidence/primeintellect/math500",
+    "exploits": [
+      {
+        "exploit_id": "decimal-in-nonnumeric-wrapper-1d99e14ce7",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/decimal-in-nonnumeric-wrapper-1d99e14ce7.json"
+      },
+      {
+        "exploit_id": "equation-rhs-extraction-599618cd09",
+        "exploit_class": "other",
+        "replay": "replays/equation-rhs-extraction-599618cd09.json"
+      },
+      {
+        "exploit_id": "evalf-chop-tiny-symbolic-offset-261f2e7bcc",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/evalf-chop-tiny-symbolic-offset-261f2e7bcc.json"
+      },
+      {
+        "exploit_id": "float-rounding-tolerance-0acf3dcb9d",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/float-rounding-tolerance-0acf3dcb9d.json"
+      },
+      {
+        "exploit_id": "no-decimal-rational-float-rounding-99113efd9e",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/no-decimal-rational-float-rounding-99113efd9e.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/primeintellect/math500/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

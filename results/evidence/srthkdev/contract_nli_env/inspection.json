@@ -1,0 +1,732 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "25fe27a48df402639a892d8d73d01b35217ad679ce2cf424b4300d8e0d21f396",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"2.3 Provided that the Recipient has a written agreement with the following persons or entities requiring them to treat the Confidential Information in accordance with this Agreement, the Recipient may disclose the Confidential Information to: 2.3.1  Any other party with the Discloser’s prior written consent; and 2.3.2 the Recipient’s employees, officials, representatives and agents who have a strict need to know the contents of the Confidential Information, and employees, officials, representatives and agents of any legal entity that it controls, controls it, or with which it is under common control, who have a similar need to know the contents of the Confidential Information, provided that, for these purposes a controlled legal entity means:\"\n\nHypothesis: \"Receiving Party shall not reverse engineer any objects which embody Disclosing Party's Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "135": {
+      "digest": "b8dca8cbda4e3d34929ebabef1d9a3873a2dcd6911be07dde6fa7399080782d8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"No right or licence is granted to either party in relation to the other party's Confidential Information except as expressly set out in this Agreement and the Disclosing Party shall retain all rights, title and interest to its Confidential Information.\"\n\nHypothesis: \"All Confidential Information shall be expressly identified by the Disclosing Party.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "156": {
+      "digest": "92fbfd32e23ffc8f2c6fa108062a4e453e8f297ded2783831603ca1ae1d86571",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"(A) The parties for their mutual benefit may have exchanged and wish further to exchange certain confidential information (including but not limited to trade secrets and proprietary know-how). (B) The parties wish to define their rights with respect to the said information and protect the confidentiality thereof and proprietary features contained therein. (C) Subject or purpose of agreement……………………………………………… IN CONSIDERATION of the undertakings given by the parties hereto the parties HEREBY AGREE as follows: 1. Definitions In this Agreement:- Confidential Information means any and all information which is now or at any time disclosed to one party by the other party and shall include without limitation, data, know-how, formulae, recipes, processes, designs and design rights, photographs, drawings, plans, intentions, product information, trade secrets, market opportunities, specifications, manufacturing data, which is disclosed to EFCA before or after the date of this Agreement but shall exclude any part of such information which:-\"\n\nHypothesis: \"Receiving Party may create a copy of some Confidential Information in some circumstances.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "296": {
+      "digest": "2fc1e2b8cafa9128ed261f0b5c77fbbedd12d2fa029ff469c79fb0fc5ee789f6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"For purposes of this agreement, Confidential Information shall be assumed to be of a confidential and/or proprietary nature by Recipient, as it is reasonable to assume and expect that said Business Information is highly relevant to the success of its Discloser’s business and is not known to the public. b. The restrictions set forth herein shall not apply with respect to information designated by Discloser as Confidential which:  (i) is known by Recipient at the time of receipt as evidenced by Recipient’s records;  (ii) is or becomes a part of the public domain without breach of the Agreement by Recipient;  (iii) is obtained by Recipient from a third party under conditions permitting its disclosure to others;  (iv) is independently developed by Recipient; or  (v) is disclosed by Recipient pursuant to judicial action or Government regulations provided Recipient notifies Discloser prior to such disclosure and cooperates with Discloser in the event Discloser elects to legally contest and avoid such disclosure. 2. Identification of Confidential Information.  For the purpose of the Agreement, written Business or Technical Information (including that which is delivered electronically) that is considered to be Confidential Information by Discloser, shall be so marked by Discloser.  Information that is furnished orally shall be considered Confidential Information if Discloser so indicates.  Additionally, information furnished by Discloser shall be deemed Confidential Information if it is obvious from its content, in the context under which it is furnished.\"\n\nHypothesis: \"All Confidential Information shall be expressly identified by the Disclosing Party.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "CONTRADICTION",
+      "info": null
+    },
+    "334": {
+      "digest": "0bb9c84c5ef105a3a1368f1418c93e4961be0dfc707e746da889926aba2d813a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Company may not at any time directly or indirectly communicate with the media in relation to the Confidential Information or any information with respect to the RFP without first obtaining the written permission of FNHA.\"\n\nHypothesis: \"Receiving Party shall not solicit some of Disclosing Party's representatives.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "592": {
+      "digest": "0370407ccd2230dfcf8cce56d0186ba391a28b96f0b6dda3c2566c99d7d1f52f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"(a) All Confidential Information, and all associated intellectual property rights therein, are and shall remain the exclusive property of IBC and its licensors.  By disclosing Confidential Information to Vendor, IBC does not grant any express or implied right to Vendor to or under any patents, copyrights, trademarks, or trade secret information except as otherwise provided herein.\"\n\nHypothesis: \"Agreement shall not grant Receiving Party any right to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "889": {
+      "digest": "231343533b1c828008101e92aae103d5bc907e4c9ad1ecbd637c31958127708a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"“Confidential Information” means ISCA’s information comprising all data and information relating to the business, technical, and other operations of ISCA, and all other information of ISCA whatsoever obtained by Vendor pursuant to, by virtue of, or in the course of negotiating or performing the Services or an agreement for the Services, including where applicable (without any limitation): (a) all technical information, data, databases, source codes, object codes, know-how, processes, formulae, designs, drawings, documents, specifications, manuals, inventions, images, and all information comprised in and/or concerning equipment, systems, research, prototypes, samples, products, or services; (b) all of ISCA’s plans, models, proposals, ideas, functionalities, workflow, work processes, network and system information, including those relating to the Services; (c) all marketing, sales, business, financial, operational, commercial, and human resource information, including financial data and business plans; (d) all contractual arrangements, forecasts, accounting and tax records, strategies, models, product and service information; (e) all ISCA IPR; (f) all of Vendor’s proposals to ISCA for the Services, and ISCA’s requirements, requests, instructions, and specifications to Vendor for the Services; (g) all communication between Vendor and ISCA; (h) all customer, client, and employee information and personal data; (i) any other proprietary information; and (j) all other information, data, experience and expertise, materials and diskettes stamped or marked as \"confidential\" of whatever kind, whether written, electronic or in oral form, which is either directly or indirectly disclosed to the Vendor or received by the Vendor from ISCA and/or its employees, advisors or consultants, whether or not such information belongs to ISCA, or to a third party.\"\n\nHypothesis: \"Receiving Party may share some Confidential Information with some third-parties (including consultants, agents and professional advisors).\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "919": {
+      "digest": "786d8819020287ac517b6a98e2077af5225069acad19a37e62ea7eac33398dbc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"j. Confidential Information: any information disclosed by one Party (the ‘Discloser’) to another party (the ‘Recipient’) relating directly or indirectly to the Project, which is identified by the disclosing Party, either orally or in writing, as confidential, either at the time of disclosure or, if disclosed orally, confirmed in writing within thirty (30) days following the original disclosure. \"\n\nHypothesis: \"Confidential Information may include verbally conveyed information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "1185": {
+      "digest": "7240bfda60e1ef6164397b2c0e9ef22976c844ccac78495c43fe1404b87a5f19",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Upon expiration or termination of this Agreement, the Recipient shall cease use of all Confidential Information furnished hereunder and shall, upon written direction of the Disclosing Party, return to the Disclosing Party, or destroy, all such Confidential Information, together with all copies made thereof by the Recipient. \"\n\nHypothesis: \"Receiving Party shall not solicit some of Disclosing Party's representatives.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "1236": {
+      "digest": "6ea2dc74924e5cab49321cb1d31c9159bb895af2afb353c8e15589d164bd3a8e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"2.1 Confidential Information of a Disclosing Party shall be used by the Receiving Party solely for the purpose of evaluating a possible business transaction between the Parties. \"\n\nHypothesis: \"Receiving Party may create a copy of some Confidential Information in some circumstances.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "1259": {
+      "digest": "260b47008139abdf55f048c20ff5277b3bdc167ed9c1be2818f9dfb9a123fa2d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The rights and obligations of the parties will not merge on the completion of any transaction contemplated by this Agreement and will survive the execution and delivery of any assignment or other document entered into for the purpose of implementing the transaction. 7.4  The laws of New Zealand govern this Agreement.  Each party submits to the non-exclusive jurisdiction of courts exercising jurisdiction there in connection with matters concerning this Agreement. 7.5  Any illegality, unenforceability or invalidity in this Agreement will not affect the rest of this Agreement which will remain in full force and effect. 7.6  The terms of this Agreement shall inure to the benefit of and be binding upon each party's successors and assigns. 7.7  This Agreement will remain in full force and effect and will continue to bind the Recipient notwithstanding any term of any other agreement, or any cessation or termination of the relationship between Room2Rent or any of its Related Companies.\"\n\nHypothesis: \"Agreement shall not grant Receiving Party any right to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "1416": {
+      "digest": "58215005e621254267b89862b1fc6b4089e04ec518af154c9d6fdb6b43925753",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"2. The Receiving Party shall keep confidential the Information for [five (5)] years from the date of disclosure, and shall not disclose the Information to any other person or company without the Disclosing Party's prior written consent, and shall not itself make any use of such Information for any purpose other than the purpose of supply of logistics services (\"the Authorised Purpose\").\"\n\nHypothesis: \"Receiving Party shall not solicit some of Disclosing Party's representatives.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "1482": {
+      "digest": "950d913bf264b03348a5aa7db637a791c51029bd4eb887120d70ae168257f6a5",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"\"Confidential Information\" means non-public information which is disclosed orally, electronically, visually or in a document or other tangible form and which is by nature confidential or is identified confidential by a Party to this Agreement (hereinafter the “DISCLOSING PARTY”) or which, under the circumstances surrounding disclosure ought to be treated as confidential by the Party that receives such information (hereinafter “RECIPIENT”).  Confidential Information includes, without limitation, information in tangible or intangible form relating to its installations, work and projects effectively carried out in such installations, accessible information by means of DISCLOSING PARTY's computer systems, including, without limitation, \"\n\nHypothesis: \"Confidential Information may include verbally conveyed information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "1756": {
+      "digest": "101512a15b2bae594b6c6c5923041dc854c62ef63c19d5f566cc0243060e75bc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"For purposes of this Agreement, “Confidential Information” shall mean the following: i. All records, files, analysis, documents, software, computer or electronic data disks or tapes, test data, printouts, processes, designs, file layout, technical bulletins, manuals, diagrams, formulas, research, inventions, patents and discoveries reasonably related to the Parties’ businesses or products and services of the Parties that have not been publicly released; ii. Technical, financial, business plan and customer information, including standard periodic financial statements and analyses, budgets, tax returns, benefit and compensation plans, customer list(s) and contact names, functional and technical specifications; iii. Other valuable information disclosed by one of the Parties to another, designated as confidential expressly or by the circumstances in which it is provided.\"\n\nHypothesis: \"All Confidential Information shall be expressly identified by the Disclosing Party.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "CONTRADICTION",
+      "info": null
+    },
+    "1778": {
+      "digest": "45849259d9ab6b19d1cf7018609596e1cb9180667e8fa17d52458ef25d873b26",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Any disclosure to any third party by each Party shall be subject to the prior consent of the other Party, which consent shall not be unreasonably withheld unless the Disclosing Party believe it might go against the purpose of this Agreement. The Receiving Party must protect the Confidential Information and, in doing so, must use no less than the highest degree of care that the Receiving Party applies to its own proprietary or secret information; The Confidential Information must be stored and handled in such a way as to prevent unauthorized disclosure. The Receiving Party shall use its best efforts to limit dissemination of Disclosing Party’s “Confidential Information” to such of its employees or sub-contractor(s) who have a need to know for the aforesaid evaluation and/or development purposes.\"\n\nHypothesis: \"Receiving Party shall not solicit some of Disclosing Party's representatives.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "1862": {
+      "digest": "9e1edbfb501f3e0c48933a4ced4a1fde92397c243ad7caa77be38b6b41f1aec9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Each party agrees to treat Confidential Information disclosed to it by the other with the same degree of care as it does in protecting its own confidential and proprietary information, and the Confidential Information shall be disclosed within the recipient party only on a need-to-know basis.\"\n\nHypothesis: \"Receiving Party may share some Confidential Information with some third-parties (including consultants, agents and professional advisors).\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "CONTRADICTION",
+      "info": null
+    },
+    "2075": {
+      "digest": "b0c664eebeb499a7cc213fc54cab6e0c330c8d6d426ecfcacbe8e6b68e108791",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The Confidential Information relates to (without limitation) the Agency’s technical data, actual and anticipated developments or products, know-how, software, hardware, processes, architectures, concepts, ideas, designs, drawings, personnel, financial information, computer programs, studies, work in progress, visual demonstrations, and other data, whether written, graphic, or electronic form.\"\n\nHypothesis: \"Confidential Information may include verbally conveyed information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "2185": {
+      "digest": "d066aa562da872f298a3bceedb5208cb25a3670f532fde4bbf5b517a8dcae105",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"For the purpose of this AGREEMENT, those data and information will be considered as confidential which are provided or delivered by one Party to the other Party and which are declared confidential when provided or delivered. 3.2  The confidential nature of the abovementioned data and information will have to be explicitly declared, printing or writing ‘CONFIDENTIAL’ on the above, followed by the signatures of the representatives of THE PARTIES or, however, clearly indicated as confidential in communications, so to allow THE PARTIES and any authorized person to immediately recognize their confidential nature and apply the subsequent compliance to confidentiality obligations as envisaged in this AGREEMENT. \"\n\nHypothesis: \"Receiving Party shall destroy or return some Confidential Information upon the termination of Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "2371": {
+      "digest": "eb29e67b98d20547060587c1719ce456616d33f81b16c89ab74d2320bd71b2cb",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"I. Supplier agrees to keep strictly confidential all documents, records, correspondence and transactions in any form concerning the operation or business of Vedrova, Group TP&H or its customers. II. Supplier shall not disclose or use any confidential information, unless and to the extent: a) Such matter is at that time in the public domain b) If it is compelled by any governmental or judicial authority to disclose any such information; or c) It is required to disclose or use such information, to the extent necessary to provide the services. III. Supplier will refrain from any operational and commercial contact with Vedrova’ s customers.  Supplier will respect Vedrova’ s commercial interests with these customers and will not approach any of Vedrova’ s customers with the purpose to directly or indirectly offer and provide logistic services, which are in scope of this Agreement or part of the services Vedrova provides to these customers. IV. Without limitation to clause I., Vedrova’ s confidential information includes any and all of its customer information, supplier information, internal processes, standard operating procedures, strategies, business information and rates.\"\n\nHypothesis: \"Receiving Party may create a copy of some Confidential Information in some circumstances.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "2511": {
+      "digest": "eb736d394de4bfe8f77b5705f6c7c6a38f3cceadde0101686285d5f23a3745ac",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Bomatec retains all rights to its data, information and objects.\"\n\nHypothesis: \"All Confidential Information shall be expressly identified by the Disclosing Party.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "2667": {
+      "digest": "040f62665e05db49a3109fb51c641bd3ed65dd76b1f9b0b2578d062aa78a1fa8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"NIST shall not make any copies of the Proprietary Information except as necessary for its employees who are entitled to review it under Section 1 above. \"\n\nHypothesis: \"Receiving Party may create a copy of some Confidential Information in some circumstances.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "2964": {
+      "digest": "98c4551a0b917ba421c7f998925be1dec035eaae4b8b4b7c1dbd54f2d8495130",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The receiving Party may disclose Confidential Information: 3.1.1 only to such employees of the receiving Party as are strictly necessary for the Permitted Purpose; and/or 3.1.2 as required by any order of any court of competent jurisdiction or any competent judicial, governmental or regularly body. 3.2 Prior to disclosure of any Confidential Information under Clause 3.1.2, the receiving Party shall (to the extent permitted by law) inform the disclosing Party of the complete circumstances and the details of the information to be disclosed.\"\n\nHypothesis: \"Receiving Party shall notify Disclosing Party in case Receiving Party is required by law, regulation or judicial process to disclose any Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "2973": {
+      "digest": "8628b7ef7d913efadffee1f258e5ba5e3c852de134926cdbf82e408a7ccd64db",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Confidential Information does not include information which: (a) was known by the Receiving Party prior to receipt from the Disclosing Party; (b) is generally available in the public domain or thereafter becomes available to the public through no act of the Receiving Party; (c) is independently discovered by an employee, agent, or representative of the Receiving Party who had no knowledge of the Confidential Information disclosed; or\"\n\nHypothesis: \"Receiving Party may independently develop information similar to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "3260": {
+      "digest": "bb54e9718eda940a0c596571edcf65f5a182d714e38843f390d7958fb5dace84",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"1. For the purposes of this Agreement, “Confidential Information” shall mean any information disclosed by Oceaneering, whether in writing, orally, visually or otherwise, including but not limited to business plans, contractual, engineering, financial, sales, marketing and operational information, product specifications, technical data, trade secrets, know-how, ideas and concepts of Oceaneering or third parties. \"\n\nHypothesis: \"Confidential Information shall only include technical information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "CONTRADICTION",
+      "info": null
+    },
+    "3400": {
+      "digest": "0ed04a52fa5fb318d9afc623838951c3730a223192b220d512cf35cda6b57304",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"b. Data Recipient agrees to not make available, disclose, provide or communicate Non-Public Information to any entity or individual, except: i. Employees of Data Recipient who  (1) have signed an acknowledgment of this Agreement or a non-disclosure agreement that covers the Non-Public Information and is at least as restrictive as this Agreement, and  (2) need the Non-Public Information for performance of a job function subject to the limitation on Market Sensitive Information below; ii. Contractors of Data Recipient who  (1) have signed a non-disclosure agreement that covers the Non-Public Information and is at least as restrictive as this Agreement, and  (2) need the Non-Public Information for the work being performed subject to the limitation on Market Sensitive Information below. \"\n\nHypothesis: \"Receiving Party may share some Confidential Information with some third-parties (including consultants, agents and professional advisors).\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "3557": {
+      "digest": "71cf72b9909ceeacf465c28437c358d1c3a3a52fc988c4b93147087adb0cf798",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"“Evaluation Material” means all information (including information in the form not only of written information but also information which may be transmitted orally, visually or by any other means) provided to the Recipient by the Disclosing Party or any of its Representatives relating to the Disclosing Party its direct and indirect, subsidiaries and their business, affairs, financial position, assets, operations and activities including, without limitation, information provided for inspection in any data room and all reports, evaluations, notes, analysis, documents, geological, engineering, geophysical and/or land maps or data, financials, trade secrets or any other documents or information pertaining in any way whatsoever to the Disclosing Party and its direct and indirect subsidiaries, together with all analysis, evaluations, compilations, notes, studies or other documents prepared by the Recipient or its Representatives containing or based upon, in whole or in part, such information or reflecting the review of, or interest in the Disclosing Party or the Transaction and includes all information, if any, previously made available to the Recipient or its Representatives; provided that Evaluation Materials will not include any information which:  (i) at the time of its disclosure to the Recipient is, or thereafter becomes, generally available to, and known by the public (other than as a result of a disclosure directly or indirectly by the Recipient or its Representatives);  (ii) was available to the Recipient on a non-confidential basis from a source other than the Disclosing Party provided that such source is not and was not, to the knowledge of the Recipient after due inquiry, bound by a confidentiality agreement with the Recipient to hold or retain such information confidential; or  (iii) has been independently acquired or developed by the Recipient without violating any of its obligations under this or any other agreement the Recipient may have with any Person;\"\n\nHypothesis: \"Receiving Party may independently develop information similar to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "3700": {
+      "digest": "a209b7c026fe58f87daea3b6146a679079105ad5beabf6f4785feecc908fa470",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"1. Definition of Confidential Information.  “Confidential Information” shall mean all information disclosed, directly or indirectly, through any means of communication or observation, by or on behalf of one party hereto (the \"Disclosing Party\") to the other party hereto (the \"Receiving Party\") on or after the date hereof, that relates to or is derived from the Disclosing Party’s business, strategic, marketing, technological or creative affairs, or to any other matter that the Receiving Party is advised or has reason to know is the confidential or proprietary information of the Disclosing Party.  Any material provided by either party to the other which is clearly designated \"Confidential\" (or other similar legend) will be presumed to be Confidential Information; the absence of any such legend, however, will not preclude the same from being deemed Confidential Information.\"\n\nHypothesis: \"All Confidential Information shall be expressly identified by the Disclosing Party.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "CONTRADICTION",
+      "info": null
+    },
+    "3807": {
+      "digest": "dc54da4629bde4e162aa7dfe3f42f33c837fb41a47ba89405ca65b9de1fe111b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Neither party shall attempt to reverse engineer, analyze or disassemble, or cause to be reverse engineered, analyzed or disassembled any product, formulation, process technology, sample or other technology provided by the other party, either directly or indirectly. \"\n\nHypothesis: \"Receiving Party shall not reverse engineer any objects which embody Disclosing Party's Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "3853": {
+      "digest": "14c30ae420526d857fef406628680003591647d306fe13e8e2db75c94a4324aa",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"A Receiving Party shall not be restricted from disclosing Confidential Information of the Disclosing Party or any Notes as required pursuant to any law, regulation or judicial or governmental order, or request of a regulatory or self-regulatory entity having examination authority over Receiving Party or a member of its Group, provided that Receiving Party will disclose only such information as it believes is required to comply with the order or request and, in the case of a court order or subpoena and to the extent legally permitted, the Receiving Party shall promptly notify the Disclosing Party and shall if reasonably practicable, cooperate with the Disclosing Party, at the Disclosing Party’s expense, so that the Disclosing Party take appropriate remedies or other appropriate protection.\"\n\nHypothesis: \"Receiving Party shall notify Disclosing Party in case Receiving Party is required by law, regulation or judicial process to disclose any Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4075": {
+      "digest": "53a5ff4bcfa88b50df398cbe5f17963e56d88ea977a74380835dcc9ca3def238",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Receiving Party shall immediately return and redeliver to Disclosing Party all tangible material embodying any Confidential Information provided hereunder and all notes, summaries, memoranda, drawings, manuals, records, excerpts or derivative information deriving therefrom, and all other documents or materials (“Notes”) (and all copies of any of the foregoing, including “copies” that have been converted to computerized media in the form of image, data, word processing, or other types of files either manually or by image capture) based on or including any Confidential Information, in whatever form of storage or retrieval, upon the earlier of  (i) the completion or termination of the dealings between the parties contemplated hereunder;  (ii) the termination of this Agreement; or \"\n\nHypothesis: \"Some obligations of Agreement may survive termination of Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4150": {
+      "digest": "a654f2b479512ac3e45e3af752599e7568842a785213ba5f0ecffce56cfe3ba8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"(d) Buyer will not utilize, now or at any time in the future, any trade secret(s), as that term may be defined under statutory or common law, that is/are included in the furnished Information for any purpose other than evaluating the possible purchase of the Business, including, without limitation, not utilizing same in the conduct of Buyer's or any other party's present or future business(es); (e) In addition to the prohibition against utilizing trade secret(s), Buyer will not utilize any other furnished information for any purpose other than evaluating the possible purchase of the Business; and\"\n\nHypothesis: \"Receiving Party shall not use any Confidential Information for any purpose other than the purposes stated in Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "4349": {
+      "digest": "9e1f4ee7ef5a3a0a41de4d5d3063b1cde5e197ab0b9a39b84776e2484baa2168",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The receiving party will neither disclose nor copy Confidential Disclosure except as necessary for its employees, agents or representatives with a need to know, provided that any such employee, agent or representative shall have agreed in writing, as a condition to his or her employment or engagement or in order to obtain Confidential Information, to be bound by non-disclosure and non-use obligations substantially similar to this Agreement. \"\n\nHypothesis: \"Receiving Party shall not disclose the fact that Agreement was agreed or negotiated.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4446": {
+      "digest": "7d1c1c78aa73e5102f5ecd353dc09f59bfcf9a9bca4c638914b2d45571541eb3",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"2. With respect to all Discloser's Proprietary Information which is initially disclosed in writing marked \"[DISCLOSER'S NAME] PROPRIETARY\" or which, if initially orally disclosed and identified as proprietary, is confirmed to Recipient in such a writing within ten [10]] business days after its initial disclosure hereunder, Recipient agrees that  (a) Recipient will use reasonable efforts (which shall be not less than the same degree of care as Recipient uses with respect to its own Proprietary Information) to prevent the disclosure of the same to third persons, and  (b) Recipient will use the same exclusively for the Purpose, unless and until Discloser authorizes any other disclosure or use in writing. \"\n\nHypothesis: \"Agreement shall not grant Receiving Party any right to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4448": {
+      "digest": "e3066d5c181fa21108324f6614c99974e585e46ad14ef579c250f31f03c6c260",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"From the date hereof, Shareholder will maintain in strict confidence and will not, directly or indirectly, or through Shareholder's Affiliates, divulge, transmit, publish, release, or otherwise use of cause to be used in any manner contrary to the interests of the Company or any of the Company's Affiliates, any confidential information relating to the Company's or any of the Company's Affiliates' systems, operations, products, services, business methods, management practices, contracts, computer programs and data bases, records, development data and reports, quality control specifications, cost analyses, flow charts, know-how, consumer lists, supplier lists, prospects, market development programs, acquisition programs, personnel data, or any information relating to customers, suppliers, products, sales, acquisitions, acquisition plans, financial structure, or pricing, and other information of like nature. \"\n\nHypothesis: \"Confidential Information shall only include technical information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4636": {
+      "digest": "47acf99222d1641b1bae22e9c9c0f229623a490347be90e61c11d83f33dfbb0a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"2. Unless otherwise expressly authorized by the disclosing party, the receiving party agrees to retain the confidential information in confidence for the \"Confidential Period\" defined in paragraph number 3 below, during which period the receiving party shall not disclose the confidential information to any third party, and shall not use the confidential information for any purpose other than the aforesaid purposes.\"\n\nHypothesis: \"Receiving Party shall not use any Confidential Information for any purpose other than the purposes stated in Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "4742": {
+      "digest": "95d8394d664c3f4b7a07d30b4694010386faafb76e8227d735b0f2a5d447822c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"1. INFE will disclose to RECIPIENT such portions of its Proprietary Information solely to enable RECIPIENT to determine the desirability of selling its assets to INFE; and RECIPIENT shall not disseminate any portions of the Proprietary Information to any third party individual or entity. 2. As used in this Agreement, the phrase Proprietary Information shall include, but not be limited to the following:  (a) information relating to trade secrets, appropriate licenses with certain third parties, data, designs, samples, drawings, relationships, documentation, machinery, prototypes, processes, methods, concepts, facilities, research, development, patent applications, and other Proprietary Information relating to the development, testing, manufacture, or application of any such devices or systems (including but not limited to system concepts, architectures, source documents and programming documents); and  (b) all marketing or financial plans, projections, resources, contracts, studies, and general information relating to the specific business opportunity contemplated herein, whether obtained verbally or in writing, or through observation.  All information, tangible or intangible, whether obtained verbally or in writing, is to be considered Proprietary Information. 4. No Proprietary Information shall be disclosed to any third party whatsoever by RECIPIENT without the prior written approval of INFE and all such information shall be protected with at least the same diligence, care, and precaution that Recipient uses to protect its own Proprietary Information.\"\n\nHypothesis: \"Receiving Party may independently develop information similar to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "4964": {
+      "digest": "e9d16dbee5ce80d628714acd19a0489c101432e11741a54120371fb401dc9c73",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Confidential Information does not include information, technical data, or know-how  (i) is in the possession of the receiving party at the time of disclosures shown by the receiving party's files and records immediately prior to the time of disclosure; or  (ii) prior to or after the time of disclosure becomes part of the public knowledge or literature, not as a result of any inaction or action of the receiving party, or  (iii) is required by law to be disclosed by the receiving party;  (iv) is independently developed by the receiving party without utilization of the Confidential Information.\"\n\nHypothesis: \"Receiving Party may create a copy of some Confidential Information in some circumstances.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "5039": {
+      "digest": "e07f9122e87a192d1c930116985c638bca057829afaeb497f0b097126c88103c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"1.1 \"Confidential Information\" shall mean: (a) All information disclosed by FormFactor to Recipient whether such information is disclosed in written, graphic, electronic, oral or sample form; and (b) All component specifications, component and contact structures, equipment designs, electronic configurations, manufacturing processes and methodologies, including any information which can be obtained by examination, testing, repair, reverse engineering and analysis of any hardware, or component part thereof comprising, relating to, or a part of a product manufactured or assembled with FormFactor's technology, notwithstanding the fact that the requirements for marking and designation referred to in Paragraph 2.1 have not been fulfilled.\"\n\nHypothesis: \"Confidential Information shall only include technical information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "5295": {
+      "digest": "e1109e892e2463c6712ed6ba76b3aa7fca94a00d2cc98f827311e19937653ae8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"In the event that Receiving Party becomes legally compelled to disclose any of the Confidential Information, Receiving Party shall provide MyPoints.com with prompt notice so that it may seek a protective order or other appropriate remedy and/or waive compliance with the provisions of this Agreement. \"\n\nHypothesis: \"Receiving Party shall notify Disclosing Party in case Receiving Party is required by law, regulation or judicial process to disclose any Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "5335": {
+      "digest": "32f23e7fa89d8276e28270b794837804dbf862734ac2e57c97ebbd5fb9b85e75",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"D. The parties intend by this Agreement to set forth their agreement to safeguard the other party's other confidential information and not to disclose or use it for any purpose not permitted by the other party. TERMS AND CONDITIONS NOW THEREFORE, for good and valuable consideration the receipt of which is hereby acknowledged and the covenants contained herein and intending to be legally bound hereby, it is hereby agreed by the parties hereto as follows: 1. Duty to Keep Confidential.  Each party receiving other confidential information (\"Receiving Party\") belonging to or received from the other party (the \"Disclosing Party\") shall safeguard the Disclosing Party's Other Confidential Information and shall not disclose it (or any concepts, inventions or other information derived there from) to third parties (unless required by any judicial or governmental request, requirement or order) or to use it (or any concepts, inventions or other information derived there from) for any purposes other than evaluation without the express prior written consent of the Disclosing Party set forth in a separate written consent.\"\n\nHypothesis: \"Agreement shall not grant Receiving Party any right to Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "5632": {
+      "digest": "5d9b06fbd1432941a05e63d21dfd2edbf2b59f88240b655d8d21eb3de822ba3f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"In the event of such a decision or request, all other Evaluation Material prepared by EnCana shall be destroyed, and in no event shall EnCana be obligated to disclose or provide the Evaluation Material prepared by it or its Representatives to TBI provided that a single copy of each item returned or destroyed may be retained in the files of EnCana's outside legal counsel for the purpose of resolving any disputes that may arise under this letter agreement. \"\n\nHypothesis: \"Receiving Party may retain some Confidential Information even after the return or destruction of Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "5764": {
+      "digest": "13483078678ca33f22ac4261165ff5eaa6089e3678416528f128d1a05f9d7b4f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The Receiving Party:  (a) shall take all reasonable steps (defined below) to keep all Confidential Information strictly confidential;  (b) shall not disclose or reveal any Confidential Information to any person other than its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know the Confidential Information for the purpose of the Evaluation;  (c) shall not use Confidential Information for any purpose other than in connection with the Evaluation; and  (d) shall not disclose to any person (other than those of its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know for the purpose of the Evaluation) any information about the Evaluation, or the terms or conditions or any other facts relating thereto, including, without limitation, the fact that discussions are taking place with respect thereto or the status thereof, or the fact that Confidential Information has been made available to the Receiving Party or its Representatives.  As used herein “reasonable steps” means those steps the Receiving Party takes to protect its own similar proprietary and confidential information, which shall not be less than a reasonable standard of care.  As used herein, “Representatives” shall mean  (i) employees of the Receiving Party; \"\n\nHypothesis: \"Receiving Party shall not reverse engineer any objects which embody Disclosing Party's Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "5924": {
+      "digest": "06441211c3daaf6f152c400ad7ceb359496831c2d62a783fcc627188afd8a9a9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The restrictions imposed on the disclosure of Confidential Information shall continue until the lesser of such time as the information disclosed hereunder is no longer Confidential Information and one (1) year from the date first written above, provided, that no such termination shall relieve Recipient from any liability relating to any prior breach of this Agreement.\"\n\nHypothesis: \"Some obligations of Agreement may survive termination of Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "5928": {
+      "digest": "7ffcb29191220595666f769e66f5696935eb71cfe8956f7b160f89dfaa78069e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"For a period of one (1) year following the date of this Confidentiality Agreement, you will not, directly or indirectly, solicit for employment any officer, director, or employee of the Company or any of its subsidiaries or divisions in an executive or management level position or who is otherwise considered by the Company (in its sole discretion) to be a key employee, in each case, with whom you have had contact or became known to you in connection with your considerations of a Transaction, except that you shall not be deemed to be in violation of this provision as a result of any such employee who: \"\n\nHypothesis: \"Receiving Party shall not solicit some of Disclosing Party's representatives.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "6225": {
+      "digest": "6df11266513ec664579f9980f1e182e075e3e0218466ac3e9b6f987b739772e0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"The Receiving Party shall, at its own expense, promptly return to the Disclosing Party all Confidential Information, including all written information, whether originals or copies of documents, records, summaries, analyses, and notes, and all materials in its possession that contain Confidential Information, regardless of who authored or generated such written information or materials, to the Disclosing Party immediately upon their request.  If any of the Confidential Information is destroyed prior to the request, an adequate response to a return request of that Confidential Information by the Disclosing Party will be a written certificate, executed by an authorized officer of the Receiving Party, certifying that the relevant Confidential Information was destroyed.  Additionally, the Receiving Party shall at the same time remove all digital representations, in any form, that contain any Confidential Information, from all electronic storage media in its possession or under its control.\"\n\nHypothesis: \"Receiving Party shall destroy or return some Confidential Information upon the termination of Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "NEUTRAL",
+      "info": null
+    },
+    "6399": {
+      "digest": "6cd196f5b22bf83ac49a44c43c1afdfed2a1519096aa8d7c1352fc4b22ca1b33",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"In the event that a party or its Representatives are requested or required (by oral questions, interrogatories, requests for information or documents in legal proceedings, subpoena, civil investigative demand or other similar process) to disclose any of the other party's Evaluation Material, the party requested or required to make the disclosure shall provide the other party with prompt notice of any such request or requirement so that the other party may seek a protective order or other appropriate remedy and/or waive compliance with the provisions of this Agreement. \"\n\nHypothesis: \"Receiving Party shall notify Disclosing Party in case Receiving Party is required by law, regulation or judicial process to disclose any Confidential Information.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "6521": {
+      "digest": "a79f2e030194fd9b7395c618ce6ceb79c0ad53f771faef8dd59fce9f5f856003",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"MSC agrees that it will not permit any person, firm or corporation to use, copy or reproduce in any manner whatsoever any part of the Information, except to the extent that the Information must be reproduced by MSC in performing its data processing services.\"\n\nHypothesis: \"Receiving Party may share some Confidential Information with some third-parties (including consultants, agents and professional advisors).\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    },
+    "6818": {
+      "digest": "c33ac1ac15995eba41371be0c65f57ca28dd708b567d8896bdc2dc3ace2f685f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box."
+        },
+        {
+          "role": "user",
+          "content": "Contract Clause (Premise): \"Neither the Recipient nor any of the Recipient’s Representatives (as defined in Section 13 below) will, at any time, directly or indirectly: (a) make use of any of the Provider’s Confidential Information (as defined in Section 12 below), except for the specific purpose of considering, evaluating and negotiating a Transaction between the Parties; or (b) subject to Section 4 below, disclose any of the Provider’s Confidential Information to any other Person (as defined in Section 13 below). The Recipient will be liable and responsible for any breach of this Agreement by any of its Representatives and for any other action or conduct on the part of any of its Representatives that is inconsistent with any provision of this Agreement.  The Recipient will (at its own expense) take all reasonable actions necessary to restrain its Representatives from making any unauthorized use or disclosure of any of the Provider’s Confidential Information. 2. Provider Contact Person.  Any request by the Recipient or any of its Representatives to review any of the Provider’s Confidential Information must be directed to the individual(s) identified opposite the name of the Provider on EXHIBIT A (the “Provider Contact Person”).  Neither the Recipient nor any of the Recipient’s Representatives will contact or otherwise communicate with any other Representative of the Provider in connection with a Transaction without the prior written authorization of the Provider Contact Person.\"\n\nHypothesis: \"Receiving Party shall not use any Confidential Information for any purpose other than the purposes stated in Agreement.\"\n\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\n\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\boxed{...}."
+        }
+      ],
+      "gold": "ENTAILMENT",
+      "info": null
+    }
+  },
+  "dataset_size": 6819,
+  "sources": {
+    "contract_nli_env.py": "import verifiers as vf\nfrom verifiers.utils.data_utils import extract_boxed_answer\nfrom datasets import Dataset\nfrom huggingface_hub import hf_hub_download\nimport json\nimport os\nimport zipfile\n\ndef load_environment(\n    num_train_examples: int = -1,\n    num_eval_examples: int = -1,\n    use_few_shot: bool = False,\n):\n    \"\"\"\n    Single-turn Legal Natural Language Inference (NLI) environment using the\n    `kiddothe2b/contract-nli` dataset from Hugging Face.\n\n    - Formats each example as a chat message requiring Chain-of-Thought reasoning\n      inside <think>...</think> and a final answer inside\n      \\boxed{ENTAILMENT|NEUTRAL|CONTRADICTION}.\n    - Rewards an exact match on the final label parsed from the \\boxed{...} block.\n    \"\"\"\n    # Load dataset without using deprecated dataset scripts.\n    # We download the JSONL archive and construct splits locally.\n    repo_id = \"kiddothe2b/contract-nli\"\n    zip_filename = \"contract_nli.zip\"\n    jsonl_name = \"contract_nli_v1.jsonl\"\n\n    zip_path = hf_hub_download(repo_id=repo_id, repo_type=\"dataset\", filename=zip_filename)\n    extract_dir = os.path.join(os.path.dirname(zip_path), \"contract_nli_extracted\")\n    os.makedirs(extract_dir, exist_ok=True)\n    jsonl_path = os.path.join(extract_dir, jsonl_name)\n    if not os.path.exists(jsonl_path):\n        with zipfile.ZipFile(zip_path) as zf:\n            with zf.open(jsonl_name) as f_in, open(jsonl_path, \"w\", encoding=\"utf-8\") as f_out:\n                for line in f_in:\n                    f_out.write(line.decode(\"utf-8\"))\n\n    # Read JSONL and split by the \"subset\" field (\"train\"/\"test\")\n    train_rows: list[dict] = []\n    test_rows: list[dict] = []\n    with open(jsonl_path, \"r\", encoding=\"utf-8\") as f:\n        for raw in f:\n            if not raw.strip():\n                continue\n            obj = json.loads(raw)\n            subset = str(obj.get(\"subset\", \"\")).strip().lower()\n            if subset == \"train\":\n                train_rows.append(obj)\n            elif subset == \"test\":\n                test_rows.append(obj)\n\n    dataset = Dataset.from_list(train_rows)\n    eval_dataset = Dataset.from_list(test_rows)\n\n    # Allow for subset slicing for quick testing\n    if num_train_examples != -1:\n        dataset = dataset.select(range(min(num_train_examples, len(dataset))))\n    if num_eval_examples != -1:\n        eval_dataset = eval_dataset.select(range(min(num_eval_examples, len(eval_dataset))))\n\n    system_prompt = \"\"\"\n    You are a meticulous legal analyst. Your task is to determine the logical relationship between a contract clause (premise) and a hypothesis. Think step-by-step inside <think>...</think>, analyzing the premise and hypothesis carefully for entailment, contradiction, or neutrality.\n\n    Then, output your final conclusion inside \\\\boxed{...} using EXACTLY ONE of: ENTAILMENT, NEUTRAL, CONTRADICTION.\n    Do not include any other text inside the box. Do not include explanations after the box.\n    \"\"\"\n\n    few_shot_examples = []\n    if use_few_shot:\n        few_shot_examples = [\n            {\n                \"role\": \"user\",\n                \"content\": (\n                    \"Contract Clause (Premise): \\\"The Recipient shall not disclose any Confidential Information to third parties without prior written consent.\\\"\\n\\n\"\n                    \"Hypothesis: \\\"Receiving Party will not share Confidential Information with outsiders without permission.\\\"\\n\\n\"\n                    \"Based on the premise, is the hypothesis an entailment, neutral, or a contradiction?\\n\\n\"\n                    \"Answer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\\\boxed{...}.\"\n                ),\n            },\n            {\"role\": \"assistant\", \"content\": \"\\\\boxed{ENTAILMENT}\"},\n            {\n                \"role\": \"user\",\n                \"content\": (\n                    \"Contract Clause (Premise): \\\"This Agreement does not grant any license or rights to the Confidential Information.\\\"\\n\\n\"\n                    \"Hypothesis: \\\"The Agreement provides a right to use Confidential Information.\\\"\\n\\n\"\n                    \"Based on the premise, is the hypothesis an entailment, neutral, or a contradiction?\\n\\n\"\n                    \"Answer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\\\boxed{...}.\"\n                ),\n            },\n            {\"role\": \"assistant\", \"content\": \"\\\\boxed{CONTRADICTION}\"},\n            {\n                \"role\": \"user\",\n                \"content\": (\n                    \"Contract Clause (Premise): \\\"The Recipient may use Confidential Information solely to evaluate a potential business relationship.\\\"\\n\\n\"\n                    \"Hypothesis: \\\"The Recipient can disclose the Confidential Information in press releases.\\\"\\n\\n\"\n                    \"Based on the premise, is the hypothesis an entailment, neutral, or a contradiction?\\n\\n\"\n                    \"Answer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\\\boxed{...}.\"\n                ),\n            },\n            {\"role\": \"assistant\", \"content\": \"\\\\boxed{CONTRADICTION}\"},\n        ]\n\n    def _format_example(example):\n        premise = example.get(\"premise\", \"\")\n        hypothesis = example.get(\"hypothesis\", \"\")\n\n        # Normalize dataset label (supports strings like 'entailment'/'neutral'/'contradiction'\n        # and integers 0/1/2 if present)\n        raw_label = example.get(\"label\")\n        answer_label = \"NEUTRAL\"\n        if isinstance(raw_label, int):\n            label_map_int = {0: \"ENTAILMENT\", 1: \"NEUTRAL\", 2: \"CONTRADICTION\"}\n            answer_label = label_map_int.get(raw_label, \"NEUTRAL\")\n        elif isinstance(raw_label, str):\n            u = raw_label.strip().upper()\n            if u in {\"ENTAILMENT\", \"NEUTRAL\", \"CONTRADICTION\"}:\n                answer_label = u\n            else:\n                # handle common lowercase labels\n                low = raw_label.strip().lower()\n                if low == \"entailment\":\n                    answer_label = \"ENTAILMENT\"\n                elif low == \"neutral\":\n                    answer_label = \"NEUTRAL\"\n                elif low == \"contradiction\":\n                    answer_label = \"CONTRADICTION\"\n\n        prompt_text = f\"Contract Clause (Premise): \\\"{premise}\\\"\\n\\nHypothesis: \\\"{hypothesis}\\\"\\n\\nBased on the premise, is the hypothesis an entailment, neutral, or a contradiction?\"\n        user_content = f\"{prompt_text}\\n\\nAnswer with one of ENTAILMENT, NEUTRAL, or CONTRADICTION inside \\\\boxed{{...}}.\"\n\n        messages = [{\"role\": \"system\", \"content\": system_prompt.strip()}]\n        if use_few_shot and few_shot_examples:\n            messages.extend(few_shot_examples)\n        messages.append({\"role\": \"user\", \"content\": user_content})\n\n        example[\"prompt\"] = messages\n        example[\"premise\"] = premise\n        example[\"hypothesis\"] = hypothesis\n        example[\"answer\"] = answer_label\n        return example\n\n    dataset = dataset.map(_format_example)\n    eval_dataset = eval_dataset.map(_format_example)\n\n    # Filter to valid examples (ensure we have premise, hypothesis, and valid label)\n    def _keep_example(example):\n        premise = example.get(\"premise\", \"\").strip()\n        hypothesis = example.get(\"hypothesis\", \"\").strip()\n        answer = example.get(\"answer\", \"\").strip().upper()\n        \n        if not premise or not hypothesis:\n            return False\n        if answer not in {\"ENTAILMENT\", \"NEUTRAL\", \"CONTRADICTION\"}:\n            return False\n        return True\n\n    dataset = dataset.filter(_keep_example)\n    eval_dataset = eval_dataset.filter(_keep_example)\n\n    parser = vf.ThinkParser(extract_fn=extract_boxed_answer)\n\n    def _completion_to_text(completion):\n        if isinstance(completion, str):\n            return completion\n        if isinstance(completion, list):\n            if completion and isinstance(completion[0], dict):\n                for msg in reversed(completion):\n                    content = msg.get(\"content\")\n                    if content:\n                        if isinstance(content, list):\n                            try:\n                                content = \" \".join(\n                                    (\n                                        part.get(\"text\", \"\") if isinstance(part, dict) else str(part)\n                                    )\n                                    for part in content\n                                )\n                            except Exception:\n                                content = str(content)\n                        return str(content)\n                return str(completion[-1])\n            return \"\\n\".join(str(x) for x in completion)\n        if isinstance(completion, dict):\n            content = completion.get(\"content\") or completion.get(\"text\")\n            if isinstance(content, list):\n                try:\n                    content = \" \".join(\n                        part.get(\"text\", \"\") if isinstance(part, dict) else str(part)\n                        for part in content\n                    )\n                except Exception:\n                    content = str(content)\n            if content is not None:\n                return str(content)\n        return str(completion)\n\n    def correct_label_reward_func(completion, answer=None, **kwargs):\n        completion_text = _completion_to_text(completion)\n        parsed = (parser.parse_answer(completion_text) or \"\").strip().upper()\n        \n        # Normalize parsed answer - handle common variants\n        if parsed not in {\"ENTAILMENT\", \"NEUTRAL\", \"CONTRADICTION\"}:\n            if \"ENTAIL\" in parsed:\n                parsed = \"ENTAILMENT\"\n            elif \"CONTRADICT\" in parsed:\n                parsed = \"CONTRADICTION\"\n            elif \"NEUTRAL\" in parsed:\n                parsed = \"NEUTRAL\"\n        \n        # Expected answer\n        expected_answer = (answer or \"\").strip().upper()\n        if expected_answer not in {\"ENTAILMENT\", \"NEUTRAL\", \"CONTRADICTION\"}:\n            return 0.0\n        \n        return 1.0 if parsed == expected_answer else 0.0\n\n    rubric = vf.Rubric(\n        funcs=[\n            correct_label_reward_func,\n            parser.get_format_reward_func(),\n        ],\n        weights=[1.0, 0.0],\n    )\n\n    default_sampling = {\"temperature\": 0.0, \"top_p\": 1.0, \"max_tokens\": 8}\n\n    vf_env = vf.SingleTurnEnv(\n        dataset=dataset,\n        eval_dataset=eval_dataset,\n        system_prompt=system_prompt,\n        few_shot=few_shot_examples if use_few_shot else None,\n        parser=parser,\n        rubric=rubric,\n        sampling_args=default_sampling,\n    )\n    return vf_env",
+    "verifiers/legacy/parsers/think_parser.py": "# ruff: noqa\n\nfrom typing import Callable\n\nfrom verifiers.legacy.parsers.parser import Parser\nfrom verifiers.legacy.types import Messages\n\n\nclass ThinkParser(Parser):\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        super().__init__(extract_fn=extract_fn)\n        self.extract_fn = extract_fn\n        self.logger.warning(\n            \"ThinkParser is intended for use with models which always include <think>...</think> tags but do NOT parse them automatically. \"\n            \"This will cause parsing failures if the model does not include <think>...</think> tags, or if the chat template automatically removes <think>...</think> tags.\"\n            \"In particular, you should NOT use this parser with Qwen3 or DeepSeek-R1 models.\"\n        )\n\n    def parse(self, text: str) -> str:\n        if \"</think>\" in text:\n            text = text.split(\"</think>\")[-1].strip()\n        else:  # do not allow any further extraction/ parsing if no </think> is found\n            text = \"\"\n        return self.extract_fn(text.strip())\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Return a reward function that checks if each message follows the format:\n        <think>\n        ...\n        </think>\n        ...\n        \"\"\"\n\n        def follows_format(text: str) -> float:\n            if (\n                text.strip().startswith(\"<think>\")\n                and text.count(\"<think>\") == 1\n                and text.count(\"</think>\") == 1\n                and len(text.split(\"</think>\")[-1]) > 0\n            ):\n                return 1.0\n            return 0.0\n\n        def format_reward_func(completion: Messages, **kwargs) -> float:\n            messages = self.get_assistant_messages(completion)\n            if not messages:\n                return 0.0\n            return sum(\n                follows_format(\n                    self._content_to_text(\n                        m.get(\"content\", \"\")\n                        if isinstance(m, dict)\n                        else (m.content or \"\")\n                    )\n                )\n                for m in messages\n            ) / len(messages)\n\n        return format_reward_func\n",
+    "verifiers/legacy/parsers/parser.py": "# ruff: noqa\n\nimport logging\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n",
+    "verifiers/legacy/utils/data_utils.py": "# ruff: noqa\n\n# NOTE: Helper functions for example datasets. Not intended for core functionality.\n\nimport random\nfrom typing import TYPE_CHECKING, Any, Callable, cast\n\nif TYPE_CHECKING:\n    from datasets import Dataset\n\n### PROMPTS ###\n\nTHINK_BOXED_SYSTEM_PROMPT = \"Think step-by-step inside <think>...</think> tags. \\\n    Then, give your final answer inside \\\\boxed{}.\"\n\n### https://github.com/huggingface/lighteval/blob/ecef2c662b9418866b6447d33b5e7d5dedd74af8/src/lighteval/tasks/default_prompts.py#L1474\nBOXED_SYSTEM_PROMPT = (\n    \"Please reason step by step, and put your final answer within \\\\boxed{}.\"\n)\n###############\n\n\ndef extract_boxed_answer(text: str, strict: bool = False) -> str:\n    \"\"\"Extract the last \\\\boxed{...} answer from text.\n\n    Args:\n        text: The text to extract from.\n        strict: If True, return \"\" when no \\\\boxed{} is found (for reward\n            scoring where format compliance matters). If False, return the\n            original text as a passthrough (for environments that use this\n            as a general text extractor).\n    \"\"\"\n\n    # Find last \\boxed{\n    boxed_start = text.rfind(\"\\\\boxed{\")\n    if boxed_start == -1:\n        return \"\" if strict else text\n    # Find the content between the braces\n    content_start = boxed_start + 7  # len('\\\\boxed{')\n    brace_count = 1\n    closing_brace = content_start\n    while closing_brace < len(text) and brace_count > 0:\n        if text[closing_brace] == \"{\":\n            brace_count += 1\n        elif text[closing_brace] == \"}\":\n            brace_count -= 1\n        closing_brace += 1\n    closing_brace = closing_brace - 1 if brace_count == 0 else -1\n\n    if closing_brace == -1:\n        return \"\" if strict else text\n\n    return text[content_start:closing_brace]\n\n\ndef extract_hash_answer(text: str) -> str:\n    if \"####\" not in text:\n        return text\n    return text.split(\"####\")[1].strip()\n\n\ndef get_preprocess_fn(name: str) -> Callable[[dict], dict]:\n    if name == \"aime2024\":\n\n        def preprocess_aime2024(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": str(int(x[\"answer\"])),\n            }\n\n        return preprocess_aime2024\n    elif name == \"aime2025\":\n\n        def preprocess_aime2025(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"question\"],\n                \"answer\": \"\".join(c for c in x[\"answer\"] if c.isdigit() or c == \".\"),\n            }\n\n        return preprocess_aime2025\n    elif name == \"amc2023\":\n\n        def preprocess_amc2023(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_amc2023\n    elif name in [\"gpqa_diamond\", \"gpqa_main\"]:\n\n        def preprocess_gpqa(x: dict[str, Any]) -> dict[str, Any]:\n            q = x[\"Question\"]\n            letters = [\"A\", \"B\", \"C\", \"D\"]\n            random.shuffle(letters)\n            itos = {k: v for k, v in enumerate(letters)}\n            ans = {\n                itos[0]: x[\"Correct Answer\"],\n                itos[1]: x[\"Incorrect Answer 1\"],\n                itos[2]: x[\"Incorrect Answer 2\"],\n                itos[3]: x[\"Incorrect Answer 3\"],\n            }\n            question = f\"Question: {q}\\n\\n\"\n            question += f\"A: {ans['A']}\\n\"\n            question += f\"B: {ans['B']}\\n\"\n            question += f\"C: {ans['C']}\\n\"\n            question += f\"D: {ans['D']}\"\n\n            return {\n                \"question\": question,\n                \"answer\": itos[0],\n            }\n\n        return preprocess_gpqa\n    elif name == \"gsm8k\":\n\n        def preprocess_gsm8k(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"question\"],\n                \"answer\": extract_hash_answer(x[\"answer\"]),\n            }\n\n        return preprocess_gsm8k\n    elif name == \"math\":\n\n        def preprocess_math(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": extract_boxed_answer(x[\"solution\"]),\n            }\n\n        return preprocess_math\n    elif name == \"math500\":\n\n        def preprocess_math500(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_math500\n    elif name == \"mmlu\":\n        mmlu_map = [\"A\", \"B\", \"C\", \"D\"]\n\n        def preprocess_mmlu(x: dict[str, Any]) -> dict[str, Any]:\n            options = x[\"choices\"]\n            answer = x[\"answer\"]\n            question = f\"Question: {x['question']}\\n\"\n            for i, option in enumerate(options):\n                question += f\"\\n{mmlu_map[i]}: {option}\"\n            return {\n                \"question\": question,\n                \"temp_answer\": mmlu_map[answer],\n            }\n\n        return preprocess_mmlu\n    elif name == \"mmlu_pro\":\n        mmlu_map = [\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\"]\n\n        def preprocess_mmlu(x: dict[str, Any]) -> dict[str, Any]:\n            options = x[\"options\"]\n            answer = x[\"answer\"]\n            question = f\"Question: {x['question']}\\n\"\n            for i, option in enumerate(options):\n                question += f\"\\n{mmlu_map[i]}: {option}\"\n            return {\n                \"question\": question,\n                \"answer\": answer,\n            }\n\n        return preprocess_mmlu\n    elif name == \"openbookqa\":\n\n        def preprocess_openbookqa(x: dict[str, Any]) -> dict[str, Any]:\n            choices_texts = x[\"choices\"][\"text\"]\n            choices_labels = x[\"choices\"][\"label\"]\n\n            formatted_choices = []\n            for i in range(len(choices_labels)):\n                formatted_choices.append(f\"{choices_labels[i]}. {choices_texts[i]}\")\n\n            question = f\"Question: {x['question_stem']}\\n\\nChoices:\\n\" + \"\\n\".join(\n                formatted_choices\n            )\n            return {\n                \"question\": question,\n                \"answer\": x[\"answerKey\"],\n            }\n\n        return preprocess_openbookqa\n    elif name in [\"openrs\", \"openrs_easy\", \"openrs_hard\"]:\n\n        def preprocess_openrs(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_openrs\n    elif name == \"prime_code\":\n\n        def preprocess_prime_code(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"prompt\"],\n                \"answer\": x[\"verification_info\"],\n            }\n\n        return preprocess_prime_code\n    else:\n        raise ValueError(f\"Dataset {name} not supported for preprocess_dataset.\")\n\n\ndef load_example_dataset(\n    name: str = \"gsm8k\", split: str | None = None, n: int | None = None, seed: int = 0\n) -> \"Dataset\":\n    from datasets import Dataset, concatenate_datasets, load_dataset\n\n    if name == \"aime2024\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"HuggingFaceH4/aime_2024\")[split]\n    elif name == \"aime2025\":\n        if split is None:\n            split = \"test\"\n        aime_i = cast(\n            Dataset, load_dataset(\"opencompass/AIME2025\", \"AIME2025-I\")[split]\n        )\n        aime_ii = cast(\n            Dataset, load_dataset(\"opencompass/AIME2025\", \"AIME2025-II\")[split]\n        )\n        dataset = concatenate_datasets([aime_i, aime_ii])\n    elif name == \"amc2023\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"knoveleng/AMC-23\")[split]\n    elif name == \"gpqa_diamond\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"Idavidrein/gpqa\", \"gpqa_diamond\")[split]\n    elif name == \"gpqa_main\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"Idavidrein/gpqa\", \"gpqa_main\")[split]\n    elif name == \"gsm8k\":\n        if split is None:\n            split = \"test\"\n        dataset = load_dataset(\"openai/gsm8k\", \"main\")[split]\n    elif name == \"math\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"chiayewken/competition_math\")[split]\n    elif name == \"math500\":\n        if split is None:\n            split = \"test\"\n        dataset = load_dataset(\"HuggingFaceH4/MATH-500\")[split]\n    elif name == \"mmlu\":\n        if split is None:\n            split = \"dev\"\n        dataset = load_dataset(\"cais/mmlu\", \"all\")[split]\n    elif name == \"mmlu_pro\":\n        if split is None:\n            split = \"validation\"\n        dataset = load_dataset(\"TIGER-Lab/MMLU-Pro\")[split]\n    elif name == \"openbookqa\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"allenai/openbookqa\", \"main\")[split]\n    elif name == \"openrs\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"knoveleng/open-rs\")[split]\n    elif name == \"openrs_easy\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(Dataset, load_dataset(\"knoveleng/open-rs\")[split])\n        dataset = dataset.filter(lambda x: x[\"level\"] == \"Easy\")\n    elif name == \"openrs_hard\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(Dataset, load_dataset(\"knoveleng/open-rs\")[split])\n        dataset = dataset.filter(lambda x: x[\"level\"] == \"Hard\")\n    elif name == \"prime_code\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(\n            Dataset, load_dataset(\"PrimeIntellect/verifiable-coding-problems\")[split]\n        )\n        dataset = dataset.filter(\n            lambda x: x[\"prompt\"].startswith(\n                \"Solve the following coding problem using the programming language python:\"\n            )\n        )\n    else:\n        raise ValueError(\n            f\"Dataset {name} not supported for preprocess_dataset. \\nPlease ensure that the dataset is formatted with 'prompt' (str) and 'answer' (str) keys.\"\n        )\n\n    preprocess_fn = get_preprocess_fn(name)\n    dataset = cast(Dataset, dataset)\n    if n is not None and n > 0:\n        dataset = dataset.shuffle(seed=seed).select(range(n))\n    dataset = dataset.map(\n        preprocess_fn,\n        num_proc=10,\n        remove_columns=dataset.column_names,\n    )\n    if \"temp_answer\" in dataset.column_names:\n        dataset = dataset.rename_column(\"temp_answer\", \"answer\")\n    return dataset\n"
+  }
+}

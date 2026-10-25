@@ -1,0 +1,7 @@
+{
+  "failures": [],
+  "notes": [
+    "[metavind/mini-sudoku] scored mini-sudoku with verifiers 0.3.1 (legacy api)",
+    "[invariants.db] rows for environments not on the leaderboard (ignored): ['beauduffy/ai2-arc', 'harleycooper/nanochatAquaRat', 'maziyar/OpenMed_PubMedQA', 'primeintellect/deepscaler-math', 'primeintellect/math500', 'primeintellect/mmlu-pro', 'primeintellect/reverse-text', 'runes/temporal-bench', 'srthkdev/contract_nli_env', 'will/gsm8k', 'will/reasoning-gym-env']"
+  ]
+}

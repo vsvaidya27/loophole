@@ -1,0 +1,15 @@
+Physical footprint:         247.4M
+    +                                     779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                               779 arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+    +                                                         779 poll  (in libsystem_kernel.dylib) + 8  [0x18c069760]
+    +                                                 !   :   777 poll  (in libsystem_kernel.dylib) + 8  [0x18c069760]
+        10       arrow::FutureImpl::Wait()  (in libarrow.2600.dylib) + 64  [0x1307e1798]
+        poll  (in libsystem_kernel.dylib)        1556

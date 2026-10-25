@@ -1,0 +1,9 @@
+{
+  "env_id": "will/gsm8k",
+  "api": "legacy",
+  "load_id": "gsm8k",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/gsm8k/bin/python",
+  "patch": "patches/will/gsm8k/patch.py"
+}

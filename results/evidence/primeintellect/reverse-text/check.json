@@ -1,0 +1,7 @@
+{
+  "failures": [],
+  "notes": [
+    "[primeintellect/reverse-text] scored reverse-text with verifiers 0.3.1 (legacy api)",
+    "[invariants.db] rows for environments not on the leaderboard (ignored): ['harleycooper/nanochatAquaRat', 'metavind/mini-sudoku', 'primeintellect/deepscaler-math', 'primeintellect/math500', 'primeintellect/mmlu-pro', 'runes/temporal-bench', 'will/gsm8k', 'will/reasoning-gym-env']"
+  ]
+}

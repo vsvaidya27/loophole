@@ -1,0 +1,9 @@
+{
+  "env_id": "dimamachine/rosalind-bio",
+  "api": "legacy",
+  "load_id": "rosalind-bio",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": null
+}

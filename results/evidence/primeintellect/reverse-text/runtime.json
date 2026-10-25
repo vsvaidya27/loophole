@@ -1,0 +1,9 @@
+{
+  "env_id": "primeintellect/reverse-text",
+  "api": "legacy",
+  "load_id": "reverse-text",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/primeintellect/reverse-text/patch.py"
+}

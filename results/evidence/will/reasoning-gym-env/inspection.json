@@ -1,0 +1,828 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "7e9998597031255806b2a3658ddc4bf347f7a884254fca7455a9429ae4075b85",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 5 3 9 9 9 9 9 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 2 6 2 6 2 2 2 7 2 2 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 8 4 6 8 8 8 2 8 8 8 6 8 0 0 0\nOutput: 0 0 0 0 0 0 0 0 8 8 8 8 8 8 8 8 8 8 8 8 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 4 4 4 4 4 2 9 4 4 4 4 4 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 4 4 4 4 4 4 4 4 4 4 4 4 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "20": {
+      "digest": "4d14a39a190e95f9adb8b0d58cad64f221d2d2d32df6ebef7b660d943331ea80",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 0 3 3 3 3 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 3\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7\n\nExample 3:\nInput:  0 0 0 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 3 3 3 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n8 8 8 8 8 8 8 8 0 0 0 0 0 0 0 8 8 8"
+        }
+      ],
+      "gold": "0 8 8 8 8 8 8 8 8 8 8 8 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "86": {
+      "digest": "04537a7d73632686d50b994751e479ed93cdfd6cb4be0ebfba988fcadbfc2102",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 5 5 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 5 5 0 0 0 0\n\nExample 3:\nInput:  0 9 9 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 9 9 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 0 0 0 8 8 8 8 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 8 8 8 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "169": {
+      "digest": "52adc5bc63e1fa1963fe2692f51d112a85a84a9c38df540a309df03bd44784c6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 6 0 0 4 0 0 1 3 9 5 0 3 0 8 0 5 4 3 4 0 0 2 0 0\nOutput: 6 4 1 3 9 5 3 8 5 4 3 4 2 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 7 7 8 3 7 8 0 0 8 0 0 1 0 0 0 0 0 9 0 6 2 5 1 2\nOutput: 7 7 8 3 7 8 8 1 9 6 2 5 1 2 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 4 0 5 2 5 3 0 0 5 0 0 0 0 0 2 0 7 0 0 7 0 0 2 6\nOutput: 4 5 2 5 3 5 2 7 7 2 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 6 0 0 0 2 0 0 9 0 0 0 0 0 4 0 0 5 7 5 0 2 0 9 0"
+        }
+      ],
+      "gold": "6 2 9 4 5 7 5 2 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "173": {
+      "digest": "b24caaac3b78c1a8a27969d6fa31911c8b1cbf20d8b98d1b7dbbbb5588709268",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 1 0 1 1 2 0 0 2 1 0 1 1 1 0 1 0 2 1 1 1 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 2 2 2\n\nExample 2:\nInput:  1 1 2 0 0 0 1 0 2 2 2 2 0 1 2 0 0 0 2 2 0 1 2 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 2 2 2 2 2 2 2 2 2\n\nExample 3:\nInput:  2 2 2 2 0 0 0 1 2 0 0 0 1 0 1 0 0 2 1 1 0 2 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 2 2 2 2 2 2 2\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n1 0 0 1 0 2 1 2 2 1 1 0 0 2 2 1 2 1 0 1 2 0 1 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "201": {
+      "digest": "3c7e2f63faeb8bc89e7aea2ec2ecb95611c8972e3095c03d0d0d1cf608a7dfec",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 5 5 5\nOutput: 0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 5 5 5 0\n\nExample 2:\nInput:  0 0 5 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0\nOutput: 0 5 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 0 0 0\nOutput: 0 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 0"
+        }
+      ],
+      "gold": "0 0 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "231": {
+      "digest": "8c181a545c43c511113c54a2671e2f3f369fc8214b9b4bb626b927ae592f5b7b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 4 4 4 4 4 4 4 0 0 0 0 0\nOutput: 0 0 0 0 0 4 4 4 4 4 4 4 0 0\n\nExample 2:\nInput:  0 0 0 0 7 7 7 7 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 7 7 7 7 0 0 0\n\nExample 3:\nInput:  0 0 5 5 5 5 5 5 5 5 0 0 0 0\nOutput: 0 0 0 0 0 5 5 5 5 5 5 5 5 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n2 2 2 2 2 2 2 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 2 2 2 2 2 2 2 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "260": {
+      "digest": "0123053d81d0bd024fe0a81c9b01cfedf38fddc89663fe50e54f9dd9ec057f07",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  8 8 8 0 0 0 0 0 8 8 8 8\nOutput: 0 0 0 0 0 8 8 8 8 8 8 8\n\nExample 2:\nInput:  1 0 0 0 0 0 0 0 0 1 1 1\nOutput: 0 0 0 0 0 0 1 1 1 1 0 0\n\nExample 3:\nInput:  7 7 7 7 7 7 7 7 0 0 7 7\nOutput: 7 7 7 7 7 0 0 7 7 7 7 7\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 2 2 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 2 2 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "297": {
+      "digest": "313233445656e0c6e3b13e6d863c01424c5e17c03ee989b0af732f4c780c91f9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 7 0\nOutput: 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 7 7\n\nExample 2:\nInput:  0 0 0 4 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 4 4 4 4 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 9 7 7 7 7 7 7 7 0 0 0 0 0\nOutput: 9 9 9 9 9 9 9 9 9 7 7 7 7 7 7 7 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 6 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0"
+        }
+      ],
+      "gold": "6 6 6 6 6 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "347": {
+      "digest": "3f626ff0e604b5852f2f649aa6d9ca5de4916bbb67afb54b9ad7d4c8b3e8a5c0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 0 0 2\nOutput: 0 0 0 0 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 2\n\nExample 2:\nInput:  0 0 0 0 0 0 0 6 6 6 6 6 6 6 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 6 6 6 6 6 6 6 0 0 0 0 0 0 0 2 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 2 0 0 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 2 9 9 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 2 6 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 2 6 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "434": {
+      "digest": "f3370a14a734bf0ef47e2a1e41da2d5c21413fd6df2b27d45942d179c32a2519",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 2 7 7 7 7 0\nOutput: 0 0 0 0 0 0 2 7 7 7 7 0\n\nExample 2:\nInput:  0 0 0 4 4 4 4 4 4 4 4 2\nOutput: 0 0 0 4 4 4 4 4 4 4 4 2\n\nExample 3:\nInput:  5 5 5 0 0 2 0 0 0 0 0 0\nOutput: 0 0 5 5 5 2 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 2 0 0 5 5 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 2 5 5 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "521": {
+      "digest": "61f213696d70e79fecf55585283cf9cb70a0481c73d8cdd771031f19eb44480b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 2 6 6 3 7 0 0\nOutput: 0 0 2 6 6 3 7 0 0 0\n\nExample 2:\nInput:  0 0 3 7 1 3 9 5 0 0\nOutput: 0 3 7 1 3 9 5 0 0 0\n\nExample 3:\nInput:  0 0 0 1 8 5 6 7 2 0\nOutput: 0 0 1 8 5 6 7 2 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 1 6 9"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 1 6 9 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "583": {
+      "digest": "58d49bb248cfe14b9edb3dbba33ad78d310e33709cbd08026294ae6259fd09b5",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  5 0 0 0 0 0 0 0 0 0 6 4 0\nOutput: 5 6 6 6 6 6 6 6 6 6 6 4 0\n\nExample 2:\nInput:  0 0 0 0 2 0 0 3 0 0 4 6 5\nOutput: 0 0 0 0 2 2 2 3 3 3 4 6 5\n\nExample 3:\nInput:  0 8 8 3 0 0 0 0 0 0 0 7 5\nOutput: 0 8 8 3 3 3 3 3 3 3 3 7 5\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 1 0 3 0 0 5"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 1 1 3 3 3 5",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "591": {
+      "digest": "42836e212478124d94315cc8f7e96c0b6c305a4f2b967dddb6da3069706c34e9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 3 0 0 0 0 0 0 0 0 3 3 3 3 3 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 3 3 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 4 4 4 4 4 4 4 4 4 4 4 0 0 0 0 0 4 0 0 0\nOutput: 0 0 0 0 0 0 4 4 4 4 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  6 0 0 0 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 0 0 0 0\nOutput: 0 0 0 0 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1 1 1 1 1 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "599": {
+      "digest": "42f1fe088694c5380e827ce1c97be8ea701cd86571589ef669d6b8d81de1f96e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 1 5 3 5 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 5 3 5 0 0\n\nExample 2:\nInput:  0 3 2 5 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 3 2 5 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 1 3 7 3 1 6 9 5 9 9 6 0 0 0 0 0 0 0 0\nOutput: 0 0 1 3 7 3 1 6 9 5 9 9 6 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 4 2 6 6 1 2 8 2 5 4 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 4 2 6 6 1 2 8 2 5 4 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "605": {
+      "digest": "b3ae7a8c27be2fd6e71d1a895b2680d4d14bf03b8fd595e12b6e90af445d3a50",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  2 1 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 2 1 6 4 8 3 7 2 1 8\nOutput: 2 1 8 2 1 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 2 1 6 4 8 3 7\n\nExample 2:\nInput:  0 0 0 0 0 6 9 7 8 5 4 9 3 3 1 5 7 4 4 1 4 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 6 9 7 8 5 4 9 3 3 1 5 7 4 4 1 4 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 3 9 5 7 1 3 6 4 3 8 8 7 4 9 4 4 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 3 9 5 7 1 3 6 4 3 8 8 7 4 9 4 4 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n5 5 6 7 5 5 1 2 5 9 6 7 1 0 0 0 0 0 0 0 0 0 0 0 0 1 9 2"
+        }
+      ],
+      "gold": "1 9 2 5 5 6 7 5 5 1 2 5 9 6 7 1 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "608": {
+      "digest": "23d6a69066dedc6e60ffe26839363c9035e3db3424f2a9d8fe9908496c6acd84",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\nOutput: 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\n\nExample 2:\nInput:  6 0 0 0 0 6 6 6 6 6 6 6 6 6 6 6\nOutput: 6 6 0 0 0 0 6 6 6 6 6 6 6 6 6 6\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7\nOutput: 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 0 7 7 7 7 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 0 0 7 7 7 7",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "695": {
+      "digest": "92858c4e3fae4d251e904e947dff4d1fabcf93458412e75831e7fe8580b2918c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 6 6 6 6 6 0 0 0 1 0 0 0 0 0\nOutput: 0 0 0 0 0 0 6 6 6 6 6 1 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 6 6 6 6 6 6 6 0 1 0 0 0 0\nOutput: 0 0 0 0 0 6 6 6 6 6 6 6 1 0 0 0 0\n\nExample 3:\nInput:  0 1 0 0 0 3 3 3 3 3 3 3 3 3 0 0 0\nOutput: 0 1 3 3 3 3 3 3 3 3 3 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n7 7 7 7 7 7 7 7 7 0 0 1 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 7 7 7 7 7 7 7 7 7 1 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "782": {
+      "digest": "bd3caae5b288ce198f339f9f6a72ffcd50a6e42fa4a716f51d607709355a3a07",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 5 5 5 6 8 6 0 0 0 0 0 0 0 0\nOutput: 0 5 5 5 6 8 6 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 3 3 7 7 4 3 0 0 0 0 0 0 0\nOutput: 0 0 3 3 7 7 4 3 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 7 7 6 3 7 2 3 1 4 7 4 0 0 0\nOutput: 0 7 7 6 3 7 2 3 1 4 7 4 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 2 2 4 3 2 8 9 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 2 2 4 3 2 8 9 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "795": {
+      "digest": "3e4147ec1aebaf9d07a7a9703b20d3a5d0cf1b497f5d417ce80bedbb8cfba376",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 8 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 8 8 8 8 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 5 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0\nOutput: 0 0 0 0 0 0 4 4 4 4 4 4 4 4 4 4 4 4 4 4 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "801": {
+      "digest": "946ecd99bbef934dad06226e1503a5a5dc4341a6a5369b387060d2db1c560639",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 6 3 2 8 2 8 0\nOutput: 0 0 0 0 0 0 0 6 3 2 8 2 8 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 9 5 6 3 2 5 5 3 8 0\nOutput: 0 0 0 0 9 5 6 3 2 5 5 3 8 0 0 0\n\nExample 3:\nInput:  0 0 3 5 6 9 7 7 9 5 8 8 0 0 0 0\nOutput: 3 5 6 9 7 7 9 5 8 8 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 9 2 2 6 4 2 4 8 2 1 9 3 7"
+        }
+      ],
+      "gold": "0 9 2 2 6 4 2 4 8 2 1 9 3 7 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "869": {
+      "digest": "b0bf81d21029f6677434e69fd76dee84ceadfa9bece0c66f26cae820ea104822",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 4 4 4 4 4 4 4 4 4 4 4 4 4 0 0\nOutput: 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 4 0 0\n\nExample 2:\nInput:  8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 0 0 0 0\nOutput: 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 0 0 0 0\n\nExample 3:\nInput:  3 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 3 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 8 8 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 8 0 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "937": {
+      "digest": "00d933f950b36693c96ff488d047114d55491d7ccf98fe6ebec4027f8adc942a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 3 0 0 8 0 6 3 0 0 0 5\nOutput: 0 0 0 3 3 3 8 8 6 3 3 3 3 5\n\nExample 2:\nInput:  5 4 0 1 0 0 0 0 0 0 0 4 2 0\nOutput: 5 4 1 1 4 4 4 4 4 4 4 4 2 0\n\nExample 3:\nInput:  0 7 0 0 0 0 0 0 0 1 0 3 0 5\nOutput: 0 7 7 7 7 7 7 7 7 1 1 3 3 5\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n5 6 2 8 0 0 0 0 0 0 7 0 0 0"
+        }
+      ],
+      "gold": "5 6 2 8 7 7 7 7 7 7 7 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "956": {
+      "digest": "a1dc5416e0f0fcace8f505142e8e2bd60c94248b61ac8c2453fc3811cdf0fc41",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 8 8 8 8 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 8 8 8 8 0\n\nExample 2:\nInput:  0 0 2 2 2 2 2 2 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 2 2 2 2 2 2\n\nExample 3:\nInput:  0 0 5 5 5 5 5 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 5 5 5 5 5 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 6 6 6 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 6 6 6 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "974": {
+      "digest": "375c907eae838ce95d5bdf8ed9ae7e8ad679c81c4830ea86b3219d3cdb8c9434",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 2 2 2 2 2 2 2 2 2 2 2 2 2 0 1 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 1 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0 1 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 1 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 6 6 1\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 6 6 1\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 1 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 1 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1042": {
+      "digest": "668d0348273c19252a8d90f16a3d6a154e3ea0fc0ec7094cfc50111f30e08df4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 3 5 7 8 5 6\nOutput: 0 0 0 0 3 5 7 8 5 6 0 0 0 0\n\nExample 2:\nInput:  1 5 8 9 3 6 3 0 0 0 0 0 0 2\nOutput: 3 6 3 0 0 0 0 0 0 2 1 5 8 9\n\nExample 3:\nInput:  0 0 0 0 4 4 4 9 8 7 0 0 0 0\nOutput: 4 4 4 9 8 7 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 3 2 9 7 9 6 1 3 0"
+        }
+      ],
+      "gold": "0 3 2 9 7 9 6 1 3 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1112": {
+      "digest": "acc96f04817189fc22b8bf7e685e9c1fbe42d41a5edfee823fda9fc4e5c6f472",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  1 1 0 0 0 1 0 0 1 0 0 2\nOutput: 2 1 1 1 1 0 0 0 0 0 0 0\n\nExample 2:\nInput:  2 2 0 1 2 1 2 0 0 2 1 0\nOutput: 2 2 2 2 2 1 1 1 0 0 0 0\n\nExample 3:\nInput:  0 1 1 2 0 0 0 2 0 2 1 0\nOutput: 2 2 2 1 1 1 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 1 0 0 0 2 0 0 2 2 0 0"
+        }
+      ],
+      "gold": "2 2 2 1 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1124": {
+      "digest": "a7a43baaf5d02e0f8ca34dc8c4441a420c537b9326a5c09d035b0421303a03f0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 3 2 2 4 2 9 8 3 1 5 3 7 9 4 5 7 5 0\nOutput: 0 0 0 0 3 2 2 4 2 9 8 3 1 5 3 7 9 4 5 7 5\n\nExample 2:\nInput:  0 0 0 7 6 9 2 8 2 1 5 2 3 7 3 9 8 1 9 9 0\nOutput: 0 0 0 0 7 6 9 2 8 2 1 5 2 3 7 3 9 8 1 9 9\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 2 4 5 6 9 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 2 4 5 6 9 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 2 3 4 8 3 5 6 2 8 9 2 7 7 4 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 2 3 4 8 3 5 6 2 8 9 2 7 7 4",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1129": {
+      "digest": "365d2e0bec8e206fb2d2a604c1c63ed3183149f14ff1a64584277a2fb83d42ec",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  7 4 5 6 0 0 0 5 5 0 5 5 0 5 5 0 5 5 0\nOutput: 7 4 5 6 0 0 0 7 7 0 4 4 0 5 5 0 6 6 0\n\nExample 2:\nInput:  1 6 0 5 5 5 5 0 0 5 5 5 5 0 0 0 0 0 0\nOutput: 1 6 0 1 1 1 1 0 0 6 6 6 6 0 0 0 0 0 0\n\nExample 3:\nInput:  3 2 0 0 5 5 5 5 0 5 5 5 5 0 0 0 0 0 0\nOutput: 3 2 0 0 3 3 3 3 0 2 2 2 2 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n3 4 6 0 5 5 0 0 0 5 5 0 0 5 5 0 0 0 0"
+        }
+      ],
+      "gold": "3 4 6 0 3 3 0 0 0 4 4 0 0 6 6 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1156": {
+      "digest": "1540babb904745eb61ffbccd9d12ceb86de234e24bc0e3acf1905b5d2b9b2717",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 7 5 8 2 3 9 3 9 7 2 7 8 0 0 0 0 0 0\nOutput: 0 0 7 5 8 2 3 9 3 9 7 2 7 8 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 6 9 1 2 3 8 6 9 7 4 6 3 9 4 5 0\nOutput: 0 0 0 0 6 9 1 2 3 8 6 9 7 4 6 3 9 4 5 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 0 0 7 4 4 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 7 4 4 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 0 0 0 3 1 4 7 6 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 0 3 1 4 7 6 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1216": {
+      "digest": "74e0e800194391b1088d80ef7ad0380299073b6f0f2b117a05e5b2e1ff36479e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  5 0 0 0 0 0 0 2 0 1 0 0 0\nOutput: 5 2 2 2 2 2 2 2 1 1 0 0 0\n\nExample 2:\nInput:  0 0 0 9 0 0 0 0 0 0 4 0 5\nOutput: 0 0 0 9 9 9 9 9 9 9 4 4 5\n\nExample 3:\nInput:  5 0 6 0 0 7 7 7 0 0 0 0 0\nOutput: 5 6 6 7 7 7 7 7 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 8 0 3 0 0 0 0 0 0 5"
+        }
+      ],
+      "gold": "0 0 0 8 8 3 3 3 3 3 3 3 5",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1303": {
+      "digest": "bd2dfb7b953a94cfdb67ca272595359fd66ce63dae4c0d6a1931b77b84dd169e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  2 0 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0\nOutput: 2 9 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  2 0 0 0 8 8 8 8 8 0 0 0 0 0 0 0 0 0 0\nOutput: 2 8 8 8 8 8 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 5 5 5 2\nOutput: 0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 5 5 5 2\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n2 0 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "2 0 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1390": {
+      "digest": "88950d49af1943bcdb3693195753b1671a8c1e790464e4948a335471e18c3d4f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 4 4 0 0 0 0\nOutput: 0 0 0 4 4 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 8 8 8 8 8 8 8 8\nOutput: 0 8 8 8 8 8 8 8 8 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 1 1 1 1 1 1 1 0\nOutput: 0 1 1 1 1 1 1 1 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 4 4 4 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 4 4 4 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1425": {
+      "digest": "a3c667a87c63ebb065af155510d728ecd4922ae9e2a1eea1cef770f7092ee882",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  1 2 1 0 1 2 0 2 2 1\nOutput: 0 0 1 1 1 1 2 2 2 2\n\nExample 2:\nInput:  1 0 0 0 0 0 1 0 0 0\nOutput: 0 0 0 0 0 0 0 0 1 1\n\nExample 3:\nInput:  0 0 0 2 0 0 2 1 1 0\nOutput: 0 0 0 0 0 0 1 1 2 2\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 2 1 0 1 0 0 0 1"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 1 1 1 2",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1477": {
+      "digest": "6c172e3a44203bc742bdf36bb0cc6be0e00da2df35f9b7f355d9c984c7f4bf7f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  2 9 4 0 0 0 0 5 5 0 0 5 5 0 0 5 5 0 0 0 0 0 0\nOutput: 2 9 4 0 0 0 0 2 2 0 0 9 9 0 0 4 4 0 0 0 0 0 0\n\nExample 2:\nInput:  6 9 4 0 0 0 5 5 5 0 0 5 5 5 0 5 5 5 0 0 0 0 0\nOutput: 6 9 4 0 0 0 6 6 6 0 0 9 9 9 0 4 4 4 0 0 0 0 0\n\nExample 3:\nInput:  5 9 1 0 5 5 5 0 0 5 5 5 0 0 0 0 0 5 5 5 0 0 0\nOutput: 5 9 1 0 5 5 5 0 0 9 9 9 0 0 0 0 0 1 1 1 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n9 2 3 6 0 0 5 5 5 0 5 5 5 0 5 5 5 0 0 5 5 5 0"
+        }
+      ],
+      "gold": "9 2 3 6 0 0 9 9 9 0 2 2 2 0 3 3 3 0 0 6 6 6 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1540": {
+      "digest": "b0e8a15bdc96ff1d7dfdf5f8f897970ba77a2de2c70e525729a0eb2c453afd0f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  3 2 2 1 5 4 4 4 1 7 3 6 6 3 1 7 3 0 0 0 0\nOutput: 0 3 2 2 1 5 4 4 4 1 7 3 6 6 3 1 7 3 0 0 0\n\nExample 2:\nInput:  0 0 0 0 4 5 4 6 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 4 5 4 6 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 7 3 1 1 9 2 3 3 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 7 3 1 1 9 2 3 3 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n5 1 2 6 9 9 9 3 9 4 4 8 5 3 1 7 7 1 0 0 0"
+        }
+      ],
+      "gold": "0 5 1 2 6 9 9 9 3 9 4 4 8 5 3 1 7 7 1 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1564": {
+      "digest": "6a980b9aa7b34a353108ebea36160c41ae04bf816bd10eb5344ee7c054a7c2fd",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 5 9 8 4 7 9 3 1 3 3\nOutput: 0 0 5 9 8 4 7 9 3 1 3 3 0\n\nExample 2:\nInput:  0 0 0 0 8 7 5 7 9 4 4 0 0\nOutput: 0 0 0 8 7 5 7 9 4 4 0 0 0\n\nExample 3:\nInput:  0 0 0 0 4 3 2 0 0 0 0 0 0\nOutput: 0 0 0 4 3 2 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 6 8 7 7 8 9 5 4 6 2"
+        }
+      ],
+      "gold": "0 0 6 8 7 7 8 9 5 4 6 2 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1567": {
+      "digest": "6d63c864e1012778694fa0e8df7e09c76e9a3c17e439036082574a5cabb469a6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 0 0 1 9 3 0\nOutput: 0 0 0 0 0 0 0 1 9 3 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 8 0 0\nOutput: 0 0 0 0 0 0 0 0 8 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 8 9 7 9 2 5 4 5 5\nOutput: 0 0 8 9 7 9 2 5 4 5 5 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 8 4 8 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 8 4 8 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1598": {
+      "digest": "94997d86c69b667e26e0f9d3ebbc3617d2707242781689b61953c9f84a609485",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 3 3 3 3 3 3 3 3 0 0 3 3 3 3 3 3 3 0\nOutput: 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 2 2 2 2 2 2 2 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 3 3 3 3 3 0 3 3 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 2 2 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 3 3 3 0 0 0 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 1 1 1 0 0 0 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 0 3 3 3 3 0 0 0 3 3 3 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 2 2 2 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1615": {
+      "digest": "84ceec4d0e74842ca2210e61b2fd501c5cf5006b6a133ca8f0650191632ad390",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 8 8 8 8 8 8 8 8 8 8 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 8 8 8 8 8 8 8 8 8 8 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 3 3\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 3 3\n\nExample 3:\nInput:  3 3 3 3 3 3 3 3 3 3 3 3 3 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 3 3 3 3 3 3 3 3 3 3 3 3 3 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1651": {
+      "digest": "e7d257b52aa2e7c405ff06009d9525ccde26a3e36a30e534ebc0f275f3e89ff4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 0 3 3 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 3 3 0 0 0 0 0 0 0\n\nExample 2:\nInput:  3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0 0\nOutput: 0 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0\n\nExample 3:\nInput:  0 0 0 0 4 4 4 4 4 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 4 4 4 4 4 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 6 6 6 6 6 6 6 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 6 6 6 6 6 6 6 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1689": {
+      "digest": "803a9cb53767852cd2a6ea1a5b737560c01ca2edb48e1887401557438e32335d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 0 0 0 3 0 0 0 0 0 4 0 0 0 8 5\nOutput: 0 0 0 0 0 0 0 0 3 3 3 3 3 3 4 4 4 4 8 5\n\nExample 2:\nInput:  0 0 0 0 0 0 0 2 0 0 0 0 0 0 9 0 0 0 4 5\nOutput: 0 0 0 0 0 0 0 2 2 2 2 2 2 2 9 9 9 9 4 5\n\nExample 3:\nInput:  5 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0\nOutput: 5 6 6 6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 3 0 0 0 0 0 0 0 0 3 0 0 0 0 0 8 0 2 5"
+        }
+      ],
+      "gold": "0 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 8 8 2 5",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1711": {
+      "digest": "de16a3a5f13494cffd7fd2d715850931debed228b9d2e245ef4848585b48f769",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  7 3 0 5 5 5 5 0 0 0 0 5 5 5 5 0 0 0 0\nOutput: 7 3 0 7 7 7 7 0 0 0 0 3 3 3 3 0 0 0 0\n\nExample 2:\nInput:  5 8 0 0 0 5 5 5 5 0 0 5 5 5 5 0 0 0 0\nOutput: 5 8 0 0 0 5 5 5 5 0 0 8 8 8 8 0 0 0 0\n\nExample 3:\nInput:  7 4 0 0 5 5 5 0 0 0 0 5 5 5 0 0 0 0 0\nOutput: 7 4 0 0 7 7 7 0 0 0 0 4 4 4 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n1 2 4 0 5 5 0 5 5 0 5 5 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "1 2 4 0 1 1 0 2 2 0 4 4 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1738": {
+      "digest": "ca4abb499a8c1005d03d2ae7696a79c378010cdfaf06319d015be44bfa1e14cb",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 3 0 1 1 1 0 7 0\nOutput: 3 3 0 3 3 3 0 1 1 1 0 7 7\n\nExample 2:\nInput:  0 0 0 0 1 1 0 5 0 0 0 0 0\nOutput: 0 0 0 0 1 1 0 5 5 0 5 5 0\n\nExample 3:\nInput:  0 0 0 0 0 0 5 0 1 1 1 0 1\nOutput: 5 5 5 0 5 5 5 0 1 1 1 0 1\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 2 0 1 1 1 1 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "2 2 0 1 1 1 1 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1825": {
+      "digest": "71680dbb93b25edbb4f78128783cdfe1afd4d3390df3ff8de0fd750f77f27125",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 9 9 9 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 9 9 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1912": {
+      "digest": "2898abc58b6b4a7f1547b014d7081e0cb96f70078fddbe985fbcf38cdec38478",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 4 3 6 8 2 9 5 2 5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 4 3 6 8 2 9 5 2 5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  4 4 5 6 4 9 1 5 5 7 2 5 6 7 5 8 4 3 1 8 0 0 0 0 0 0 0 0\nOutput: 0 0 0 4 4 5 6 4 9 1 5 5 7 2 5 6 7 5 8 4 3 1 8 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 6 1 6 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 6 1 6 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 3 4 2 9 1 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 3 4 2 9 1 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1918": {
+      "digest": "48b827e7e55ddffc8ec7e17d594e03ad1c34af7aa0a2d2722e68036cb25c33df",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 0 0 0 0 3 3 3 3 3 3 3 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 3 3 3 3 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 0 5 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 7 7 7 7 7 7 7 7 0 0 0 0 0 0 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 7 7 7 7 7 7 7 7 0 0 0 0 0 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    },
+    "1999": {
+      "digest": "f0716f4252133e60506d174093749c9e5fe206b58860b09c2b34746608795290",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Given a problem, your task is to answer the question by thinking step-by-step in a clear and specific manner.\nOnce you have thought about the reasoning process, provide the answer in the following format:\n<answer>answer here</answer>\nDo not explain your reasoning inside the answer tags, provide only the final answer. When an example is provided, you should strictly follow the format of the output/answer in that example.\n"
+        },
+        {
+          "role": "user",
+          "content": "Find the common rule that maps an input grid to an output grid, given the examples below.\n\nExample 1:\nInput:  0 0 0 0 0 4 3 4 5 8 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 4 3 4 5 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 2:\nInput:  0 0 0 0 0 0 0 2 7 0 0 0 0 0 0 0 0 0 0 0 0\nOutput: 0 0 0 0 2 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n\nExample 3:\nInput:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 5 0 0 0 0\nOutput: 0 0 0 0 0 0 0 0 0 0 0 0 1 5 0 0 0 0 0 0 0\n\nBelow is a test input grid. Predict the corresponding output grid by applying the rule you found. Describe how you derived the rule and your overall reasoning process in detail before you submit your answer. Your final answer should be just the test output grid itself.\n\nInput:\n0 0 0 0 0 0 0 0 0 0 9 2 1 3 9 9 0 0 0 0 0"
+        }
+      ],
+      "gold": "0 0 0 0 0 0 0 9 2 1 3 9 9 0 0 0 0 0 0 0 0",
+      "info": {
+        "source_dataset": "arc_1d"
+      }
+    }
+  },
+  "dataset_size": 2000,
+  "sources": {
+    "reasoning_gym_env.py": "import verifiers as vf\n\n\ndef load_environment(\n    gym: str | list[str | dict] = \"arc_1d\",\n    num_train_examples: int = 2000,\n    num_eval_examples: int = 2000,\n    seed: int = 0,\n):\n    vf_env = vf.ReasoningGymEnv(\n        gym=gym,\n        num_train_examples=num_train_examples,\n        num_eval_examples=num_eval_examples,\n        seed=seed,\n    )\n    return vf_env\n",
+    "verifiers/legacy/envs/integrations/reasoninggym_env.py": "# ruff: noqa\n\nfrom typing import List, Tuple\n\nfrom datasets import Dataset\n\nimport verifiers.legacy as vf\n\ntry:\n    import reasoning_gym as rg\n    from reasoning_gym.composite import DatasetSpec\n    from reasoning_gym.dataset import ProceduralDataset\n    from reasoning_gym.utils import SYSTEM_PROMPTS\n\n    DEFAULT_SYSTEM_PROMPT = SYSTEM_PROMPTS[\"default\"]\nexcept ImportError as e:\n    raise ImportError(\n        \"ReasoningGymEnv requires reasoning-gym. Install with: uv add 'verifiers[rg]'\"\n    ) from e\n\n\nclass ReasoningGymEnv(vf.SingleTurnEnv):\n    def __init__(\n        self,\n        gym: str | List[str | dict],\n        num_train_examples: int = 1000,\n        num_eval_examples: int = 100,\n        system_prompt: str = DEFAULT_SYSTEM_PROMPT,\n        parser: vf.Parser | None = None,\n        seed: int = 0,\n    ):\n        self.gym = gym\n        self.num_train_examples = num_train_examples\n        self.num_eval_examples = num_eval_examples\n        self.seed = seed\n        total_examples = num_train_examples + num_eval_examples\n        self.rg_dataset = self.build_rg_dataset(gym, total_examples, seed=seed)\n        dataset, eval_dataset = self.rg_to_hf(self.rg_dataset)\n        parser = parser or vf.XMLParser(fields=[\"answer\"])\n        rubric = vf.Rubric(parser=parser)\n\n        async def check_answer_reward_func(\n            completion: vf.Messages, answer: str, **kwargs\n        ) -> float:\n            # rg_dataset expects an int index\n            entry = self.rg_dataset[int(answer)]\n            response = str(parser.parse_answer(completion)).strip()\n            reward = self.rg_dataset.score_answer(answer=response, entry=entry)\n            return reward\n\n        rubric.add_reward_func(check_answer_reward_func)\n        rubric.add_reward_func(parser.get_format_reward_func(), weight=0.0)\n        super().__init__(\n            dataset=dataset,\n            eval_dataset=eval_dataset,\n            system_prompt=system_prompt,\n            parser=parser,\n            rubric=rubric,\n            message_type=\"chat\",\n        )\n        self.parser = parser\n        self.rubric = rubric\n\n    def build_rg_dataset(\n        self, gym: str | List[str | dict], total_examples: int = 1000, seed: int = 0\n    ) -> ProceduralDataset:\n        if isinstance(gym, str):\n            return rg.create_dataset(gym, size=total_examples, seed=seed)\n        dataset_specs = []\n        for dataset_config in gym:\n            if isinstance(dataset_config, str):\n                dataset_specs.append(\n                    DatasetSpec(name=dataset_config, weight=1.0, config={})\n                )\n            elif isinstance(dataset_config, dict):\n                dataset_specs.append(DatasetSpec(**dataset_config))\n            else:\n                raise ValueError(f\"Invalid dataset config: {dataset_config}\")\n        return rg.create_dataset(\n            \"composite\", datasets=dataset_specs, size=total_examples, seed=seed\n        )\n\n    def rg_to_hf(self, rg_dataset: ProceduralDataset) -> Tuple[Dataset, Dataset]:\n        train_dataset_rows = []\n        eval_dataset_rows = []\n        for i, x in enumerate(rg_dataset):\n            row = {\n                \"question\": x[\"question\"],\n                \"answer\": str(i),  # in verifiers, an answer must be a string\n                \"info\": {\"source_dataset\": x[\"metadata\"][\"source_dataset\"]},\n            }\n            if i < self.num_train_examples:\n                train_dataset_rows.append(row)\n            else:\n                eval_dataset_rows.append(row)\n        dataset = Dataset.from_list(train_dataset_rows)\n        eval_dataset = Dataset.from_list(eval_dataset_rows)\n        return dataset, eval_dataset\n",
+    "verifiers/legacy/parsers/xml_parser.py": "# ruff: noqa\n\nimport re\nfrom types import SimpleNamespace\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.parsers.parser import Parser\nfrom verifiers.legacy.types import Messages\n\n\nclass XMLParser(Parser):\n    def __init__(\n        self,\n        fields: list[str | tuple[str, ...]],\n        answer_field: str = \"answer\",\n        extract_fn: Callable[[str], str] = lambda x: x,\n    ):\n        \"\"\"\n        Initialize the parser with field definitions.\n\n        Each field may be:\n          - a string (e.g. \"reasoning\"): the XML tag is fixed.\n          - a tuple of alternatives (e.g. (\"code\", \"answer\")): the first element is\n            the canonical name used for formatting, and all elements are allowed tags\n            when parsing.\n\n        The schema is assumed to have no duplicate names.\n        \"\"\"\n        super().__init__(extract_fn=extract_fn)\n        # list of (canonical, [alternatives])\n        self._fields: list[tuple[str, list[str]]] = []\n\n        self.answer_field = answer_field\n        seen = set()\n        for field in fields:\n            if isinstance(field, str):\n                canonical = field\n                alternatives = [field]\n            elif isinstance(field, tuple):\n                if not field:\n                    raise ValueError(\"Field tuple cannot be empty.\")\n                canonical = field[0]\n                if not all(isinstance(alt, str) for alt in field):\n                    raise TypeError(\"All alternatives in a tuple must be strings.\")\n                alternatives = list(field)\n            else:\n                raise TypeError(\"Each field must be a string or a tuple of strings.\")\n            if canonical in seen:\n                raise ValueError(f\"Duplicate field name: {canonical}\")\n            seen.add(canonical)\n            self._fields.append((canonical, alternatives))\n        if \"think\" in seen:\n            self.logger.warning(\n                \"You have included the 'think' field in the XMLParser. This should only be used with models which always include <think>...</think> tags but do NOT parse them automatically. \"\n                \"This will cause parsing failures if the model does not include <think>...</think> tags, or if the chat template automatically removes <think>...</think> tags.\"\n                \"In particular, you should NOT use this parser configuration with Qwen3 or DeepSeek-R1 models.\"\n            )\n\n    def parse(self, text: str, strip: bool = True, last: bool = False) -> Any:\n        \"\"\"\n        Parse the given XML string and return an object with attributes corresponding\n        to all allowed tags in the schema.\n\n        For each field defined:\n          - If it is a simple field (e.g. 'reasoning'), the output object will have\n            an attribute 'reasoning' set to the text content (or None if missing).\n          - If it is defined with alternatives (e.g. (\"code\", \"answer\")), the output\n            object will have attributes for *each* allowed tag name. For example,\n            if the schema is ['reasoning', ('code', 'answer')], then both\n            `result.code` and `result.answer` are always accessible. If a tag is not\n            found in the XML, its corresponding attribute is set to None.\n        \"\"\"\n        results: dict[str, str | None] = {}\n        for canonical, alternatives in self._fields:\n            # For each allowed alternative tag, search independently.\n            for alt in alternatives:\n                # Regex pattern to capture the content between the tags.\n                pattern = rf\"<{alt}>\\s*(.*?)\\s*</{alt}>\"\n                if last:\n                    match = None\n                    for match in re.finditer(pattern, text, re.DOTALL):\n                        pass  # iterate over matches to bind last match\n                else:\n                    match = re.search(pattern, text, re.DOTALL)\n                if match:\n                    results[alt] = match.group(1).strip() if strip else match.group(1)\n                else:\n                    results[alt] = None\n        return SimpleNamespace(**results)\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        \"\"\"Extract the last answer from a completion.\"\"\"\n        if isinstance(completion, str):\n            parsed = self.parse(completion, last=True)\n            if (\n                parsed\n                and hasattr(parsed, self.answer_field)\n                and getattr(parsed, self.answer_field) is not None\n            ):\n                return getattr(parsed, self.answer_field)\n        else:\n            for msg in reversed(self.get_assistant_messages(completion)):\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                if (\n                    parsed\n                    and hasattr(parsed, self.answer_field)\n                    and getattr(parsed, self.answer_field) is not None\n                ):\n                    return getattr(parsed, self.answer_field)\n        return None\n\n    def get_format_str(self) -> str:\n        \"\"\"\n        Return a string that describes the format of the XML.\n        \"\"\"\n        format_str = \"\"\n        for field in self._fields:\n            if len(field[1]) > 1:\n                options = \" | \".join(field[1])\n                format_str += f\"<[ {options} ]>\\n...\\n</[ {options} ]>\\n\"\n            else:\n                format_str += f\"<{field[0]}>\\n...\\n</{field[0]}>\\n\"\n        return format_str.strip()\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Return a reward function that checks if messages follow the expected format.\n\n        The function does not make assumptions about which fields should start/end the message\n        or the specific order of fields. It checks that:\n        - At least one field from the schema is present in each message\n        - Fields have proper content and spacing\n        \"\"\"\n\n        def format_reward_func(completion: Messages):\n            \"\"\"Reward function that checks if each step follows the expected format.\"\"\"\n            model_messages = self.get_assistant_messages(completion)\n            if not model_messages:\n                return 0.0\n\n            # Calculate format adherence for each message\n            format_scores = []\n            for msg in model_messages:\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                parsed_no_strip = self.parse(content, strip=False)\n\n                # Check if the message has at least one valid field\n                has_any_field = False\n                fields_with_content = 0\n                total_fields = 0\n\n                # Keep track of which expected fields are present\n                expected_field_count = len(\n                    self._fields\n                )  # Total number of expected field sets\n                present_field_sets = (\n                    set()\n                )  # Which field sets have at least one alternative present\n\n                # Check proper spacing for fields\n                has_correct_spacing = True\n\n                for i, (canonical, alternatives) in enumerate(self._fields):\n                    field_set_present = False\n                    for alt in alternatives:\n                        if hasattr(parsed, alt) and getattr(parsed, alt) is not None:\n                            has_any_field = True\n                            fields_with_content += 1\n                            total_fields += 1\n                            field_set_present = True\n\n                            # Check if field exists in non-stripped version too (proper spacing)\n                            if not (\n                                hasattr(parsed_no_strip, alt)\n                                and getattr(parsed_no_strip, alt) is not None\n                            ):\n                                has_correct_spacing = False\n                        elif (\n                            content.count(f\"<{alt}>\") > 0\n                            or content.count(f\"</{alt}>\") > 0\n                        ):\n                            # Tag exists but content wasn't properly parsed\n                            total_fields += 1\n                            field_set_present = True\n\n                    # If any alternative from this field set was present, count it\n                    if field_set_present:\n                        present_field_sets.add(i)\n\n                # Calculate format score components\n                format_score = 0.0\n\n                # Check if any field from the first field set starts the message\n                starts_with_any_field = False\n                first_field_set = self._fields[0][\n                    1\n                ]  # Get alternatives for first field set\n                for alt in first_field_set:\n                    if content.strip().startswith(f\"<{alt}>\"):\n                        starts_with_any_field = True\n                        break\n\n                # Check if any field from the last field set ends the message\n                ends_with_any_field = False\n                last_field_set = self._fields[-1][\n                    1\n                ]  # Get alternatives for last field set\n                for alt in last_field_set:\n                    if content.strip().endswith(f\"</{alt}>\"):\n                        ends_with_any_field = True\n                        break\n\n                # Weight the score based on different criteria\n                if has_any_field:\n                    # Calculate the proportion of expected field sets that are present\n                    field_set_ratio = len(present_field_sets) / expected_field_count\n                    format_score += 0.4 * field_set_ratio\n\n                if has_correct_spacing:\n                    format_score += 0.2\n\n                if starts_with_any_field:\n                    format_score += 0.2\n\n                if ends_with_any_field:\n                    format_score += 0.2\n\n                format_scores.append(format_score)\n\n            # Return average format adherence\n            if not format_scores:\n                return 0.0\n            return sum(format_scores) / len(format_scores)\n\n        return format_reward_func\n\n    def get_fields(self) -> list[str]:\n        \"\"\"Return a list of the canonical field names (in order).\"\"\"\n        return [canonical for canonical, _ in self._fields]\n\n    def format(self, **kwargs) -> str:\n        \"\"\"\n        Format the provided keyword arguments into an XML string.\n\n        For fields with alternatives (tuple), the canonical name (the first element)\n        is used as the XML tag. The method looks for a provided value using any of the\n        allowed names (preferring the canonical if present).\n\n        Example usage:\n            parser = XMLParser(['reasoning', ('code', 'answer')])\n            formatted_str = parser.format(reasoning=\"...\", code=\"...\")\n        \"\"\"\n        parts = []\n        for canonical, alternatives in self._fields:\n            value = None\n            # Look for a provided value using any of the acceptable keys,\n            # preferring the canonical name if it exists.\n            if canonical in kwargs:\n                value = kwargs[canonical]\n            else:\n                for alt in alternatives:\n                    if alt in kwargs:\n                        value = kwargs[alt]\n                        break\n            if value is None:\n                raise ValueError(\n                    f\"Missing value for field '{canonical}' (allowed: {alternatives})\"\n                )\n            # Use the canonical name as the tag for formatting.\n            parts.append(f\"<{canonical}>\\n{value}\\n</{canonical}>\")\n        return \"\\n\".join(parts)\n",
+    "reasoning_gym/dataset.py": "\"\"\"Base class for procedural dataset generators\"\"\"\n\nfrom abc import ABC, abstractmethod\nfrom collections.abc import Iterable, Sized\nfrom copy import deepcopy\nfrom random import Random\nfrom typing import Any, Iterator, Optional, Type, TypeVar\n\n\nclass ProceduralDataset(ABC, Sized, Iterable[dict[str, Any]]):\n    \"\"\"Abstract base class for procedural dataset generators\"\"\"\n\n    def __init__(self, config: Any, seed: Optional[int] = None, size: int = 500):\n        \"\"\"Initialize the dataset with config, optional seed and size\"\"\"\n        if hasattr(config, \"validate\") and callable(config.validate):\n            config.validate()\n\n        self.config = config\n        self.size = size\n        self.seed = seed if seed is not None else Random().randint(0, 2**32)\n\n    @property\n    def category(self) -> str:\n        \"\"\"Extract category from the module name.\"\"\"\n        module_name = self.__class__.__module__\n        parts = module_name.split(\".\")\n        if len(parts) >= 3:\n            return parts[1]  # reasoning_gym.{category}.dataset_name\n        return \"other\"\n\n    def __len__(self) -> int:\n        \"\"\"Return the virtual size of the dataset\"\"\"\n        return self.size\n\n    def __iter__(self):\n        \"\"\"Make the dataset iterable\"\"\"\n        self._current_idx = 0\n        return self\n\n    def __next__(self) -> dict[str, Any]:\n        \"\"\"Get next item in iteration\"\"\"\n        if self._current_idx >= self.size:\n            raise StopIteration\n        item = self[self._current_idx]\n        self._current_idx += 1\n        return item\n\n    @abstractmethod\n    def __getitem__(self, idx: int) -> dict[str, Any]:\n        \"\"\"Generate a single dataset item\n\n        Args:\n            idx: Index of the item to generate\n\n        Returns:\n            dict containing at least:\n                - question: str\n                - answer: str\n                - metadata: dict\n        \"\"\"\n        raise NotImplementedError\n\n    def score_answer(self, answer: Optional[str], entry: dict[str, Any]) -> float:\n        \"\"\"Overwrite this method in derived classes if a single oracle answer is not available.\"\"\"\n        oracle_answer = entry[\"answer\"]\n        reward = 0.0\n        if isinstance(answer, str) and len(answer) > 0:\n            if answer == oracle_answer:\n                reward = 1.0\n            elif oracle_answer in answer:\n                reward = len(oracle_answer) / len(answer)\n        return reward\n\n\nT = TypeVar(\"T\", bound=\"ProceduralDataset\")\n\n\nclass ReseedingDataset(Iterable[dict[str, Any]]):\n    \"\"\"Wrapper that makes any ProceduralDataset infinite by reseeding when reaching the end\"\"\"\n\n    def __init__(self, dataset: T, chunk_size: int = 500):\n        \"\"\"Initialize with dataset instance and chunk size\n\n        Args:\n            dataset: The ProceduralDataset instance to wrap\n            chunk_size: Size of each generated chunk before reseeding\n        \"\"\"\n        self.dataset = dataset\n        self.dataset_cls: Type[T] = type(dataset)\n        self.chunk_size = chunk_size\n\n        # Start with chunk 0\n        self._current_chunk = 0\n        self._current_dataset = self._create_chunk(0)\n        self._current_idx = 0\n\n    def _create_chunk(self, chunk_num: int) -> T:\n        \"\"\"Create a new dataset chunk with unique seed\"\"\"\n        # Create new config with modified seed\n        new_config = deepcopy(self.dataset.config)\n        if hasattr(new_config, \"seed\"):\n            # Derive new seed from chunk number using dataset's seed, wrapping around at 2^32\n            new_config.seed = (self.dataset.seed + chunk_num) % (2**32)\n\n        # Create new dataset instance with chunk config\n        return self.dataset_cls(new_config)\n\n    def __iter__(self) -> Iterator[dict[str, Any]]:\n        \"\"\"Make the dataset iterable\"\"\"\n        self._current_chunk = 0\n        self._current_dataset = self._create_chunk(0)\n        self._current_idx = 0\n        return self\n\n    def __next__(self) -> dict[str, Any]:\n        \"\"\"Get next item, creating new chunk if needed\"\"\"\n        if self._current_idx >= self.chunk_size:\n            # Move to next chunk\n            self._current_chunk += 1\n            self._current_dataset = self._create_chunk(self._current_chunk)\n            self._current_idx = 0\n\n        item = self._current_dataset[self._current_idx]\n        self._current_idx += 1\n        return item\n\n    def score_answer(self, answer: Optional[str], entry: dict[str, Any]) -> float:\n        \"\"\"Forward scoring to the wrapped dataset's implementation\"\"\"\n        return self.dataset.score_answer(answer, entry)\n"
+  }
+}

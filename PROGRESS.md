@@ -5,7 +5,7 @@ Contract: `scripts/check_leaderboard.py` (frozen at `cd376a7`). API spend cap $4
 
 ## 2026-10-24
 
-**Spend so far: $0.1424** in `results/spend_ledger.jsonl`: $0.0493 of Claude smoke tests (`env_id` "smoke-test", see below) and $0.0931 testing the env compiler (`env_id` "compiler-test"). On Claude Opus 5.5 the test cost $0.0887 (5 calls); on Claude Haiku 5.5, now the default, $0.0044 (6 calls). Both refused a multi-turn game and compiled two new games that pass the gates.
+**Spend before the full audit sweep: $0.1424** in `results/spend_ledger.jsonl`: $0.0493 of Claude smoke tests (`env_id` "smoke-test", see below) and $0.0931 testing the env compiler (`env_id` "compiler-test"). On Claude Opus 5.5 the test cost $0.0887 (5 calls); on Claude Haiku 5.5, now the default, $0.0044 (6 calls). Both refused a multi-turn game and compiled two new games that pass the gates.
 
 Verified offline, through the checker's own worker in each env's venv:
 
@@ -30,8 +30,8 @@ Harness (`harden/audit/`):
 - New: `invariants.py`, the extractor hook `harden.store.reconcile` calls for an exploit
   with no invariant row (it used to import it from `loop.py`).
 - Done: the per-environment loop in `loop.py`; implementation and validation details below.
-  No paid environment audit has been run, so there is no published audit evidence,
-  leaderboard or invariants.db yet.
+  The full paid sweep is complete. Evidence is under `results/evidence/`,
+  accepted fixes under `patches/`, and invariant records in `invariants.db`.
 
 Evidence contract the loop has to write for `leaderboard.py` (beyond the checker docstring):
 each `replays/<exploit_id>.json` carries `exploit_class`; an env that fails twice gets
@@ -108,11 +108,104 @@ AUDIT_REAL_ENV_TEST=1 HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 \
 .venvs/hub/bin/python -m harden.audit.loop primeintellect/reverse-text --cap 2
 ```
 
+### Full audit sweep completed
+
+Pulled `origin/main` at `8e01a8b` and attempted all 16 selected environments.
+**11 patched, 1 robust on tested probes, 3 unpatched, 1 failed to load.** Including
+three earlier installation failures, the leaderboard has 19 entries. The unchanged
+frozen checker reports **PASS: 0 failures**.
+
+Saved **95 complete, embedded invariants** (60 closed mechanisms, 35 open), **11 repair
+files**, and all replay/baseline evidence. Every patched entry has measured ASR 0 and
+passes the benign/model retention gates. This was a bounded sampled sweep, not an
+exhaustive dataset audit. Full per-environment results and limitations: `RUN_NOTES.md`.
+
+**Audit ledger at sweep completion: $16.755505 / $40**, including $0.142360 of earlier tests and
+$0.017800 for the archived reverse-text attempt. New sweep cost: $16.613145.
+Zero reservations remain open. Local embeddings and validation added no API spend.
+
+PubMedQA, Contract NLI and Countdown remain unpatched because their solver batches were
+declined, leaving too few verified model records for the repair gate. Reasoning-core's
+remote streaming load stalled twice; diagnostics are saved and it is marked failed.
+DeepScaleR resumed its completed three-round run under a $3.50 cumulative cap and
+finished at five rounds. Refused reverse-text examples were excluded from the recovery.
+
+Harness fixes now cover skipped empty solver batches, safe regex compilation, and
+`--resume` with retained cost/evidence and the same five-round ceiling. Validation:
+30 unit tests passed, one opt-in integration test skipped, plus the full real-evidence
+checker. Reconciliation made no changes. The checker and installed graders are unchanged.
+
+Graph handoff: `results/audit_batch/invariants.db` and `results/invariant_graph_batch.json`, including
+normalized MiniLM embeddings, replay paths and accepted patch hashes. The export was
+validated through the service client with mocked HTTP. No hosted writes were made;
+the dedicated writer token is not configured on this machine.
+
+### Main synchronization and publication
+
+Integrated collaborator changes through `f2ca0f8` before publishing this handoff. The
+shared ledger now preserves both histories: **$17.37688380 total**, including
+**$0.62137880** from the independently run compiler/game pilots. The sweep's
+$16.613145 cost and its measured outcomes are unchanged; there are no open reservations.
+
+The saved sweep ran with the Opus 5.5 configuration at `8e01a8b`. Current main uses
+Haiku 5.5 and an explicitly configured global budget; set `AUDIT_CAP_USD=40` for a
+future bounded run. Publishing the existing evidence did not rerun it with Haiku.
+The local live outbox stays ignored; the audit snapshot is committed separately.
+
+Post-integration validation passed: **62 tests, 1 optional integration test skipped**,
+covering audit orchestration, export, service client, retrieval, budget accounting and
+the live pusher. The full frozen checker again reports **0 failures**. Offline retrieval
+loaded all 95 snapshot invariants and returned five matches for a test query. Logs are
+`results/audit_batch/publication_tests.log` and `publication_checker.log`.
+
+### Frontend and SpacetimeDB graph RAG handoff
+
+The audit code, accepted patches, evidence, SQLite snapshot, and import batch are versioned
+together. Pull `main` and use these entry points:
+
+| Artifact / interface | Consumer |
+|---|---|
+| `results/invariant_graph_batch.json` | Ready-to-ingest batch: 19 environments, 95 invariants with normalized 384-dimensional `all-MiniLM-L6-v2` embeddings, and 11 repair hashes |
+| `results/audit_batch/invariants.db` | Read-only audit snapshot for `SQLiteKnowledgeSource` / `knowledge_cli --sqlite results/audit_batch/invariants.db` |
+| `results/leaderboard.json` / `.md` | Audit outcomes and measured rates, including failures and unpatched findings |
+| `results/audit_batch/final_manifest.json` | Counts, spend, checker result, and batch SHA-256 |
+| `patches/` and `results/evidence/` | Repair source and replay provenance; evidence paths in the batch are repository-relative |
+| `dashboard/src/graph/buildGraph.ts` | Frontend projection from generated-client subscription rows; see `docs/GRAPH_STORE_CONTRACT.md` |
+| `harden/store/retrieval.py` and `docs/GRAPH_RETRIEVAL.md` | Hosted graph retrieval and target-specific hacker/fixer integration |
+
+Ingest from the repository root after configuring the dedicated writer credential as
+explained in `deployment/README.md`:
+
+```sh
+export SPACETIME_HOST=https://maincloud.spacetimedb.com
+export SPACETIME_DB=loophole-knowledge-calhacks-2026
+export SPACETIME_TOKEN_FILE=/private/path/to/knowledge-writer-token
+python3 -m harden.store.service_client push results/invariant_graph_batch.json
+```
+
+The client writes environments → exploits → invariants, calls `graph_on_invariant` for
+each invariant, and marks the 60 closed exploits patched. Repeating the same IDs is safe.
+It does not upload repair files or mark SQLite rows pushed. Hosted ingestion is still
+pending; publishing these artifacts to Git does not populate SpacetimeDB.
+
+For the frontend, subscribe to the existing environment, exploit, invariant, rule,
+similarity-edge and rule-application tables and pass the generated camelcase rows to
+`buildGraph`. The import JSON is a reducer batch, not a `GraphRows` snapshot. Invariant
+IDs are `env_id#exploit_id`. Show the 35 open findings as open; the projection's `pending`
+flag means its invariant record has not arrived, not that its exploit is unpatched.
+
+There are no cross-environment rule applications in this batch (`applications: []`).
+Similarity edges become available after ingestion; transfer-success edges require new,
+target-specific replay validation and `record_rule_application` writes. Hosted graph RAG
+can then read `SpacetimeKnowledgeSource(host, database).load()`; offline SQLite retrieval
+can use the committed snapshot immediately (without graph-neighbour expansion). Exact integration examples are in
+`docs/GRAPH_RETRIEVAL.md`.
+
 ## Next steps
 
-1. **Run the environments**: a real-API smoke test on one cheap env with a $2 sub-cap
-   first, check its evidence with the checker, then the remaining envs, committing each
-   one as it finishes and logging its cost here.
-2. `leaderboard.py`, then `python -m harden.store.reconcile`, then `leaderboard.py` again
-   (reconcile can add calls), then `python3 scripts/check_leaderboard.py` until it exits 0.
-3. RUN_NOTES.md, then push (`cd376a7`, `0721541` and the commits after them are local only).
+1. Ingest the saved batch using the dedicated writer token and verify the 95 invariant
+   IDs, 60 patched exploits, 35 open exploits, and generated graph memberships/edges.
+2. Use the existing live dashboard subscriptions and hosted graph RAG with the newly
+   ingested audit rows; the live pipeline/dashboard merged separately while this audit ran.
+3. Resolve the dataset loading issue and missing solver baselines before claiming
+   repairs for the four remaining selected environments.

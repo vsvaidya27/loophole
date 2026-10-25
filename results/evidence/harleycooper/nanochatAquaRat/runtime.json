@@ -1,0 +1,9 @@
+{
+  "env_id": "harleycooper/nanochatAquaRat",
+  "api": "legacy",
+  "load_id": "nanochatAquaRat",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/harleycooper/nanochatAquaRat/patch.py"
+}

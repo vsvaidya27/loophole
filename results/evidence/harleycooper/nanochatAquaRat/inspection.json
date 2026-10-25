@@ -1,0 +1,730 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "13b815a3b6944d996055dd9d03e68a2379307b5638e72056d3c9438d579639fc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: There are r red ball, b blue ball and w white ball in a bag. What is the ratio of the number of blue ball to the total no. of ball in terms of r, b and w.?\n- r / (r + b + w)=A\n- r * (r + b + w)=B\n- (r + b + w)=C\n- r / (r + b )=D\n- r / (b + w)=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1768": {
+      "digest": "335f940cba013ac114d0e6bbc32a33ac10f869dd672b067803d3ef6aa8be1de8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?\n- 120 metres=A\n- 180 metres=B\n- 324 metres=C\n- 150 metres=D\n- 100 meters=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "4237": {
+      "digest": "a9b34f7dbd82a296bc44805dcca7fef46c158dc586dc2e728467a5e3e78c91be",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: How many alphabets need to be there in a language if one were to make 1 million distinct 3 digit initials using the alphabets of the language?\n- 100=A\n- 50=B\n- 26=C\n- 1000=D\n- None of these=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "8475": {
+      "digest": "7c8ebbef7b0d8a263ddcf00ed3f0e50b32109a6b77eac58765df1cc34a1156b0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A number of the form 213ab, where a and b are digits, has a reminder less than 10 when divided by 100. The sum of all the digits in the above number is equal to 13. Find the digit b.\n- 9=A\n- 10=B\n- 7=C\n- 12=D\n- 13=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "9465": {
+      "digest": "13d47843bc070db264910c074621c023b2d8b23e243e9386592687d4685ad364",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: How long does a train 150 m long traveling at 50 kmph takes to cross a bridge of 250m in length?\n- 28.8 sec=A\n- 16.8 sec=B\n- 15.2 sec=C\n- 25.4 sec=D\n- 16.2 sec=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "9545": {
+      "digest": "b9650f52e463b0fa28c0096703bfdea16f6406432990a002d3ec27e2ad0181ba",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: P and Q are both positive integers. When P is divided by Q, the remainder is some positive integer D, and when P is divided by (Q + 8), the remainder is also D. If P/Q = 1020.75 and P/(Q + 8) = 816.6, then which of the following gives the correct set of {D, Q}?\n- {6, 12}=A\n- {6, 15}=B\n- {9, 12}=C\n- {9, 15}=D\n- {24, 32}=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "11942": {
+      "digest": "c3cfe961c9665732045dd82a0f6a58cd19b4c7c2a61bd7dfef44fbc9fe542ad1",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A collection of books went on sale, and 2/3 of them were sold for $2.00 each. If none of the 36 remaining books were sold, what was the total amount received for the books that were sold?\n- $144=A\n- $135=B\n- $90=C\n- $60=D\n- $54=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "12712": {
+      "digest": "6096f2f4644b76900301cda7e96d7c1cee5c861246dff6ab1f6df5c1432f9551",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: The speed of a car is 100 km in the first hour and 80 km in the second hour. What is the average speed of the car?\n- 12=A\n- 75=B\n- 88=C\n- 54=D\n- 90=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "16950": {
+      "digest": "6b76936ad852a88fc3527ca2981d68bdde88f07fc32cbeb0ffbaf393d2b8fa1d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A train passes a station platform in 50 seconds and a man standing on the platform in 20 seconds. If the speed of the train is 54 km/hr, what is the length of the platform?\n- 180 m=A\n- 200 m=B\n- 240 m=C\n- 320 m=D\n- 450 m=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "18154": {
+      "digest": "70048205cd138f4192a4d79a15fec4a5037211a649739ab80898de7c4df1d6c8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A certain theater has 100 balcony seats. For every $2 increase in the price of a balcony seat above $10, 5 fewer seats will be sold. If all the balcony seats are sold when the price of each seat is $10, which of the following could be the price of a balcony seat if the revenue from the sale of balcony seats is $1,560 ?\n- $12=A\n- $14=B\n- $24=C\n- $17=D\n- $18=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "20603": {
+      "digest": "2b995965d5aa4dd71161cb3fee4e7cf382055f9922405aafb13642063cade013",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: There are 5 periods in each working day of a school. In how many ways can one organize 4 subjects such that each subject is allowed at least one period?\n- 240=A\n- 250=B\n- 260=C\n- 280=D\n- None of these=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "21188": {
+      "digest": "604a206830b663191c38181cea6a23fd8a4967f5e06dcfa9ff93a1ac2d927bb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A group of 5 fishermen chartered a boat for a day to fish for flounder. The boat costs x dollars per day to rent. If the group can find 3 more fishermen on the docks who are willing to come aboard and share the rental costs, how much less will the rental cost be per person in terms of x?\n- x/70=A\n- x/35=B\n- 3x/40=C\n- 3x/10=D\n- 3x/7=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "25425": {
+      "digest": "745d68d4bc1d6ce3957d11e5154977f1b8bbc4a12854fd66c8829d801cef435c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A man can row a boat at 30 kmph in still water. If the speed of the stream is 8 kmph, what is the time taken to row a distance of 70 km upstream?\n- 35/9=A\n- 35/10=B\n- 35/11=C\n- 35/12=D\n- 35/13=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "25555": {
+      "digest": "0fe8627276ea6f5a8195724a65de540accdb14fbaded38d3850897e694b6adf6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: In a certain alphabet, 9 letters contain a dot and a straight line. 24 letters contain a straight line but do not contain a dot. If that alphabet has 40 letters, all of which contain either a dot or a straight line or both, how many letters contain a dot but do not contain a straight line?\n- 7=A\n- 8=B\n- 14=C\n- 20=D\n- 28=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "26079": {
+      "digest": "f64e8f7fd178078356db10270bd3778c3f9ede32f6cf65ecadb0c32e76ebc8fd",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A motorist travel to a place 150 km away at an average speed of 120 km/hr and returns at 30 km/hr.His average speed for the whole journey in km/hr is\n- 36 km/hr=A\n- 37 km/hr=B\n- 45 km/hr=C\n- 48 km/hr=D\n- None of these=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "27062": {
+      "digest": "5e9bac90dd00e0ac6957c3f4692c8208a0fa8ccd4e5cd6d2ab26cb55e95a80e9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A company plans to award prizes to its top 3 salespeople, with the largest prize going to the top salesperson, the next-largest prize to the next salesperson, and a smaller prize to the third-ranking salesperson. If the company has 10 salespeople on staff, how many different arrangements of winners are possible?\n- 1,728=A\n- 1,440=B\n- 1,320=C\n- 220=D\n- 720=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "28968": {
+      "digest": "8314285f16384284134fe2357aa0b3abf0b1b265e7d82636ee745e9685e03af8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: The ratio between the perimeter and the breadth of a rectangle is 5 : 1. If the area of the rectangle is 216 sq. cm, what is the length of the rectangle?\n- 18 cm=A\n- 20 cm=B\n- 24 cm=C\n- 28 cm=D\n- 38 cm=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "29499": {
+      "digest": "f2c59f289590aa1ea1b92e77b59f40d6d2a27896a14cfae9d7e8b643c5bd4c38",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A speaks truth in 75% case and B in 80% of the cases. In what percentage of cases are they likely to contradict each other, narrating the same incident?\n- 40=A\n- 23=B\n- 35=C\n- 60=D\n- 21=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "29663": {
+      "digest": "06a9194088a9e2e489c2344ea189beafef03c6bd228ad465cafd1ea886172722",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: If f(x)=x^3 and g(x)=x^2, and x is a natural number, what CANNOT the answer be for f(g(x))?\n- 1=A\n- 64=B\n- 729=C\n- 512=D\n- 4096=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "33780": {
+      "digest": "6d061c447f23667b07e66d2d44f46b503842a9b57c12913bdb246ead112d468b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: What percent of 120 are 90?\n- 25%=A\n- 50%=B\n- 75%=C\n- 33%=D\n- 30%=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "33901": {
+      "digest": "9ba2bc0d8f6dbc6cceab3c8c5dd02136724479757608b6e2d94d911fbea4032a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A bag contains 6 white and 4 black balls .2 balls are drawn at random. find the probability that they are of same colour.\n- 8/15=A\n- 5/14=B\n- 7/15=C\n- 16/7=D\n- 4/3=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "36141": {
+      "digest": "adaa94fea79751442d9767b9a6b5efff24e534c091b81ccecf103a5a15f66749",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Find the value of x from the below equation? : 3x^2+5x+2 = 0\n- -1=A\n- 1=B\n- -2=C\n- 2=D\n- -3=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "38138": {
+      "digest": "c231a003e5c7411c1dc996a43fe0b31509e81b557413b498de291ef28c06d93c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Audrey 4 hours to complete a certain job. Ferris can do the same job in 3hours. Audrey and Ferris decided to collaborate on the job, working at their respective rates. While Audrey worked continuously, Ferris took 2 breaks of equal length. If the two completed the job together in 2 hours, how many minutes long was each of Ferris’ breaks ?\n- 5=A\n- 15=B\n- 17=C\n- 20=D\n- 25=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "40056": {
+      "digest": "1ce14e159f0e27b91f553a297e3472ee1ad37733cee76de45c6455f3fbaf94c0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: There is a sequence A(n) such that A(n+1)=2A(n)-1 and A(1)=3, where n is a positive integer. What is the value of A(76)-A(75)?\n- 2^22+1=A\n- 2^23+1=B\n- 2^23+1=C\n- 2^24=D\n- 2^75=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "40715": {
+      "digest": "e5e06053ea76528fc767ccd912015c12b850bcfde549f5988e53d7a6e5cc1e75",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: How many bricks, each measuring 25cm*11.25cm*6cm, will be needed to build a wall 8m*6m*22.5m\n- 6100=A\n- 6200=B\n- 6300=C\n- 6400=D\n- None of these=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "42376": {
+      "digest": "2447676dc998890d09e046ea11c9d19571ff482067c81a9d1261c60eee521709",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Difference of two numbers is 1650. If 7.5% of the number is 12.5% of the other number , find the number ?\n- 2660, 1000=A\n- 3660, 2000=B\n- 3000, 4160=C\n- 2490, 4150=D\n- 2475, 4125=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "46614": {
+      "digest": "a7158f691ac077f446afd75dae7cb7b3a9cac1c134f76231f10be2313bc65f1b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: On a certain test, Bill scored 20 more points than John, but half as many points as Sue. If the sum of the scores of the three students was 140 points, how many points did Bill receive?\n- 30=A\n- 40=B\n- 50=C\n- 80=D\n- 100=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "47687": {
+      "digest": "99a52e3db8e44c06889953ca82808353eec942757e7ff3a81728795f86fa8d4f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Two representatives must be selected from each of two groups of students. One group consists of three men and one woman, and the other group consists of two women and one man. What is the probability that 2 men and 2 women will be selected ?\n- 1/6=A\n- 1/4=B\n- 2/7=C\n- 1/3=D\n- 1/2=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "50803": {
+      "digest": "ebc9fb468a6ce87c625c43f2a4206ccf1c50da0219b5efc1d724482073f90f48",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: 19 people are there, they are shaking hands together, how many hand shakes possible,if they are in pair of cyclic sequence.\n- 19=A\n- 20=B\n- 21=C\n- 22=D\n- 23=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "50851": {
+      "digest": "919fcb1936258ebc4ced692e3505fdf489f93958304f0d31c11611866224086a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: In an entrance exam, 3 marks is awarded for every correct answer and (-1) for every wrong answer. If a student gets 38 marks after attempting all questions, find the number of questions answered correctly if the total questions were 70.\n- 38=A\n- 40=B\n- 27=C\n- 43=D\n- 56=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "55089": {
+      "digest": "6097cde4f0e04571ca185672253236ab3780a4c092863880cc8fe880618188ad",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: If the length of a certain rectangle is decreased by 4 cm and the width is increased by 3 cm, a square with the same area as the original rectangle would result. Find the perimeter of the original rectangle.\n- 40 cm=A\n- 45 cm=B\n- 50 cm=C\n- 52 cm=D\n- 57 cm=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "59327": {
+      "digest": "4572f840c44618c4f7a90157ef884b6a463ff356707ca730fbaff754bad0fe83",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Two bullet train s 140 m and 180 m long run at the speed of 60 km/hr and 40 km/hr respectively in opposite directions on parallel tracks. The time (in seconds) which they take to cross each other, is:\n- 15.8 sec.=A\n- 11.52 sec.=B\n- 11.8 sec.=C\n- 10.8 sec.=D\n- 08.8 sec.=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "60003": {
+      "digest": "28229a78d08f2ec8bdb84ded6a39d99e5a1d668e15a04eed5b030bed5e276b95",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: 60 percent of movie theatres in Town X have 3 screens or less. 20% of those theatres sell an average of more than $300 worth of popcorn per showing. 56 percent of all the movie theatres in Town X sell $300 or less of popcorn per showing. What percent of all the stores on the street have 4 or more screens and sell an average of more than $300 worth of popcorn per day?\n- 12=A\n- 18=B\n- 32=C\n- 40=D\n- 44=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "63564": {
+      "digest": "cc38d8053749f4affdf35c4dfb48546497b5666da6a5ed0956a49bb620308eeb",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Three models (F, G, and H) of cars are distributed among three showrooms. The number of cars in each showrooms must be equal and each model must be represented by at least one car in every showroom. There are 19 cars of Model F, 17 cars of Model G, and 15 cars of Model H. What is the maximum number of cars of model F in any showroom ?\n- 17=A\n- 16=B\n- 15=C\n- 14=D\n- 13=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "67802": {
+      "digest": "c2f01670984a9794a12c22fd8fdba251f402742d3baae6e50862b830a18cb83f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: sale of Rs 6835, Rs. 9927, Rs. 6855, Rs. 7230 and Rs. 6562 for 5 consecutive months. How much sale must he have in the sixth month so that he gets an average sale of Rs, 7000 ?\n- 4966=A\n- 2477=B\n- 2877=C\n- 7991=D\n- 8881=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "70712": {
+      "digest": "e2028a416f1424fe80d06b63eaa86a1a71a344b70145b91996d0969af0b0f0d8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: If Jesse flips a coin five times in a row, what is the probability that the result will be heads at least 3 times?\n- 21/128=A\n- 29/128=B\n- 35/128=C\n- 1/16=D\n- 1/2=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "72040": {
+      "digest": "62dce4ae25cf9d9507d8277d0cdc75d1f5db9b970ae211b893383e93b0c06a0e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: The difference between the compound interest and simple interest on a certain sum of money at 5% per annum for 2 years is 45. Then the original sum is?\n- 17000=A\n- 12000=B\n- 19000=C\n- 14000=D\n- 18000=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "76277": {
+      "digest": "9cd8a5b299fd29fec56a5bd07fb2e2a104cb200bc71b4a36f9914d39c59069c4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: 7 points are marked on a straight line and another 6 points are marked on a second straight line with no points in common. How many triangles can be constructed with vertices from among the above points?\n- 281=A\n- 91=B\n- 168=C\n- 196=D\n- 364=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "80515": {
+      "digest": "8c6259c22711510bdfe5cd7d3a29a7a297dc021054bd62a8d8f7af127c5284a5",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Two brother X and Y appeared for an exam. The probability of selection of X is 1/7 and that of B is 2/5. Find the probability that both of them are selected.\n- 2/69=A\n- 2/60=B\n- 2/63=C\n- 2/35=D\n- 2/38=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "84041": {
+      "digest": "d4904612481ae99683c2ff30a86032c1417d39a6edf953353122a43f0e19d228",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A train leaves Mumabai at 9 am at a speed of 40 kmph. After one hour, another train leaves Mumbai in the same direction as that of the first train at a speed of 45 kmph. When and at what distance from Mumbai do the two trains meet?\n- 287=A\n- 279=B\n- 270=C\n- 278=D\n- 379=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "84753": {
+      "digest": "ef89e7af8bf260d9f3ca568494550a2043311272b77d81a026a90b3fc4acebe1",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: if N is a prime number bigger than 5. Which of the following expressions must be even?\n- 72=A\n- (b) N^2+2.=B\n- (c) N(N+2).=C\n- (d) (N+1)(N+2)=D\n- (e) (N-2)^2=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "85275": {
+      "digest": "bdac171c1f5f29ed7110380c8d4f1dbcaec26625b323b0ca66df3d2c54c91738",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: Six bells commence tolling together and toll at the intervals of 2,4,6,8,10,12 seconds resp. In 60 minutes how many times they will toll together.\n- 15=A\n- 16=B\n- 30=C\n- 31=D\n- 32=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "85678": {
+      "digest": "87bb3c0132227c9b04391d6a81afad1fb85a87bb9603645e82511e78259205f7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A certain stock exchange designates each stock with a 1, 2 or 3 letter code, where each letter is selected from the 26 letters of the alphabet. If the letters may be repeated and if the same letters used in a different order, constitute a different code, how many diff stocks is it possible to designate with these codes?\n- 2,951=A\n- 8,125=B\n- 15,600=C\n- 16,302=D\n- 18,278=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "E",
+      "info": null
+    },
+    "88990": {
+      "digest": "e4c983c7fe59f63058b50625f72260742d108cfcf001b1e0eade4c94fd115fc7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: What approximate value should come in place of the question mark (?) in each of the following equations ?\n52.861 + 0.2563 + 8.1 + 57.35 + 0.0087 = ?\n- 119=A\n- 116=B\n- 121=C\n- 115=D\n- 120=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "90014": {
+      "digest": "e3bc2ab51c3d3fd00230c4d505e2ef3d78289f0a637e01d4bf2f2507617887db",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: In a class of boys and girls Vikas's rank is 9th and Tanvi's rank is 17th . Vikas's rank among the boys in that class is 4th from the top and 18th from the bottom and Tanvi's rank among the girls is 8th from top and 21st from bottom. In the order of rank, how many girls are there between Tanvi and Vikas?\n- 29=A\n- 8=B\n- 2=C\n- 4=D\n- 6=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "90892": {
+      "digest": "ce514a7c3c2c439ba88a9c4babf66190657243542706334c231943d7a574bda8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: How much is 60% of 40 is greater than 4/5 of 25?\n- 4=A\n- 6=B\n- 10=C\n- 8=D\n- 13=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "93228": {
+      "digest": "72004d60d9105d960306df8cbd5f93e1435bcf2636059e280bc6925ce9a96fc2",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: In a kilometer race, A beats B by 50 meters or 10 seconds. What time does A take to complete the race?\n- 187 sec=A\n- 190 sec=B\n- 168 sec=C\n- 197 sec=D\n- 191 sec=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "97466": {
+      "digest": "9c212ab190d0d019968434130fee2062084291afcde72ea3d328a707acd29833",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an algebra tutor. Solve each problem, show your reasoning, and end with 'Answer: <letter>' where <letter> is one of A, B, C, D, or E."
+        },
+        {
+          "role": "user",
+          "content": "Solve the multiple choice problem and explain your reasoning. Conclude with 'Answer: <letter>'.\n\nQuestion: A, B and C started a business with capitals of Rs. 8000, Rs. 10000 and Rs. 12000 respectively. At the end of the year, the profit share of B is Rs. 2000. The difference between the profit shares of A and C is?\n- 621=A\n- 276=B\n- 236=C\n- 800=D\n- 211=E\n\nRespond only with the letter of the correct answer."
+        }
+      ],
+      "gold": "D",
+      "info": null
+    }
+  },
+  "dataset_size": 97467,
+  "sources": {
+    "nanochatAquaRat.py": "from __future__ import annotations\n\nimport json\nimport re\nfrom pathlib import Path\nfrom typing import Optional\n\nimport verifiers as vf\nfrom datasets import Dataset, load_dataset\n\n\nDEFAULT_SYSTEM_PROMPT = (\n    \"You are an algebra tutor. Solve each problem, show your reasoning, and end with \"\n    \"'Answer: <letter>' where <letter> is one of A, B, C, D, or E.\"\n)\n\nLETTER_PATTERN = re.compile(r\"(?i)\\banswer\\s*[:\\-]\\s*([A-E])\\b|(?<![A-Z])([A-E])(?![A-Z])\")\n\n\ndef _parse_option(option: str) -> tuple[str, str]:\n    if \")\" in option:\n        letter, text = option.split(\")\", 1)\n        return letter.strip().upper(), text.strip()\n    return option[:1].upper(), option[1:].strip()\n\n\ndef _render_prompt(question: str, options: list[str]) -> str:\n    rendered = \"Solve the multiple choice problem and explain your reasoning. \"\n    rendered += \"Conclude with 'Answer: <letter>'.\\n\\n\"\n    rendered += f\"Question: {question.strip()}\\n\"\n    parsed = [_parse_option(opt) for opt in options]\n    for letter, choice in parsed:\n        rendered += f\"- {choice}={letter}\\n\"\n    rendered += \"\\nRespond only with the letter of the correct answer.\"\n    return rendered\n\n\ndef _extract_letter(text: str | None) -> Optional[str]:\n    if not text:\n        return None\n    match = LETTER_PATTERN.search(text)\n    if not match:\n        return None\n    return (match.group(1) or match.group(2) or \"\").strip().upper() or None\n\n\ndef _load_local_split(path: Path) -> list[dict]:\n    if not path.exists():\n        return []\n    if path.suffix == \".jsonl\":\n        return [json.loads(line) for line in path.read_text(encoding=\"utf-8\").splitlines() if line.strip()]\n    if path.suffix == \".json\":\n        data = json.loads(path.read_text(encoding=\"utf-8\"))\n        if isinstance(data, list):\n            return data\n    return []\n\n\ndef _maybe_load_dataset(split: str, data_dir: Optional[str], cache_dir: Optional[str]) -> Dataset:\n    local_rows: list[dict] = []\n    if data_dir:\n        base = Path(data_dir)\n        local_rows.extend(_load_local_split(base / f\"{split}.jsonl\"))\n        local_rows.extend(_load_local_split(base / f\"{split}.json\"))\n    if local_rows:\n        return Dataset.from_list(local_rows)\n    return load_dataset(\"deepmind/aqua_rat\", split=split, cache_dir=cache_dir)\n\n\ndef _row_to_prompt_payload(\n    row: dict,\n    system_prompt: Optional[str],\n    include_rationale: bool,\n) -> dict:\n    if \"messages\" in row:\n        # Prepared conversation format (e.g. from scripts/prepare_aqua.py)\n        user_msg = next((m[\"content\"] for m in row[\"messages\"] if m[\"role\"] == \"user\"), \"\")\n        correct = row.get(\"answer_letter\") or row.get(\"correct\") or \"\"\n        rationale = \"\"\n        assistant_msg = next((m for m in row[\"messages\"] if m.get(\"role\") == \"assistant\"), None)\n        if assistant_msg and isinstance(assistant_msg.get(\"content\"), list):\n            rationale_parts = [part.get(\"text\", \"\") for part in assistant_msg[\"content\"] if isinstance(part, dict)]\n            rationale = \"\\n\".join(filter(None, rationale_parts))\n    else:\n        question = row[\"question\"]\n        options = row[\"options\"]\n        correct = row[\"correct\"]\n        rationale = row.get(\"rationale\", \"\")\n        user_msg = _render_prompt(question, options)\n\n    prompt_messages = []\n    if system_prompt:\n        prompt_messages.append({\"role\": \"system\", \"content\": system_prompt})\n    prompt_messages.append({\"role\": \"user\", \"content\": user_msg})\n\n    metadata = {}\n    if row.get(\"question\") is not None:\n        metadata[\"question\"] = row[\"question\"]\n    if row.get(\"options\") is not None:\n        metadata[\"options\"] = row[\"options\"]\n    if include_rationale and rationale:\n        metadata[\"rationale\"] = rationale\n\n    return {\n        \"prompt\": prompt_messages,\n        \"answer\": str(correct).strip().upper(),\n        \"metadata\": metadata,\n    }\n\n\ndef _format_dataset(\n    raw_dataset: Dataset,\n    system_prompt: Optional[str],\n    include_rationale: bool,\n) -> Dataset:\n    def formatter(batch: dict) -> dict:\n        prompts, answers, metadata = [], [], []\n        for idx in range(len(batch[next(iter(batch))])):\n            row = {key: batch[key][idx] for key in batch}\n            payload = _row_to_prompt_payload(row, system_prompt, include_rationale)\n            prompts.append(payload[\"prompt\"])\n            answers.append(payload[\"answer\"])\n            metadata.append(payload[\"metadata\"])\n        return {\"prompt\": prompts, \"answer\": answers, \"metadata\": metadata}\n\n    processed = raw_dataset.map(formatter, batched=True, remove_columns=raw_dataset.column_names)\n    return processed\n\n\ndef _build_datasets(\n    train_split: str,\n    eval_split: Optional[str],\n    system_prompt: Optional[str],\n    num_train_examples: int,\n    num_eval_examples: int,\n    include_rationale: bool,\n    data_dir: Optional[str],\n    cache_dir: Optional[str],\n    seed: Optional[int],\n) -> tuple[Dataset, Dataset]:\n    raw_train = _maybe_load_dataset(train_split, data_dir, cache_dir)\n    if seed is not None:\n        raw_train = raw_train.shuffle(seed=seed)\n    if num_train_examples is not None and num_train_examples >= 0:\n        cap = min(num_train_examples, len(raw_train))\n        raw_train = raw_train.select(range(cap))\n    formatted_train = _format_dataset(raw_train, system_prompt, include_rationale)\n\n    if eval_split:\n        raw_eval = _maybe_load_dataset(eval_split, data_dir, cache_dir)\n        if num_eval_examples is not None and num_eval_examples >= 0:\n            cap = min(num_eval_examples, len(raw_eval))\n            raw_eval = raw_eval.select(range(cap))\n        formatted_eval = _format_dataset(raw_eval, system_prompt, include_rationale)\n    else:\n        formatted_eval = formatted_train\n    return formatted_train, formatted_eval\n\n\ndef load_environment(\n    system_prompt: str = DEFAULT_SYSTEM_PROMPT,\n    train_split: str = \"train\",\n    eval_split: Optional[str] = \"validation\",\n    num_train_examples: int = -1,\n    num_eval_examples: int = -1,\n    seed: Optional[int] = 42,\n    include_rationale_metadata: bool = True,\n    data_dir: Optional[str] = None,\n    cache_dir: Optional[str] = None,\n) -> vf.Environment:\n    \"\"\"\n    Create a verifiers environment exposing the nanochat AQuA-RAT reward function.\n\n    Args:\n        system_prompt: Optional system message prepended to each example.\n        train_split: Split to use for training data (defaults to Hugging Face 'train').\n        eval_split: Split to use for evaluation data. If None, reuses the train split.\n        num_train_examples: Optional cap on train examples (-1 keeps full split).\n        num_eval_examples: Optional cap on eval examples (-1 keeps full split).\n        seed: Shuffle seed for deterministic sampling.\n        include_rationale_metadata: Whether to attach human rationales in metadata.\n        data_dir: Optional directory containing preprocessed JSON/JSONL splits.\n        cache_dir: Optional Hugging Face cache directory.\n    \"\"\"\n    train_ds, eval_ds = _build_datasets(\n        train_split=train_split,\n        eval_split=eval_split,\n        system_prompt=system_prompt,\n        num_train_examples=num_train_examples,\n        num_eval_examples=num_eval_examples,\n        include_rationale=include_rationale_metadata,\n        data_dir=data_dir,\n        cache_dir=cache_dir,\n        seed=seed,\n    )\n\n    parser = vf.Parser(extract_fn=_extract_letter)\n\n    def exact_match_reward(completion, answer, parser, **kwargs) -> float:\n        predicted = parser.parse_answer(completion) or \"\"\n        return 1.0 if predicted == answer else 0.0\n\n    def format_reward(completion, parser, **kwargs) -> float:\n        predicted = parser.parse_answer(completion)\n        return 1.0 if predicted in {\"A\", \"B\", \"C\", \"D\", \"E\"} else 0.0\n\n    rubric = vf.Rubric(parser=parser)\n    rubric.add_reward_func(exact_match_reward)\n    rubric.add_reward_func(format_reward, weight=0.1)\n\n    vf_env = vf.SingleTurnEnv(\n        dataset=train_ds,\n        eval_dataset=eval_ds,\n        parser=parser,\n        rubric=rubric,\n        message_type=\"chat\",\n        env_id=\"harleycooper/nanochatAquaRat\",\n    )\n    return vf_env\n",
+    "verifiers/legacy/parsers/parser.py": "# ruff: noqa\n\nimport logging\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n"
+  }
+}

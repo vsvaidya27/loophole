@@ -1,0 +1,40 @@
+{
+  "entry": {
+    "env_id": "will/reasoning-gym-env",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer,other,substring-match",
+    "asr_before": 0.6667,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 4,
+    "cost_usd": 0.7068,
+    "evidence_dir": "results/evidence/will/reasoning-gym-env",
+    "exploits": [
+      {
+        "exploit_id": "comma-separator-padding-747887ed49",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/comma-separator-padding-747887ed49.json"
+      },
+      {
+        "exploit_id": "first-answer-tag-wins-ee451640da",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-answer-tag-wins-ee451640da.json"
+      },
+      {
+        "exploit_id": "substring-ratio-hedge-text-59f01ad3b4",
+        "exploit_class": "other",
+        "replay": "replays/substring-ratio-hedge-text-59f01ad3b4.json"
+      },
+      {
+        "exploit_id": "substring-ratio-padding-b096aba239",
+        "exploit_class": "substring-match",
+        "replay": "replays/substring-ratio-padding-b096aba239.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/will/reasoning-gym-env/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

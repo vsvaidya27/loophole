@@ -1,0 +1,66 @@
+{
+  "entry": {
+    "env_id": "sami/countdown",
+    "status": "unpatched",
+    "exploit_class": "lenient-normalization,multi-answer,other,parser-bypass",
+    "asr_before": 1.0,
+    "asr_after": 1.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 4,
+    "cost_usd": 1.8144,
+    "evidence_dir": "results/evidence/sami/countdown",
+    "exploits": [
+      {
+        "exploit_id": "equals-tail-ignored-d294ba13de",
+        "exploit_class": "multi-answer",
+        "replay": "replays/equals-tail-ignored-d294ba13de.json"
+      },
+      {
+        "exploit_id": "multiline-last-line-eval-f10db514b1",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/multiline-last-line-eval-f10db514b1.json"
+      },
+      {
+        "exploit_id": "no-intermediate-validation-06e9b9d57f",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/no-intermediate-validation-06e9b9d57f.json"
+      },
+      {
+        "exploit_id": "non-integer-intermediate-accepted-e7f3bd0367",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/non-integer-intermediate-accepted-e7f3bd0367.json"
+      },
+      {
+        "exploit_id": "nonpositive-line-skipped-8b5e1496af",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/nonpositive-line-skipped-8b5e1496af.json"
+      },
+      {
+        "exploit_id": "python-floor-division-allowed-6b97eb1548",
+        "exploit_class": "other",
+        "replay": "replays/python-floor-division-allowed-6b97eb1548.json"
+      },
+      {
+        "exploit_id": "python-pow-operator-allowed-c2db24a80c",
+        "exploit_class": "other",
+        "replay": "replays/python-pow-operator-allowed-c2db24a80c.json"
+      },
+      {
+        "exploit_id": "unary-minus-accepted-84a6fced61",
+        "exploit_class": "other",
+        "replay": "replays/unary-minus-accepted-84a6fced61.json"
+      }
+    ]
+  },
+  "unpatched_because": [
+    "a patch is committed",
+    "every replay case scores low under the patch",
+    "asr_after is below asr_before",
+    ">= 5 model benign records",
+    "no last-iteration attempt beats the final reward"
+  ],
+  "patch": null,
+  "stop_reason": "budget exhausted before the next probe",
+  "pending_invariants": []
+}

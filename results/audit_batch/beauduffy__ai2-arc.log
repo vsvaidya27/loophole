@@ -1,0 +1,13 @@
+[19:30:06] beauduffy/ai2-arc: setup: 24 ground-truth and 8 verified model records
+[19:30:38] beauduffy/ai2-arc: iteration 1: 3 attempts, 0 confirmed mechanisms total
+[19:31:34] beauduffy/ai2-arc: iteration 2: 3 attempts, 2 confirmed mechanisms total
+[19:31:50] beauduffy/ai2-arc: iteration 2: rejected repair 1/2
+[19:32:15] beauduffy/ai2-arc: iteration 2: accepted repair 2
+[19:34:46] beauduffy/ai2-arc: iteration 3: 3 attempts, 3 confirmed mechanisms total
+[19:35:09] beauduffy/ai2-arc: iteration 3: rejected repair 1/2
+[19:35:32] beauduffy/ai2-arc: iteration 3: accepted repair 2
+[19:38:14] beauduffy/ai2-arc: iteration 4: 3 attempts, 5 confirmed mechanisms total
+[19:38:50] beauduffy/ai2-arc: iteration 4: accepted repair 1
+[19:40:22] beauduffy/ai2-arc: iteration 5: 3 attempts, 6 confirmed mechanisms total
+[19:40:52] beauduffy/ai2-arc: iteration 5: accepted repair 1
+[19:41:44] beauduffy/ai2-arc: patched: 5 iterations, cost $1.5522; 0 pending invariants

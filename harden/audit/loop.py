@@ -10,6 +10,7 @@ evidence and patch. Generated responses stay in evidence files, never console lo
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import random
 import re
@@ -54,12 +55,21 @@ class AuditError(RuntimeError):
 
 
 class Audit:
-    def __init__(self, spec: EnvSpec, cap: float):
+    def __init__(self, spec: EnvSpec, cap: float, *, resume: bool = False):
         if not math.isfinite(cap) or cap <= 0:
             raise ValueError("cap must be a positive finite number")
         self.spec = spec
         self.dir = spec.evidence_dir
-        self._reset_evidence()
+        self.resume = resume
+        if resume:
+            summary_path = self.dir / "summary.json"
+            if (not summary_path.is_file() or (self.dir / "failed.json").exists()
+                    or json.loads(summary_path.read_text())["entry"]["status"] != "unpatched"):
+                raise ValueError("--resume requires a completed unpatched audit")
+            if len(read_jsonl(self.dir / "iterations.jsonl")) >= MAX_ITER:
+                raise ValueError("the audit has already used all five iterations")
+        else:
+            self._reset_evidence()
         self.claude = Claude(ROOT, self.dir / "api_calls.jsonl", spec.env_id, env_cap=cap)
         self.rows: dict[int, dict] = {}
         self.ref: dict[int, str] = {}
@@ -256,13 +266,16 @@ class Audit:
 
             def solve():
                 answers = roles.solve(self.claude, [{"id": i, "messages": self.rows[i]["messages"]} for i in indices])
-                if not answers or any(i not in indices or not isinstance(t, str) for i, t in answers.items()):
+                if any(i not in indices or not isinstance(t, str) for i, t in answers.items()):
                     raise AuditError("solver returned no usable responses")
                 return answers
 
             answers = self.retry("solver", solve)
+            append_jsonl(self.dir / "solver.jsonl", {"example_indices": indices, "responses": answers})
+            if not answers:
+                self.log("solver batch returned no answers; excluded from the benign baseline")
+                continue
             pairs = list(answers.items())
-            append_jsonl(self.dir / "solver.jsonl", {"responses": answers})
             verdicts = self.verify(0, pairs)
             self.score_into(pairs, None, self.orig)
             for (i, text), judge in zip(pairs, verdicts):
@@ -277,6 +290,57 @@ class Audit:
             raise AuditError("not enough distinct benign completions")
         self.cur = dict(self.orig)
         self.log(f"setup: {len(truth)} ground-truth and {len(self.benign) - len(truth)} verified model records")
+
+    def restore(self) -> None:
+        """Continue a bounded run without regenerating its baseline or earlier probes."""
+        info = json.loads((self.dir / "inspection.json").read_text())
+        self.dataset_size = info["dataset_size"]
+        self.rows = {int(i): row for i, row in info["rows"].items()}
+        self.ref = {i: self.spec.reference(row["gold"]) for i, row in self.rows.items()}
+        self.benign = read_jsonl(self.dir / "benign.jsonl")
+        self.attempts = read_jsonl(self.dir / "attempts.jsonl")
+        self.iterations = read_jsonl(self.dir / "iterations.jsonl")
+        if not self.iterations or not self.attempts or not self.benign:
+            raise AuditError("cannot resume incomplete evidence")
+        if any(c["iteration"] > len(self.iterations) for c in read_jsonl(self.dir / "api_calls.jsonl")):
+            raise AuditError("cannot resume an incomplete paid iteration")
+        runtime = json.loads((self.dir / "runtime.json").read_text())
+        self.patched = bool(runtime.get("patch"))
+        self.target = "original"
+        for n, iteration in enumerate(self.iterations, 1):
+            if iteration["iteration"] != n or iteration["target"] != self.target:
+                raise AuditError("invalid saved patch history")
+            self.target = iteration["patch_after"] or self.target
+        actual = ck.patch_digest(self.spec.patch_dir) if self.patched else "original"
+        if actual != self.target:
+            raise AuditError("saved patch no longer matches the iteration history")
+        if self.patched:
+            self.rules = patching.rules_of((self.spec.patch_dir / "patch.py").read_text())
+        truth = spread(self.dataset_size, N_GROUND_TRUTH)
+        self.probe_indices = [truth[j] for j in spread(len(truth), N_PROBE_POOL)]
+        self.context = roles.env_context(self.spec, info["sources"])
+        self.probe_context = self.context + "\n\n" + roles.examples_context([
+            {**self.rows[i], "index": i, "reference": self.ref[i]} for i in self.probe_indices
+        ])
+        for row in self.benign + self.attempts:
+            pair = (row["example_index"], row["completion"].strip())
+            judge = row.get("judge") or {"verdict": "correct", "reason": "ground-truth reference", "method": "reference"}
+            if pair in self.verdicts and self.verdicts[pair]["verdict"] != judge["verdict"]:
+                raise AuditError("conflicting saved verdicts")
+            self.verdicts[pair] = judge
+            if row.get("exploit_id"):
+                self.exploit_class[row["exploit_id"]] = row["exploit_class"]
+        self.score_into(self.all_pairs(), None, self.orig)
+        if self.patched:
+            self.score_into(self.all_pairs(), self.spec.patch_dir, self.cur)
+        else:
+            self.cur = dict(self.orig)
+        mirror.record_environment(self.spec.env_id, source="hub", title=self.spec.env_id, status="running")
+        # New cases can reopen a previously closed mechanism. Recompute its final
+        # closure at finish rather than preserving a stale per-exploit patched flag.
+        with mirror.connect() as con:
+            con.execute("UPDATE exploits SET status='confirmed', reward_patched=NULL, pushed_at=NULL WHERE env_id=?", (self.spec.env_id,))
+        self.log(f"resuming after {len(self.iterations)} iterations; existing API cost counts toward the cap")
 
     # ------------------------------------------------------------ probe / repair
 
@@ -461,8 +525,11 @@ class Audit:
 
     def run(self) -> dict:
         try:
-            self.setup()
-            for iteration in range(1, MAX_ITER + 1):
+            if self.resume:
+                self.restore()
+            else:
+                self.setup()
+            for iteration in range(len(self.iterations) + 1, MAX_ITER + 1):
                 try:
                     added = self.probe(iteration)
                 except BudgetExceeded:
@@ -510,14 +577,19 @@ class Audit:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("env_id", help="selected owner/name from envs.yaml")
-    parser.add_argument("--cap", type=float, default=2.3, help="per-run API spend cap in USD (default: 2.3)")
+    parser.add_argument("--cap", type=float, default=2.3, help="API spend cap in USD, including earlier calls with --resume (default: 2.3)")
+    parser.add_argument("--resume", action="store_true", help="continue a completed unpatched audit, keeping its evidence and cost")
     args = parser.parse_args(argv)
     if not math.isfinite(args.cap) or args.cap <= 0:
         parser.error("--cap must be a positive finite number")
     specs, _ = load_envs()
     if args.env_id not in specs:
         parser.error(f"unknown selected environment: {args.env_id}")
-    summary = Audit(specs[args.env_id], args.cap).run()
+    try:
+        audit = Audit(specs[args.env_id], args.cap, resume=args.resume)
+    except ValueError as exc:
+        parser.error(str(exc))
+    summary = audit.run()
     return int(summary["entry"]["status"] == "failed_to_run" or bool(summary.get("pending_invariants")))
 
 

@@ -1,0 +1,2 @@
+{"iteration": 2, "try": 1, "reason": "uses a non-regex compile(), which a tightened grader may not"}
+{"iteration": 3, "try": 1, "reason": "uses a non-regex compile(), which a tightened grader may not"}

@@ -1,0 +1,50 @@
+{
+  "entry": {
+    "env_id": "beauduffy/ai2-arc",
+    "status": "patched",
+    "exploit_class": "parser-bypass",
+    "asr_before": 0.6667,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 1.5522,
+    "evidence_dir": "results/evidence/beauduffy/ai2-arc",
+    "exploits": [
+      {
+        "exploit_id": "alt-box-command-ignored-c73d3a6878",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/alt-box-command-ignored-c73d3a6878.json"
+      },
+      {
+        "exploit_id": "colorbox-arg-skip-446e144a4e",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/colorbox-arg-skip-446e144a4e.json"
+      },
+      {
+        "exploit_id": "escaped-brace-depth-mismatch-e48e1f5f23",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/escaped-brace-depth-mismatch-e48e1f5f23.json"
+      },
+      {
+        "exploit_id": "nested-box-rfind-inner-d2865bdfe0",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/nested-box-rfind-inner-d2865bdfe0.json"
+      },
+      {
+        "exploit_id": "optional-arg-bracket-skip-be52d2deee",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/optional-arg-bracket-skip-be52d2deee.json"
+      },
+      {
+        "exploit_id": "spaced-box-invisible-to-rfind-679f1ed904",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/spaced-box-invisible-to-rfind-679f1ed904.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/beauduffy/ai2-arc/patch.py",
+  "stop_reason": "iteration limit reached",
+  "pending_invariants": []
+}

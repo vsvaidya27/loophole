@@ -1,0 +1,538 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "b3f67849bc2444f8631c23d2230d2dc80cd3035ab3870cce0614e93fe34fffb6",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nTypical advertising regulatory bodies suggest, for example that adverts must not: encourage _________, cause unnecessary ________ or _____, and must not cause _______ offence.\n\nA. Safe practices, Fear, Jealousy, Trivial\nB. Unsafe practices, Distress, Joy, Trivial\nC. Safe practices, Wants, Jealousy, Trivial\nD. Safe practices, Distress, Fear, Trivial\nE. Unsafe practices, Wants, Jealousy, Serious\nF. Safe practices, Distress, Jealousy, Serious\nG. Safe practices, Wants, Fear, Serious\nH. Unsafe practices, Wants, Fear, Trivial\nI. Unsafe practices, Distress, Fear, Serious"
+        }
+      ],
+      "gold": "I",
+      "info": {}
+    },
+    "523": {
+      "digest": "7d2200a684c530dd8bbf3774db52f6b5a2699c98b0eb3f0edcb8b8785deee820",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nCompany A has found that if it offers a guarantee on its transistor radios, more will be sold than without the guarantee. In a year, the company expects to sell 100 radios if no guarantee is offered, but if the length of the guarantee is t years then the number sold will be Q = 100 + 5t. It is known that 10% of radios sold will fail each year. The cost of fixing a radio is $1 and a profit of $2.80 is made on every radio sold. What is the length of the guarantee period t that maximizes profit?\n\nA. 2 years\nB. 3 years\nC. 6 years\nD. 4 years\nE. 8 years\nF. 10 years\nG. 9 years\nH. 7 years\nI. 1 year\nJ. 5 years"
+        }
+      ],
+      "gold": "D",
+      "info": {}
+    },
+    "853": {
+      "digest": "05a71c0161ddd4c8f170ee6b7a48e189dc18e4e04ebff9f4ed290a4dda04a00b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA state enacted a statute making it illegal to knowingly sell, purchase, or in anyway distribute any form of tobacco to a minor. Violation of the statute was a misdemeanor punishable by a $500 fine and up to 30 days in jail. After the statute's enactment, a defendant sold a pack of cigarettes to a girl who was 17 years of age. Before selling the product to the girl, the defendant carefully examined the girl's driver's license, which indicated that she was, in fact, 17 years old. The defendant nevertheless made the sale because he erroneously believed the age of majority to be 17. The defendant is subsequently charged with violation of the statute, and his mistake is honestly held to have been made. Such a mistake should\n\nA. not prevent his conviction, because the crime imposes absolute criminal liability.\nB. result in his acquittal, because the girl presented a false identity.\nC. not prevent his conviction, because he intentionally sold the cigarettes.\nD. not prevent his conviction, because he had previous knowledge of the law.\nE. result in his acquittal, because he did not possess the requisite mens rea.\nF. not prevent his conviction, because the age of majority is 18, not 17.\nG. result in his acquittal, because he took reasonable steps to ascertain the girl's age.\nH. result in his acquittal, because he honestly made a mistake.\nI. result in his acquittal, because the statute was not clearly defined."
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "1046": {
+      "digest": "10c59e96d8836a300671d6168df62261c7063d656f0be702c7628137f504b145",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhich of the following cases best illustrates the 'living instrument principle' used by the European Court of Human Rights?\n\nA. McCann v UK (1995)\nB. Soering v UK (1989)\nC. A v UK (2009)\nD. Marper v UK (2008)\nE. Goodwin v UK (2002)\nF. Golder v UK (1978)\nG. Tyrer v UK (1978)\nH. Osman v UK (1998)"
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "1569": {
+      "digest": "e83e7c70d5c36ebdab10b89470f2762f29cf05b2d053ddb17a1a79ee187a9e99",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIn Osman v UK (1998), the European Court laid down a test, which can be used to apply a general positive obligation on a state. Which of the following statements is not part of the Osman test?\n\nA. The risk must be immediate and unavoidable\nB. If a real and imminent risk (of death/harm)\nC. The state should take unreasonable steps to prevent death/harm occurring\nD. The risk must have been previously reported to the state\nE. A state should take reasonable steps to prevent death/harm occurring\nF. The state has a duty to inform the individual of the risk\nG. The state has a responsibility to eliminate all risk\nH. The state must provide financial compensation for any potential harm\nI. The risk must emanate from a state agent\nJ. A state knows or ought to have known"
+        }
+      ],
+      "gold": "I",
+      "info": {}
+    },
+    "1651": {
+      "digest": "004b8e624464084a86a27864be15bb1a8f2d07bd7349be6baed2287526da4c6f",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA state legislature has recently enacted an obscenity statute prohibiting \"the selling or offering for sale of any obscene printed or video materials. \" Following numerous complaints from a local citizens' group, the police entered an adult bookstore, examined materials on the shelves, and purchased magazines that depicted actual pictures of sexual intercourse. The owner was subsequently arrested and charged with violating the state obscenity law. At his trial, the owner's defense was that the sale of the materials complained of was constitutionally protected speech. Which of the following, if established, would be most helpful to the owner's defense?\n\nA. The bookstore had a strict policy against selling to minors.\nB. The particular materials involved were sold to consenting adults only.\nC. The particular materials involved consisted of serious scientific studies of human sexual urges.\nD. The police did not have a search warrant when they entered the bookstore to purchase the particular materials involved in this obscenity prosecution.\nE. The particular materials involved were part of a larger collection of non-explicit content.\nF. The particular materials involved depicted normal, not deviant, sexual conduct.\nG. The particular materials were imported and not produced in the state.\nH. 85% of the citizens of the state believe that the sale of sexually explicit material does not contribute to antisocial sexual behavior."
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "1664": {
+      "digest": "548d02a974e85fe844fc50471566ff19d8dfef4da642cf75e3131f2eb13b88f7",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhat is the meaning of justiciability?\n\nA. Justiciability refers to the limitation of a State to enforce a particular right\nB. Justiciability refers to the ethical implications of a particular right\nC. Justiciability refers to the just nature or cause of a particular right\nD. Justiciability refers to the availability of legal remedies for a particular right\nE. Justiciability refers to the obligation of a State to enforce a particular Right\nF. Justiciability refers to the legal interpretation of a particular right\nG. Justiciability refers to the public perception of a particular right\nH. Justiciability refers to the courts' assessment of whether the non-enforcement of a particular rights conforms to principles of justice\nI. Justiciability refers to the political implications of a particular right\nJ. Justiciability refers to the possibility of enforcement of a particular right by the relevant rights holders"
+        }
+      ],
+      "gold": "J",
+      "info": {}
+    },
+    "2092": {
+      "digest": "6af34e1b806d1fae4dadae4e33a5cb62a696fb2a6e250ae1818bfae2ccad5903",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nDiscuss the three attributes of color. Why do red and pink appearto be different colors ?\n\nA. Saturation, tone, and pigment\nB. Intensity, shade, and tone\nC. Chroma, contrast, and clarity\nD. Brightness, shade, and chroma\nE. Hue, brightness and saturation\nF. Pigment, texture, and luminance\nG. Tone, shade and tint\nH. Red, green and blue\nI. Hue, saturation, and value\nJ. Contrast, brightness and hue"
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "2342": {
+      "digest": "0b209a7b04f44232a0056e8d616d306f9ec04ba9903c6d8b6b580d2c2078c5b9",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIn comparing Asian and Asian-American therapy clients to Anglo clients, the experts frequently point out that the former:\n\nA. tend to prefer a less directive therapeutic approach.\nB. are grounded more in the here-and-now than in the past or the future.\nC. are likely to express emotional problems as verbal symptoms.\nD. respond better when goal-setting is immediate.\nE. are grounded more in the past or the future than in the here-and-now.\nF. are likely to express emotional problems as somatic symptoms.\nG. tend to prefer group therapy over individual therapy.\nH. respond better when goal-setting is delayed."
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    },
+    "2615": {
+      "digest": "74abb0fe496ffdcd9e4676cb0a5948766afac133ca45eed0f92b391fb4400c55",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nOne's ability to make inferences about the behavior of a population from the behavior of a sample of that population is referred to as\n\nA. reliability\nB. face validity\nC. internal validity\nD. external validity\nE. statistical significance\nF. criterion validity\nG. content validity\nH. convergent validity\nI. inter-rater reliability\nJ. construct validity"
+        }
+      ],
+      "gold": "D",
+      "info": {}
+    },
+    "2664": {
+      "digest": "38c4808f95aa1a0ccfe3819900b1fb1fe5236516b63a2baf87caccdc2d5eb2f0",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nThe superintendent of a large school district asks the school psychologist to predict students' grade point averages (GPAs) for the first year of high school. The school psychologist has included achievement and aptitude scores as predictor variables for firstyear high school GPA in a regression analysis and is considering whether to also administer a school interest inventory and include those scores. The major concern of the school psychologist when making this decision should be which of the following?\n\nA. The cost of administering the school interest inventory to all students\nB. The correlation between the school interest inventory scores and the achievement test scores\nC. The similarity between the school interest inventory scores and the aptitude test scores\nD. The effect of the school interest inventory score on the students' second-year high school GPA\nE. The correlation between the school interest inventory score and the students' middle school GPA\nF. The degree to which the school interest inventory score raises the multiple correlation when it is included as a predictor variable of first-year high school GPA\nG. The zero-order correlation of first-year high school GPA and the school interest inventory score\nH. The difference in the correlations of the school interest inventory scores with first-year high school GPA and the aptitude and achievement test scores with first-year high school GPA\nI. The time required to administer the school interest inventory\nJ. The intercorrelation of the aptitude and achievement test scores"
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    },
+    "3138": {
+      "digest": "c168a52b808b9dfe2a7d1f22f1e55ef2b8217bcfdc7d3afb5e4fa2174d47a39b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhy are the elements carbon, hydrogen, oxygen, and nitrogen (C, H, O, N) of immense importance in living matter ?\n\nA. These elements make up the majority of non-living matter.\nB. Carbon, hydrogen, oxygen and nitrogen are the four most abundant elements in living organisms, make up about 99 percent of the mass of most cells, and can readily form covalent bonds by electron pair sharing.\nC. These elements are rare and precious.\nD. They are noble gases that are crucial for maintaining the structure of proteins.\nE. These elements are responsible for the magnetic properties of living organisms.\nF. These elements are heavy metals that are essential for building DNA and RNA structures.\nG. These elements cannot form covalent bonds.\nH. Carbon, hydrogen, oxygen, and nitrogen are the only elements that organisms need for survival.\nI. These elements are only important for their radioactive properties.\nJ. Carbon, hydrogen, oxygen, and nitrogen are the only elements that can form ionic bonds."
+        }
+      ],
+      "gold": "B",
+      "info": {}
+    },
+    "3252": {
+      "digest": "593166f344465d8bb784c7ac27d6000e3085d92ccb3ea86c6481cd1b0aa1d82a",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nBy photographic and optical means, an image can be enlarged almost indefinitely. However, most light microscopes offer magnifications of only 1000 to 1500 times the actual size, while electron microscopes offer magnifications of 100,000 times or more. Explain.\n\nA. The resolution offered by electron microscopes is more than a thousandfold better than light microscopes.\nB. Electron microscopes are less expensive and more accessible than light microscopes\nC. Light microscopes have a more complex setup and calibration process than electron microscopes\nD. Light microscopes provide a deeper depth of field than electron microscopes\nE. Electron microscopes require specimens to be in a vacuum, which limits the type of specimens that can be observed\nF. Light microscopes can magnify live specimens, whereas electron microscopes cannot\nG. Electron microscopes use light waves, while light microscopes use electron beams\nH. Light microscopes use shorter wavelength radiation\nI. Electron microscopes have a larger magnification range\nJ. Electron microscopes are easier to use"
+        }
+      ],
+      "gold": "A",
+      "info": {}
+    },
+    "3466": {
+      "digest": "7df400489f03b229d0bb3387d41d2eb8434d97a807c03c6b10ca1e2f8f48c449",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nTwo moles of gaseous NH_3 are introduced into a 1.0-liter vessel and allowed to undergo partial decomposition at high temperature ac-cording to the reaction 2NH_3 (g) \\rightleftarrows N_2 (g) + 3H_2 (g) . At equilibrium, 1.0 mole of NH_3 (g) remains. What is the value of the equilibrium constant?\n\nA. 0.25\nB. 4.0\nC. 1.5\nD. 2.0\nE. 3.0\nF. 1.6875\nG. 0.5\nH. 1.0\nI. 2.5\nJ. 0.75"
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    },
+    "3580": {
+      "digest": "3eb5a66bae54834abc4888d52867df022d2f4a0308bbc8aea7ea94122635f76b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhy does theelectronegativityof the halogens decrease with increasing atomic number?\n\nA. Ionization potentials decrease with increasing atomic number\nB. The atomic radius decreases with increasing atomic number, which increases electronegativity\nC. Ionization potentials increase with increasing atomic number\nD. Electronegativity increases with increasing atomic number\nE. The valence electrons become more tightly bound with increasing atomic number, leading to higher electronegativity\nF. Halogens gain electrons more readily with increasing atomic number, increasing their electronegativity\nG. The valence electron shell becomes more shielded with increasing atomic number, thus reducing electronegativity\nH. The nuclear charge decreases with increasing atomic number, making the atoms less electronegative\nI. Electrons are easier to remove from elements with lower atomic number"
+        }
+      ],
+      "gold": "A",
+      "info": {}
+    },
+    "3661": {
+      "digest": "0863fdb96e563a1b32355c4f66ef824b51f243a63ded5dc4ec84214bf8216deb",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nOne of the major atmospheric pollutants emitted by fuel combustion power stations is a sulfur oxide mixture general-ly designated as S0_x. It consists mainly of SO_2 but may contain anywhere from 1 to 10% SO_3 computed as percent by weight of the total mass. What would be the approximate range to assign to x?\n\nA. x = 2.01\nB. x = 3.14/1.56\nC. x = 1.56/3.14\nD. x = 1.25 × 10^-2"
+        }
+      ],
+      "gold": "B",
+      "info": {}
+    },
+    "4010": {
+      "digest": "0c884faff533b79caea0aa9afddd7ba2d3f98e7a462ecb729f358dcb8a2a4dce",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nConsider the formation of an ionic molecule, AB, by the donation of an electron from atom A to atom B. If the ionization potential of A is 5.5eVand the electron affinity of B is 1.5eV, and the ion B^- has a radius of 0.20 nm, what is the maximum size of A^+ that would lend itself to the formation of an energetically stable bond?\n\nA. 0.10 nm\nB. 0.25 nm\nC. 0.36 nm\nD. 0.15 nm\nE. 0.40 nm\nF. 0.22 nm\nG. 0.30 nm\nH. 0.12 nm\nI. 0.20 nm\nJ. 0.16 nm"
+        }
+      ],
+      "gold": "J",
+      "info": {}
+    },
+    "4184": {
+      "digest": "8c7088f53a0f7cd0c5ffb5d6bc4d3eca88e31b93c4bf176fb8c0e25e3368be06",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\n40 g of ice at 0°C is mixed with 100 g of water at 60°C, What is the final temperature after equilibrium has been established? Heat of fusion of H_2O = 80 cal/g, specific heat = 1 cal/g-°C.\n\nA. 40°C\nB. 30°C\nC. 20°C\nD. 50°C"
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "4707": {
+      "digest": "1eeaf79e7d11b5e9f90239f27297e2bfa99af06ee8a46f7066bf3887362743dd",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nThe possibility that Homo erectus possessed an aesthetic sense and may have created “art” is suggested by:\n\nA. the discovery of figurines made from clay at the Trinil site.\nB. recovery of a shell at the Trinil site with an intentionally engraved series of lines.\nC. the use of complex tools requiring a high level of cognitive function.\nD. cave paintings and elaborate burials with numerous grave goods at the Trinil site.\nE. all of the above.\nF. all of the above except B and D.\nG. evidence of musical instruments found at the Trinil site.\nH. their ability to control fire, suggesting a deeper understanding of their environment.\nI. the construction of elaborate shelters, indicating a sense of design.\nJ. the size of their brains, with a mean brain size slightly larger than modern humans."
+        }
+      ],
+      "gold": "B",
+      "info": {}
+    },
+    "5161": {
+      "digest": "df9e50b5b53af072192d14b5b826e10a4a1d48ccfb30d0b005e96b31ae766399",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nRomulo is on a crowded bus and he sees a woman near the door. Feeling a little saucy Romulo proceeds to rub up against the woman and is immediately aroused. Romulo's inappropriate behavior would be characterized as:\n\nA. Narcissism\nB. Voyeurism\nC. Fetishism\nD. Pedophilic Disorder\nE. Transvestic Disorder\nF. Sexual Sadism Disorder\nG. Exhibitionism\nH. Frotteurism\nI. Sadomasochism\nJ. Masochism"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "5230": {
+      "digest": "013656b13667d0c9d3c169ae37452c09417c71a133087e468cb2752b995632e1",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIn Symbolic Interactionist theory, Mead defined the 'generalized other' as:\n\nA. a collection of individual roles and expectations in society\nB. the viewpoint of a specific other individual we interact with\nC. an imaginary audience that is always judging our actions\nD. the overall impression of ourselves that we try to give off to others\nE. an image of how people in the wider society might perceive our behaviour\nF. a significant figure in early childhood who teaches us the general values of society\nG. the group of structural theories of society that he was reacting against\nH. the inherent human tendency to seek social acceptance"
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "5753": {
+      "digest": "6e57634ad17c791b1422c890f9e083d4d1c0df773b495f362f31050fc03610d7",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nBrill Co. made the following expenditures relating to Product X: Labor and material costs incurred in producing a prototype $100000 Cost of testing the prototype $40000 Legal costs to file a patent $5000 Production of Product X commenced when the patent was granted. What amount of the above costs should be expensed as research and development costs?\n\nA. $50,000\nB. $150,000\nC. $105,000\nD. $140,000\nE. $95,000\nF. $90,000\nG. $145,000\nH. 145000\nI. $40,000\nJ. $100,000"
+        }
+      ],
+      "gold": "D",
+      "info": {}
+    },
+    "5805": {
+      "digest": "2153c9e6fc5e6c6b062742ba40218604f72004a4bbdcd0e8cb1b8afbccfee384",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nAs of 2019, about what percentage of French people say God plays an important role in their life?\n\nA. 51%\nB. 11%\nC. 44%\nD. 71%\nE. 80%\nF. 25%\nG. 60%\nH. 31%\nI. 91%\nJ. 15%"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "6062": {
+      "digest": "f69f6d73a5e6e15e81e8480f701aead9fba9f42a1766ad6dcdc36ff4012667d2",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIn which of the following positions does a patient lie face down?\n\nA. Supine\nB. Erect\nC. Trendelenburg\nD. Prone\nE. Sims\nF. Dorsal\nG. Jackknife\nH. Lateral\nI. Semi-Fowler's\nJ. Lithotomy"
+        }
+      ],
+      "gold": "B",
+      "info": {}
+    },
+    "6277": {
+      "digest": "8f0e0dedfbb3b1e81d82146c0c8295262b60c77762a12e7fd2664d82581c9504",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA 15-year-old male presents to the office with the complaint of painless swelling in the left testicle that has varied in size over the past several months. There is no history of trauma. The lesion transilluminates well, and no inguinal nodes are palpable. Findings from a testicular scan are normal. The most appropriate management includes\n\nA. ultrasonic therapy\nB. cryotherapy\nC. needle biopsy\nD. radiation therapy\nE. laser therapy\nF. chemotherapy\nG. needle aspiration\nH. injection with a sclerosing agent\nI. surgical repair\nJ. oral medication"
+        }
+      ],
+      "gold": "I",
+      "info": {}
+    },
+    "6289": {
+      "digest": "6d14c578d965c440e6aa50ee19e524eeddf14344ff0392427d6910d0e2762dad",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhich of the following will increase in vitamin D deficiency?\n\n\nA. The plasma concentration of vitamin B12\nB. The plasma concentration of prothrombin\nC. The plasma concentration of preprothrombin\nD. The plasma activity of acid phosphatase\nE. The plasma activity of lipase\nF. The plasma concentration of vitamin C\nG. The plasma activity of pepsin\nH. The plasma concentration of insulin\nI. The plasma activity of amylase\nJ. The plasma activity of alkaline phosphatase"
+        }
+      ],
+      "gold": "J",
+      "info": {}
+    },
+    "6377": {
+      "digest": "55a277e329685ad73a958d27d7f94ea045806c5a00893e25dda465d1be0a75e3",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA 22-year-old woman comes to the physician in October for a follow-up examination. She feels well. She has a 2-year history of type 1 diabetes mellitus controlled with insulin. She had a normal Pap smear 3 months ago and saw her ophthalmologist 6 months ago. Her 67-year-old grandmother has breast cancer. She is 168 cm (5 ft 6 in) tall and weighs 57 kg (125 lb); BMI is 20 kg/m2 . Her hemoglobin A1c is 6.2%, and fingerstick blood glucose concentration is 118 mg/dL. Which of the following health maintenance recommendations is most appropriate at this time?\n\nA. Pneumococcal vaccine\nB. Mammography\nC. Dietary modification for weight loss\nD. Screening for cervical cancer\nE. Screening for colon cancer\nF. Influenza virus vaccine\nG. Routine eye examination\nH. Colonoscopy\nI. Human papillomavirus testing\nJ. Hepatitis B virus vaccine"
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    },
+    "6800": {
+      "digest": "ba4520f8ce3dfa3e65dffb5418a43b9a7e4255334d9dba726651b45a68d4d7ce",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhich of the following will shift the demand curve for the Mexican peso to the left?\n\nA. An increase in the international demand for Mexican-made textiles\nB. Speculation that the peso will increase in value\nC. A decrease in the international demand for Mexican-made textiles\nD. An increase in the international demand for Mexican tourism\nE. A stable rate of inflation in Mexico relative to other countries\nF. A lower rate of inflation in Mexico relative to other countries\nG. An increase in interest rates in Mexico relative to other countries"
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "7074": {
+      "digest": "431c90d361553403fb243a175c17c3f3d259edc22cc4cee99b03479b9eed372c",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhich of the following statements concerning the regression population and sample is FALSE?\n\nA. The population is the total collection of all items of interest\nB. The population can be infinite\nC. In theory, the sample could be larger than the population\nD. A random sample is one where each individual item from the population is equally likely to be drawn."
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "7323": {
+      "digest": "724b958976d131c3144b6c177976a340428c69bed683a266edb74e213b1619cf",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIf one person has the only original signed copy of The Wealth of Nations by Adam Smith, which of the following would illustrate this situation?\n\nA. A downward sloping supply curve.\nB. An upward sloping demand curve.\nC. An upward sloping supply curve.\nD. An invisible hand.\nE. A perfectly horizontal supply curve.\nF. A perfectly horizontal demand curve.\nG. A perfectly vertical demand curve.\nH. An invisible supply.\nI. A downward sloping demand curve.\nJ. A perfectly vertical supply curve."
+        }
+      ],
+      "gold": "J",
+      "info": {}
+    },
+    "7846": {
+      "digest": "9995cac346692d68f803c5151c0bf7dcba994cb42a8837abf703849dea73f6e6",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA gas station sold 300.5849 gallons of gas in a day. How many gallons of gas did the gas station sell, rounded to the nearest hundredth?\n\nA. 300.6\nB. 300.59\nC. 301\nD. 300.58\nE. 300\nF. 300.60\nG. 300.586\nH. 300.50\nI. 300.585"
+        }
+      ],
+      "gold": "D",
+      "info": {}
+    },
+    "8369": {
+      "digest": "1dd02c0b8fdaf77905e6695d7c4d730b5f94d9c955c0d24784d285e991aa6ed0",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nThe probability is 0.2 that a value selected at random from a normal distribution with mean 600 and standard deviation 15 will be above what number?\n\nA. 603.8\nB. 605.3\nC. 600.0\nD. 620.5\nE. 625.9\nF. 610.2\nG. 587.4\nH. 612.6\nI. 0.84\nJ. 615.7"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "8390": {
+      "digest": "4c68165a3695e834e464387e4098f13666be015a1d1e7afc7e9869c97a348a68",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nStatement 1 | f : X → Y is continuous and X is compact. f must be uniformly continuous. Statement 2 | If f(x), g(x) : R → R are everywhere differentiable f(g(x)) must be everywhere differentiable.\n\nA. Not applicable, Not applicable\nB. True, False\nC. Both statements are applicable, but cannot be definitively classified as true or false.\nD. False, Not applicable\nE. False, True\nF. True, Not applicable\nG. False, False\nH. Not applicable, True\nI. Not applicable, False\nJ. True, True"
+        }
+      ],
+      "gold": "J",
+      "info": {}
+    },
+    "8892": {
+      "digest": "0dbedb5e4af09ffc7a9f1c4c5099c4eb8b42655c60ee895284826b95cf66461e",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhat is the energy equivalent in MeV of a particle whose mass is 1 amu?\n\nA. 1100 MeV\nB. 482 MeV\nC. 1500 MeV\nD. 1024 MeV\nE. 1230 MeV\nF. 1000 MeV\nG. 500 MeV\nH. 931 MeV\nI. 800 MeV\nJ. 750 MeV"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "8945": {
+      "digest": "eafac2c7ef9abffdf9f24d8006904a4f047c6c5a901edbaeef830820baebec53",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nFind the fraction of 7.7-MeV alpha particles that is deflected at an angle of 90° or more from a gold foil of 10^-6 m thickness.\n\nA. 5e-05\nB. 4e-05\nC. 7e-05\nD. 8e-05\nE. 9e-05\nF. 1e-04\nG. 3e-05\nH. 6e-05\nI. 1.5e-05\nJ. 2e-05"
+        }
+      ],
+      "gold": "B",
+      "info": {}
+    },
+    "9206": {
+      "digest": "35d0ecb0032e361ea146589f602c2f7eb0169735d6c0b9f627ad4e98bb5baef8",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nGiven the necessary precautions, water can be cooled to a temperature T = -10 °C. What mass of ice m is formed from M = 1 kg. of such water when a particle of ice is thrown into it and freezing thereby produced? Regard the specific heat of thesupercooledwater as independent of the temper-ature and equal to the specific heat of ordinary water.\n\nA. 80 gr\nB. 100 gr\nC. 250 gr\nD. 300 gr\nE. 220 gr\nF. 125 gr\nG. 200 gr\nH. 150 gr\nI. 50 gr\nJ. 175 gr"
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    },
+    "9415": {
+      "digest": "df800e97b97ea28717b46a5a5528d98ccef81b166c491eaa6b8cdf60e9436407",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA rocket has a length L = 600 m measured at rest on the earth. It moves directly away from the earth at constant velocity, and a pulse of radar is sent from earth and reflected back by devices at the nose and tail of the rocket. The reflected signal from the tail is detected on earth 200 sec after emission and the signal from the nose 17.4 × 10^-6 sec later. Calculate the distance of the rocket from the earth and the velocity of the rocket with respect to the earth.\n\nA. R = 3.2 × 10^10 m, v = 2.40 × 10^8 m/sec\nB. R = 2 × 10^10 m, v = 1.63 × 10^8 m/sec\nC. R = 3.5 × 10^10 m, v = 2.50 × 10^8 m/sec\nD. R = 4.5 × 10^10 m, v = 3.00 × 10^8 m/sec\nE. R = 2.5 × 10^10 m, v = 2.00 × 10^8 m/sec\nF. R = 1.5 × 10^10 m, v = 1.50 × 10^8 m/sec\nG. R = 4 × 10^10 m, v = 2.63 × 10^8 m/sec\nH. R = 1 × 10^10 m, v = 1.13 × 10^8 m/sec\nI. R = 3 × 10^10 m, v = 2.13 × 10^8 m/sec\nJ. R = 2.8 × 10^10 m, v = 1.90 × 10^8 m/sec"
+        }
+      ],
+      "gold": "I",
+      "info": {}
+    },
+    "9938": {
+      "digest": "5494782efdd39181af35e04824f1983f6b09798e695d2c3d7a1eebcbaf624984",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nIn a typical experiment performed to measure the mechanical (electrical) equivalent of heat the following data were obtained: resistance of the coil, 55 ohms; applied voltage, 110 volts; mass of water, 153 gm; mass of calorimeter, 60 gm; specific heat of calorimeter, 0.10 cal/(gmC°); time of run, 1.25 min; initial temperature of water, 10.0°C; final temperature, 35.0°C. Find the value of J.\n\nA. 3.15 Joules/cal\nB. 9.15 Joules/cal\nC. 8.15 Joules/cal\nD. 1.15 Joules/cal\nE. 7.15 Joules/cal\nF. 2.15 Joules/cal\nG. 5.15 Joules/cal\nH. 6.15 Joules/cal\nI. 4.15 Joules/cal\nJ. 10.15 Joules/cal"
+        }
+      ],
+      "gold": "I",
+      "info": {}
+    },
+    "10040": {
+      "digest": "a88897d310d05f91c0ffbdbd61ebb138f21e680cbba6e369036a0bde6ee37120",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nFind thedeBrogliewavelength corresponding to an electron with energy 1, 10^4 , or 10^5eV. Neglect any corrections connected with the theory of relativity.\n\nA. For K1= 1eV, λ1 = 14 A; For K2 = 10^4eV, λ2 = 0.14 A; For K3 = 10^5eV, λ3= 0.045 A\nB. For K1= 1eV, λ1 = 15 A; For K2 = 10^4eV, λ2 = 0.15 A; For K3 = 10^5eV, λ3= 0.05 A\nC. For K1= 1eV, λ1 = 20 A; For K2 = 10^4eV, λ2 = 0.2 A; For K3 = 10^5eV, λ3= 0.06 A\nD. For K1= 1eV, λ1 = 10 A; For K2 = 10^4eV, λ2 = 0.1 A; For K3 = 10^5eV, λ3= 0.01 A\nE. For K1= 1eV, λ1 = 8.5 A; For K2 = 10^4eV, λ2 = 0.085 A; For K3 = 10^5eV, λ3= 0.028 A\nF. For K1= 1eV, λ1 = 11 A; For K2 = 10^4eV, λ2 = 0.11 A; For K3 = 10^5eV, λ3= 0.035 A\nG. For K1= 1eV, λ1 = 12.2 A; For K2 = 10^4eV, λ2 = 0.122 A; For K3 = 10^5eV, λ3= 0.039 A\nH. For K1= 1eV, λ1 = 9 A; For K2 = 10^4eV, λ2 = 0.09 A; For K3 = 10^5eV, λ3= 0.03 A\nI. For K1= 1eV, λ1 = 13.5 A; For K2 = 10^4eV, λ2 = 0.135 A; For K3 = 10^5eV, λ3= 0.043 A\nJ. For K1= 1eV, λ1 = 16 A; For K2 = 10^4eV, λ2 = 0.16 A; For K3 = 10^5eV, λ3= 0.052 A"
+        }
+      ],
+      "gold": "G",
+      "info": {}
+    },
+    "10200": {
+      "digest": "5d9dfb3c54e3d84f0ed16acad90ddbf0997cbd8ab8ee42cf057c5aaf21bba0ee",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nExplain the 'END OF FILE Condition' method of ending a Explain the 'END OF FILE Condition' method of ending a programin PL/I.\n\nA. The end-file condition occurs when a special end-of-file character is encountered within the file's data.\nB. The end-file condition occurs when the file is not found\nC. The end-file condition occurs when the operating system signals the end of a file due to a timeout.\nD. The end-file condition occurs when the file is manually closed by the user during the execution of the program.\nE. The end-file condition occurs when an attempt is made to acquire data from the input file after the last data from the file has already been read.\nF. The end-file condition occurs when the file reaches a certain size limit during data writing.\nG. The end-file condition occurs when the file is corrupted\nH. The end-file condition occurs when the file's read permission is revoked while the program is running.\nI. The end-file condition is triggered by a specific keyword written into the file."
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "10461": {
+      "digest": "176f548872e9ec8aa996df701350edc656bca60e09980c6809e488ffc0d942ed",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nWhich of the following is true of a convolution kernel?\n\nA. Convolving an image with $\\begin{bmatrix}0 & 0 & 0\\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$ would not change the image\nB. Convolving an image with $\\begin{bmatrix}1 & 0 & 0\\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$ would not change the image\nC. Convolving an image with $\\begin{bmatrix}0 & 1 & 0\\\\ 0 & 0 & 0 \\\\ 0 & 1 & 0 \\end{bmatrix}$ would not change the image\nD. Convolving an image with $\\begin{bmatrix}1 & 1 & 1\\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$ would not change the image\nE. Convolving an image with $\\begin{bmatrix}1 & 1 & 1\\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1 \\end{bmatrix}$ would not change the image\nF. Convolving an image with $\\begin{bmatrix}0 & 0 & 0\\\\ 0 & 0 & 0 \\\\ 1 & 1 & 1 \\end{bmatrix}$ would not change the image\nG. Convolving an image with $\\begin{bmatrix}0 & 1 & 0\\\\ 1 & 0 & 1 \\\\ 0 & 1 & 0 \\end{bmatrix}$ would not change the image\nH. Convolving an image with $\\begin{bmatrix}0 & 0 & 0\\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$ would not change the image\nI. Convolving an image with $\\begin{bmatrix}1 & 0 & 1\\\\ 1 & 0 & 1 \\\\ 1 & 0 & 1 \\end{bmatrix}$ would not change the image\nJ. Convolving an image with $\\begin{bmatrix}1 & 0 & 1\\\\ 0 & 1 & 0 \\\\ 1 & 0 & 1 \\end{bmatrix}$ would not change the image"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "10518": {
+      "digest": "766d3316093c0ded92e28552748756113cd6f40d321c84e364b0774d16b4a106",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nStatement 1| VGGNets have convolutional kernels of smaller width and height than AlexNet's first-layer kernels. Statement 2| Data-dependent weight initialization procedures were introduced before Batch Normalization.\n\nA. Both Statement 1 and Statement 2 are Not Given\nB. Statement 1 is Not Given and Statement 2 is True\nC. True, True\nD. Statement 1 is False and Statement 2 is Not Given\nE. True, False\nF. False, False\nG. Statement 1 is True and Statement 2 is Not Given\nH. False, True\nI. Statement 1 is Not Given and Statement 2 is False\nJ. Statement 1 is Not Given and Statement 2 is Not Given"
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "10984": {
+      "digest": "dd21e97219d6f477e17b87292e77b5ca04ceb8b19adca2a9bd27e43107d17f99",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\n Which bodhisattva is known for conducting the souls of dead children to salvation?\n\nA. Kannon\nB. Shakyamuni\nC. Manjusri\nD. Guan-yin\nE. Tara\nF. Avalokiteshvara\nG. Vajrapani\nH. Ojizo-sama\nI. Amitabha\nJ. Maitreya"
+        }
+      ],
+      "gold": "H",
+      "info": {}
+    },
+    "11015": {
+      "digest": "caff922a9bd53b407cf04b34d9a184ba7e237d0d61c22bf01fe7c11866bfb912",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\n In Singer's understanding, the principle of the equality of human beings is\n\nA. a description of an alleged actual equality among humans.\nB. a description of an alleged equality among all living beings.\nC. a prescription of how we should treat nonhuman animals.\nD. a description of an alleged inequality among all living beings.\nE. a prescription of how we should treat humans.\nF. a description of an alleged actual inequality among humans.\nG. a description of an alleged actual superiority of humans over nonhuman animals.\nH. a prescription of how we should treat both human and nonhuman animals equally.\nI. a prescription of how we should treat nonhuman animals differently.\nJ. a prescription of how we should treat the environment."
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "11507": {
+      "digest": "8726d8489085ec2b24de031137d6f4a0cd85b7e061f8129dff6b65ca6abfbf5d",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nA 2 ft high vertical plate is maintained at 200°F. If steam at 15psiais condensing on the plate, determine the average heat transfer coefficient of the plate.\n\nA. 7500 Btu/hr-ft^2-°F\nB. 969.7 Btu/hr-ft2-°F\nC. 540 Btu/hr-ft^2-°F\nD. 1200 Btu/hr-ft^2-°F\nE. 1665 Btu/hr-ft2-°F\nF. 2500 Btu/hr-ft^2-°F\nG. 213.03 Btu/hr-ft2-°F\nH. 8467.1 Btu/hr-ft2-°F\nI. 450 Btu/hr-ft^2-°F\nJ. 3000 Btu/hr-ft^2-°F"
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "11726": {
+      "digest": "a5eb8285ec1a60c082f6b0d4d49f045bb850e7cf52d2b7d939cdd08ec62f6493",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nCalculate the heat transfer coefficient for water traveling at a velocity of 15 ft/sec in a (3/4) in. 20 BWG tube. Bulk temperatures at the entrance and exit are 65°F and 125°F, respectively. The wall surface tempera-ture is 170°F.\n\nA. 2200 Btu/hr-ft^2-°F, 2400 Btu/hr-ft^2-°F, 2600 Btu/hr-ft^2-°F\nB. 2600 Btu/hr-ft^2-°F, 2800 Btu/hr-ft^2-°F, 3000 Btu/hr-ft^2-°F\nC. 2935.2 Btu/hr-ft^2-°F, 2642.3 Btu/hr-ft^2-°F, 2751.6 Btu/hr-ft^2-°F\nD. 3050 Btu/hr-ft^2-°F, 3100 Btu/hr-ft^2-°F, 2950 Btu/hr-ft^2-°F\nE. 2000 Btu/hr-ft^2-°F, 2500 Btu/hr-ft^2-°F, 2300 Btu/hr-ft^2-°F\nF. 2750 Btu/hr-ft^2-°F, 2900 Btu/hr-ft^2-°F, 2650 Btu/hr-ft^2-°F\nG. 2850 Btu/hr-ft^2-°F, 2700 Btu/hr-ft^2-°F, 2550 Btu/hr-ft^2-°F\nH. 1500 Btu/hr-ft^2-°F, 1800 Btu/hr-ft^2-°F, 2100 Btu/hr-ft^2-°F\nI. 3200 Btu/hr-ft^2-°F, 2800 Btu/hr-ft^2-°F, 2600 Btu/hr-ft^2-°F\nJ. 3100 Btu/hr-ft^2-°F, 2900 Btu/hr-ft^2-°F, 2700 Btu/hr-ft^2-°F"
+        }
+      ],
+      "gold": "C",
+      "info": {}
+    },
+    "11886": {
+      "digest": "843c8ed6e4c95d1ee4ee5e3ec1f6ad98f0cfa03f9d671202f7e8fa69e059fdbc",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\n12 gal/min of a liquid with a specific gravity of 1.3 is to be lifted with an air pump. If air can be obtained at 55 psig, and the liquid is to be raised 75 ft., determine the power needed using isentropic air compression. The pump has an efficiency of 30%.\n\nA. 2.0 hp\nB. 0.8 hp\nC. 1.8 hp\nD. 0.5 hp\nE. 1.2 hp\nF. 2.5 hp\nG. 3.0 hp\nH. 1.5 hp\nI. 0.6 hp\nJ. 1.0 hp"
+        }
+      ],
+      "gold": "E",
+      "info": {}
+    },
+    "12031": {
+      "digest": "7e392d44bbf9623796d95f2c4598e7481a340fe93b3cf8c8dcaedb0c9e237936",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please reason step by step, then ONLY give the letter of the correct answer within \\boxed{}.\n\nThe frequency range of a commercially broadcast FM signal is 88 to 108 MHz, with carrier swing of 125 kHz. Find the percentage modulation of the signal.\n\nA. 110%\nB. 125%\nC. 50%\nD. 62.5%\nE. 75%\nF. 83.3%\nG. 93.8%\nH. 57.1%\nI. 100%\nJ. 90%"
+        }
+      ],
+      "gold": "F",
+      "info": {}
+    }
+  },
+  "dataset_size": 12032,
+  "sources": {
+    "mmlu_pro/taskset.py": "\"\"\"mmlu_pro: MMLU-Pro multiple-choice.\n\nLoad MMLU-Pro questions, optionally prepend category-matched chain-of-thought examples,\nprompt the model to box the correct answer letter, and score the boxed letter against gold.\n\"\"\"\n\nfrom collections.abc import Iterator\n\nimport verifiers.v1 as vf\n\nDATASET_NAME = \"TIGER-Lab/MMLU-Pro\"\nDATASET_SUBSET = \"default\"\nDATASET_SPLIT = \"test\"\nEXAMPLE_SPLIT = \"validation\"\nDATASET_REVISION = \"b189ec765aa7ed75c8acfea42df31fdae71f97be\"\nINSTRUCTION = \"Please reason step by step, then ONLY give the letter of the correct answer within \\\\boxed{}.\"\n# Adapted to the boxed-answer contract from the upstream category-matched CoT prompt:\n# https://github.com/TIGER-AI-Lab/MMLU-Pro/blob/main/cot_prompt_lib/initial_prompt.txt\nFEW_SHOT_INSTRUCTION = (\n    \"The following are multiple choice questions (with answers) about {category}. \"\n    \"Think step by step and then finish your answer with the correct letter inside \\\\boxed{{}}.\"\n)\n\n\nclass MMLUProData(vf.TaskData):\n    network_allow: list[str] = []\n    answer: str\n    \"\"\"The gold answer letter — math-verify compares the model's boxed letter to this.\"\"\"\n\n\nclass MMLUProTask(vf.Task[MMLUProData]):\n    @vf.reward(weight=1.0)\n    async def correct(self, trace: vf.Trace) -> float:\n        return vf.verify_boxed_math_answer(trace.last_reply, self.data.answer)\n\n\nclass MMLUProConfig(vf.TasksetConfig):\n    n_shot: int = 0\n    \"\"\"Number of category-matched validation examples to prepend (0-5).\"\"\"\n\n\nclass MMLUProTaskset(vf.Taskset[MMLUProTask, MMLUProConfig]):\n    def load(self) -> Iterator[MMLUProTask]:\n        from datasets import load_dataset\n\n        if not 0 <= self.config.n_shot <= 5:\n            raise ValueError(\"n_shot must be between 0 and 5\")\n\n        rows = load_dataset(DATASET_NAME, DATASET_SUBSET, split=DATASET_SPLIT, revision=DATASET_REVISION)\n        examples_by_category: dict[str, list[dict]] = {}\n        if self.config.n_shot:\n            examples = load_dataset(DATASET_NAME, DATASET_SUBSET, split=EXAMPLE_SPLIT, revision=DATASET_REVISION)\n            for example in examples:\n                examples_by_category.setdefault(example[\"category\"], []).append(example)\n\n        for i, row in enumerate(rows):\n            options = \"\\n\".join(f\"{chr(65 + j)}. {option}\" for j, option in enumerate(row[\"options\"]))\n            prompt = f\"{INSTRUCTION}\\n\\n{row['question']}\\n\\n{options}\"\n            if self.config.n_shot:\n                prompt_parts = [FEW_SHOT_INSTRUCTION.format(category=row[\"category\"])]\n                for example in examples_by_category[row[\"category\"]][: self.config.n_shot]:\n                    real_options = [option for option in example[\"options\"] if option != \"N/A\"]\n                    example_options = \"\\n\".join(f\"{chr(65 + j)}. {option}\" for j, option in enumerate(real_options))\n                    reasoning = example[\"cot_content\"].removeprefix(\"A: \").rsplit(\"The answer is\", 1)[0].rstrip()\n                    prompt_parts.append(\n                        f\"Question:\\n{example['question']}\\nOptions:\\n{example_options}\\n\"\n                        f\"Answer: {reasoning} The answer is \\\\boxed{{{example['answer']}}}.\"\n                    )\n                prompt_parts.append(f\"Question:\\n{row['question']}\\nOptions:\\n{options}\\nAnswer:\")\n                prompt = \"\\n\\n\".join(prompt_parts)\n\n            yield MMLUProTask(\n                MMLUProData(\n                    idx=i,\n                    prompt=prompt,\n                    answer=str(row[\"answer\"]),\n                ),\n                self.config.task,\n            )\n",
+    "verifiers/v1/utils/score.py": "from __future__ import annotations\n\nimport re\nfrom collections.abc import Sequence\nfrom decimal import Decimal, InvalidOperation\nfrom typing import TYPE_CHECKING\n\nfrom math_verify import parse, verify\nfrom math_verify.errors import TimeoutException as MathVerifyTimeout\n\nfrom verifiers.v1.errors import SandboxError\n\nif TYPE_CHECKING:\n    from verifiers.v1.runtimes import Runtime\n    from verifiers.v1.trace import Trace\n\nBOXED_START = \"\\\\boxed{\"\nANSI_RE = re.compile(r\"\\x1b\\[[0-?]*[ -/]*[@-~]\")\nPYTEST_OUTCOMES = (\"PASSED\", \"FAILED\", \"ERROR\", \"SKIPPED\", \"XFAIL\", \"XPASS\")\n\n\ndef extract_boxed_answer(text: str, strict: bool = False) -> str:\n    start = text.rfind(BOXED_START)\n    if start == -1:\n        return \"\" if strict else text\n\n    # Regex is the wrong tool for nested braces, so walk the final box by hand.\n    answer_start = start + len(BOXED_START)\n    depth = 1\n    for index, char in enumerate(text[answer_start:], start=answer_start):\n        if char == \"{\":\n            depth += 1\n        elif char == \"}\":\n            depth -= 1\n        if depth == 0:\n            return text[answer_start:index]\n\n    return \"\" if strict else text\n\n\nasync def read_answer_file_or_last_reply(\n    runtime: Runtime, path: str, trace: Trace\n) -> str:\n    try:\n        answer = (await runtime.read(path)).decode(errors=\"replace\").strip()\n    except (FileNotFoundError, OSError, SandboxError):\n        answer = \"\"\n    return answer or trace.last_reply\n\n\ndef parse_judge_choice(\n    content: str | None, choices: Sequence[str] = (\"A\", \"B\", \"C\")\n) -> str | None:\n    if not content or (\"<think>\" in content and \"</think>\" not in content):\n        return None\n\n    text = content.rsplit(\"</think>\", 1)[-1].strip()\n    text = extract_boxed_answer(text, strict=True).strip() or text\n\n    text_upper = text.upper()\n    choices_by_upper = {choice.upper(): choice for choice in choices}\n    allowed = \"|\".join(re.escape(choice) for choice in choices_by_upper)\n    choice_re = rf\"(?<!\\w)({allowed})(?!\\w)\"\n    verdict_re = (\n        r\"(?:^|\\n)\\s*(?:FINAL\\s+JUDGMENT|FINAL\\s+ANSWER|FINAL\\s+VERDICT|\"\n        r\"JUDGMENT|VERDICT|ANSWER)\\s*(?:IS\\s*)?[:\\-]?\\s*\"\n    )\n\n    verdict = re.search(verdict_re, text_upper)\n    if verdict:\n        match = re.search(choice_re, text_upper[verdict.end() :])\n        return choices_by_upper.get(match.group(1)) if match else None\n\n    matches = re.findall(choice_re, text_upper)\n    return choices_by_upper.get(matches[-1]) if matches else None\n\n\ndef verify_boxed_math_answer(\n    response: str | None, answer: str, *, timeout_seconds: int = 5\n) -> float:\n    if not response or (\"<think>\" in response and \"</think>\" not in response):\n        return 0.0\n\n    prediction_text = response.rsplit(\"</think>\", 1)[-1]\n    prediction = extract_boxed_answer(prediction_text, strict=True).strip()\n    gold = (extract_boxed_answer(answer, strict=True) or answer).strip()\n    if not prediction or not gold:\n        return 0.0\n\n    # math-verify expects both sides as boxed math expressions.\n    try:\n        parsed_gold = parse(f\"\\\\boxed{{{gold}}}\", parsing_timeout=timeout_seconds)\n        parsed_prediction = parse(\n            f\"\\\\boxed{{{prediction}}}\",\n            parsing_timeout=timeout_seconds,\n        )\n        return float(\n            verify(\n                parsed_gold,\n                parsed_prediction,\n                timeout_seconds=timeout_seconds,\n            )\n        )\n    except (Exception, MathVerifyTimeout):  # noqa: BLE001 - malformed answers score zero\n        return 0.0\n\n\ndef compare_stdout_results(\n    exec_stdout: str, expected: str, *, tolerance: float = 1e-3\n) -> bool:\n    if exec_stdout.strip() == expected.strip():\n        return True\n\n    actual_lines = [line.strip() for line in exec_stdout.splitlines() if line.strip()]\n    expected_lines = [line.strip() for line in expected.splitlines() if line.strip()]\n    if actual_lines == expected_lines:\n        return True\n\n    actual_tokens = [token for line in actual_lines for token in line.split()]\n    expected_tokens = [token for line in expected_lines for token in line.split()]\n    if actual_tokens == expected_tokens:\n        return True\n    if len(actual_tokens) != len(expected_tokens) or not actual_tokens:\n        return False\n\n    # Code datasets often allow tiny floating-point drift in stdout.\n    try:\n        actual_numbers = [Decimal(token) for token in actual_tokens]\n        expected_numbers = [Decimal(token) for token in expected_tokens]\n    except (InvalidOperation, ValueError):\n        return False\n    if not all(number.is_finite() for number in actual_numbers + expected_numbers):\n        return False\n\n    limit = Decimal(str(tolerance))\n    return all(\n        abs(actual - expected) <= limit\n        for actual, expected in zip(actual_numbers, expected_numbers)\n    )\n\n\ndef parse_pytest_outcomes(output: str | None) -> dict[str, str]:\n    outcomes: dict[str, str] = {}\n    for raw_line in ANSI_RE.sub(\"\", output or \"\").splitlines():\n        parts = raw_line.strip().split(maxsplit=1)\n        if len(parts) != 2:\n            continue\n\n        outcome, test_id = parts\n        if outcome not in PYTEST_OUTCOMES:\n            continue\n\n        # SKIPPED short-summary rows use \"[N] file.py:line: reason\", not a node id.\n        if test_id.startswith(\"[\"):\n            continue\n\n        # These summary rows append \" - <reason>\"; passing node ids do not.\n        if outcome in (\"FAILED\", \"ERROR\", \"XFAIL\", \"XPASS\") and \" - \" in test_id:\n            parts = test_id.split(\" - \")\n            for index in range(1, len(parts)):\n                node_id = \" - \".join(parts[:index])\n                if node_id.count(\"[\") == node_id.count(\"]\"):\n                    test_id = node_id\n                    break\n        outcomes[test_id.rstrip()] = outcome\n    return outcomes\n"
+  }
+}

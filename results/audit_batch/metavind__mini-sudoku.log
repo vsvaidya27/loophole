@@ -1,0 +1,9 @@
+[19:29:57] metavind/mini-sudoku: setup: 24 ground-truth and 8 verified model records
+[19:30:30] metavind/mini-sudoku: iteration 1: 3 attempts, 1 confirmed mechanisms total
+[19:30:49] metavind/mini-sudoku: iteration 1: rejected repair 1/2
+[19:31:02] metavind/mini-sudoku: iteration 1: accepted repair 2
+[19:32:11] metavind/mini-sudoku: iteration 2: 3 attempts, 2 confirmed mechanisms total
+[19:32:26] metavind/mini-sudoku: iteration 2: rejected repair 1/2
+[19:32:43] metavind/mini-sudoku: iteration 2: accepted repair 2
+[19:33:43] metavind/mini-sudoku: iteration 3: 3 attempts, 2 confirmed mechanisms total
+[19:34:05] metavind/mini-sudoku: patched: 3 iterations, cost $0.6390; 0 pending invariants

@@ -1,0 +1,80 @@
+{
+  "entry": {
+    "env_id": "harleycooper/nanochatAquaRat",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer,other,parser-bypass",
+    "asr_before": 0.8667,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 1.2507,
+    "evidence_dir": "results/evidence/harleycooper/nanochatAquaRat",
+    "exploits": [
+      {
+        "exploit_id": "control-char-whitespace-marker-a5940fd8e8",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/control-char-whitespace-marker-a5940fd8e8.json"
+      },
+      {
+        "exploit_id": "exotic-whitespace-marker-534b605b8b",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/exotic-whitespace-marker-534b605b8b.json"
+      },
+      {
+        "exploit_id": "first-answer-line-wins-d271450770",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-answer-line-wins-d271450770.json"
+      },
+      {
+        "exploit_id": "first-standalone-letter-match-365f1e22b9",
+        "exploit_class": "other",
+        "replay": "replays/first-standalone-letter-match-365f1e22b9.json"
+      },
+      {
+        "exploit_id": "glued-prefix-answer-marker-5cfc6d2d6e",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/glued-prefix-answer-marker-5cfc6d2d6e.json"
+      },
+      {
+        "exploit_id": "markdown-bold-marker-mismatch-0a9b006ec1",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/markdown-bold-marker-mismatch-0a9b006ec1.json"
+      },
+      {
+        "exploit_id": "out-of-range-final-letter-d858645555",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/out-of-range-final-letter-d858645555.json"
+      },
+      {
+        "exploit_id": "separatorless-answer-is-override-23abc0c7d3",
+        "exploit_class": "multi-answer",
+        "replay": "replays/separatorless-answer-is-override-23abc0c7d3.json"
+      },
+      {
+        "exploit_id": "underscore-after-final-letter-1069ce8a7e",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/underscore-after-final-letter-1069ce8a7e.json"
+      },
+      {
+        "exploit_id": "unicode-casefold-marker-3b73642500",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/unicode-casefold-marker-3b73642500.json"
+      },
+      {
+        "exploit_id": "unicode-digit-after-final-letter-5570dde4e9",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/unicode-digit-after-final-letter-5570dde4e9.json"
+      },
+      {
+        "exploit_id": "unicode-letter-after-final-letter-cdae50c845",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/unicode-letter-after-final-letter-cdae50c845.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/harleycooper/nanochatAquaRat/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

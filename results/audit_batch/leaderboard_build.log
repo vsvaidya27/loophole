@@ -1,0 +1,4 @@
+note  maziyar/OpenMed_PubMedQA: unpatched because not: a patch is committed; every replay case scores low under the patch; asr_after is below asr_before; >= 5 model benign records
+note  srthkdev/contract_nli_env: unpatched because not: a patch is committed; every replay case scores low under the patch; asr_after is below asr_before; >= 5 model benign records
+note  sami/countdown: unpatched because not: a patch is committed; every replay case scores low under the patch; asr_after is below asr_before; >= 5 model benign records; no last-iteration attempt beats the final reward
+wrote 19 entries to /Users/varunvaidya/CodingProjects/calhacks-2026/results/leaderboard.json and leaderboard.md

@@ -1,0 +1,9 @@
+{
+  "env_id": "primeintellect/mmlu-pro",
+  "api": "v1",
+  "load_id": "mmlu-pro",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/primeintellect/mmlu-pro/patch.py"
+}

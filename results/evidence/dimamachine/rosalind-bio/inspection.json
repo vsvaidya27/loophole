@@ -1,0 +1,538 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "1f8293166e1ea5babfa8ece6a6eeeaef715b6959c7d4ade706dc69583d7f8c51",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: TAGTTGTGCCGCAGCGAAGTAGTGCTTGAAAT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "8 5 10 9",
+      "info": null
+    },
+    "2": {
+      "digest": "4332086800e210261d9f27e45476981c52ea5f4f32b6b2aa09c9bdd3e68aa633",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: CATCAATAGACAGGTCATAATCGGTCCACCGGATCATTGGTGCATAGAGCCTGGGCGTTAACGCCCTTTATTACTAGCTTAATGGTATCACATTGACAAACACG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "CGTGTTTGTCAATGTGATACCATTAAGCTAGTAATAAAGGGCGTTAACGCCCAGGCTCTATGCACCAATGATCCGGTGGACCGATTATGACCTGTCTATTGATG",
+      "info": null
+    },
+    "3": {
+      "digest": "3d8446e7d86e9435593f30610c04ce61e1d5ea1326a8277e82afeadd86a81f6d",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: CATTAAGTAGCGACGAAACGGGATTTGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "46.429",
+      "info": null
+    },
+    "4": {
+      "digest": "fbfc59ff2c90976f8f5de587f19e4938b97165a16ba8be0af74000b47bd71662",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: TGACCGGGGAGAAGCCGGTCGATCAGCAGTGGTAATTGGATATTAGGCCTAAA\ns2: CCATAATGTTCTAGCGCTCGAAATCATTGCACCACTTGCATCTTTGTTCCAGG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "35",
+      "info": null
+    },
+    "6": {
+      "digest": "25b41407c72780bac9b110e3ba1708804183b3691d54d7aee3a32e5e3197dbde",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: TGTAAATCGTTTCAACGGGATGGTTTACCCGGAATTCTAC\nt: ACCC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "27",
+      "info": null
+    },
+    "8": {
+      "digest": "c602cb6bb716988b51aaaa29c63857d8945030364797eba132a74b3c472ee60f",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: TGACTTAATAATCATTTATGGAGAAGAGGCACGACCACAAGGACCCTATGGCACGGTGGGCAAGCTCCCGCCCGGTACATAACTGTCTGGA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "UGACUUAAUAAUCAUUUAUGGAGAAGAGGCACGACCACAAGGACCCUAUGGCACGGUGGGCAAGCUCCCGCCCGGUACAUAACUGUCUGGA",
+      "info": null
+    },
+    "9": {
+      "digest": "e25343825cf883454042f2ceb5d631811e6e1f7b7b5713867891efbec0476d8a",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: TGATTATGTCGGTACAGACTTCTTCCT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AGGAAGAAGTCTGTACCGACATAATCA",
+      "info": null
+    },
+    "11": {
+      "digest": "88ef3c04920c1ceed415f9f026b2537c895397c09774cb414ab08a8cfa44fca1",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: ATTTCGGTTCTTGTATGCTACAGTTAAATAGAAAGGCCGCATTGTCGTTCTCGCCCTGTTTTCCTCATACACGACCGAGGTTATTTGTCGGAAAC\ns2: GAGACATCTCTCGAAGGTGGAACGACGCCGGGTGTGCAGAATTTATTTTAAACACTCTATTACCTCCGGGTAGCGTTGGCAAACTCCGATAATGA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "66",
+      "info": null
+    },
+    "12": {
+      "digest": "1f00fa81b422c299fb7ac317a936257b63a8e7bcf1726fe24fdf31d94be6c4ea",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the RNA string below into a protein string using the standard genetic code. Read it in non-overlapping codons (groups of three) from the start; stop at the first stop codon and do not emit any symbol for it. Return only the resulting protein string of one-letter amino-acid codes.\n\nRNA: GUAGACGAGGAGCAUGAUUCAGUAUGCAGUUAA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "VDEEHDSVCS",
+      "info": null
+    },
+    "13": {
+      "digest": "3d0f2d7abbfe7bd0dac086c829693c97d8128b25c4c193968ee8597c919e671d",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: GGCGTGCCAGGACTCCACCTCCCCTGCTAAGTTGACCTTGAGCT\nt: CCC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "21 22",
+      "info": null
+    },
+    "14": {
+      "digest": "d7aa1343dd97569ed2269db9aa67f7380025730ae7d683bd4bd7f1482e9ae037",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: TACAGCGTCGGCGAGACGATAACAACGAAGTCCTTCGGCGTTATGTAATTCACCAGCCCACCATATCAGGTAATAGGCTCGCTGGTTAGGTAGATTATGTAAGAGGCGTGCAGCGCC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "31 28 32 26",
+      "info": null
+    },
+    "15": {
+      "digest": "c07756a41dc314a306c0fd8eeb7745949b7fdcc48ebd8196f1b9072adab72b18",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: AACGGGGGTTTCACATCGATGCATGCCACA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AACGGGGGUUUCACAUCGAUGCAUGCCACA",
+      "info": null
+    },
+    "16": {
+      "digest": "cfda6436af700a81f3ac102df50dd9d01d451a7f7d571fb617a20d6a2da5c10f",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: TTGGGATGGGGCTCACTGTATCAGCCGTACCGCTATCTACCTATTGGTGGAGATAGCTTTTATGCGGATTCA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "TGAATCCGCATAAAAGCTATCTCCACCAATAGGTAGATAGCGGTACGGCTGATACAGTGAGCCCCATCCCAA",
+      "info": null
+    },
+    "18": {
+      "digest": "d911e6bbd9fb3b67d9a6a2679e55044d39ed1ae100c57988b72440bebdb60ef0",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: TTCATGCTAGAAAGACTAGTTTAATGAAA\ns2: GGATACGAATGCCCCCCGATTACCGGCCG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "24",
+      "info": null
+    },
+    "20": {
+      "digest": "fc8ff37a2944095808a66fa522b74ac41bf266eaad4437ce46850e58e51dce31",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: CCAAGAAAACCTATTGCCGCTACTGATTCTTCTCTTAGGGATCGAGTAACTATTTATTCCGTTCGAGGCGTACGCGGTAGTATGTCGCCAGCATTTAATCCCCCCACTGGGATGCGGCTGCTGTTGTTA\nt: GCT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "19 117 120",
+      "info": null
+    },
+    "21": {
+      "digest": "77d5983ca1d60b2fb313d21da052edb579ea0c76692d93a9ea4dd83b9487bdf6",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: ACAGCTAAAAGTGATGGTCC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "7 4 5 4",
+      "info": null
+    },
+    "24": {
+      "digest": "bf09ffa7e7a87a41f03721ce95ab4a04f163123608f6eff29b18c8653c5f0f24",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: CTAGAGGGTCAGAAGACCTCGCTAATATTCTGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "48.485",
+      "info": null
+    },
+    "26": {
+      "digest": "3d80e2945b786609aa6329a2f0267c9cef35867a7d0c7730daf24d77068c5533",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the RNA string below into a protein string using the standard genetic code. Read it in non-overlapping codons (groups of three) from the start; stop at the first stop codon and do not emit any symbol for it. Return only the resulting protein string of one-letter amino-acid codes.\n\nRNA: AAACAGCAAGCGCUUUACGCAACGCCUACUUGUAGAUUCCUGACGAAUGAUGGAAUUUGGAUCAGGUUCCUGGAGACGGUGUUAAAAUCCUCUACUCUGCCAUCAUAG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "KQQALYATPTCRFLTNDGIWIRFLETVLKSSTLPS",
+      "info": null
+    },
+    "27": {
+      "digest": "a3979a706aa1e1166df7a4770ad72911fc02ff983336c5516feaf5967bc509b1",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: CAGACTAGGCGATAGAACTACGACCCTCTGCGGCCTGCG\nt: TA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "6 13 19",
+      "info": null
+    },
+    "29": {
+      "digest": "1b144f9cef6a86171c0bb86373bfb74d29caabb9700f84a2361ea52e9b14a24d",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: AGTACTGGTTTACGCCCCGCCGACCTCCCCCGATCATCTTCTTACAAAACTTGTGTGACCCAAATCTCGACGGGGGCATCTGTGTCTGGGTTTGCCTCGCCTGGTGTACGTAACAGACCCGGAAACGCTTGGATAA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AGUACUGGUUUACGCCCCGCCGACCUCCCCCGAUCAUCUUCUUACAAAACUUGUGUGACCCAAAUCUCGACGGGGGCAUCUGUGUCUGGGUUUGCCUCGCCUGGUGUACGUAACAGACCCGGAAACGCUUGGAUAA",
+      "info": null
+    },
+    "30": {
+      "digest": "924b096b80ca7a180774d3dd836f37954ab44e5ebdca164716ea6e28a75eeb23",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: AGGCTCGCCTCTCAATACATGGCAG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "CTGCCATGTATTGAGAGGCGAGCCT",
+      "info": null
+    },
+    "33": {
+      "digest": "80bc22623f0fd18525475a1fd3f437dff856b608bdf400ae228f322a62d406ea",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the RNA string below into a protein string using the standard genetic code. Read it in non-overlapping codons (groups of three) from the start; stop at the first stop codon and do not emit any symbol for it. Return only the resulting protein string of one-letter amino-acid codes.\n\nRNA: CCAAGUAGAACUUGCUGA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "PSRTC",
+      "info": null
+    },
+    "35": {
+      "digest": "e80ea308875343c7e61ad628ab52d9d46f5c2b262e80eba5f650cfb78d04204a",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: ATGCGCAGGAGCCGTTTACTAGCCTGCCTGCACCTTCAGTAGAATCAAATGGTCCACTCACCCCCAAGAGTGTAACTAGGGTTAGCCACCCTGAGTCGTCGATGCGGAGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "26 33 28 23",
+      "info": null
+    },
+    "36": {
+      "digest": "2f8c1d4b983ddf96067d6dae6eebd8e1b0ac7360e4dac01f6061e7bda85714f2",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: ATTAGTTCCAGATGCTTGTCTGCACGGAATGGCG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AUUAGUUCCAGAUGCUUGUCUGCACGGAAUGGCG",
+      "info": null
+    },
+    "39": {
+      "digest": "addea22ac93ca1167557959ab734c6cab60347ca5fe2ed9df8fb14f7651d094c",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: TAACACCATTCGTTGACTCAATGGG\ns2: TAGGTAAGCTGCTATAAAGAGGAAA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "19",
+      "info": null
+    },
+    "41": {
+      "digest": "40a527f73b14df5f2553fef840ea21790dbbfb2aac78e39dab9e3bc8ca4dd1fb",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: CATTAATTCACGTCAACATGGTGCACTGGGGAAACGCCCATTCGGCACGGCATCGGCACGTAGTGAGCTATGCGAGAGTAGCCGGACTCATGAG\nt: TA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "4 61 69 79",
+      "info": null
+    },
+    "42": {
+      "digest": "838e1fd4c2813207657e4e846ab93bd8b711ea2ee309018edb32590ff1a2536d",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: CGCTCCACTTGGGAATGCTCTACTTTCCTTTCGACAGCA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "7 13 7 12",
+      "info": null
+    },
+    "44": {
+      "digest": "2e669b4dd97bdce0f2d45a26ee77b18ed4d5e82b75c7561a3889d85051387fff",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: CTGTGCAGGTAGCCCAGCAATTAACTCGAGGCTGAGAAAGGGCATTTCATGTTTTCTCTCGACTGGGTGCCTCGCTCATGCAGCGGAATGGGGACGCCCTCAGAATATTTCCAACATAGAACGTCTGGCTGCCACG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "CGTGGCAGCCAGACGTTCTATGTTGGAAATATTCTGAGGGCGTCCCCATTCCGCTGCATGAGCGAGGCACCCAGTCGAGAGAAAACATGAAATGCCCTTTCTCAGCCTCGAGTTAATTGCTGGGCTACCTGCACAG",
+      "info": null
+    },
+    "45": {
+      "digest": "e831baa4082a26da489d9729a7e42190a4cb33282f0d37389a210bf65672047b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: AGTGTACGCTCCACTTAGCAGCCCGTGTGGACGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "61.765",
+      "info": null
+    },
+    "46": {
+      "digest": "1a5e8dfe1fabeb3d5eb22f2c77da2a765fd8189378c9ae357201eb4b9849abf5",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: AGTCAATTTGGCGTCATCAAACAAGGCAACCGTGTCTACATATCCACGGGTGTTGGGTGTGTGACTGTTCCT\ns2: CCCAGCCTATCTCAAAAACCCGGAATTCGCCTGACTACCCGGGCTGAATAACGTCGTAGATTGCTAGGCAGT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "58",
+      "info": null
+    },
+    "48": {
+      "digest": "74339c9a52af00d6ca9dd908d7258857e39189994b756429c3a266ea6a67e2d1",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: TACGGGCTTAGCTAGCCATT\nt: AGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "10 14",
+      "info": null
+    },
+    "49": {
+      "digest": "b9756140f1f3c5e6d236bb3c4ca53198b7481d9b7093eb4192fb6f344e951651",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: CGCAACACTCATGGGGTAGTTCTATGCGGCCGCAGTCGGCTAACTTAACACGTACCATGCA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "15 18 15 13",
+      "info": null
+    },
+    "50": {
+      "digest": "ad0fb87967315e9b62af6d694525428ab92a904c3e483f2875c14f6336efc946",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: AAACCTCGACGAGGCGATGAGGGAGCGAATATCTTGACTAAAACTTCCAAATTGCTAGTCGCATTACGTCCCACAGGGGCCTGATATCTCTTCTGACCTTCAACCGAGACCTGAGCACTGTACGCGAGTGGAGAGGCGCCCCT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AAACCUCGACGAGGCGAUGAGGGAGCGAAUAUCUUGACUAAAACUUCCAAAUUGCUAGUCGCAUUACGUCCCACAGGGGCCUGAUAUCUCUUCUGACCUUCAACCGAGACCUGAGCACUGUACGCGAGUGGAGAGGCGCCCCU",
+      "info": null
+    },
+    "51": {
+      "digest": "1538fa19b50cd39d651b0aad901d033307653f51fb37e2dd7fbba836ed068bd2",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: GCGTAATAGCGAATGCCAGGCTG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "CAGCCTGGCATTCGCTATTACGC",
+      "info": null
+    },
+    "52": {
+      "digest": "02d10a4227db4c711057c560dfec1386f23673577abc5441b7d0d16ae520b089",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: CATCGTGGACTGCATTTGGTCGATATCAATCGATGAATTGCCCAACGGTCTCCGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "50.909",
+      "info": null
+    },
+    "54": {
+      "digest": "59c728a6048d8992cecd6243755f0dfcc9c3ff9599df42b61eaffeb84099db35",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the RNA string below into a protein string using the standard genetic code. Read it in non-overlapping codons (groups of three) from the start; stop at the first stop codon and do not emit any symbol for it. Return only the resulting protein string of one-letter amino-acid codes.\n\nRNA: CUCGGAGACAUGCACUUGUAG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "LGDMHL",
+      "info": null
+    },
+    "55": {
+      "digest": "4d52f7a1017f4345107bc1962a206adc297fa49c455acb59014701a3c6ba9934",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: GGATGCGTAGGGGAGATCGGGTATCCGCAATTTAGAATGCCTATAGACAAGTGAGTGGGCACT\nt: TA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "8 22 33 42 44",
+      "info": null
+    },
+    "57": {
+      "digest": "f5203a3e5f59ba63405edf5a3d8de7474f6be940f44e38af6e83426ee94cf8d3",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: TGCGATCGCGAGTCACTCGCCTTGTCATTG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "UGCGAUCGCGAGUCACUCGCCUUGUCAUUG",
+      "info": null
+    },
+    "58": {
+      "digest": "765743e795b1455be8bfe1ccfeb04cc049614e2f7e0883cc3344ffde082a69db",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: CGTGTCTCCTTATCGTAGGCCCGCCGCCAACGGGCAGGATGGGAAAGTTGCATTAGGCA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "TGCCTAATGCAACTTTCCCATCCTGCCCGTTGGCGGCGGGCCTACGATAAGGAGACACG",
+      "info": null
+    },
+    "59": {
+      "digest": "614ecc379447fed4c9bc06dea04b177ff6e7e08bb1020b7965589a37d637e0dd",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: CTGAGGTAACCGTCAAAGCTATCGAACGCCCTTCCAGTCAGGGCTCAAGTAAAGGAGACGAATTCGCCCCAATTCTCCAGC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "53.086",
+      "info": null
+    },
+    "60": {
+      "digest": "9c44cf6ad5945482dda8a8abc0d7478da1bbe1ac0063aeba2a768afa29feb9bf",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: ATTCTGTCTCCTGTGTCCTACGGAGTCTC\ns2: GGAGATAAAATGTGATATGAGAAGAAAAC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "26",
+      "info": null
+    },
+    "62": {
+      "digest": "5119cc7ac6915e91bc5ff7c2027ea7cafc11e4aab1c372910a6694923402a00e",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: TACCTTACCACTTTGCATCTCAGTTTTGCAGCGGCTGGTGGCAGGCACTCGCTTCGGTATTACAGGATTCACATTGTTAGTAAACCCGTCGTCAGCCCCAATGGATTCACATGAGATCGTATTTCCAACTGGCAGGACATATGGTCA\nt: CAG\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "21 29 42 63 93 133",
+      "info": null
+    },
+    "63": {
+      "digest": "b5377e80387c21f45d85cc178f05586f2e0b767d6f4e0f0654ea5df45426bfe8",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Count the nucleotides in the DNA string below. Return four integers separated by single spaces: the counts of 'A', 'C', 'G', and 'T', in that exact order.\n\nDNA: CGAACAGGTGGGGCATAACCGTCGGGGAATATT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "9 6 12 6",
+      "info": null
+    },
+    "64": {
+      "digest": "faa39ba2321682a8f938f5181ba9328b95f8129ac8cb648d8dc4756b5574586c",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Transcribe the DNA string below into RNA by replacing every 'T' with 'U'. Return only the resulting RNA string.\n\nDNA: ATCTCTAGTGGCATGCACTTCACGCGAGGTCACGCTGAATTACA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "AUCUCUAGUGGCAUGCACUUCACGCGAGGUCACGCUGAAUUACA",
+      "info": null
+    },
+    "65": {
+      "digest": "c19b30f3dbca763ba102c15868e347a38494844dfc60811126cb1f78f5215f12",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return the reverse complement of the DNA string below: reverse the string, then complement each base (A<->T, C<->G). Return only the resulting DNA string.\n\nDNA: TCGTGCAGCATTGGCCATCCGCCTCAACTTTACGGACGTTAGATGCAAGTCGGAAATCTCTTTCCATATGCAGTCTTACGGGTATATGTGTAGCTTGTCTGAGCCGACATTGCATGGTAAACTAAT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "ATTAGTTTACCATGCAATGTCGGCTCAGACAAGCTACACATATACCCGTAAGACTGCATATGGAAAGAGATTTCCGACTTGCATCTAACGTCCGTAAAGTTGAGGCGGATGGCCAATGCTGCACGA",
+      "info": null
+    },
+    "66": {
+      "digest": "c17dc15b4132c2b1d0574b64592393af9d467a9575af6cdd45554bdcadd80e83",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the GC-content of the DNA string below: the percentage of bases that are 'G' or 'C'. Return the percentage rounded to exactly three decimal places (e.g. 53.333), with no '%' sign.\n\nDNA: CAGACTAAAGCTCCCCAATTGCAAAACTGATGACA\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "42.857",
+      "info": null
+    },
+    "67": {
+      "digest": "b72cd83a94b752c0274a15e1e30cbcaec25aacb8508316558dc305ba81969338",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Compute the Hamming distance between the two equal-length DNA strings below: the number of positions at which the corresponding bases differ. Return a single integer.\n\ns1: GCCGCCCGAAGTTGCAGTACATAGGCAAAACGAAGGTAATCGGACAGGGGAATGGGACTGCCA\ns2: TGACCCAGTAGCTCTATCGGGATAGTTGCCGTTGCCATCCCAGTAAAGCCGTTGGGGTCTCTC\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "46",
+      "info": null
+    },
+    "69": {
+      "digest": "e9fb964d57552869d3b1ad6b13f2e1c30ecfabe869d5ef29724e88cf2c6eba79",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find every location of the motif t in the DNA string s below. Return all 1-based starting positions where t occurs as a substring of s (matches may overlap), as integers separated by single spaces, in increasing order.\n\ns: CGGAGGAGAGCTATCTTGAGAATTAC\nt: AT\n\nEnd your response with a single line: ANSWER: <result>"
+        }
+      ],
+      "gold": "13 22",
+      "info": null
+    }
+  },
+  "dataset_size": 70,
+  "sources": {
+    "rosalind_bio.py": "\"\"\"\nrosalind_bio: a single-turn RL/eval environment of classic Rosalind-style\nbioinformatics problems for the Prime Intellect Environments Hub.\n\nProblem types (all instances are generated programmatically, so the gold\nanswer is computed exactly and the reward is deterministic):\n\n  - DNA   : count A, C, G, T in a DNA string\n  - RNA   : transcribe DNA -> RNA (T -> U)\n  - REVC  : reverse complement of a DNA string\n  - GC    : GC-content of a DNA string, as a percentage\n  - HAMM  : Hamming distance between two equal-length DNA strings\n  - PROT  : translate an RNA string into a protein string\n  - SUBS  : find all 1-based positions of a motif in a DNA string\n\nA `difficulty` knob (easy / medium / hard / mixed) controls sequence lengths\nso the environment exposes a gradient of difficulty rather than a single\ntrivial level. Each model response is scored by exact match on the extracted\nfinal answer.\n\"\"\"\n\nimport random\nimport re\n\nimport verifiers as vf\nfrom datasets import Dataset\n\nNUCS = \"ACGT\"\nCOMPLEMENT = {\"A\": \"T\", \"T\": \"A\", \"C\": \"G\", \"G\": \"C\"}\n\n# Standard RNA codon table ('*' marks a stop codon).\nCODON_TABLE = {\n    \"UUU\": \"F\", \"UUC\": \"F\", \"UUA\": \"L\", \"UUG\": \"L\",\n    \"CUU\": \"L\", \"CUC\": \"L\", \"CUA\": \"L\", \"CUG\": \"L\",\n    \"AUU\": \"I\", \"AUC\": \"I\", \"AUA\": \"I\", \"AUG\": \"M\",\n    \"GUU\": \"V\", \"GUC\": \"V\", \"GUA\": \"V\", \"GUG\": \"V\",\n    \"UCU\": \"S\", \"UCC\": \"S\", \"UCA\": \"S\", \"UCG\": \"S\",\n    \"CCU\": \"P\", \"CCC\": \"P\", \"CCA\": \"P\", \"CCG\": \"P\",\n    \"ACU\": \"T\", \"ACC\": \"T\", \"ACA\": \"T\", \"ACG\": \"T\",\n    \"GCU\": \"A\", \"GCC\": \"A\", \"GCA\": \"A\", \"GCG\": \"A\",\n    \"UAU\": \"Y\", \"UAC\": \"Y\", \"UAA\": \"*\", \"UAG\": \"*\",\n    \"CAU\": \"H\", \"CAC\": \"H\", \"CAA\": \"Q\", \"CAG\": \"Q\",\n    \"AAU\": \"N\", \"AAC\": \"N\", \"AAA\": \"K\", \"AAG\": \"K\",\n    \"GAU\": \"D\", \"GAC\": \"D\", \"GAA\": \"E\", \"GAG\": \"E\",\n    \"UGU\": \"C\", \"UGC\": \"C\", \"UGA\": \"*\", \"UGG\": \"W\",\n    \"CGU\": \"R\", \"CGC\": \"R\", \"CGA\": \"R\", \"CGG\": \"R\",\n    \"AGU\": \"S\", \"AGC\": \"S\", \"AGA\": \"R\", \"AGG\": \"R\",\n    \"GGU\": \"G\", \"GGC\": \"G\", \"GGA\": \"G\", \"GGG\": \"G\",\n}\nSENSE_CODONS = [c for c, aa in CODON_TABLE.items() if aa != \"*\"]\nSTOP_CODONS = [c for c, aa in CODON_TABLE.items() if aa == \"*\"]\n\n# Sequence-length ranges per difficulty level: (min_len, max_len).\nDIFFICULTY_LEN = {\n    \"easy\": (20, 40),\n    \"medium\": (40, 80),\n    \"hard\": (80, 150),\n}\n# Codon-count ranges (for the translation task) per difficulty level.\nDIFFICULTY_CODONS = {\n    \"easy\": (5, 12),\n    \"medium\": (12, 25),\n    \"hard\": (25, 45),\n}\n\n\n# ---------------------------------------------------------------------------\n# Task generators: each takes (rng, difficulty) and returns (question, gold)\n# ---------------------------------------------------------------------------\n\ndef _len_for(rng: random.Random, difficulty: str) -> int:\n    lo, hi = DIFFICULTY_LEN[difficulty]\n    return rng.randint(lo, hi)\n\n\ndef _random_dna(rng: random.Random, n: int) -> str:\n    return \"\".join(rng.choice(NUCS) for _ in range(n))\n\n\ndef _make_dna_count(rng: random.Random, difficulty: str):\n    seq = _random_dna(rng, _len_for(rng, difficulty))\n    gold = \" \".join(str(seq.count(b)) for b in \"ACGT\")\n    q = (\n        \"Count the nucleotides in the DNA string below. Return four integers \"\n        \"separated by single spaces: the counts of 'A', 'C', 'G', and 'T', \"\n        f\"in that exact order.\\n\\nDNA: {seq}\"\n    )\n    return q, gold\n\n\ndef _make_rna(rng: random.Random, difficulty: str):\n    seq = _random_dna(rng, _len_for(rng, difficulty))\n    gold = seq.replace(\"T\", \"U\")\n    q = (\n        \"Transcribe the DNA string below into RNA by replacing every 'T' \"\n        f\"with 'U'. Return only the resulting RNA string.\\n\\nDNA: {seq}\"\n    )\n    return q, gold\n\n\ndef _make_revc(rng: random.Random, difficulty: str):\n    seq = _random_dna(rng, _len_for(rng, difficulty))\n    gold = \"\".join(COMPLEMENT[b] for b in reversed(seq))\n    q = (\n        \"Return the reverse complement of the DNA string below: reverse the \"\n        \"string, then complement each base (A<->T, C<->G). Return only the \"\n        f\"resulting DNA string.\\n\\nDNA: {seq}\"\n    )\n    return q, gold\n\n\ndef _make_gc(rng: random.Random, difficulty: str):\n    # Ensure a non-trivial, well-defined percentage by using a decent length.\n    seq = _random_dna(rng, max(20, _len_for(rng, difficulty)))\n    pct = (seq.count(\"G\") + seq.count(\"C\")) / len(seq) * 100\n    gold = f\"{pct:.3f}\"\n    q = (\n        \"Compute the GC-content of the DNA string below: the percentage of \"\n        \"bases that are 'G' or 'C'. Return the percentage rounded to exactly \"\n        \"three decimal places (e.g. 53.333), with no '%' sign.\\n\\n\"\n        f\"DNA: {seq}\"\n    )\n    return q, gold\n\n\ndef _make_hamming(rng: random.Random, difficulty: str):\n    n = _len_for(rng, difficulty)\n    s1 = _random_dna(rng, n)\n    s2 = _random_dna(rng, n)\n    gold = str(sum(a != b for a, b in zip(s1, s2)))\n    q = (\n        \"Compute the Hamming distance between the two equal-length DNA \"\n        \"strings below: the number of positions at which the corresponding \"\n        \"bases differ. Return a single integer.\\n\\n\"\n        f\"s1: {s1}\\ns2: {s2}\"\n    )\n    return q, gold\n\n\ndef _make_prot(rng: random.Random, difficulty: str):\n    lo, hi = DIFFICULTY_CODONS[difficulty]\n    k = rng.randint(lo, hi)\n    body = [rng.choice(SENSE_CODONS) for _ in range(k)]\n    rna = \"\".join(body) + rng.choice(STOP_CODONS)\n    gold = \"\".join(CODON_TABLE[c] for c in body)\n    q = (\n        \"Translate the RNA string below into a protein string using the \"\n        \"standard genetic code. Read it in non-overlapping codons (groups of \"\n        \"three) from the start; stop at the first stop codon and do not emit \"\n        \"any symbol for it. Return only the resulting protein string of \"\n        \"one-letter amino-acid codes.\\n\\n\"\n        f\"RNA: {rna}\"\n    )\n    return q, gold\n\n\ndef _make_subs(rng: random.Random, difficulty: str):\n    n = _len_for(rng, difficulty)\n    seq = _random_dna(rng, n)\n    # Pick the motif as a real substring of seq so at least one match exists.\n    m = rng.randint(2, 5)\n    start = rng.randint(0, len(seq) - m)\n    motif = seq[start:start + m]\n    positions = [\n        str(i + 1)\n        for i in range(len(seq) - m + 1)\n        if seq[i:i + m] == motif\n    ]\n    gold = \" \".join(positions)\n    q = (\n        \"Find every location of the motif t in the DNA string s below. \"\n        \"Return all 1-based starting positions where t occurs as a substring \"\n        \"of s (matches may overlap), as integers separated by single spaces, \"\n        \"in increasing order.\\n\\n\"\n        f\"s: {seq}\\nt: {motif}\"\n    )\n    return q, gold\n\n\nGENERATORS = [\n    _make_dna_count,\n    _make_rna,\n    _make_revc,\n    _make_gc,\n    _make_hamming,\n    _make_prot,\n    _make_subs,\n]\n\nANSWER_INSTRUCTION = \"\\n\\nEnd your response with a single line: ANSWER: <result>\"\n\n\n# ---------------------------------------------------------------------------\n# Answer extraction + reward functions\n# ---------------------------------------------------------------------------\n\ndef _extract_answer(text: str) -> str:\n    \"\"\"Pull the text after the last 'ANSWER:' marker; fall back to last line.\"\"\"\n    matches = re.findall(r\"ANSWER:\\s*(.+)\", text, flags=re.IGNORECASE)\n    if matches:\n        return matches[-1].strip()\n    lines = [ln.strip() for ln in text.strip().splitlines() if ln.strip()]\n    return lines[-1] if lines else \"\"\n\n\ndef _normalize(s: str) -> str:\n    return \" \".join(s.split()).upper()\n\n\nasync def correct_answer(completion, answer) -> float:\n    \"\"\"1.0 if the extracted, normalized answer matches the gold answer.\"\"\"\n    response = completion[-1][\"content\"]\n    pred = _normalize(_extract_answer(response))\n    gold = _normalize(answer)\n    return 1.0 if pred == gold else 0.0\n\n\ndef format_reward(completion) -> float:\n    \"\"\"Small bonus for following the 'ANSWER:' output format.\"\"\"\n    response = completion[-1][\"content\"]\n    return 1.0 if re.search(r\"ANSWER:\\s*\\S\", response, flags=re.IGNORECASE) else 0.0\n\n\n# ---------------------------------------------------------------------------\n# Environment entry point\n# ---------------------------------------------------------------------------\n\ndef load_environment(\n    num_examples: int = 70,\n    seed: int = 0,\n    difficulty: str = \"mixed\",\n) -> vf.Environment:\n    \"\"\"Build the rosalind_bio environment.\n\n    Args:\n        num_examples: number of generated instances.\n        seed: RNG seed for reproducibility.\n        difficulty: one of \"easy\", \"medium\", \"hard\", or \"mixed\" (cycles\n            through the three levels for a gradient of difficulty).\n    \"\"\"\n    levels = [\"easy\", \"medium\", \"hard\"]\n    if difficulty not in levels and difficulty != \"mixed\":\n        raise ValueError(\n            f\"difficulty must be one of {levels + ['mixed']}, got {difficulty!r}\"\n        )\n\n    rng = random.Random(seed)\n    rows = []\n    for i in range(num_examples):\n        gen = GENERATORS[i % len(GENERATORS)]\n        level = difficulty if difficulty != \"mixed\" else levels[i % len(levels)]\n        question, gold = gen(rng, level)\n        rows.append(\n            {\n                \"prompt\": [{\"role\": \"user\", \"content\": question + ANSWER_INSTRUCTION}],\n                \"answer\": gold,\n            }\n        )\n    dataset = Dataset.from_list(rows)\n\n    rubric = vf.Rubric(\n        funcs=[correct_answer, format_reward],\n        weights=[1.0, 0.1],\n    )\n\n    return vf.SingleTurnEnv(dataset=dataset, rubric=rubric)\n",
+    "verifiers/legacy/parsers/parser.py": "# ruff: noqa\n\nimport logging\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "failures": [],
+  "notes": [
+    "[primeintellect/math500] scored math500 with verifiers 0.3.1 (v1 api)",
+    "[invariants.db] rows for environments not on the leaderboard (ignored): ['harleycooper/nanochatAquaRat', 'metavind/mini-sudoku', 'primeintellect/deepscaler-math', 'primeintellect/mmlu-pro', 'primeintellect/reverse-text', 'runes/temporal-bench', 'will/gsm8k', 'will/reasoning-gym-env']"
+  ]
+}

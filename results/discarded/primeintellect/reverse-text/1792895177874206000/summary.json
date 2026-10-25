@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "env_id": "primeintellect/reverse-text",
+    "status": "failed_to_run",
+    "exploit_class": null,
+    "asr_before": null,
+    "asr_after": null,
+    "benign_pass_before": null,
+    "benign_pass_after": null,
+    "iterations": 0,
+    "cost_usd": 0.0178,
+    "evidence_dir": "results/evidence/primeintellect/reverse-text",
+    "failure_reason": "AuditError: solver returned no usable responses",
+    "exploits": []
+  }
+}

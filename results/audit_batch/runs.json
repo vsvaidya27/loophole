@@ -1,0 +1,128 @@
+[
+  {
+    "env_id": "sileod/reasoning-core-env",
+    "exit_code": 1,
+    "status": "failed_to_run",
+    "cost_usd": 0,
+    "iterations": 0,
+    "pending_invariants": 0,
+    "seconds": 5
+  },
+  {
+    "env_id": "will/gsm8k",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 0.3877,
+    "iterations": 2,
+    "pending_invariants": 0,
+    "seconds": 172
+  },
+  {
+    "env_id": "primeintellect/deepscaler-math",
+    "exit_code": 0,
+    "status": "unpatched",
+    "cost_usd": 1.7434,
+    "iterations": 3,
+    "pending_invariants": 0,
+    "seconds": 727
+  },
+  {
+    "env_id": "harleycooper/nanochatAquaRat",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 1.2507,
+    "iterations": 5,
+    "pending_invariants": 0,
+    "seconds": 574
+  },
+  {
+    "env_id": "primeintellect/math500",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 1.6887,
+    "iterations": 5,
+    "pending_invariants": 0,
+    "seconds": 758
+  },
+  {
+    "env_id": "metavind/mini-sudoku",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 0.639,
+    "iterations": 3,
+    "pending_invariants": 0,
+    "seconds": 270
+  },
+  {
+    "env_id": "will/reasoning-gym-env",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 0.7068,
+    "iterations": 4,
+    "pending_invariants": 0,
+    "seconds": 316
+  },
+  {
+    "env_id": "primeintellect/mmlu-pro",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 0.3471,
+    "iterations": 2,
+    "pending_invariants": 0,
+    "seconds": 157
+  },
+  {
+    "env_id": "beauduffy/ai2-arc",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 1.5522,
+    "iterations": 5,
+    "pending_invariants": 0,
+    "seconds": 717
+  },
+  {
+    "env_id": "srthkdev/contract_nli_env",
+    "exit_code": 0,
+    "status": "unpatched",
+    "cost_usd": 0.7134,
+    "iterations": 5,
+    "pending_invariants": 0,
+    "seconds": 312
+  },
+  {
+    "env_id": "maziyar/OpenMed_PubMedQA",
+    "exit_code": 0,
+    "status": "unpatched",
+    "cost_usd": 1.0726,
+    "iterations": 5,
+    "pending_invariants": 0,
+    "seconds": 552
+  },
+  {
+    "env_id": "dimamachine/rosalind-bio",
+    "exit_code": 0,
+    "status": "robust",
+    "cost_usd": 0.3268,
+    "iterations": 3,
+    "pending_invariants": 0,
+    "seconds": 155
+  },
+  {
+    "env_id": "primeintellect/ascii-tree",
+    "exit_code": 0,
+    "status": "patched",
+    "cost_usd": 1.0093,
+    "iterations": 4,
+    "pending_invariants": 0,
+    "seconds": 435
+  },
+  {
+    "env_id": "sami/countdown",
+    "exit_code": 0,
+    "status": "unpatched",
+    "cost_usd": 1.8144,
+    "iterations": 4,
+    "pending_invariants": 0,
+    "seconds": 962
+  }
+]

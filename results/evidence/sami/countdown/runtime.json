@@ -1,0 +1,9 @@
+{
+  "env_id": "sami/countdown",
+  "api": "legacy",
+  "load_id": "countdown",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/v012/bin/python",
+  "patch": null
+}

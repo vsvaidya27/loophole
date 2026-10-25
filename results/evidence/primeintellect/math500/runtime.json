@@ -1,0 +1,9 @@
+{
+  "env_id": "primeintellect/math500",
+  "api": "v1",
+  "load_id": "math500",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/primeintellect/math500/patch.py"
+}

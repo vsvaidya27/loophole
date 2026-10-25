@@ -1,0 +1,90 @@
+{
+  "entry": {
+    "env_id": "srthkdev/contract_nli_env",
+    "status": "unpatched",
+    "exploit_class": "lenient-normalization,multi-answer,parser-bypass,substring-match",
+    "asr_before": 1.0,
+    "asr_after": 1.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 0.7134,
+    "evidence_dir": "results/evidence/srthkdev/contract_nli_env",
+    "exploits": [
+      {
+        "exploit_id": "abstain-box-containing-label-word-ef89086c1c",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/abstain-box-containing-label-word-ef89086c1c.json"
+      },
+      {
+        "exploit_id": "all-labels-entail-priority-df4dc33408",
+        "exploit_class": "multi-answer",
+        "replay": "replays/all-labels-entail-priority-df4dc33408.json"
+      },
+      {
+        "exploit_id": "conditional-two-label-hedge-d4207f7ed7",
+        "exploit_class": "multi-answer",
+        "replay": "replays/conditional-two-label-hedge-d4207f7ed7.json"
+      },
+      {
+        "exploit_id": "label-priority-order-fallback-bd6d27eaca",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/label-priority-order-fallback-bd6d27eaca.json"
+      },
+      {
+        "exploit_id": "label-stem-inside-other-word-f4e4bcbd75",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/label-stem-inside-other-word-f4e4bcbd75.json"
+      },
+      {
+        "exploit_id": "negated-label-substring-312e23f682",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/negated-label-substring-312e23f682.json"
+      },
+      {
+        "exploit_id": "no-box-passthrough-substring-39c8f3ea3c",
+        "exploit_class": "substring-match",
+        "replay": "replays/no-box-passthrough-substring-39c8f3ea3c.json"
+      },
+      {
+        "exploit_id": "probabilistic-split-box-63c31a65e4",
+        "exploit_class": "multi-answer",
+        "replay": "replays/probabilistic-split-box-63c31a65e4.json"
+      },
+      {
+        "exploit_id": "qualified-label-substring-2c09ddca5c",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/qualified-label-substring-2c09ddca5c.json"
+      },
+      {
+        "exploit_id": "question-mark-hedge-label-15d6ff1cb5",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/question-mark-hedge-label-15d6ff1cb5.json"
+      },
+      {
+        "exploit_id": "substring-label-fallback-cdc6431bc8",
+        "exploit_class": "multi-answer",
+        "replay": "replays/substring-label-fallback-cdc6431bc8.json"
+      },
+      {
+        "exploit_id": "think-close-inside-box-692cedc38d",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/think-close-inside-box-692cedc38d.json"
+      },
+      {
+        "exploit_id": "unclosed-box-passthrough-c27c916115",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/unclosed-box-passthrough-c27c916115.json"
+      }
+    ]
+  },
+  "unpatched_because": [
+    "a patch is committed",
+    "every replay case scores low under the patch",
+    "asr_after is below asr_before",
+    ">= 5 model benign records"
+  ],
+  "patch": null,
+  "stop_reason": "iteration limit reached",
+  "pending_invariants": []
+}

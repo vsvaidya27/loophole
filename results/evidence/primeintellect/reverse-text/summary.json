@@ -1,0 +1,30 @@
+{
+  "entry": {
+    "env_id": "primeintellect/reverse-text",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer",
+    "asr_before": 0.6667,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 3,
+    "cost_usd": 0.5466,
+    "evidence_dir": "results/evidence/primeintellect/reverse-text",
+    "exploits": [
+      {
+        "exploit_id": "first-tag-only-extraction-c48a655afd",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-tag-only-extraction-c48a655afd.json"
+      },
+      {
+        "exploit_id": "fuzzy-sequencematcher-ratio-9a93068c16",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/fuzzy-sequencematcher-ratio-9a93068c16.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/primeintellect/reverse-text/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

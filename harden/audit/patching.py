@@ -170,7 +170,7 @@ FORBIDDEN = [
     (r"\bPath\s*\(", "file access (pathlib)"),
     (r"\bos\.", "the os module"),
     (r"\bsubprocess\b", "subprocess"),
-    (r"\b(?:eval|exec|compile)\s*\(", "eval/exec/compile"),
+    (r"\b(?:eval|exec)\s*\(", "eval/exec"),
     (r"__import__|importlib", "dynamic imports"),
     (r"\bsys\.path\b", "sys.path changes"),
     (r"\b(?:requests|urllib|socket|http)\b", "network access"),
@@ -196,6 +196,22 @@ def static_problems(spec: EnvSpec, code: str, exploit_attempts: list[dict]) -> l
             module = node.module if isinstance(node, ast.ImportFrom) else node.names[0].name
             if module and module.split(".")[0] in ("harden", "scripts", "check_leaderboard"):
                 problems.append(f"import of repository module {module!r} is not allowed")
+    # Regex compilation is ordinary parsing, not Python code execution. Check
+    # compile calls structurally so re.compile() does not trigger the builtin ban.
+    regex_modules = {alias.asname or alias.name for node in ast.walk(tree) if isinstance(node, ast.Import)
+                     for alias in node.names if alias.name == "re"}
+    regex_functions = {alias.asname or alias.name for node in ast.walk(tree)
+                       if isinstance(node, ast.ImportFrom) and node.module == "re"
+                       for alias in node.names if alias.name == "compile"}
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        func = node.func
+        if isinstance(func, ast.Name) and func.id == "compile" and func.id not in regex_functions:
+            problems.append("uses Python compile(), which a tightened grader may not")
+        elif (isinstance(func, ast.Attribute) and func.attr == "compile"
+              and not (isinstance(func.value, ast.Name) and func.value.id in regex_modules)):
+            problems.append("uses a non-regex compile(), which a tightened grader may not")
     stripped = _code_without_comments(code)
     for pattern, what in FORBIDDEN:
         if re.search(pattern, stripped):

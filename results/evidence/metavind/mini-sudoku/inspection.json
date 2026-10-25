@@ -1,0 +1,875 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "974540aa0e8a1771a16b23467ac0152ee36b240fd79aca4a71ba00a771d3dc62",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ _ 3 2\n2 3 1 _\n1 _ 4 3\n3 4 _ 1"
+        }
+      ],
+      "gold": "4 1 3 2\n2 3 1 4\n1 2 4 3\n3 4 2 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "8": {
+      "digest": "e5f1cecfabbdb8ce3008d2ef412297c4cf267530f63f58a1665a3a52c7bd33ae",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ _ 2 1\n_ 2 3 4\n3 _ 1 _\n_ 1 _ 3"
+        }
+      ],
+      "gold": "4 3 2 1\n1 2 3 4\n3 4 1 2\n2 1 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "9": {
+      "digest": "55d008d5d0e76837a989265230b6c2cfa7b58b23385313b4cb798ef08bd1d37f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 3 2 4\n_ 2 3 _\n2 4 _ _\n_ _ _ _"
+        }
+      ],
+      "gold": "1 3 2 4\n4 2 3 1\n2 4 1 3\n3 1 4 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "16": {
+      "digest": "37e88b17f1374bc177a623aaba38f91f83d67d0c1951c7e27c2d90f68b64cb30",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 2 _ 4\n_ _ _ _\n4 _ 3 _\n2 _ 4 1"
+        }
+      ],
+      "gold": "3 2 1 4\n1 4 2 3\n4 1 3 2\n2 3 4 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "19": {
+      "digest": "8354d7c217c3a716a3fcca6f63dd8d5378d2a898be7f78afd717705fff6b5324",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 1 _ 4\n4 _ _ 1\n_ _ 4 2\n2 4 1 3"
+        }
+      ],
+      "gold": "3 1 2 4\n4 2 3 1\n1 3 4 2\n2 4 1 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "21": {
+      "digest": "f307db746170859e776a0eda6b4fd2cb830891905d4bd2c7f51893f1c12c4127",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 3 _ 4\n_ 1 3 2\n3 2 _ _\n_ 4 2 3"
+        }
+      ],
+      "gold": "2 3 1 4\n4 1 3 2\n3 2 4 1\n1 4 2 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "24": {
+      "digest": "87a9bc7e42eeb41b57661637ea6564879c745c7fec309da23a729d49716c1fc6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ 4 _ 2\n1 2 _ _\n_ _ 4 1\n4 1 _ _"
+        }
+      ],
+      "gold": "3 4 1 2\n1 2 3 4\n2 3 4 1\n4 1 2 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "25": {
+      "digest": "7354209011909e5536030807e7cc69d0a9ba5da6fb68c5c7e596bfe6f54c95db",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 1 _ _\n3 4 _ _\n1 2 3 _\n_ _ 1 2"
+        }
+      ],
+      "gold": "2 1 4 3\n3 4 2 1\n1 2 3 4\n4 3 1 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "33": {
+      "digest": "e78ecf4ecba16db17246263c8c992a58ac1abcdaca6e38c067f9482d8c919e64",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 4 1 3\n1 _ _ 4\n3 _ 4 1\n_ 1 3 _"
+        }
+      ],
+      "gold": "2 4 1 3\n1 3 2 4\n3 2 4 1\n4 1 3 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "34": {
+      "digest": "80d79604d9fb7a8e9a35ec0cb8e452f98e7b2e386108194651938bf0dc54c75d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 1 2 4\n_ 4 3 _\n_ 3 4 2\n_ 2 _ _"
+        }
+      ],
+      "gold": "3 1 2 4\n2 4 3 1\n1 3 4 2\n4 2 1 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "39": {
+      "digest": "bd8704f7df05c7a3afe3196c7bf95430f37416f6a624ba050899e705facaeab6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 4 1 _\n1 _ 4 3\n_ 3 2 1\n2 _ _ _"
+        }
+      ],
+      "gold": "3 4 1 2\n1 2 4 3\n4 3 2 1\n2 1 3 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "40": {
+      "digest": "524cd27436e233e1e4b529ff4457ca3b1b402a199334a51911a0c9340b2bc4be",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 2 _ 3\n_ 1 _ _\n_ 3 2 _\n2 _ 3 _"
+        }
+      ],
+      "gold": "4 2 1 3\n3 1 4 2\n1 3 2 4\n2 4 3 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "41": {
+      "digest": "8298dadf097dcc92e9eadd3acca5052d9958e8534f1fa46a1f2520922e41337d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ _ 1 3\n1 3 _ 4\n4 _ 3 _\n_ 1 4 2"
+        }
+      ],
+      "gold": "2 4 1 3\n1 3 2 4\n4 2 3 1\n3 1 4 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "49": {
+      "digest": "c81797b2eec4ac1a6e4603911e6c7ec4a776be1592bb203a6cdb5543dd411669",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 _ 2 3\n_ 3 _ _\n_ _ 3 2\n3 2 4 _"
+        }
+      ],
+      "gold": "4 1 2 3\n2 3 1 4\n1 4 3 2\n3 2 4 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "55": {
+      "digest": "22b09c97094d61047df603a211e394e583d165cc35eb7ecf3846932332dd3d2f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 2 4 3\n_ _ 2 _\n4 _ 1 2\n_ 1 3 4"
+        }
+      ],
+      "gold": "1 2 4 3\n3 4 2 1\n4 3 1 2\n2 1 3 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "58": {
+      "digest": "4ac75c483f62239ae37033ecb80923432f789bca215e70f20c96a834eebbf059",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ 2 4 3\n4 3 1 2\n_ _ 3 _\n_ _ 2 4"
+        }
+      ],
+      "gold": "1 2 4 3\n4 3 1 2\n2 4 3 1\n3 1 2 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "66": {
+      "digest": "3e13a4767adbc96eb72e441da06e0dbc9486e8ea3dcba4f6ab1aca67c0738b13",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 _ 2 _\n_ _ 4 1\n3 _ 1 _\n1 4 3 _"
+        }
+      ],
+      "gold": "4 1 2 3\n2 3 4 1\n3 2 1 4\n1 4 3 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "74": {
+      "digest": "08d2f2c59cb2a29aec106b8ed42469d0466cd4a00dd6c9f725ecc4dbbdd058fd",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 _ 1 4\n4 1 _ 2\n1 4 _ _\n_ _ _ 1"
+        }
+      ],
+      "gold": "2 3 1 4\n4 1 3 2\n1 4 2 3\n3 2 4 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "82": {
+      "digest": "ccc6867f0ec764822471f2280bc135233e93d51c3f41579ac434c38a581912ff",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 4 _ _\n_ _ _ 4\n3 2 4 1\n4 1 _ 3"
+        }
+      ],
+      "gold": "1 4 3 2\n2 3 1 4\n3 2 4 1\n4 1 2 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "83": {
+      "digest": "daea1e086c2220b57ab0b2fa4a0179af8977f9a1cd8b1fc06c1e264924affdb4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 _ _ 1\n_ _ 4 2\n_ _ _ 4\n4 1 2 _"
+        }
+      ],
+      "gold": "2 4 3 1\n1 3 4 2\n3 2 1 4\n4 1 2 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "87": {
+      "digest": "75a584bc9e2f1ddbf000099194ec82f8ff5fe31ed278e1275e242d54f633fbeb",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ _ 2 3\n_ _ 1 _\n_ 1 3 2\n3 2 _ _"
+        }
+      ],
+      "gold": "1 4 2 3\n2 3 1 4\n4 1 3 2\n3 2 4 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "91": {
+      "digest": "ee63a8f8d911463738fc65993d92ad75faea50070b7474a6b041c6420a1a7097",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ _ _ 4\n4 2 1 3\n1 4 _ 2\n2 3 4 _"
+        }
+      ],
+      "gold": "3 1 2 4\n4 2 1 3\n1 4 3 2\n2 3 4 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "99": {
+      "digest": "05409eb807c72a6cb01ed1b5316a0ed8fd3fe71113759712323e0972b7d47243",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 _ 1 _\n_ 1 2 4\n4 2 _ 1\n_ 3 _ 2"
+        }
+      ],
+      "gold": "2 4 1 3\n3 1 2 4\n4 2 3 1\n1 3 4 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "101": {
+      "digest": "f6ec0bb2ef18a48a071de17a925e34cf9609f4f821d63879d91a64d6c18cb954",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 2 _ 4\n1 _ 3 2\n_ _ 4 _\n4 _ 2 1"
+        }
+      ],
+      "gold": "3 2 1 4\n1 4 3 2\n2 1 4 3\n4 3 2 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "102": {
+      "digest": "74144192794f058e6841bba890141dd03291314604e6bb74266f698e8be6e6a2",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 2 _ 4\n_ _ 2 _\n2 4 _ 3\n3 1 4 _"
+        }
+      ],
+      "gold": "1 2 3 4\n4 3 2 1\n2 4 1 3\n3 1 4 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "107": {
+      "digest": "8f229c2b5e493dec2f556b046e3b06f89121aacc91081c8fc1d52699e4c023d3",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 _ _ 3\n_ 2 1 4\n2 3 4 _\n_ _ 3 2"
+        }
+      ],
+      "gold": "4 1 2 3\n3 2 1 4\n2 3 4 1\n1 4 3 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "114": {
+      "digest": "5e85f00abf0a9614af07e9595d8621307d3650ccb9829974e0420bcfb8f07cbf",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ 2 3 1\n3 _ _ 4\n_ 3 4 2\n2 _ 1 3"
+        }
+      ],
+      "gold": "4 2 3 1\n3 1 2 4\n1 3 4 2\n2 4 1 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "116": {
+      "digest": "dbf6db77ae9ac866bf8eddacd254526289d0649f585aff28798f2d4fca409153",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 2 4 1\n_ 1 _ 2\n_ 4 _ _\n2 3 1 4"
+        }
+      ],
+      "gold": "3 2 4 1\n4 1 3 2\n1 4 2 3\n2 3 1 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "124": {
+      "digest": "1f1a805ce8fe192314c399aa5c955014a0684e6b38bde7e437d608b493b67412",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 4 _ 2\n2 _ _ 1\n_ 1 _ 3\n3 _ _ _"
+        }
+      ],
+      "gold": "1 4 3 2\n2 3 4 1\n4 1 2 3\n3 2 1 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "132": {
+      "digest": "05cc08d7bb70e12ee0b18dda0964c07a58fad6326fd600abf5ea4860c4b76eee",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 1 4 2\n4 2 _ 3\n1 _ _ _\n2 _ 3 1"
+        }
+      ],
+      "gold": "3 1 4 2\n4 2 1 3\n1 3 2 4\n2 4 3 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "138": {
+      "digest": "8dbc60012bb2445f6679665e6410fa81dee740d7ba2e30f961138a3c66cacd15",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 1 _ _\n_ _ _ _\n_ 2 3 4\n4 3 2 _"
+        }
+      ],
+      "gold": "3 1 4 2\n2 4 1 3\n1 2 3 4\n4 3 2 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "139": {
+      "digest": "2322fb3b3ed2b87d4945ac97d3e954ef4c6d84dafdb05bee75d430f0807a3458",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 _ 3 _\n3 1 2 _\n_ _ 4 2\n4 2 _ _"
+        }
+      ],
+      "gold": "2 4 3 1\n3 1 2 4\n1 3 4 2\n4 2 1 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "141": {
+      "digest": "82cd0f2a0682119daab44f2fe3804eefd034dd607c4ab691235efe413d2f97f8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 3 4 _\n4 2 1 _\n2 _ 3 1\n3 _ _ _"
+        }
+      ],
+      "gold": "1 3 4 2\n4 2 1 3\n2 4 3 1\n3 1 2 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "148": {
+      "digest": "bf76dfff20a44a8f056f5600b03f598c201efd116521072b2624aca7d1228e1c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 1 3 _\n_ _ 1 _\n_ _ _ 1\n1 2 4 3"
+        }
+      ],
+      "gold": "4 1 3 2\n2 3 1 4\n3 4 2 1\n1 2 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "149": {
+      "digest": "52f6c4c9bf9cc99b0a3b5ee7fb4af8279a9bf4f4e7e701532d39695d0a7ac500",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 3 _ 2\n_ 2 _ 3\n2 _ 3 _\n_ _ _ 1"
+        }
+      ],
+      "gold": "1 3 4 2\n4 2 1 3\n2 1 3 4\n3 4 2 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "156": {
+      "digest": "33a34870dc3b3644b5d76b40aba41135e105a0c4e6f576e7fe4c8df25554470c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 _ 1 _\n1 4 _ _\n_ 3 _ 1\n2 _ 4 _"
+        }
+      ],
+      "gold": "3 2 1 4\n1 4 3 2\n4 3 2 1\n2 1 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "157": {
+      "digest": "02ee9f7a5ff195428260642c16e691b283620e73cc45b391ae0ed416cad46df8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 2 _ 3\n1 3 _ _\n2 4 3 1\n_ 1 _ 2"
+        }
+      ],
+      "gold": "4 2 1 3\n1 3 2 4\n2 4 3 1\n3 1 4 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "164": {
+      "digest": "0be47db1e43bdd12ec629612397a68f631a8db0014c5935ea14e5225cd769680",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 3 _ _\n_ 1 2 _\n1 _ 3 2\n3 2 1 4"
+        }
+      ],
+      "gold": "2 3 4 1\n4 1 2 3\n1 4 3 2\n3 2 1 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "166": {
+      "digest": "8bd2cf94093b0b9ac2c654b2e83bdc6a47272db87047520d2fd14c979bad94c3",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "3 4 2 _\n_ _ _ _\n_ 3 1 2\n2 1 _ 3"
+        }
+      ],
+      "gold": "3 4 2 1\n1 2 3 4\n4 3 1 2\n2 1 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "168": {
+      "digest": "82b9ef154a741a9af067a108af405296e68642a72b9b16db8c1f29853eed56b6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 4 _ 3\n_ 2 _ _\n_ _ _ 4\n_ 1 3 2"
+        }
+      ],
+      "gold": "1 4 2 3\n3 2 4 1\n2 3 1 4\n4 1 3 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "170": {
+      "digest": "4bdbb9ee24a76d8a0694c15b5bbb79c54f1a19ae2e1abdbd4d956daa955f8f9f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ 2 _ _\n1 3 4 2\n2 4 1 3\n_ 1 2 _"
+        }
+      ],
+      "gold": "4 2 3 1\n1 3 4 2\n2 4 1 3\n3 1 2 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "172": {
+      "digest": "58af1b6860a8b0c29939c60f8416a56bc5e067b274ec772675b2633edb2176e4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 1 3 _\n_ 4 2 1\n4 _ _ 2\n1 _ _ _"
+        }
+      ],
+      "gold": "2 1 3 4\n3 4 2 1\n4 3 1 2\n1 2 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 7
+      }
+    },
+    "173": {
+      "digest": "b70a5e7fd8d1d06bb8761e780ae6c6cb8ff8ed7019469d60f4ea92ada0fda046",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 3 4 _\n_ 4 2 3\n_ 2 1 4\n_ 1 _ _"
+        }
+      ],
+      "gold": "2 3 4 1\n1 4 2 3\n3 2 1 4\n4 1 3 2",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "174": {
+      "digest": "cfc0c3262889bc81c7f9f5c58c17ed06242e5afde7e246234eda6a61cc5420df",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 3 _ _\n1 _ _ _\n4 2 1 3\n_ 1 2 4"
+        }
+      ],
+      "gold": "2 3 4 1\n1 4 3 2\n4 2 1 3\n3 1 2 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "177": {
+      "digest": "47736d815a895aaad6c8bc8c2f94d194b9e3d3596fd25c5e91311b1824341c7d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "1 _ _ 3\n_ _ 1 2\n2 1 _ _\n3 4 2 1"
+        }
+      ],
+      "gold": "1 2 4 3\n4 3 1 2\n2 1 3 4\n3 4 2 1",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 6
+      }
+    },
+    "182": {
+      "digest": "c1387cc40c49a110a326ee375f08d9e12148288b6599cbff4403a2cba4860ca0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "2 4 _ 1\n1 3 _ _\n4 1 2 _\n3 2 1 _"
+        }
+      ],
+      "gold": "2 4 3 1\n1 3 4 2\n4 1 2 3\n3 2 1 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    },
+    "186": {
+      "digest": "c74d72f21d41534ba7c851403a553f1c8b3e6de77f3d42e5493501929cf41bfc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "_ 1 _ 3\n_ _ _ 2\n4 3 _ 1\n1 _ 3 _"
+        }
+      ],
+      "gold": "2 1 4 3\n3 4 1 2\n4 3 2 1\n1 2 3 4",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 8
+      }
+    },
+    "191": {
+      "digest": "4f9c47a54fa0d0ff23b8b55796f5d14616781d92483f75ed52c1207fadbcda4e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Solve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that each row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. Provide your answer between <answer> and </answer> tags."
+        },
+        {
+          "role": "user",
+          "content": "4 _ 1 2\n_ 2 3 4\n3 4 2 1\n_ 1 _ _"
+        }
+      ],
+      "gold": "4 3 1 2\n1 2 3 4\n3 4 2 1\n2 1 4 3",
+      "info": {
+        "difficulty": "medium",
+        "empty_cells": 5
+      }
+    }
+  },
+  "dataset_size": 192,
+  "sources": {
+    "mini_sudoku.py": "import numpy as np\nfrom datasets import load_dataset\n\nimport verifiers as vf\n\n### system prompt\nSYSTEM_PROMPT = \"\"\"\\\nSolve the following 4x4 sudoku puzzle by replacing all _ instances with the correct number such that \\\neach row, each column, and each of the four 2x2 blocks contains all numbers 1-4 exactly once. \\\nProvide your answer between <answer> and </answer> tags.\"\"\"\n\n### helper functions\ndef board_from_string(board_str: str) -> np.ndarray:\n    \"\"\"Convert a string representation to a numpy board\"\"\"\n    rows = board_str.strip().split(\"\\n\")\n    return np.array([[0 if cell == \"_\" else int(cell) for cell in row.split()] \n                     for row in rows])\n\n\ndef is_valid_board(board: np.ndarray) -> bool:\n    \"\"\"Check if board meets game rules (4x4 shape, values between 1 and 4).\"\"\"\n    return board.shape == (4, 4) and np.all((1 <= board) & (board <= 4)).item()\n\n\ndef parse_guess(guess: str | None) -> np.ndarray | None:\n    \"\"\"Parse and validate a guess.\"\"\"\n    if guess is None:\n        return None\n    try:\n        guess_board = board_from_string(guess)\n        return guess_board if is_valid_board(guess_board) else None \n    except Exception:\n        return None\n\n\n### reward functions\ndef partial_credit_reward_func(parser, completion, answer) -> float:\n    \"\"\"Reward +1.0 partial credit for each correct cell in guess.\"\"\"\n    parsed_guess = parser.parse_answer(completion)\n    guess_board = parse_guess(parsed_guess)\n    if guess_board is None:\n        return 0.0\n\n    answer_board = board_from_string(answer)\n    return float(np.sum(np.equal(guess_board, answer_board)))\n\ndef correct_answer_reward_func(parser, completion, answer) -> float:\n    \"\"\"Return +1.0 when the guess matches the ground-truth exactly.\"\"\"\n    parsed_guess = parser.parse_answer(completion)\n    guess_board = parse_guess(parsed_guess)\n    if guess_board is None:\n        return 0.0\n\n    answer_board = board_from_string(answer)\n    return float(np.array_equal(guess_board, answer_board))\n\n\n### environment loader\ndef load_environment(\n    num_train_examples: int = -1,\n    num_eval_examples: int = -1,\n    difficulty: str = \"medium\",\n    include_partial_credit: bool = True,\n) -> vf.Environment:\n    dataset_dict = load_dataset(\"metavind/mini-sudoku\")\n    train_dataset = dataset_dict[\"train\"]\n    eval_dataset = dataset_dict[\"test\"]\n\n    train_dataset = train_dataset.filter(lambda x: x[\"difficulty\"] == difficulty)  # type: ignore\n    eval_dataset = eval_dataset.filter(lambda x: x[\"difficulty\"] == difficulty)  # type: ignore\n\n    if num_train_examples != -1:\n        train_dataset = train_dataset.select(range(num_train_examples))  # type: ignore\n    if num_eval_examples != -1:\n        eval_dataset = eval_dataset.select(range(num_eval_examples))  # type: ignore\n\n    def attach_info(sample: dict) -> dict:\n        info = {\"difficulty\": sample[\"difficulty\"], \"empty_cells\": sample[\"empty_cells\"]}\n        return {\"info\": info}\n\n    train_dataset = train_dataset.map(attach_info)  # type: ignore\n    eval_dataset = eval_dataset.map(attach_info)  # type: ignore\n\n    parser = vf.XMLParser(fields=[\"answer\"], answer_field=\"answer\")\n\n    rubric = vf.Rubric(parser=parser)\n    rubric.add_reward_func(parser.get_format_reward_func(), weight=0.1)\n    if include_partial_credit:\n        rubric.add_reward_func(partial_credit_reward_func, weight=0.01)\n    rubric.add_reward_func(correct_answer_reward_func)\n    \n    vf_env = vf.SingleTurnEnv(\n        dataset=train_dataset,\n        eval_dataset=eval_dataset,\n        system_prompt=SYSTEM_PROMPT,\n        parser=parser,\n        rubric=rubric,\n    )\n\n    return vf_env\n",
+    "verifiers/legacy/parsers/xml_parser.py": "# ruff: noqa\n\nimport re\nfrom types import SimpleNamespace\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.parsers.parser import Parser\nfrom verifiers.legacy.types import Messages\n\n\nclass XMLParser(Parser):\n    def __init__(\n        self,\n        fields: list[str | tuple[str, ...]],\n        answer_field: str = \"answer\",\n        extract_fn: Callable[[str], str] = lambda x: x,\n    ):\n        \"\"\"\n        Initialize the parser with field definitions.\n\n        Each field may be:\n          - a string (e.g. \"reasoning\"): the XML tag is fixed.\n          - a tuple of alternatives (e.g. (\"code\", \"answer\")): the first element is\n            the canonical name used for formatting, and all elements are allowed tags\n            when parsing.\n\n        The schema is assumed to have no duplicate names.\n        \"\"\"\n        super().__init__(extract_fn=extract_fn)\n        # list of (canonical, [alternatives])\n        self._fields: list[tuple[str, list[str]]] = []\n\n        self.answer_field = answer_field\n        seen = set()\n        for field in fields:\n            if isinstance(field, str):\n                canonical = field\n                alternatives = [field]\n            elif isinstance(field, tuple):\n                if not field:\n                    raise ValueError(\"Field tuple cannot be empty.\")\n                canonical = field[0]\n                if not all(isinstance(alt, str) for alt in field):\n                    raise TypeError(\"All alternatives in a tuple must be strings.\")\n                alternatives = list(field)\n            else:\n                raise TypeError(\"Each field must be a string or a tuple of strings.\")\n            if canonical in seen:\n                raise ValueError(f\"Duplicate field name: {canonical}\")\n            seen.add(canonical)\n            self._fields.append((canonical, alternatives))\n        if \"think\" in seen:\n            self.logger.warning(\n                \"You have included the 'think' field in the XMLParser. This should only be used with models which always include <think>...</think> tags but do NOT parse them automatically. \"\n                \"This will cause parsing failures if the model does not include <think>...</think> tags, or if the chat template automatically removes <think>...</think> tags.\"\n                \"In particular, you should NOT use this parser configuration with Qwen3 or DeepSeek-R1 models.\"\n            )\n\n    def parse(self, text: str, strip: bool = True, last: bool = False) -> Any:\n        \"\"\"\n        Parse the given XML string and return an object with attributes corresponding\n        to all allowed tags in the schema.\n\n        For each field defined:\n          - If it is a simple field (e.g. 'reasoning'), the output object will have\n            an attribute 'reasoning' set to the text content (or None if missing).\n          - If it is defined with alternatives (e.g. (\"code\", \"answer\")), the output\n            object will have attributes for *each* allowed tag name. For example,\n            if the schema is ['reasoning', ('code', 'answer')], then both\n            `result.code` and `result.answer` are always accessible. If a tag is not\n            found in the XML, its corresponding attribute is set to None.\n        \"\"\"\n        results: dict[str, str | None] = {}\n        for canonical, alternatives in self._fields:\n            # For each allowed alternative tag, search independently.\n            for alt in alternatives:\n                # Regex pattern to capture the content between the tags.\n                pattern = rf\"<{alt}>\\s*(.*?)\\s*</{alt}>\"\n                if last:\n                    match = None\n                    for match in re.finditer(pattern, text, re.DOTALL):\n                        pass  # iterate over matches to bind last match\n                else:\n                    match = re.search(pattern, text, re.DOTALL)\n                if match:\n                    results[alt] = match.group(1).strip() if strip else match.group(1)\n                else:\n                    results[alt] = None\n        return SimpleNamespace(**results)\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        \"\"\"Extract the last answer from a completion.\"\"\"\n        if isinstance(completion, str):\n            parsed = self.parse(completion, last=True)\n            if (\n                parsed\n                and hasattr(parsed, self.answer_field)\n                and getattr(parsed, self.answer_field) is not None\n            ):\n                return getattr(parsed, self.answer_field)\n        else:\n            for msg in reversed(self.get_assistant_messages(completion)):\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                if (\n                    parsed\n                    and hasattr(parsed, self.answer_field)\n                    and getattr(parsed, self.answer_field) is not None\n                ):\n                    return getattr(parsed, self.answer_field)\n        return None\n\n    def get_format_str(self) -> str:\n        \"\"\"\n        Return a string that describes the format of the XML.\n        \"\"\"\n        format_str = \"\"\n        for field in self._fields:\n            if len(field[1]) > 1:\n                options = \" | \".join(field[1])\n                format_str += f\"<[ {options} ]>\\n...\\n</[ {options} ]>\\n\"\n            else:\n                format_str += f\"<{field[0]}>\\n...\\n</{field[0]}>\\n\"\n        return format_str.strip()\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Return a reward function that checks if messages follow the expected format.\n\n        The function does not make assumptions about which fields should start/end the message\n        or the specific order of fields. It checks that:\n        - At least one field from the schema is present in each message\n        - Fields have proper content and spacing\n        \"\"\"\n\n        def format_reward_func(completion: Messages):\n            \"\"\"Reward function that checks if each step follows the expected format.\"\"\"\n            model_messages = self.get_assistant_messages(completion)\n            if not model_messages:\n                return 0.0\n\n            # Calculate format adherence for each message\n            format_scores = []\n            for msg in model_messages:\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                parsed_no_strip = self.parse(content, strip=False)\n\n                # Check if the message has at least one valid field\n                has_any_field = False\n                fields_with_content = 0\n                total_fields = 0\n\n                # Keep track of which expected fields are present\n                expected_field_count = len(\n                    self._fields\n                )  # Total number of expected field sets\n                present_field_sets = (\n                    set()\n                )  # Which field sets have at least one alternative present\n\n                # Check proper spacing for fields\n                has_correct_spacing = True\n\n                for i, (canonical, alternatives) in enumerate(self._fields):\n                    field_set_present = False\n                    for alt in alternatives:\n                        if hasattr(parsed, alt) and getattr(parsed, alt) is not None:\n                            has_any_field = True\n                            fields_with_content += 1\n                            total_fields += 1\n                            field_set_present = True\n\n                            # Check if field exists in non-stripped version too (proper spacing)\n                            if not (\n                                hasattr(parsed_no_strip, alt)\n                                and getattr(parsed_no_strip, alt) is not None\n                            ):\n                                has_correct_spacing = False\n                        elif (\n                            content.count(f\"<{alt}>\") > 0\n                            or content.count(f\"</{alt}>\") > 0\n                        ):\n                            # Tag exists but content wasn't properly parsed\n                            total_fields += 1\n                            field_set_present = True\n\n                    # If any alternative from this field set was present, count it\n                    if field_set_present:\n                        present_field_sets.add(i)\n\n                # Calculate format score components\n                format_score = 0.0\n\n                # Check if any field from the first field set starts the message\n                starts_with_any_field = False\n                first_field_set = self._fields[0][\n                    1\n                ]  # Get alternatives for first field set\n                for alt in first_field_set:\n                    if content.strip().startswith(f\"<{alt}>\"):\n                        starts_with_any_field = True\n                        break\n\n                # Check if any field from the last field set ends the message\n                ends_with_any_field = False\n                last_field_set = self._fields[-1][\n                    1\n                ]  # Get alternatives for last field set\n                for alt in last_field_set:\n                    if content.strip().endswith(f\"</{alt}>\"):\n                        ends_with_any_field = True\n                        break\n\n                # Weight the score based on different criteria\n                if has_any_field:\n                    # Calculate the proportion of expected field sets that are present\n                    field_set_ratio = len(present_field_sets) / expected_field_count\n                    format_score += 0.4 * field_set_ratio\n\n                if has_correct_spacing:\n                    format_score += 0.2\n\n                if starts_with_any_field:\n                    format_score += 0.2\n\n                if ends_with_any_field:\n                    format_score += 0.2\n\n                format_scores.append(format_score)\n\n            # Return average format adherence\n            if not format_scores:\n                return 0.0\n            return sum(format_scores) / len(format_scores)\n\n        return format_reward_func\n\n    def get_fields(self) -> list[str]:\n        \"\"\"Return a list of the canonical field names (in order).\"\"\"\n        return [canonical for canonical, _ in self._fields]\n\n    def format(self, **kwargs) -> str:\n        \"\"\"\n        Format the provided keyword arguments into an XML string.\n\n        For fields with alternatives (tuple), the canonical name (the first element)\n        is used as the XML tag. The method looks for a provided value using any of the\n        allowed names (preferring the canonical if present).\n\n        Example usage:\n            parser = XMLParser(['reasoning', ('code', 'answer')])\n            formatted_str = parser.format(reasoning=\"...\", code=\"...\")\n        \"\"\"\n        parts = []\n        for canonical, alternatives in self._fields:\n            value = None\n            # Look for a provided value using any of the acceptable keys,\n            # preferring the canonical name if it exists.\n            if canonical in kwargs:\n                value = kwargs[canonical]\n            else:\n                for alt in alternatives:\n                    if alt in kwargs:\n                        value = kwargs[alt]\n                        break\n            if value is None:\n                raise ValueError(\n                    f\"Missing value for field '{canonical}' (allowed: {alternatives})\"\n                )\n            # Use the canonical name as the tag for formatting.\n            parts.append(f\"<{canonical}>\\n{value}\\n</{canonical}>\")\n        return \"\\n\".join(parts)\n",
+    "verifiers/legacy/parsers/parser.py": "# ruff: noqa\n\nimport logging\nfrom typing import Any, Callable\n\nfrom verifiers.legacy.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n"
+  }
+}

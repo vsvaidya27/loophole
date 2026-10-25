@@ -1,0 +1,9 @@
+{
+  "env_id": "beauduffy/ai2-arc",
+  "api": "legacy",
+  "load_id": "ai2-arc",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/beauduffy/ai2-arc/patch.py"
+}

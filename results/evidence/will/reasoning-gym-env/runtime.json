@@ -1,0 +1,9 @@
+{
+  "env_id": "will/reasoning-gym-env",
+  "api": "legacy",
+  "load_id": "reasoning-gym-env",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/will/reasoning-gym-env/patch.py"
+}

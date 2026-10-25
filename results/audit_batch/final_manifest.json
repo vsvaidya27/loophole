@@ -1,0 +1,48 @@
+{
+  "base_commit": "8e01a8b",
+  "selected_environments": 16,
+  "selected_statuses": {
+    "patched": 11,
+    "unpatched": 3,
+    "robust": 1,
+    "failed_to_run": 1
+  },
+  "leaderboard_entries": 19,
+  "leaderboard_statuses": {
+    "patched": 11,
+    "unpatched": 3,
+    "robust": 1,
+    "failed_to_run": 4
+  },
+  "invariants": 95,
+  "closed_exploits": 60,
+  "open_exploits": 35,
+  "patch_files": 11,
+  "ledger_total_usd": 16.755505,
+  "sweep_cost_usd": 16.613145,
+  "prior_test_cost_usd": 0.14236,
+  "discarded_run_cost_usd": 0.0178,
+  "checker": {
+    "passed": true,
+    "failures": 0,
+    "log": "results/audit_batch/check_leaderboard.log",
+    "frozen_git_blob": "512017a27c32f36a63069feeb94ae558f3234a82"
+  },
+  "graph_batch": "results/invariant_graph_batch.json",
+  "graph_batch_sha256": "baeedde972a53e0438dfe574b66dae6fefebb6f28ecea6cd142f9f9bb6686560",
+  "hosted_ingestion": "not_sent_writer_token_unconfigured",
+  "publication_base_commit": "f2ca0f8ed048a1963c94fcd8a43d3191d5e231af",
+  "audit_snapshot": "results/audit_batch/invariants.db",
+  "audit_snapshot_sha256": "bbd84152ed5fb883198ac89fb0636b79e44b6ca685dbef10914553e2cb0bb3e1",
+  "shared_ledger_total_usd_at_publication": 17.3768838,
+  "other_pipeline_spend_usd_at_publication": 0.6213788,
+  "publication_validation": {
+    "tests_passed": 62,
+    "tests_skipped": 1,
+    "tests_log": "results/audit_batch/publication_tests.log",
+    "checker_failures": 0,
+    "checker_log": "results/audit_batch/publication_checker.log",
+    "offline_retrieval_invariants": 95,
+    "offline_retrieval_query_matches": 5
+  }
+}

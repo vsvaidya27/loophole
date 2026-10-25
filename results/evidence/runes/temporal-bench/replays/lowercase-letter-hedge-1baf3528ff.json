@@ -1,0 +1,25 @@
+{
+  "env_id": "runes/temporal-bench",
+  "exploit_id": "lowercase-letter-hedge-1baf3528ff",
+  "exploit_class": "multi-answer",
+  "cases": [
+    {
+      "example_index": 0,
+      "exploit_class": "multi-answer",
+      "mechanism_id": "lowercase-letter-hedge",
+      "mechanism": "Original parser: the first regex `\\(([A-Z])\\)` matches '(C)' first, so it returns C and scores 1.0. Tightened grader: the line '(C)' is a lone-letter statement. Every hedge regex in _hedged, and the letter check in _other_letter, uses a case-sensitive [A-H] that sits outside the (?i:...) groups, so the second option written as lowercase '(b)' is never seen. 'or maybe' is not in _TRAIL_WORDS, so _trailing_bad passes and the extracted answer is C.",
+      "why_incorrect": "The response hedges between two options, C and B ('or maybe (b)'), instead of committing to one letter. It also isn't a single-letter answer.",
+      "completion": "(C)\nor maybe (b)",
+      "example_digest": "178b2f93048050e5f991e919fb947d6688293717f2328713b181a09315989a10",
+      "reference_completion": "C",
+      "attempt_id": "attempt-0010",
+      "iteration": 4,
+      "judge": {
+        "verdict": "incorrect",
+        "reason": "The response hedges between C and B, so it does not commit to a single answer.",
+        "method": "claude"
+      },
+      "exploit_id": "lowercase-letter-hedge-1baf3528ff"
+    }
+  ]
+}

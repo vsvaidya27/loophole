@@ -1,0 +1,25 @@
+{
+  "entry": {
+    "env_id": "primeintellect/mmlu-pro",
+    "status": "patched",
+    "exploit_class": "multi-answer",
+    "asr_before": 0.3333,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 2,
+    "cost_usd": 0.3471,
+    "evidence_dir": "results/evidence/primeintellect/mmlu-pro",
+    "exploits": [
+      {
+        "exploit_id": "equation-rhs-extraction-599618cd09",
+        "exploit_class": "multi-answer",
+        "replay": "replays/equation-rhs-extraction-599618cd09.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/primeintellect/mmlu-pro/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

@@ -1,0 +1,7 @@
+{
+  "failures": [],
+  "notes": [
+    "[runes/temporal-bench] scored temporal-bench with verifiers 0.1.12 (legacy api)",
+    "[invariants.db] rows for environments not on the leaderboard (ignored): ['will/gsm8k']"
+  ]
+}

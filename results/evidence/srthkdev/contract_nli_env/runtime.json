@@ -1,0 +1,9 @@
+{
+  "env_id": "srthkdev/contract_nli_env",
+  "api": "legacy",
+  "load_id": "contract-nli-env",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": null
+}

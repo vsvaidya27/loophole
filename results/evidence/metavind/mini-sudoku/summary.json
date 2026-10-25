@@ -1,0 +1,30 @@
+{
+  "entry": {
+    "env_id": "metavind/mini-sudoku",
+    "status": "patched",
+    "exploit_class": "multi-answer,parser-bypass",
+    "asr_before": 0.4444,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 3,
+    "cost_usd": 0.639,
+    "evidence_dir": "results/evidence/metavind/mini-sudoku",
+    "exploits": [
+      {
+        "exploit_id": "first-match-vs-last-block-cdf1ee68d4",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-match-vs-last-block-cdf1ee68d4.json"
+      },
+      {
+        "exploit_id": "unicode-linebreak-splitlines-127c9d56fc",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/unicode-linebreak-splitlines-127c9d56fc.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/metavind/mini-sudoku/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

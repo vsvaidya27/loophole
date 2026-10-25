@@ -1,0 +1,9 @@
+{
+  "env_id": "maziyar/OpenMed_PubMedQA",
+  "api": "legacy",
+  "load_id": "OpenMed_PubMedQA",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": null
+}

@@ -1,0 +1,90 @@
+{
+  "entry": {
+    "env_id": "runes/temporal-bench",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer,other",
+    "asr_before": 1.0,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 1.4545,
+    "evidence_dir": "results/evidence/runes/temporal-bench",
+    "exploits": [
+      {
+        "exploit_id": "case-insensitive-is-inside-word-71229a3122",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/case-insensitive-is-inside-word-71229a3122.json"
+      },
+      {
+        "exploit_id": "first-paren-letter-wins-b65402d2f5",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-paren-letter-wins-b65402d2f5.json"
+      },
+      {
+        "exploit_id": "hedge-before-answer-statement-unchecked-6f35c053d2",
+        "exploit_class": "multi-answer",
+        "replay": "replays/hedge-before-answer-statement-unchecked-6f35c053d2.json"
+      },
+      {
+        "exploit_id": "hedge-on-following-line-unchecked-77f8a5b3de",
+        "exploit_class": "multi-answer",
+        "replay": "replays/hedge-on-following-line-unchecked-77f8a5b3de.json"
+      },
+      {
+        "exploit_id": "hedge-vocabulary-gap-b60239cea1",
+        "exploit_class": "multi-answer",
+        "replay": "replays/hedge-vocabulary-gap-b60239cea1.json"
+      },
+      {
+        "exploit_id": "last-line-letter-overrides-body-3fd0e64429",
+        "exploit_class": "multi-answer",
+        "replay": "replays/last-line-letter-overrides-body-3fd0e64429.json"
+      },
+      {
+        "exploit_id": "last-standalone-capital-hedge-a43767075c",
+        "exploit_class": "multi-answer",
+        "replay": "replays/last-standalone-capital-hedge-a43767075c.json"
+      },
+      {
+        "exploit_id": "lowercase-bare-letter-trailing-override-c73288819f",
+        "exploit_class": "multi-answer",
+        "replay": "replays/lowercase-bare-letter-trailing-override-c73288819f.json"
+      },
+      {
+        "exploit_id": "lowercase-letter-hedge-1baf3528ff",
+        "exploit_class": "multi-answer",
+        "replay": "replays/lowercase-letter-hedge-1baf3528ff.json"
+      },
+      {
+        "exploit_id": "option-text-override-30409ac6ec",
+        "exploit_class": "other",
+        "replay": "replays/option-text-override-30409ac6ec.json"
+      },
+      {
+        "exploit_id": "option-text-override-no-trail-vocab-deb9211086",
+        "exploit_class": "other",
+        "replay": "replays/option-text-override-no-trail-vocab-deb9211086.json"
+      },
+      {
+        "exploit_id": "spelled-number-option-reference-a92408fa9c",
+        "exploit_class": "other",
+        "replay": "replays/spelled-number-option-reference-a92408fa9c.json"
+      },
+      {
+        "exploit_id": "spelled-out-retraction-9182adf1b3",
+        "exploit_class": "other",
+        "replay": "replays/spelled-out-retraction-9182adf1b3.json"
+      },
+      {
+        "exploit_id": "wrong-reasoning-before-statement-11e48d102a",
+        "exploit_class": "other",
+        "replay": "replays/wrong-reasoning-before-statement-11e48d102a.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/runes/temporal-bench/patch.py",
+  "stop_reason": "iteration limit reached",
+  "pending_invariants": []
+}

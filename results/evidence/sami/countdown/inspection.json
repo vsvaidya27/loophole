@@ -1,0 +1,1211 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "a66e026834d857881f6985caf697ddd73c456bbf7eb37beee9d872fa02c172ed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 2, 2, 75, 3, 10, 5\nTarget: 948"
+        }
+      ],
+      "gold": "((75 + (2 + 2)) * (5 + (10 - 3)))",
+      "info": {
+        "numbers": [
+          2,
+          2,
+          75,
+          3,
+          10,
+          5
+        ],
+        "target": 948
+      }
+    },
+    "9": {
+      "digest": "cee00a8ece8e17daf5d7338c65f66f9db2dc21ac37fbc29f48c8f9c20a0773f7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 3, 25, 9, 100, 50, 2\nTarget: 308"
+        }
+      ],
+      "gold": "((3 + 25) * (9 + 2))",
+      "info": {
+        "numbers": [
+          3,
+          25,
+          9,
+          100,
+          50,
+          2
+        ],
+        "target": 308
+      }
+    },
+    "10": {
+      "digest": "cab5093c9338f98385224539a9ee1bd2ede1309fbdd129bbfbd29257b8958cf1",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 8, 100, 6, 1, 2, 25\nTarget: 845"
+        }
+      ],
+      "gold": "((2 * 25) + ((8 * 100) - (6 - 1)))",
+      "info": {
+        "numbers": [
+          8,
+          100,
+          6,
+          1,
+          2,
+          25
+        ],
+        "target": 845
+      }
+    },
+    "17": {
+      "digest": "f5ff8d2ad2f311fb0c4d17d8f7af6846b8cab710664d24b2f020c46a1c38db9a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 10, 6, 1, 2, 9, 100\nTarget: 892"
+        }
+      ],
+      "gold": "((9 * 100) - ((10 + 6) / (1 * 2)))",
+      "info": {
+        "numbers": [
+          10,
+          6,
+          1,
+          2,
+          9,
+          100
+        ],
+        "target": 892
+      }
+    },
+    "26": {
+      "digest": "5500f5e708179b158e9bd30544d309e56e2a789482d1dc87453fbbfbfcc7d67b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 25, 8, 4, 1, 100, 50\nTarget: 284"
+        }
+      ],
+      "gold": "((1 + 100) + ((4 * 50) - (25 - 8)))",
+      "info": {
+        "numbers": [
+          25,
+          8,
+          4,
+          1,
+          100,
+          50
+        ],
+        "target": 284
+      }
+    },
+    "30": {
+      "digest": "ce64f1dc8b4edc67b61f1570724690e17dd4a134655af1cdb35a2399dd44cf91",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 10, 2, 8, 1, 75, 4\nTarget: 500"
+        }
+      ],
+      "gold": "(((8 * 1) * (75 - (10 + 2))) - 4)",
+      "info": {
+        "numbers": [
+          10,
+          2,
+          8,
+          1,
+          75,
+          4
+        ],
+        "target": 500
+      }
+    },
+    "32": {
+      "digest": "0dfdc4a503fa6f0844dfaa133495d409fac65ce4bef8bbb4ebd2852706015014",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 9, 3, 1, 100, 25, 50\nTarget: 651"
+        }
+      ],
+      "gold": "(1 + ((100 - 50) * (25 - (9 + 3))))",
+      "info": {
+        "numbers": [
+          9,
+          3,
+          1,
+          100,
+          25,
+          50
+        ],
+        "target": 651
+      }
+    },
+    "34": {
+      "digest": "f99f89bf54583e441d67aa53da2c6b9af7afad0c545d72654549370b96570487",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 2, 6, 3, 4, 75, 25\nTarget: 190"
+        }
+      ],
+      "gold": "((4 * 25) + ((2 * 6) + (3 + 75)))",
+      "info": {
+        "numbers": [
+          2,
+          6,
+          3,
+          4,
+          75,
+          25
+        ],
+        "target": 190
+      }
+    },
+    "37": {
+      "digest": "369dac36b520c275831ada06d445c6d4beb1445afe112048df805f953651ebd0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 9, 50, 100, 10, 1, 25\nTarget: 524"
+        }
+      ],
+      "gold": "(((9 + 50) * (10 + 1)) - (100 + 25))",
+      "info": {
+        "numbers": [
+          9,
+          50,
+          100,
+          10,
+          1,
+          25
+        ],
+        "target": 524
+      }
+    },
+    "46": {
+      "digest": "92d99ab00890c026c5fdf0df194f01ee6c32591b24863fedea4cdd6917f03bc4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 3, 75, 8, 100, 9, 50\nTarget: 913"
+        }
+      ],
+      "gold": "((50 - 9) + ((75 - 3) + (8 * 100)))",
+      "info": {
+        "numbers": [
+          3,
+          75,
+          8,
+          100,
+          9,
+          50
+        ],
+        "target": 913
+      }
+    },
+    "52": {
+      "digest": "3143a3f77c7fa1329201274214bbfb7068558b3064a93f0f77a5c177c09ed3b6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 8, 75, 9, 8, 1, 3\nTarget: 190"
+        }
+      ],
+      "gold": "(((8 * 75) / 3) - (9 + 1))",
+      "info": {
+        "numbers": [
+          8,
+          75,
+          9,
+          8,
+          1,
+          3
+        ],
+        "target": 190
+      }
+    },
+    "62": {
+      "digest": "f71d37d52b4f4ef87984e377451a2d094350c7aabeff225f73e6f1770c43b278",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 1, 7, 2, 75, 5, 8\nTarget: 745"
+        }
+      ],
+      "gold": "(5 * ((2 * 75) - (8 / (1 + 7))))",
+      "info": {
+        "numbers": [
+          1,
+          7,
+          2,
+          75,
+          5,
+          8
+        ],
+        "target": 745
+      }
+    },
+    "69": {
+      "digest": "b56eff43f1f808140dcfa55479ea7636a04a2e1ab7eb97b02c16400308b9f7a9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 4, 100, 7, 6, 5, 75\nTarget: 610"
+        }
+      ],
+      "gold": "((4 * 100) + (5 * (7 * 6)))",
+      "info": {
+        "numbers": [
+          4,
+          100,
+          7,
+          6,
+          5,
+          75
+        ],
+        "target": 610
+      }
+    },
+    "84": {
+      "digest": "31eafe190343d2cf153b5f0456e90068cfd27083f4e5c6abd4037d929bb981db",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 8, 5, 10, 5, 6, 50\nTarget: 579"
+        }
+      ],
+      "gold": "(((8 + 5) * (50 - (10 - 5))) - 6)",
+      "info": {
+        "numbers": [
+          8,
+          5,
+          10,
+          5,
+          6,
+          50
+        ],
+        "target": 579
+      }
+    },
+    "86": {
+      "digest": "3b84e2a8b126dbe314d5eb525f0fbc2979c8dad1789a2c96a682c8a38313db21",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 50, 25, 75, 3, 10, 10\nTarget: 586"
+        }
+      ],
+      "gold": "((10 + ((50 + 25) * (75 + 3))) / 10)",
+      "info": {
+        "numbers": [
+          50,
+          25,
+          75,
+          3,
+          10,
+          10
+        ],
+        "target": 586
+      }
+    },
+    "104": {
+      "digest": "92f47d489f93556278292f2daa027b928fbc2b2f3c3f55983bc47d9bd15a0fc2",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 9, 6, 100, 75, 6, 50\nTarget: 245"
+        }
+      ],
+      "gold": "((100 / 50) + ((9 - 6) * (75 + 6)))",
+      "info": {
+        "numbers": [
+          9,
+          6,
+          100,
+          75,
+          6,
+          50
+        ],
+        "target": 245
+      }
+    },
+    "121": {
+      "digest": "6f849eaf9f0862acc3fa052ed3140812444bc116e4718e991b036391199925e6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 10, 25, 8, 50, 6, 75\nTarget: 339"
+        }
+      ],
+      "gold": "((8 + 6) + (75 + (10 * 25)))",
+      "info": {
+        "numbers": [
+          10,
+          25,
+          8,
+          50,
+          6,
+          75
+        ],
+        "target": 339
+      }
+    },
+    "128": {
+      "digest": "6eb08f69155e83732dbf0d0afd60a3a003bbede14300aca72132bf8f230daea0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 2, 5, 10, 7, 3, 50\nTarget: 628"
+        }
+      ],
+      "gold": "(((2 * 10) / 5) * (7 + (3 * 50)))",
+      "info": {
+        "numbers": [
+          2,
+          5,
+          10,
+          7,
+          3,
+          50
+        ],
+        "target": 628
+      }
+    },
+    "138": {
+      "digest": "85ec07754ef52e5bf6c9c20fef66478a394b4f76b79d5dace3f91107d8409468",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 4, 1, 6, 75, 100, 50\nTarget: 384"
+        }
+      ],
+      "gold": "(((6 * 50) / 75) * (100 - (4 * 1)))",
+      "info": {
+        "numbers": [
+          4,
+          1,
+          6,
+          75,
+          100,
+          50
+        ],
+        "target": 384
+      }
+    },
+    "149": {
+      "digest": "9cf602369d7c64ba4320f569d5f6a25e70f3be83fd9fe5adb246d83e0fc3262e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 4, 75, 9, 50, 2, 25\nTarget: 950"
+        }
+      ],
+      "gold": "(2 * (25 + (9 * 50)))",
+      "info": {
+        "numbers": [
+          4,
+          75,
+          9,
+          50,
+          2,
+          25
+        ],
+        "target": 950
+      }
+    },
+    "156": {
+      "digest": "990ae8087000ed4630a95870d0db142b04f33854b31a6f70223eb809260aec10",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 1, 50, 25, 100, 5, 2\nTarget: 148"
+        }
+      ],
+      "gold": "((25 + 100) + (((1 + 50) - 5) / 2))",
+      "info": {
+        "numbers": [
+          1,
+          50,
+          25,
+          100,
+          5,
+          2
+        ],
+        "target": 148
+      }
+    },
+    "168": {
+      "digest": "34060f805c4ab28b2d4b5df585f7037821f2dd4a61ea2242af4aea5af05a5a90",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 5, 5, 9, 75, 50, 6\nTarget: 924"
+        }
+      ],
+      "gold": "((9 + 75) * (6 + (50 / (5 + 5))))",
+      "info": {
+        "numbers": [
+          5,
+          5,
+          9,
+          75,
+          50,
+          6
+        ],
+        "target": 924
+      }
+    },
+    "170": {
+      "digest": "7d1c7e27cb1306b26cfee51baa060a8cad25866b53556c49a1137d30677b6273",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 1, 100, 25, 8, 5, 9\nTarget: 301"
+        }
+      ],
+      "gold": "((1 + 100) + (25 * 8))",
+      "info": {
+        "numbers": [
+          1,
+          100,
+          25,
+          8,
+          5,
+          9
+        ],
+        "target": 301
+      }
+    },
+    "173": {
+      "digest": "21af76ce93544394716e654f7bf6dd0d4eb14b4db82e2c7b6b5978abc6bec524",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 50, 4, 8, 9, 100, 75\nTarget: 703"
+        }
+      ],
+      "gold": "(100 + (9 * (75 - 8)))",
+      "info": {
+        "numbers": [
+          50,
+          4,
+          8,
+          9,
+          100,
+          75
+        ],
+        "target": 703
+      }
+    },
+    "174": {
+      "digest": "68f46545bf8cecf64304110a65aefa04d0a142db633e3731ca8b5923e248f577",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 7, 4, 75, 25, 1, 10\nTarget: 857"
+        }
+      ],
+      "gold": "((7 + 25) + (75 * (1 + 10)))",
+      "info": {
+        "numbers": [
+          7,
+          4,
+          75,
+          25,
+          1,
+          10
+        ],
+        "target": 857
+      }
+    },
+    "190": {
+      "digest": "6de075e79327e66c8766c035986ca6e2443b6018b7342f805d92dc89db342fe4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 8, 50, 75, 10, 25, 2\nTarget: 363"
+        }
+      ],
+      "gold": "((75 + (8 + 50)) + (10 * (25 - 2)))",
+      "info": {
+        "numbers": [
+          8,
+          50,
+          75,
+          10,
+          25,
+          2
+        ],
+        "target": 363
+      }
+    },
+    "208": {
+      "digest": "3b5012b5634a410513240e056b9aa35728b16e6d902afb851d6c581e4e98f30d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 50, 2, 5, 4, 7, 1\nTarget: 726"
+        }
+      ],
+      "gold": "(5 + (7 * ((50 * 2) + (4 - 1))))",
+      "info": {
+        "numbers": [
+          50,
+          2,
+          5,
+          4,
+          7,
+          1
+        ],
+        "target": 726
+      }
+    },
+    "225": {
+      "digest": "0811b6f716cb7301ef95d95a00e30de39300735d75277027d8946b8846aa3a9b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 25, 9, 75, 5, 1, 100\nTarget: 500"
+        }
+      ],
+      "gold": "(5 * 100)",
+      "info": {
+        "numbers": [
+          25,
+          9,
+          75,
+          5,
+          1,
+          100
+        ],
+        "target": 500
+      }
+    },
+    "242": {
+      "digest": "0d841c5bcc1464831a393d157a7b00a955a689eaa50594d936a7a65b12cc1eb8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 25, 3, 4, 5, 100, 75\nTarget: 896"
+        }
+      ],
+      "gold": "((100 * (3 + 5)) + (75 + (25 - 4)))",
+      "info": {
+        "numbers": [
+          25,
+          3,
+          4,
+          5,
+          100,
+          75
+        ],
+        "target": 896
+      }
+    },
+    "248": {
+      "digest": "9b19ba0c96f2df50e85b216fbbbbaafe99fec156949e0f99994971d9f6a6ee9e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 4, 2, 9, 9, 25, 7\nTarget: 758"
+        }
+      ],
+      "gold": "(2 + ((9 * 7) * (25 - (4 + 9))))",
+      "info": {
+        "numbers": [
+          4,
+          2,
+          9,
+          9,
+          25,
+          7
+        ],
+        "target": 758
+      }
+    },
+    "251": {
+      "digest": "1c9a58eb5ee8f60fc1fd8c60f459c6ea1cc374ed7e9c0b83b7d93167fdbb0a1d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 50, 100, 1, 75, 2, 8\nTarget: 677"
+        }
+      ],
+      "gold": "(2 + ((1 + 8) * ((50 + 100) - 75)))",
+      "info": {
+        "numbers": [
+          50,
+          100,
+          1,
+          75,
+          2,
+          8
+        ],
+        "target": 677
+      }
+    },
+    "260": {
+      "digest": "e737e8ef91f34cbf0a653d45f08e56f2f459d23a0799f15390d0dc2463007f9b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 75, 5, 100, 8, 7, 6\nTarget: 439"
+        }
+      ],
+      "gold": "(7 + (6 * ((75 + 5) - 8)))",
+      "info": {
+        "numbers": [
+          75,
+          5,
+          100,
+          8,
+          7,
+          6
+        ],
+        "target": 439
+      }
+    },
+    "261": {
+      "digest": "bac660a1cc999f7b2d766918baaa2acfa1ae66ec58c37b186faacb1d3a2c2235",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 7, 75, 9, 6, 25, 9\nTarget: 994"
+        }
+      ],
+      "gold": "((75 * 6) + ((7 + 9) * (25 + 9)))",
+      "info": {
+        "numbers": [
+          7,
+          75,
+          9,
+          6,
+          25,
+          9
+        ],
+        "target": 994
+      }
+    },
+    "277": {
+      "digest": "f96172ed691ac21d78dc60f52c72dedbe822cf7ab5ac4c8ef77b4422dd9e0650",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 6, 9, 100, 7, 8, 50\nTarget: 656"
+        }
+      ],
+      "gold": "((8 + 50) + ((6 * 100) - (9 - 7)))",
+      "info": {
+        "numbers": [
+          6,
+          9,
+          100,
+          7,
+          8,
+          50
+        ],
+        "target": 656
+      }
+    },
+    "279": {
+      "digest": "0f234db14bec38266ba5d8e2ee72e3a5654aedc5853e0488e3446a59232a1db1",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 50, 5, 5, 7, 10, 6\nTarget: 468"
+        }
+      ],
+      "gold": "((5 + 7) * ((50 + 5) - (10 + 6)))",
+      "info": {
+        "numbers": [
+          50,
+          5,
+          5,
+          7,
+          10,
+          6
+        ],
+        "target": 468
+      }
+    },
+    "285": {
+      "digest": "003c11afb08b219ab28e389aee2e5cc1858fbd60ab8272296b17f5a61386c6f4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 6, 50, 7, 25, 75, 8\nTarget: 195"
+        }
+      ],
+      "gold": "((7 * (25 + ((6 * 50) / 75))) - 8)",
+      "info": {
+        "numbers": [
+          6,
+          50,
+          7,
+          25,
+          75,
+          8
+        ],
+        "target": 195
+      }
+    },
+    "294": {
+      "digest": "90240ccd566484f5e79c7cab6d2b3d05896488cf285492013aed5b69cb8bcd1a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 2, 6, 25, 100, 8, 75\nTarget: 667"
+        }
+      ],
+      "gold": "((8 * 75) + ((100 - 25) - (2 + 6)))",
+      "info": {
+        "numbers": [
+          2,
+          6,
+          25,
+          100,
+          8,
+          75
+        ],
+        "target": 667
+      }
+    },
+    "312": {
+      "digest": "e8a6de5f9855a9b8aa3f4e7c555ad66bc3b5e2c52cc78d42f1f6e8b0c0dcba1e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 1, 50, 100, 6, 8, 9\nTarget: 851"
+        }
+      ],
+      "gold": "((1 + 50) + (100 * 8))",
+      "info": {
+        "numbers": [
+          1,
+          50,
+          100,
+          6,
+          8,
+          9
+        ],
+        "target": 851
+      }
+    },
+    "322": {
+      "digest": "724c15d94331988e4b45689ba38edd547dd93bf91bf02b2a373e38c19337d719",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 3, 75, 9, 50, 25, 8\nTarget: 534"
+        }
+      ],
+      "gold": "((8 * ((75 + 25) - (3 * 9))) - 50)",
+      "info": {
+        "numbers": [
+          3,
+          75,
+          9,
+          50,
+          25,
+          8
+        ],
+        "target": 534
+      }
+    },
+    "329": {
+      "digest": "0573effe12dac01fb60cffe0ed8c87c71853fcaa2eb01f0758384917bc193882",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 100, 6, 2, 5, 25, 75\nTarget: 784"
+        }
+      ],
+      "gold": "((100 - 2) * ((6 + 5) - (75 / 25)))",
+      "info": {
+        "numbers": [
+          100,
+          6,
+          2,
+          5,
+          25,
+          75
+        ],
+        "target": 784
+      }
+    },
+    "346": {
+      "digest": "ed0d43307443e0fa6df9124b9b9cf1860f80ab795c7b7e228653e53466caa9e2",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 75, 3, 4, 5, 7, 25\nTarget: 768"
+        }
+      ],
+      "gold": "(((4 * (75 * 3)) - 7) - (5 * 25))",
+      "info": {
+        "numbers": [
+          75,
+          3,
+          4,
+          5,
+          7,
+          25
+        ],
+        "target": 768
+      }
+    },
+    "350": {
+      "digest": "db8f1fd9213a1f0c2d01c0308ea80d068af3997c8ab9738f6b8f97b19947fc8b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 2, 3, 8, 25, 1, 2\nTarget: 345"
+        }
+      ],
+      "gold": "(((8 - 1) * (25 * 2)) - (2 + 3))",
+      "info": {
+        "numbers": [
+          2,
+          3,
+          8,
+          25,
+          1,
+          2
+        ],
+        "target": 345
+      }
+    },
+    "364": {
+      "digest": "27e07471f23163d821f3b0ff9fe28d58f86666475dd14c77d3a5043199218f37",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 9, 5, 7, 9, 25, 10\nTarget: 706"
+        }
+      ],
+      "gold": "((9 * 9) + (25 * ((5 * 7) - 10)))",
+      "info": {
+        "numbers": [
+          9,
+          5,
+          7,
+          9,
+          25,
+          10
+        ],
+        "target": 706
+      }
+    },
+    "369": {
+      "digest": "a36ccb3deea8bb06b54b567845c7bff868ff229581bf46fc5587b3af0cb3a084",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 9, 100, 3, 50, 25, 3\nTarget: 185"
+        }
+      ],
+      "gold": "((50 + 25) + ((9 + 100) + (3 / 3)))",
+      "info": {
+        "numbers": [
+          9,
+          100,
+          3,
+          50,
+          25,
+          3
+        ],
+        "target": 185
+      }
+    },
+    "371": {
+      "digest": "0fda9545806c4933d8af2c57bd885dbb342121d2da6e01af2570ed2c4937a31c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 6, 2, 50, 3, 7, 4\nTarget: 699"
+        }
+      ],
+      "gold": "(3 * ((2 + 7) + (4 * (6 + 50))))",
+      "info": {
+        "numbers": [
+          6,
+          2,
+          50,
+          3,
+          7,
+          4
+        ],
+        "target": 699
+      }
+    },
+    "381": {
+      "digest": "96cb30d29dccec4ad0c5ae8788b1ef56f7b8acd393e055c44927091e4bfe5db0",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 25, 9, 10, 100, 75, 1\nTarget: 727"
+        }
+      ],
+      "gold": "((10 * (75 - 1)) - (9 + (100 / 25)))",
+      "info": {
+        "numbers": [
+          25,
+          9,
+          10,
+          100,
+          75,
+          1
+        ],
+        "target": 727
+      }
+    },
+    "395": {
+      "digest": "a8d753f6da216a76b9407a0bd300087b6854461becb0d74c1b4581b9fe70a59b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 100, 1, 2, 75, 8, 6\nTarget: 932"
+        }
+      ],
+      "gold": "((100 * (2 + 8)) - ((75 - 1) - 6))",
+      "info": {
+        "numbers": [
+          100,
+          1,
+          2,
+          75,
+          8,
+          6
+        ],
+        "target": 932
+      }
+    },
+    "399": {
+      "digest": "bab3a32f54fc7c881380e253726945b530b6331b1c3858eb7e17bdba11ab6d57",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>"
+        },
+        {
+          "role": "user",
+          "content": "Numbers: 7, 7, 100, 9, 9, 10\nTarget: 662"
+        }
+      ],
+      "gold": "((7 * 100) - ((9 - 7) * (9 + 10)))",
+      "info": {
+        "numbers": [
+          7,
+          7,
+          100,
+          9,
+          9,
+          10
+        ],
+        "target": 662
+      }
+    }
+  },
+  "dataset_size": 400,
+  "sources": {
+    "countdown.py": "\"\"\"\nCountdown Numbers Game Environment\n\nThe classic UK TV show arithmetic puzzle where players must reach a target number (101-999)\nusing 6 source numbers with +, -, *, / operations. Each source number can only be used once.\n\"\"\"\n\nimport json\nimport os\nimport random\nimport re\nfrom itertools import permutations, product\nfrom typing import Callable, Optional\n\nimport verifiers as vf\nfrom datasets import Dataset\n\n# Path to pre-computed puzzles\nPUZZLES_FILE = os.path.join(os.path.dirname(__file__), \"puzzles.json\")\n\n# Type alias for dataset builders\nDatasetBuilder = Callable[[], Dataset]\n\n\n# =============================================================================\n# Puzzle Generation & Solving\n# =============================================================================\n\nLARGE_NUMBERS = [25, 50, 75, 100]\nSMALL_NUMBERS = list(range(1, 11)) * 2  # 1-10, each appears twice\n\n\ndef generate_source_numbers(num_large: int = 2) -> list[int]:\n    \"\"\"Generate 6 source numbers with specified count of large numbers.\"\"\"\n    num_large = max(0, min(4, num_large))  # Clamp to 0-4\n    large = random.sample(LARGE_NUMBERS, num_large)\n    small = random.sample(SMALL_NUMBERS, 6 - num_large)\n    numbers = large + small\n    random.shuffle(numbers)\n    return numbers\n\n\ndef generate_target() -> int:\n    \"\"\"Generate a random target between 101 and 999.\"\"\"\n    return random.randint(101, 999)\n\n\ndef solve_countdown(numbers: list[int], target: int, find_all: bool = False) -> list[str]:\n    \"\"\"\n    Find solution(s) to reach the target using the given numbers.\n\n    Uses recursive search trying all combinations of operations.\n    Returns list of solution strings, or empty list if unsolvable.\n    \"\"\"\n    solutions = []\n\n    def search(available: list[tuple[int, str]], depth: int = 0):\n        \"\"\"Recursive search for solutions.\"\"\"\n        if len(solutions) > 0 and not find_all:\n            return\n\n        # Check if we've reached the target\n        for val, expr in available:\n            if val == target:\n                solutions.append(expr)\n                if not find_all:\n                    return\n\n        if len(available) < 2:\n            return\n\n        # Try all pairs and operations\n        for i in range(len(available)):\n            for j in range(len(available)):\n                if i == j:\n                    continue\n\n                a_val, a_expr = available[i]\n                b_val, b_expr = available[j]\n\n                # Build remaining numbers (excluding i and j)\n                remaining = [available[k] for k in range(len(available)) if k != i and k != j]\n\n                # Try each operation\n                ops = [\n                    (a_val + b_val, f\"({a_expr} + {b_expr})\"),\n                    (a_val * b_val, f\"({a_expr} * {b_expr})\"),\n                ]\n\n                # Subtraction (must stay positive)\n                if a_val > b_val:\n                    ops.append((a_val - b_val, f\"({a_expr} - {b_expr})\"))\n                elif b_val > a_val:\n                    ops.append((b_val - a_val, f\"({b_expr} - {a_expr})\"))\n\n                # Division (must be exact)\n                if b_val != 0 and a_val % b_val == 0:\n                    ops.append((a_val // b_val, f\"({a_expr} / {b_expr})\"))\n                if a_val != 0 and b_val % a_val == 0 and a_val != b_val:\n                    ops.append((b_val // a_val, f\"({b_expr} / {a_expr})\"))\n\n                for new_val, new_expr in ops:\n                    if new_val > 0:  # Must stay positive\n                        search(remaining + [(new_val, new_expr)], depth + 1)\n\n    # Initialize with source numbers as expressions\n    initial = [(n, str(n)) for n in numbers]\n    search(initial)\n\n    return solutions\n\n\ndef is_solvable(numbers: list[int], target: int) -> bool:\n    \"\"\"Check if the puzzle has at least one solution.\"\"\"\n    return len(solve_countdown(numbers, target, find_all=False)) > 0\n\n\ndef generate_puzzle(ensure_solvable: bool = True, max_attempts: int = 100) -> dict:\n    \"\"\"Generate a puzzle, optionally ensuring it's solvable.\"\"\"\n    for _ in range(max_attempts):\n        num_large = random.randint(1, 3)  # Typically 1-3 large numbers\n        numbers = generate_source_numbers(num_large)\n        target = generate_target()\n\n        if not ensure_solvable or is_solvable(numbers, target):\n            return {\n                \"numbers\": numbers,\n                \"target\": target,\n            }\n\n    # Fallback: return anyway (may be unsolvable)\n    return {\n        \"numbers\": numbers,\n        \"target\": target,\n    }\n\n\n# =============================================================================\n# Solution Validation\n# =============================================================================\n\ndef normalize_operators(expr: str) -> str:\n    \"\"\"Normalize Unicode operators to ASCII equivalents.\"\"\"\n    replacements = {\n        '×': '*',\n        '÷': '/',\n        '−': '-',\n        '–': '-',  # en-dash\n        '—': '-',  # em-dash\n    }\n    for unicode_op, ascii_op in replacements.items():\n        expr = expr.replace(unicode_op, ascii_op)\n    return expr\n\n\ndef validate_solution(solution: str, numbers: list[int], target: int) -> tuple[bool, str]:\n    \"\"\"\n    Validate a solution string.\n\n    Returns (is_valid, message) tuple.\n    \"\"\"\n    if not solution or not solution.strip():\n        return False, \"Empty solution\"\n\n    # Normalize operators first\n    solution = normalize_operators(solution)\n\n    # Strip \"= result\" from the end (e.g., \"6 * 5 = 30\" -> \"6 * 5\")\n    if '=' in solution:\n        solution = solution.split('=')[0].strip()\n\n    # Extract numbers used in the solution\n    used_numbers = [int(n) for n in re.findall(r'\\d+', solution)]\n\n    # Check that all used numbers are from the source\n    available = numbers.copy()\n    for num in used_numbers:\n        if num in available:\n            available.remove(num)\n        else:\n            return False, f\"Number {num} not available or used more than once\"\n\n    # Check only valid operations are used\n    allowed_chars = set('0123456789+-*/() \\n\\t')\n    solution_chars = set(solution)\n    invalid_chars = solution_chars - allowed_chars\n    if invalid_chars:\n        return False, f\"Invalid characters: {invalid_chars}\"\n\n    # Evaluate the expression\n    try:\n        # Clean up the solution for evaluation\n        clean_solution = solution.strip()\n\n        # Handle multi-step solutions (take the last expression or result)\n        lines = [l.strip() for l in clean_solution.split('\\n') if l.strip()]\n\n        # Try to find a final result\n        result = None\n        for line in reversed(lines):\n            # Remove comments or explanations\n            if '=' in line:\n                line = line.split('=')[-1].strip()\n\n            try:\n                # Safely evaluate arithmetic expression\n                result = eval_arithmetic(line)\n                if result is not None:\n                    break\n            except:\n                continue\n\n        if result is None:\n            # Try evaluating the whole thing\n            result = eval_arithmetic(clean_solution)\n\n        if result is None:\n            return False, \"Could not evaluate expression\"\n\n        # Check for integer intermediate results (Countdown rule)\n        # This is a simplified check - full validation would trace each step\n\n        if result == target:\n            return True, f\"Correct! {result} = {target}\"\n        else:\n            return False, f\"Result {result} does not equal target {target}\"\n\n    except Exception as e:\n        return False, f\"Evaluation error: {str(e)}\"\n\n\ndef eval_arithmetic(expr: str) -> Optional[int]:\n    \"\"\"Safely evaluate an arithmetic expression.\"\"\"\n    try:\n        # Normalize Unicode operators first\n        expr = normalize_operators(expr)\n\n        # Strip \"= result\" from the end\n        if '=' in expr:\n            expr = expr.split('=')[0].strip()\n\n        # Only allow digits and basic operators\n        if not re.match(r'^[\\d\\s\\+\\-\\*\\/\\(\\)\\.]+$', expr):\n            return None\n\n        result = eval(expr, {\"__builtins__\": {}}, {})\n\n        # Check if result is a valid integer\n        if isinstance(result, (int, float)) and result == int(result) and result > 0:\n            return int(result)\n        return None\n    except:\n        return None\n\n\n# =============================================================================\n# Dataset Generation\n# =============================================================================\n\nSYSTEM_PROMPT = \"\"\"You are solving a Countdown Numbers Game puzzle.\n\nRules:\n- You are given 6 source numbers and a target number\n- Use +, -, *, / to reach the target exactly\n- Each source number can only be used once\n- All intermediate results must be positive integers\n- You don't have to use all numbers\n\nFormat your response as:\n<reasoning>\nShow your step-by-step working here\n</reasoning>\n<solution>\nYour final arithmetic expression that equals the target\n</solution>\"\"\"\n\n\ndef load_precomputed_puzzles():\n    \"\"\"Load pre-computed solvable puzzles from JSON file.\"\"\"\n    if os.path.exists(PUZZLES_FILE):\n        with open(PUZZLES_FILE, \"r\") as f:\n            return json.load(f)\n    return None\n\n\ndef build_dataset_from_puzzles(puzzles: list, num_examples: int, seed: int = 42) -> Dataset:\n    \"\"\"Build dataset from pre-computed puzzle list.\"\"\"\n    random.seed(seed)\n\n    # Shuffle and take num_examples\n    shuffled = puzzles.copy()\n    random.shuffle(shuffled)\n    selected = shuffled[:num_examples]\n\n    examples = []\n    for puzzle in selected:\n        numbers = puzzle[\"numbers\"]\n        target = puzzle[\"target\"]\n        question = f\"Numbers: {', '.join(map(str, numbers))}\\nTarget: {target}\"\n        examples.append({\n            \"question\": question,\n            \"answer\": puzzle.get(\"solution\", \"\"),\n            \"info\": {\"numbers\": numbers, \"target\": target}\n        })\n\n    return Dataset.from_list(examples)\n\n\ndef build_dataset(num_examples: int = 1000, ensure_solvable: bool = True, seed: int = 42) -> Dataset:\n    \"\"\"Build a dataset of Countdown puzzles.\"\"\"\n    random.seed(seed)\n\n    examples = []\n    for i in range(num_examples):\n        puzzle = generate_puzzle(ensure_solvable=ensure_solvable)\n        numbers = puzzle[\"numbers\"]\n        target = puzzle[\"target\"]\n\n        # Skip solving for speed - reward functions use info, not answer\n        answer = \"\"\n\n        question = f\"Numbers: {', '.join(map(str, numbers))}\\nTarget: {target}\"\n\n        examples.append({\n            \"question\": question,\n            \"answer\": answer,\n            \"info\": {\n                \"numbers\": numbers,\n                \"target\": target,\n            }\n        })\n\n    return Dataset.from_list(examples)\n\n\ndef get_dataset_builder(\n    num_examples: int = 1000,\n    ensure_solvable: bool = True,\n    seed: int = 42\n) -> DatasetBuilder:\n    \"\"\"Returns a builder that lazily loads the dataset.\"\"\"\n    def build() -> Dataset:\n        return build_dataset(num_examples, ensure_solvable, seed)\n    return build\n\n\n# =============================================================================\n# Reward Functions\n# =============================================================================\n\ndef parse_completion(completion, parser):\n    \"\"\"Parse the completion using the XML parser.\"\"\"\n    if not completion:\n        return None\n    # Get the last assistant message content\n    content = completion[-1].get(\"content\", \"\") if isinstance(completion[-1], dict) else \"\"\n    if not content:\n        return None\n    return parser.parse(content)\n\n\nasync def exact_match_reward(completion, info, parser) -> float:\n    \"\"\"Reward for reaching the target exactly.\"\"\"\n    try:\n        parsed = parse_completion(completion, parser)\n        if not parsed:\n            return 0.0\n\n        solution = getattr(parsed, 'solution', \"\") or \"\"\n        if not solution:\n            return 0.0\n\n        numbers = info[\"numbers\"]\n        target = info[\"target\"]\n\n        is_valid, _ = validate_solution(solution, numbers, target)\n        return 1.0 if is_valid else 0.0\n    except Exception:\n        return 0.0\n\n\nasync def closeness_reward(completion, info, parser) -> float:\n    \"\"\"Reward based on how close the result is to the target.\"\"\"\n    try:\n        parsed = parse_completion(completion, parser)\n        if not parsed:\n            return 0.0\n\n        solution = getattr(parsed, 'solution', \"\") or \"\"\n        if not solution:\n            return 0.0\n\n        # Reject \"give up\" responses - must be an arithmetic expression\n        give_up_phrases = [\"unable\", \"cannot\", \"impossible\", \"no solution\", \"not possible\"]\n        if any(phrase in solution.lower() for phrase in give_up_phrases):\n            return 0.0\n\n        target = info[\"target\"]\n\n        # Only reward valid arithmetic expressions\n        result = eval_arithmetic(solution)\n        if result is None:\n            return 0.0\n\n        # Exponential decay based on distance\n        distance = abs(result - target)\n        if distance == 0:\n            return 1.0\n\n        # Decay with half-life of ~10\n        reward = 0.5 ** (distance / 10)\n        return reward\n\n    except Exception:\n        return 0.0\n\n\nasync def format_reward(completion, parser) -> float:\n    \"\"\"Reward for proper XML format compliance with valid arithmetic solution.\"\"\"\n    try:\n        parsed = parse_completion(completion, parser)\n        if not parsed:\n            return 0.0\n\n        score = 0.0\n\n        # Check for reasoning section\n        if getattr(parsed, 'reasoning', None):\n            score += 0.5\n\n        # Check for solution section with actual arithmetic (not give-up text)\n        solution = getattr(parsed, 'solution', None)\n        if solution:\n            give_up_phrases = [\"unable\", \"cannot\", \"impossible\", \"no solution\", \"not possible\"]\n            if not any(phrase in solution.lower() for phrase in give_up_phrases):\n                # Must contain at least one arithmetic operator to be valid\n                if any(op in solution for op in ['+', '-', '*', '/', '×', '÷', '−']):\n                    score += 0.5\n\n        return score\n    except Exception:\n        return 0.0\n\n\n# =============================================================================\n# Environment\n# =============================================================================\n\ndef load_environment(\n    num_examples: int = 400,\n    seed: int = 42,\n    eval_examples: int = 80,\n) -> vf.Environment:\n    \"\"\"\n    Load the Countdown Numbers Game environment.\n\n    Args:\n        num_examples: Number of training examples (from pre-computed set)\n        seed: Random seed for reproducibility\n        eval_examples: Number of evaluation examples\n    \"\"\"\n    # Load pre-computed solvable puzzles\n    precomputed = load_precomputed_puzzles()\n\n    if precomputed:\n        print(f\"Loading {num_examples} training puzzles from pre-computed set...\")\n        dataset = build_dataset_from_puzzles(precomputed[\"train\"], num_examples, seed)\n        print(f\"Loading {eval_examples} evaluation puzzles from pre-computed set...\")\n        eval_dataset = build_dataset_from_puzzles(precomputed[\"eval\"], eval_examples, seed + 1000)\n    else:\n        print(\"Warning: No pre-computed puzzles found, generating on the fly...\")\n        dataset = build_dataset(num_examples, ensure_solvable=False, seed=seed)\n        eval_dataset = build_dataset(eval_examples, ensure_solvable=False, seed=seed + 1000)\n\n    # Parser for structured output\n    parser = vf.XMLParser(fields=[\"reasoning\", \"solution\"])\n\n    # Build rubric with weighted rewards\n    rubric = vf.Rubric(\n        funcs=[exact_match_reward, closeness_reward, format_reward],\n        weights=[1.0, 0.3, 0.1],\n        parser=parser,\n    )\n\n    return vf.SingleTurnEnv(\n        dataset=dataset,\n        eval_dataset=eval_dataset,\n        system_prompt=SYSTEM_PROMPT,\n        rubric=rubric,\n        parser=parser,\n    )\n",
+    "verifiers/parsers/xml_parser.py": "import re\nfrom types import SimpleNamespace\nfrom typing import Any, Callable\n\nfrom verifiers.parsers.parser import Parser\nfrom verifiers.types import Messages\n\n\nclass XMLParser(Parser):\n    def __init__(\n        self,\n        fields: list[str | tuple[str, ...]],\n        answer_field: str = \"answer\",\n        extract_fn: Callable[[str], str] = lambda x: x,\n    ):\n        \"\"\"\n        Initialize the parser with field definitions.\n\n        Each field may be:\n          - a string (e.g. \"reasoning\"): the XML tag is fixed.\n          - a tuple of alternatives (e.g. (\"code\", \"answer\")): the first element is\n            the canonical name used for formatting, and all elements are allowed tags\n            when parsing.\n\n        The schema is assumed to have no duplicate names.\n        \"\"\"\n        super().__init__(extract_fn=extract_fn)\n        # list of (canonical, [alternatives])\n        self._fields: list[tuple[str, list[str]]] = []\n\n        self.answer_field = answer_field\n        seen = set()\n        for field in fields:\n            if isinstance(field, str):\n                canonical = field\n                alternatives = [field]\n            elif isinstance(field, tuple):\n                if not field:\n                    raise ValueError(\"Field tuple cannot be empty.\")\n                canonical = field[0]\n                if not all(isinstance(alt, str) for alt in field):\n                    raise TypeError(\"All alternatives in a tuple must be strings.\")\n                alternatives = list(field)\n            else:\n                raise TypeError(\"Each field must be a string or a tuple of strings.\")\n            if canonical in seen:\n                raise ValueError(f\"Duplicate field name: {canonical}\")\n            seen.add(canonical)\n            self._fields.append((canonical, alternatives))\n        if \"think\" in seen:\n            self.logger.warning(\n                \"You have included the 'think' field in the XMLParser. This should only be used with models which always include <think>...</think> tags but do NOT parse them automatically. \"\n                \"This will cause parsing failures if the model does not include <think>...</think> tags, or if the chat template automatically removes <think>...</think> tags.\"\n                \"In particular, you should NOT use this parser configuration with Qwen3 or DeepSeek-R1 models.\"\n            )\n\n    def parse(self, text: str, strip: bool = True, last: bool = False) -> Any:\n        \"\"\"\n        Parse the given XML string and return an object with attributes corresponding\n        to all allowed tags in the schema.\n\n        For each field defined:\n          - If it is a simple field (e.g. 'reasoning'), the output object will have\n            an attribute 'reasoning' set to the text content (or None if missing).\n          - If it is defined with alternatives (e.g. (\"code\", \"answer\")), the output\n            object will have attributes for *each* allowed tag name. For example,\n            if the schema is ['reasoning', ('code', 'answer')], then both\n            `result.code` and `result.answer` are always accessible. If a tag is not\n            found in the XML, its corresponding attribute is set to None.\n        \"\"\"\n        results: dict[str, str | None] = {}\n        for canonical, alternatives in self._fields:\n            # For each allowed alternative tag, search independently.\n            for alt in alternatives:\n                # Regex pattern to capture the content between the tags.\n                pattern = rf\"<{alt}>\\s*(.*?)\\s*</{alt}>\"\n                if last:\n                    match = None\n                    for match in re.finditer(pattern, text, re.DOTALL):\n                        pass  # iterate over matches to bind last match\n                else:\n                    match = re.search(pattern, text, re.DOTALL)\n                if match:\n                    results[alt] = match.group(1).strip() if strip else match.group(1)\n                else:\n                    results[alt] = None\n        return SimpleNamespace(**results)\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        \"\"\"Extract the last answer from a completion.\"\"\"\n        if isinstance(completion, str):\n            parsed = self.parse(completion, last=True)\n            if (\n                parsed\n                and hasattr(parsed, self.answer_field)\n                and getattr(parsed, self.answer_field) is not None\n            ):\n                return getattr(parsed, self.answer_field)\n        else:\n            for msg in reversed(self.get_assistant_messages(completion)):\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                if (\n                    parsed\n                    and hasattr(parsed, self.answer_field)\n                    and getattr(parsed, self.answer_field) is not None\n                ):\n                    return getattr(parsed, self.answer_field)\n        return None\n\n    def get_format_str(self) -> str:\n        \"\"\"\n        Return a string that describes the format of the XML.\n        \"\"\"\n        format_str = \"\"\n        for field in self._fields:\n            if len(field[1]) > 1:\n                options = \" | \".join(field[1])\n                format_str += f\"<[ {options} ]>\\n...\\n</[ {options} ]>\\n\"\n            else:\n                format_str += f\"<{field[0]}>\\n...\\n</{field[0]}>\\n\"\n        return format_str.strip()\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Return a reward function that checks if messages follow the expected format.\n\n        The function does not make assumptions about which fields should start/end the message\n        or the specific order of fields. It checks that:\n        - At least one field from the schema is present in each message\n        - Fields have proper content and spacing\n        \"\"\"\n\n        def format_reward_func(completion: Messages):\n            \"\"\"Reward function that checks if each step follows the expected format.\"\"\"\n            model_messages = self.get_assistant_messages(completion)\n            if not model_messages:\n                return 0.0\n\n            # Calculate format adherence for each message\n            format_scores = []\n            for msg in model_messages:\n                content = self._content_to_text(\n                    msg.get(\"content\", \"\")\n                    if isinstance(msg, dict)\n                    else (msg.content or \"\")\n                )\n                parsed = self.parse(content)\n                parsed_no_strip = self.parse(content, strip=False)\n\n                # Check if the message has at least one valid field\n                has_any_field = False\n                fields_with_content = 0\n                total_fields = 0\n\n                # Keep track of which expected fields are present\n                expected_field_count = len(\n                    self._fields\n                )  # Total number of expected field sets\n                present_field_sets = (\n                    set()\n                )  # Which field sets have at least one alternative present\n\n                # Check proper spacing for fields\n                has_correct_spacing = True\n\n                for i, (canonical, alternatives) in enumerate(self._fields):\n                    field_set_present = False\n                    for alt in alternatives:\n                        if hasattr(parsed, alt) and getattr(parsed, alt) is not None:\n                            has_any_field = True\n                            fields_with_content += 1\n                            total_fields += 1\n                            field_set_present = True\n\n                            # Check if field exists in non-stripped version too (proper spacing)\n                            if not (\n                                hasattr(parsed_no_strip, alt)\n                                and getattr(parsed_no_strip, alt) is not None\n                            ):\n                                has_correct_spacing = False\n                        elif (\n                            content.count(f\"<{alt}>\") > 0\n                            or content.count(f\"</{alt}>\") > 0\n                        ):\n                            # Tag exists but content wasn't properly parsed\n                            total_fields += 1\n                            field_set_present = True\n\n                    # If any alternative from this field set was present, count it\n                    if field_set_present:\n                        present_field_sets.add(i)\n\n                # Calculate format score components\n                format_score = 0.0\n\n                # Check if any field from the first field set starts the message\n                starts_with_any_field = False\n                first_field_set = self._fields[0][\n                    1\n                ]  # Get alternatives for first field set\n                for alt in first_field_set:\n                    if content.strip().startswith(f\"<{alt}>\"):\n                        starts_with_any_field = True\n                        break\n\n                # Check if any field from the last field set ends the message\n                ends_with_any_field = False\n                last_field_set = self._fields[-1][\n                    1\n                ]  # Get alternatives for last field set\n                for alt in last_field_set:\n                    if content.strip().endswith(f\"</{alt}>\"):\n                        ends_with_any_field = True\n                        break\n\n                # Weight the score based on different criteria\n                if has_any_field:\n                    # Calculate the proportion of expected field sets that are present\n                    field_set_ratio = len(present_field_sets) / expected_field_count\n                    format_score += 0.4 * field_set_ratio\n\n                if has_correct_spacing:\n                    format_score += 0.2\n\n                if starts_with_any_field:\n                    format_score += 0.2\n\n                if ends_with_any_field:\n                    format_score += 0.2\n\n                format_scores.append(format_score)\n\n            # Return average format adherence\n            if not format_scores:\n                return 0.0\n            return sum(format_scores) / len(format_scores)\n\n        return format_reward_func\n\n    def get_fields(self) -> list[str]:\n        \"\"\"Return a list of the canonical field names (in order).\"\"\"\n        return [canonical for canonical, _ in self._fields]\n\n    def format(self, **kwargs) -> str:\n        \"\"\"\n        Format the provided keyword arguments into an XML string.\n\n        For fields with alternatives (tuple), the canonical name (the first element)\n        is used as the XML tag. The method looks for a provided value using any of the\n        allowed names (preferring the canonical if present).\n\n        Example usage:\n            parser = XMLParser(['reasoning', ('code', 'answer')])\n            formatted_str = parser.format(reasoning=\"...\", code=\"...\")\n        \"\"\"\n        parts = []\n        for canonical, alternatives in self._fields:\n            value = None\n            # Look for a provided value using any of the acceptable keys,\n            # preferring the canonical name if it exists.\n            if canonical in kwargs:\n                value = kwargs[canonical]\n            else:\n                for alt in alternatives:\n                    if alt in kwargs:\n                        value = kwargs[alt]\n                        break\n            if value is None:\n                raise ValueError(\n                    f\"Missing value for field '{canonical}' (allowed: {alternatives})\"\n                )\n            # Use the canonical name as the tag for formatting.\n            parts.append(f\"<{canonical}>\\n{value}\\n</{canonical}>\")\n        return \"\\n\".join(parts)\n",
+    "verifiers/parsers/parser.py": "import logging\nfrom typing import Any, Callable\n\nfrom verifiers.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n"
+  }
+}

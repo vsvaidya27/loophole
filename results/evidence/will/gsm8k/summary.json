@@ -1,0 +1,25 @@
+{
+  "entry": {
+    "env_id": "will/gsm8k",
+    "status": "patched",
+    "exploit_class": "parser-bypass",
+    "asr_before": 0.1667,
+    "asr_after": 0.0,
+    "benign_pass_before": 0.9688,
+    "benign_pass_after": 0.9688,
+    "iterations": 2,
+    "cost_usd": 0.3877,
+    "evidence_dir": "results/evidence/will/gsm8k",
+    "exploits": [
+      {
+        "exploit_id": "nested-boxed-rfind-innermost-819f2692b2",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/nested-boxed-rfind-innermost-819f2692b2.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/will/gsm8k/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

@@ -1,0 +1,15 @@
+[19:20:27] harleycooper/nanochatAquaRat: setup: 24 ground-truth and 8 verified model records
+[19:20:55] harleycooper/nanochatAquaRat: iteration 1: 3 attempts, 2 confirmed mechanisms total
+[19:21:12] harleycooper/nanochatAquaRat: iteration 1: rejected repair 1/2
+[19:21:29] harleycooper/nanochatAquaRat: iteration 1: accepted repair 2
+[19:22:18] harleycooper/nanochatAquaRat: iteration 2: 3 attempts, 4 confirmed mechanisms total
+[19:22:31] harleycooper/nanochatAquaRat: iteration 2: rejected repair 1/2
+[19:22:50] harleycooper/nanochatAquaRat: iteration 2: accepted repair 2
+[19:23:51] harleycooper/nanochatAquaRat: iteration 3: 3 attempts, 6 confirmed mechanisms total
+[19:24:10] harleycooper/nanochatAquaRat: iteration 3: rejected repair 1/2
+[19:24:32] harleycooper/nanochatAquaRat: iteration 3: accepted repair 2
+[19:25:21] harleycooper/nanochatAquaRat: iteration 4: 3 attempts, 9 confirmed mechanisms total
+[19:25:39] harleycooper/nanochatAquaRat: iteration 4: rejected repair 1/2
+[19:25:59] harleycooper/nanochatAquaRat: iteration 4: accepted repair 2
+[19:28:02] harleycooper/nanochatAquaRat: iteration 5: 3 attempts, 12 confirmed mechanisms total
+[19:29:34] harleycooper/nanochatAquaRat: patched: 5 iterations, cost $1.2507; 0 pending invariants

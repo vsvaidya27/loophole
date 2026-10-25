@@ -1,0 +1,12 @@
+{
+  "reason": "Streaming dataset load stalled in SSL reads and Arrow futures before any rows were returned; terminated this loader so the normal second attempt can start.",
+  "elapsed_seconds": 990,
+  "api_calls_before_restart": 0,
+  "second_attempt": {
+    "elapsed": "08:13",
+    "outcome": "bounded load stopped before returning any rows",
+    "reason": "Second network-enabled load remained blocked in remote stream polling and Arrow FutureImpl::Wait. First load also stalled; no dataset or grader changes were made.",
+    "process_exit": "SIGTERM sent only to this audit inspection child",
+    "sample_file": "load_stack_second.txt"
+  }
+}

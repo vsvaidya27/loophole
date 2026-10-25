@@ -1,0 +1,19 @@
+{
+  "entry": {
+    "env_id": "dimamachine/rosalind-bio",
+    "status": "robust",
+    "exploit_class": null,
+    "asr_before": 0.0,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 3,
+    "cost_usd": 0.3268,
+    "evidence_dir": "results/evidence/dimamachine/rosalind-bio",
+    "exploits": []
+  },
+  "unpatched_because": [],
+  "patch": null,
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

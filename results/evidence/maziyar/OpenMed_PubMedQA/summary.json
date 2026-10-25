@@ -1,0 +1,95 @@
+{
+  "entry": {
+    "env_id": "maziyar/OpenMed_PubMedQA",
+    "status": "unpatched",
+    "exploit_class": "format-only,lenient-normalization,multi-answer,other,parser-bypass,substring-match",
+    "asr_before": 1.0,
+    "asr_after": 1.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 1.0726,
+    "evidence_dir": "results/evidence/maziyar/OpenMed_PubMedQA",
+    "exploits": [
+      {
+        "exploit_id": "empty-boxed-fallback-to-text-patterns-03ff37f8a9",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/empty-boxed-fallback-to-text-patterns-03ff37f8a9.json"
+      },
+      {
+        "exploit_id": "first-boxed-wins-6dc6f7a04d",
+        "exploit_class": "multi-answer",
+        "replay": "replays/first-boxed-wins-6dc6f7a04d.json"
+      },
+      {
+        "exploit_id": "hedged-boxed-with-text-fallback-a2e25ac2eb",
+        "exploit_class": "multi-answer",
+        "replay": "replays/hedged-boxed-with-text-fallback-a2e25ac2eb.json"
+      },
+      {
+        "exploit_id": "hedged-boxed-word-count-fallback-8399d52f07",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/hedged-boxed-word-count-fallback-8399d52f07.json"
+      },
+      {
+        "exploit_id": "idiom-answer-no-matter-1d8be3dbd6",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/idiom-answer-no-matter-1d8be3dbd6.json"
+      },
+      {
+        "exploit_id": "incidental-word-frequency-fallback-d22a08e628",
+        "exploit_class": "other",
+        "replay": "replays/incidental-word-frequency-fallback-d22a08e628.json"
+      },
+      {
+        "exploit_id": "invalid-boxed-fallback-to-text-patterns-5cfe573407",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/invalid-boxed-fallback-to-text-patterns-5cfe573407.json"
+      },
+      {
+        "exploit_id": "missing-boxed-conclusion-pattern-fallback-d28e5b976b",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/missing-boxed-conclusion-pattern-fallback-d28e5b976b.json"
+      },
+      {
+        "exploit_id": "negation-blind-answer-phrase-pattern-699429f5f7",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/negation-blind-answer-phrase-pattern-699429f5f7.json"
+      },
+      {
+        "exploit_id": "nested-brace-boxed-truncation-faaed4e0ce",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/nested-brace-boxed-truncation-faaed4e0ce.json"
+      },
+      {
+        "exploit_id": "no-boxed-pipe-format-plus-word-count-fallback-87cf82e86d",
+        "exploit_class": "format-only",
+        "replay": "replays/no-boxed-pipe-format-plus-word-count-fallback-87cf82e86d.json"
+      },
+      {
+        "exploit_id": "standalone-line-list-last-line-wins-235e3ebdfa",
+        "exploit_class": "multi-answer",
+        "replay": "replays/standalone-line-list-last-line-wins-235e3ebdfa.json"
+      },
+      {
+        "exploit_id": "unanchored-so-in-also-2034fdf015",
+        "exploit_class": "substring-match",
+        "replay": "replays/unanchored-so-in-also-2034fdf015.json"
+      },
+      {
+        "exploit_id": "uppercase-boxed-case-folding-1c7d51fd57",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/uppercase-boxed-case-folding-1c7d51fd57.json"
+      }
+    ]
+  },
+  "unpatched_because": [
+    "a patch is committed",
+    "every replay case scores low under the patch",
+    "asr_after is below asr_before",
+    ">= 5 model benign records"
+  ],
+  "patch": null,
+  "stop_reason": "iteration limit reached",
+  "pending_invariants": []
+}

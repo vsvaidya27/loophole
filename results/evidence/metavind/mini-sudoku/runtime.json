@@ -1,0 +1,9 @@
+{
+  "env_id": "metavind/mini-sudoku",
+  "api": "legacy",
+  "load_id": "mini-sudoku",
+  "env_args": {},
+  "split": "train",
+  "python": ".venvs/hub/bin/python",
+  "patch": "patches/metavind/mini-sudoku/patch.py"
+}

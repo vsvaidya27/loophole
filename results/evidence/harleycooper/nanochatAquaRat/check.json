@@ -1,0 +1,7 @@
+{
+  "failures": [],
+  "notes": [
+    "[harleycooper/nanochatAquaRat] scored nanochatAquaRat with verifiers 0.3.1 (legacy api)",
+    "[invariants.db] rows for environments not on the leaderboard (ignored): ['metavind/mini-sudoku', 'primeintellect/deepscaler-math', 'primeintellect/math500', 'primeintellect/mmlu-pro', 'primeintellect/reverse-text', 'runes/temporal-bench', 'will/gsm8k', 'will/reasoning-gym-env']"
+  ]
+}

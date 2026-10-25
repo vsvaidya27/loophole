@@ -1,0 +1,4 @@
+{"iteration": 1, "try": 1, "reason": "uses eval/exec/compile, which a tightened grader may not"}
+{"iteration": 2, "try": 1, "reason": "uses eval/exec/compile, which a tightened grader may not"}
+{"iteration": 3, "try": 1, "reason": "uses eval/exec/compile, which a tightened grader may not"}
+{"iteration": 4, "try": 1, "reason": "uses eval/exec/compile, which a tightened grader may not"}

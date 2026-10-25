@@ -1,0 +1,730 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "178b2f93048050e5f991e919fb947d6688293717f2328713b181a09315989a10",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "The timeline indicates 'temporarily' for a certain event. What does this mean in terms of timing?\n (A) 21 day from now\n (B) in the times ahead\n (C) for the time being"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "165": {
+      "digest": "21b8a485a3c69422c8ab1c54b29bf10dea79765900108ef5c35e5dd1739b631f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If the date is 5/6/1923 in the Gregorian, what is the date in the Islamic?\n (A) 3/18/1342\n (B) 1/2/1341\n (C) 9/20/1341"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "209": {
+      "digest": "194d252fba0f4d2f65bbfe381f5f0a04774ad2130775c14800b8c61cc053d81f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "A famous artifact, discovered in 1901, was believed to have been crafted 789 years prior. When was it likely made?\n (A) 1114\n (B) 1117\n (C) 1112"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "330": {
+      "digest": "0394b53911ac83e1c02bf466231fbda9f0d9b0b1d1e23fc63c538dbfcb8b9c12",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "The product launch in the 2nd week of November has been shifted 3 weeks later. Around when will it likely be?\n (A) November 14th\n (B) November 21st\n (C) November 28th"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "364": {
+      "digest": "970dac0331a57133fd73d2d482c0304c9da24a9ffb1c614a0bc8a903ecd2e11e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "The carnival that happens every Monday has been moved three days earlier. When will it take place?\n (A) Monday\n (B) Friday\n (C) Wednesday"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "495": {
+      "digest": "585f1e835f9767517f2f0c34417539d9eeeebd2b385cdf12e73a4724df6847ad",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Your flight is originally scheduled to depart at 02:17 PM. If it's rescheduled to take off 6 hours 30 minutes earlier, when will it leave?\n (A) 3:17 PM\n (B) 7:47 AM\n (C) 2:32 PM"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "505": {
+      "digest": "5581467fe21354cd694fe6496ad820e36c57895ccb7f67f3dc8f5aca2f71a710",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If a boy starts doing homework at 1 AM and finishes at 5 PM, how many hours did he spend on homework?\n (A) 18 hours\n (B) 15 hours\n (C) 17 hours\n (D) 16 hours"
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "660": {
+      "digest": "02cb696193a99951bb8dbcbcd2628757e61667bf42492843ed51063d2cb3ba00",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "What will be the time 14 years and 4 months after January 1122?\n (A) May 1136\n (B) August 1138\n (C) July 1139\n (D) June 1139"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "717": {
+      "digest": "a3dccdca3ba523ecb7bd541372928662a0b5749f339f84d65e3a5ca187f72f48",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "What is 04:34 AM + 05:29?\n (A) 12:17 PM\n (B) 8:57 AM\n (C) 9:01 AM\n (D) 10:03 AM"
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "772": {
+      "digest": "806d11cc8daca83c067d1699f60d627be7a615fe7b4df202766969a02c640779",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "What is 10:34 PM + 09:34?\n (A) 8:08 AM\n (B) 9:24 AM\n (C) 6:54 AM\n (D) 10:16 AM"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "815": {
+      "digest": "1fb849790b8e640e9a4fcb157e17ed740dbbbdcefe096f919aa65ae5d4cf04d3",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "What is 23:47 + 12:44?\n (A) 9:12\n (B) 12:31\n (C) 13:50\n (D) 10:24"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "825": {
+      "digest": "d51f7dd543c3db379148356b19266a0569c1b664479304929c7f926b4d8a14dc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "What is 04:28 + 18:14?\n (A) 23:46\n (B) 21:33\n (C) 22:42\n (D) 19:37"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "991": {
+      "digest": "048e6b0b2e4bd3e3e34a88431c204453976720b8257a76e7314b088c7aef3c6c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which month comes 4 months after April?\n (A) July\n (B) May\n (C) August\n (D) October"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "1014": {
+      "digest": "1ae49f7cebd9574bb1da1ae3ffab19169d180057ad306a03a30dacf37a4b546a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Convert 246 minutes into hours.\n (A) 5.9\n (B) 7.1\n (C) 4.1\n (D) 6.1"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "1016": {
+      "digest": "d1d8efa7df09e549c25338030d44b4ca9787d680d63e81942c28257b132cb0aa",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Subtract 0 minutes 40 seconds from 1 hour 2 minutes.\n (A) 64 minutes 23 seconds\n (B) 53 minutes 12 seconds\n (C) 62 minutes 21 seconds\n (D) 61 minutes 20 seconds"
+        }
+      ],
+      "gold": "D",
+      "info": null
+    },
+    "1123": {
+      "digest": "412a4fd24fcb4d702e56e189b0e8bcf35aa9a896953638db31c4f47cf7b89943",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If it's 7 PM on July 28, 2015 in Australia/Sydney, what's the date and time in Europe/London?\n (A) 11 AM on July 28, 2015\n (B) 4 PM on July 28, 2015\n (C) 10 AM on July 28, 2015\n (D) 9 AM on July 28, 2015"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "1156": {
+      "digest": "277e971b1e5aead698abd4cd2e794bf912fd5488a1961096a08d7542086d45bf",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If it's 10 PM on June 27, 1033 in US/Hawaii, what's the date and time in Europe/Paris?\n (A) 8 AM on June 28, 1033\n (B) 4 PM on June 28, 1033\n (C) 2 PM on June 28, 1033\n (D) 3 PM on June 28, 1033"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1196": {
+      "digest": "b4de3de18db11d0fa3b09c532058944888b2c813106f59d74417b851a2b49c9a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If it's 10 AM on April 15, 1059 in Australia/Sydney, what's the date and time in Europe/Paris?\n (A) 12 AM on April 15, 1059\n (B) 12 PM on April 15, 1059\n (C) 10 PM on April 15, 1059\n (D) 1 AM on April 15, 1059"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1321": {
+      "digest": "9f1d270b2b755ec849246484df548b85fe06853c3b89ee080c6a6d8d0c00f163",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which year was 1 year before 1878?\n (A) 1910\n (B) 1917\n (C) 1877\n (D) 1868"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "1486": {
+      "digest": "b776aef2dd7d536384debafe2710a02dd620d33db8980c7163885a31bc28ab8f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "According to the Premise: The couple travelled south for the winter.\n answer the question: What's the more plausible CAUSE?\n (A) They were separated.\n (B) They were retired."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "1487": {
+      "digest": "701fe6bd7ff86c701758b8086a4d8a7e191d6b49786f72fe2d5e8e73527a64f9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "According to the Premise: The park started closing earlier as the winter season approached.\n answer the question: What's the more plausible CAUSE?\n (A) The park staff wanted to have a longer evening break.\n (B) The days were getting shorter, resulting in reduced daylight hours."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "1594": {
+      "digest": "63d03b73f37a4ddeac7dda9f7ebd8f48febecec8766db01fcd42e5fabdf32750",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "According to the Premise: The technology company released a highly anticipated smartphone after years of development.\n answer the question: What's the more plausible RESULT?\n (A) The market responded with massive sales and positive reviews, appreciating the innovative features.\n (B) All other companies stopped producing smartphones."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1651": {
+      "digest": "06ce13d5f669ac99fd7fb5c8ace2e0ea5284008f3d024d3a63ec27aa8d947b51",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Guests at the Science Fair had time for long walks in between, while those at the Classical Music Evening barely had time for a quick snack. Circus attendees, on the other hand, managed to catch short naps. Which event was in the middle in terms of duration?\n (A) Classical Music Evening\n (B) Science Fair\n (C) Circus"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "1665": {
+      "digest": "0856cb590919554a9f0871bb2dad288114f396b415c9fe151d99932ce15a3453",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Art Exhibition was akin to baking a cake, Tech Conference was preparing a seven-course meal, and Stargazing Event was making toast. Which was the longest event?\n (A) Art Exhibition\n (B) Tech Conference\n (C) Stargazing Event"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "1816": {
+      "digest": "384ff5aeee9c9c20bb024a81623d97522b63f87fbff75b032da6b5010dcda80f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "The total duration of a presentation is four times the time of rehearsal which is 3 months. If review is half of rehearsal minus 5% of rehearsal and preparation is twice rehearsal plus 15% of rehearsal, how long do the review and preparation together take?\n (A) 8.8 months\n (B) 7.8 months\n (C) 13.8 months"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "1835": {
+      "digest": "eea8de73f7e5f21a8b81c5b7e99982854327823e3700d94c33abb58c398a8b09",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "During a conference, planning takes 5 days, while keynote is three times that duration minus 20% of planning. If execution takes 30% the sum of planning and keynote, what's the total duration?\n (A) 24.7 days\n (B) 27.7 days\n (C) 29.7 days"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1904": {
+      "digest": "03bb0be1a4793a860f2dd5e801fbfe9bc2089a67593d557158758d7e8510604c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which event lasted the longest: March of the Robots (a few nights), Rise of the Meteor Empire (many years), or Battle of the Frozen Frontier (quite a few years)?\n (A) March of the Robots\n (B) Rise of the Meteor Empire\n (C) Battle of the Frozen Frontier"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "1966": {
+      "digest": "28da57c639965c06259474e86bcdf54b9f1aa104053deba02e7acb1b02a9f229",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which event lasted longer: Battle for the Solar Throne (almost a decade) or Voyage of the Starship Nomad (a couple of days)?\n (A) Battle for the Solar Throne\n (B) Voyage of the Starship Nomad\n (C) Both are same"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "1982": {
+      "digest": "5f0a9a9f0229bfe108ec06ce81f8cbe606db790a390e0f4b323a95cd1438d2dc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which event lasted the longest: Construction of the Panama Canal, 2015-16 Zika Virus Epidemic, or Roaring Twenties?\n (A) Construction of the Panama Canal\n (B) 2015-16 Zika Virus Epidemic\n (C) Roaring Twenties"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2147": {
+      "digest": "094ac7c6a3b042dc2c8f23af481872b5a440f4c678526937ce118e1dd9b1a2c7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "It takes 5 weeks for Sculpture Walk to happen. Charity Run occurs in triple the time of Sculpture Walk. Gospel Choir occurs in quadruple the time of Charity Run. Which event takes the longest?\n (A) Gospel Choir\n (B) Sculpture Walk\n (C) Charity Run"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2225": {
+      "digest": "5544af451780fe9cd6655889c48be888b5a195a8b7d28ecf782e44ecd43a1a0f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "With nearly a third of Bostonians using public transit for their commute to work, Boston has the fifth-highest rate of public transit usage in the country. Boston's subway system, the Massachusetts Bay Transportation Authority (MBTA—known as the \"T\") operates the oldest underground rapid transit system in the Americas, and is the fourth-busiest rapid transit system in the country, with 65.5 miles (105 km) of track on four lines. The MBTA also operates busy bus and commuter rail networks, and water shuttles. How long is bostons subway system?\n (A) half a millennium\n (B) 65.5 miles\n (C) 50 years"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "2244": {
+      "digest": "6cebe619c9c1089fa2f29903d79ba875c50424212c65540308f42889e434a98d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "In the case of the United States where a one-hour shift occurs at 02:00 local time, in spring the clock jumps forward from the last moment of 01:59 standard time to 03:00 DST and that day has 23 hours, whereas in autumn the clock jumps backward from the last moment of 01:59 DST to 01:00 standard time, repeating that hour, and that day has 25 hours. A digital display of local time does not read 02:00 exactly at the shift to summer time, but instead jumps from 01:59:59.9 forward to 03:00:00.0. In the fall, DST means one hour is repeated, which means the day is actually how many hours long?\n (A) 35 seconds\n (B) 55 months\n (C) 25"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "2312": {
+      "digest": "a42c420d79772ec1117f22f94b750ba074ea8d4a3ae099988cd82941d3492680",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "A TV series releases a new episode every 3 days. If the inaugural episode was released on a Monday, on which day will the 5th episode be released?\n (A) Wednesday\n (B) Saturday\n (C) Tuesday"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "2372": {
+      "digest": "355d3133b6663e54030b100bab40b27d264e2565fe714a53d5e6f1d7185cca0f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "A particular star becomes visible from Earth every 50 years. If it was last observed in 1846, in which year will it next be visible?\n (A) 1898\n (B) 1896\n (C) 1894"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "2477": {
+      "digest": "c35044f74009ba1f0815cb8c43c587bff1a8765b1212f18a7a42dcee8be94c09",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "So really, that's what many of the people are doing now,\" he said. How often do they do this?\n (A) daily\n (B) every 90 years\n (C) every 10 seconds"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2642": {
+      "digest": "db9b6b36f1b34542fcb436e0fa53de0048312032c7aab642506114dcf53611dd",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "If 'Oracles' forecast festival' happens quarterly, how many times will it occur in 75 years?\n (A) It will occur 300 times\n (B) It will occur 301 times\n (C) It will occur 298 times"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2807": {
+      "digest": "c74259e2e38f6ab14b47a06c0946df351d1f7196a1034f4f7c84f5bc6e941952",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Some of the cleaner energy facilities in Boston include the Allston green district, with three ecologically compatible housing facilities. Boston is also breaking ground on multiple green affordable housing facilities to help reduce the carbon footprint of the city while simultaneously making these initiatives financially available to a greater population. Boston's climate plan is updated every three years and was most recently modified in 2013. This legislature includes the Building Energy Reporting and Disclosure Ordinance, which requires the city's larger buildings to disclose their yearly energy and water use statistics and partake in an energy assessment every five years. These statistics are made public by the city, thereby increasing incentives for buildings to be more environmentally conscious. How often is Boston's climate plan updated?\n (A) every three years\n (B) twice a month\n (C) every other day"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2847": {
+      "digest": "5227e6b93e974c395437f9ae9b31c76d2e6f317f81557de64596f258dd03eded",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "As anticipated by Nimitz, the Japanese fleet arrived off Midway on 4 June and was spotted by PBY patrol aircraft. Nagumo executed a first strike against Midway, while Fletcher launched his aircraft, bound for Nagumo's carriers. At 09:20 the first U.S. carrier aircraft arrived, TBD Devastator torpedo bombers from Hornet, but their attacks were poorly coordinated and ineffectual; thanks in part to faulty aerial torpedoes, they failed to score a single hit and all 15 were wiped out by defending Zero fighters. At 09:35, 15 additional TBDs from Enterprise attacked in which 14 were lost, again with no hits. Thus far, Fletcher's attacks had been disorganized and seemingly ineffectual, but they succeeded in drawing Nagumo's defensive fighters down to sea level where they expended much of their fuel and ammunition repulsing the two waves of torpedo bombers. As a result, when U.S. dive bombers arrived at high altitude, the Zeros were poorly positioned to defend. To make matters worse, Nagumo's four carriers had drifted out of formation in their efforts to avoid torpedoes, reducing the concentration of their anti-aircraft fire. Nagumo's indecision had also created confusion aboard his carriers. Alerted to the need of a second strike on Midway, but also wary of the need to deal with the American carriers that he now knew were in the vicinity, Nagumo twice changed the arming orders for his aircraft. As a result, the American dive bombers found the Japanese carriers with their decks cluttered with munitions as the crews worked hastily to properly re-arm their air groups. How many times did Nagumo change orders for arming his aircraft?\n (A) twice\n (B) always\n (C) once a day"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "2973": {
+      "digest": "c82b3b2fcd4745d6f469b3fd0a44e42aee9be93e541fcbf6301de8387d442f9e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "According to the Premise: no i haven't read it i've heard all about it though and the Hypothesis: I've read it but have never heard about it. answer the question: Do the hypothesis and premise logically entail each other, contradict each other, or remain undetermined?\n (A) entailment\n (B) neutral\n (C) contradiction"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "3086": {
+      "digest": "076519ce20d4f967d978ac5f29257e6ebbbf27de1f7a181febd35a643382a497",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Search \"Emiliano Malaquez\" and you'll find he's a master of the \"captured moment\" school of sculpture. What does Emiliano Malaquez do after he finishes a sculpture? Is \"he places it on display\" possible?\n (A) FALSE\n (B) Undetermined\n (C) TRUE"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "3138": {
+      "digest": "25c0c8212aefe0601238c864ac0966afd4dddf29a66c9f7709469cd3df754e98",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Arrange the following events in chronological order: (1) The city of Los Angeles is founded by Spanish settlers. (2) Rasmus Malling-Hansen's invention the Hansen Writing Ball becomes the first commercially sold typewriter. (3) U.S. President Donald Trump is impeached by the House of Representatives for abuse of power and obstruction of Congress. (4) Assassination of Indira Gandhi, Indian Prime Minister. (5) Arrival of the disciples of Saints Cyril and Methodius in Bulgaria\n (A) (4), (2), (3), (5), (1)\n (B) (1), (4), (2), (5), (3)\n (C) (5), (1), (2), (4), (3)"
+        }
+      ],
+      "gold": "C",
+      "info": null
+    },
+    "3169": {
+      "digest": "548209e9ea39226e4fa37d4e2f92a2b3989c4bf31ec26a3e8936a2ad476ba635",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Is the following sequence of events in the correct chronological order? (1) Independence of Kenya and Zanzibar and creation of Malaysia. (2) The Revolution of 1905 in Russia erupts. (3) Greek military coup establishes a military dictatorship led by Georgios Papadopoulos. The dictatorship ends in 1974. (4) Independence of Eritrea. (5) The Armenian–Azerbaijani War begins.\n (A) TRUE\n (B) FALSE\n (C) Undetermined"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "3303": {
+      "digest": "81905a2dfa0f37ebf20fb157046db144af250a620e7a14c3d5a1a483fe9c04b8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "According to the story: Lily was having a bad week. Her mom died and she lost her job. She thought anything would be a miracle. Then she found out she got the job of a lifetime. answer the question: Which of the two endings is the most plausible correct ending to the story?\n (A) She was hired as a waitress at a restaurant in the city.\n (B) It made it all better."
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "3455": {
+      "digest": "4bb0004f48a5b0a5679784d2f4b74e08fd6985b1499d52f16b534763a575cfcc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which statement is more typical in terms of time? A: 'People often visit cemeteries on national memorial days.' or B: 'People often visit cemeteries on casual weekends.'?\n (A) People often visit cemeteries on national memorial days.\n (B) People often visit cemeteries on casual weekends.\n (C) Neither statement is typical."
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "3468": {
+      "digest": "791da4fae7d1e83243244d9b3553e3fa50acc923ca1b7e4912636f7c38dc766f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Which event typically happens earlier: morning birdwatching or night jungle safari?\n (A) Morning birdwatching\n (B) Night jungle safari\n (C) Around the same time"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "3633": {
+      "digest": "9c274ea1f870b28d5e3d1233dfca0877d2688399a8948ae0b540b161319a6c5c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "In what year(s) did \"World leaders mark Earth Day by hosting a virtual summit on climate change, during which more ambitious targets for greenhouse gas emission reductions are proposed, including a 40% cut by 2030 for the United States.\" occur?\n (A) 2019\n (B) 2021\n (C) 2017"
+        }
+      ],
+      "gold": "B",
+      "info": null
+    },
+    "3773": {
+      "digest": "97c60c008d05a5cdd258ecb7eecdf3132fbb6d8772ace92cdaa155fedf2b292b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "The Suez Canal, built in partnership with the French, was completed in 1869. Its construction led to enormous debt to European banks, and caused popular discontent because of the onerous taxation it required. In 1875 Ismail was forced to sell Egypt's share in the canal to the British Government. Within three years this led to the imposition of British and French controllers who sat in the Egyptian cabinet, and, \"with the financial power of the bondholders behind them, were the real power in the Government.\" In what year did Egypt sell its portion of Suez Canal?\n (A) 1875\n (B) 2005\n (C) 8-May-45"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    },
+    "3799": {
+      "digest": "af3afce13e8a38b73344993eda3ccf2d7cabaa6a134dbffa3814947359531d6c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text."
+        },
+        {
+          "role": "user",
+          "content": "Fox announced on May 11, 2015 that the fifteenth season would be the final season of American Idol; as such, the season is expected to have an additional focus on the program's alumni. Ryan Seacrest returns as host, with Harry Connick Jr., Keith Urban, and Jennifer Lopez all returning for their respective third, fourth, and fifth seasons as judges. When did Fox announce that Season 15 would be the final season?\n (A) 11-May-15\n (B) 1964\n (C) 1996"
+        }
+      ],
+      "gold": "A",
+      "info": null
+    }
+  },
+  "dataset_size": 3800,
+  "sources": {
+    "temporal_bench.py": "import verifiers as vf\nfrom datasets import load_dataset\nfrom verifiers.parsers.parser import Parser\nfrom verifiers.types import Messages\nimport re\nfrom typing import Optional\n\n\ndef temporal_bench_parser(text: str) -> Optional[str]:\n    \"\"\"Parse answer from completion text.\"\"\"\n    if isinstance(text, list):\n        assistant_msgs = [msg for msg in text if msg.get(\"role\") == \"assistant\"]\n        if assistant_msgs:\n            text = assistant_msgs[-1].get(\"content\", \"\")\n        else:\n            return None\n    else:\n        text = str(text)\n\n    # Search for various patterns to extract answers\n    match = re.search(r'\\(([A-Z])\\)', text)\n    if match:\n        return match.group(1).upper()\n\n    match = re.search(r\"(?:answer is|is:|is|:)\\s*([A-Z])\", text, re.IGNORECASE)\n    if match:\n        return match.group(1).upper()\n\n    match = re.search(r\"\\\\boxed\\{([A-Z])\\}\", text)\n    if match:\n        return match.group(1).upper()\n\n    match = re.search(r'\\b([A-Z])[\\.\\)\\],]', text)\n    if match:\n        return match.group(1).upper()\n\n    matches = re.findall(r'\\b([A-Z])\\b', text)\n    if matches:\n        possible_answers = [m for m in matches if m in \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"]\n        if possible_answers:\n            return possible_answers[-1]\n\n    match = re.search(r\"\\b([A-Z])\\.\", text)\n    if match:\n        return match.group(1).upper()\n\n    return text.strip().upper()\n\n\ndef load_environment(\n    dataset_split: str = \"test\",\n    task_type: str = None,\n    system_prompt: str = \"Evaluate the sequence, duration, or timing of events in the given context. For multiple choice questions, respond with only the letter of the correct answer choice (such as 'A', 'B', 'C', etc.) with no additional text.\",\n    **kwargs\n) -> vf.Environment:\n    dataset = load_dataset(\"Warrieryes/TRAM-Temporal\", split=dataset_split)\n\n    # Filter by task type if specified\n    if task_type is not None:\n        # Check if task_type is a specific task type or a category prefix\n        if task_type.endswith('*'):\n            # This is a category-based filter (e.g., \"causality_*\") - filter by prefix\n            prefix = task_type[:-1]  # Remove the '*'\n            dataset = dataset.filter(lambda example: example[\"task\"].startswith(prefix))\n        else:\n            # This is a specific task type filter\n            dataset = dataset.filter(lambda example: example[\"task\"] == task_type)\n\n    def process_input(example):\n        input_text = example[\"input\"]\n\n        if \"### Instruction:\" in input_text and \"### Response:\" in input_text:\n            response_parts = input_text.split(\"### Response:\")\n\n            last_instruction_part = response_parts[-2] if len(response_parts) > 1 else response_parts[0]\n\n            if \"### Instruction:\" in last_instruction_part:\n                actual_question = last_instruction_part.split(\"### Instruction:\")[-1].strip()\n                input_text = actual_question\n            else:\n                input_text = last_instruction_part.strip()\n\n        return {\n            \"prompt\": [{\"role\": \"user\", \"content\": input_text}],\n            \"answer\": example[\"answer\"],\n            \"task\": example[\"task\"],\n        }\n\n    dataset = dataset.map(process_input).select_columns([\"prompt\", \"answer\", \"task\"])\n\n    parser = vf.Parser(temporal_bench_parser)\n\n    def exact_match_reward(parser: Parser, completion: Messages, answer: str, **kwargs) -> float:\n        response = parser.parse(completion)\n        return 1.0 if response and response == answer else 0.0\n\n    rubric = vf.Rubric(funcs=[exact_match_reward], parser=parser)\n\n    return vf.SingleTurnEnv(\n        dataset=dataset,\n        system_prompt=system_prompt,\n        parser=parser,\n        rubric=rubric,\n        **kwargs\n    )",
+    "verifiers/parsers/parser.py": "import logging\nfrom typing import Any, Callable\n\nfrom verifiers.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n"
+  }
+}

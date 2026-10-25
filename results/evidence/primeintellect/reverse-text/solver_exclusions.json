@@ -1,0 +1,14 @@
+{
+  "example_indices": [
+    277,
+    406,
+    494,
+    672,
+    728,
+    768,
+    819,
+    921
+  ],
+  "reason": "Excluded the previously declined solver batch; no prompts were rewritten or resubmitted for these examples.",
+  "prior_calls": "results/discarded/primeintellect/reverse-text/1792895177874206000/api_calls.jsonl"
+}

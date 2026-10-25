@@ -1,0 +1,55 @@
+{
+  "entry": {
+    "env_id": "primeintellect/ascii-tree",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer,parser-bypass",
+    "asr_before": 0.6667,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 4,
+    "cost_usd": 1.0093,
+    "evidence_dir": "results/evidence/primeintellect/ascii-tree",
+    "exploits": [
+      {
+        "exploit_id": "bare-cr-unified-by-patch-1d122efc7c",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/bare-cr-unified-by-patch-1d122efc7c.json"
+      },
+      {
+        "exploit_id": "concatenated-alternative-trees-3a96f1ba0e",
+        "exploit_class": "multi-answer",
+        "replay": "replays/concatenated-alternative-trees-3a96f1ba0e.json"
+      },
+      {
+        "exploit_id": "fence-prefix-line-dropped-21e4a793f8",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/fence-prefix-line-dropped-21e4a793f8.json"
+      },
+      {
+        "exploit_id": "nested-open-tag-last-open-extraction-586d4eee62",
+        "exploit_class": "parser-bypass",
+        "replay": "replays/nested-open-tag-last-open-extraction-586d4eee62.json"
+      },
+      {
+        "exploit_id": "partial-line-credit-6261221de6",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/partial-line-credit-6261221de6.json"
+      },
+      {
+        "exploit_id": "unchecked-middle-block-56f217f4a4",
+        "exploit_class": "multi-answer",
+        "replay": "replays/unchecked-middle-block-56f217f4a4.json"
+      },
+      {
+        "exploit_id": "whitespace-only-line-dropped-fd2dc37074",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/whitespace-only-line-dropped-fd2dc37074.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/primeintellect/ascii-tree/patch.py",
+  "stop_reason": "no successful attack on the current grader",
+  "pending_invariants": []
+}

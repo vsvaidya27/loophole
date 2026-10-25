@@ -208,6 +208,15 @@ class LoopTests(unittest.TestCase):
         self.assertIn("model retention", reasons[0]["reason"])
         self.check_entry(result)
 
+    def test_regex_compile_is_allowed_but_python_compile_is_rejected(self):
+        code = "import re\n_PATTERN = re.compile(r'^answer$')\ndef tighten(text, gold, info, reward): return reward\n"
+        self.assertEqual(patching.static_problems(self.spec, code, []), [])
+        alias_code = code.replace("import re", "import re as _re").replace("re.compile", "_re.compile")
+        self.assertEqual(patching.static_problems(self.spec, alias_code, []), [])
+        for call in ("compile(text, '<response>', 'eval')", "builtins.compile(text, '<response>', 'eval')"):
+            problems = patching.static_problems(self.spec, f"def tighten(text, gold, info, reward): return {call}", [])
+            self.assertTrue(any("compile" in p for p in problems))
+
     def test_static_failure_retried_before_scoring(self):
         self.repair_codes = ["def tighten(:"]
         _, result = self.run_audit()
@@ -314,6 +323,31 @@ class LoopTests(unittest.TestCase):
         self.assertTrue((self.spec.evidence_dir / "invariant_errors.jsonl").is_file())
         self.assertEqual(len(mirror.exploit_rows(self.spec.env_id)), 1)
 
+    def test_resume_keeps_paid_history_and_reprobes_the_existing_patch(self):
+        self.cap_after_patch = True
+        _, first = self.run_audit()
+        self.assertEqual(first["entry"]["status"], "unpatched")
+        before = (self.spec.evidence_dir / "attempts.jsonl").read_text()
+        self.cap_after_patch = False
+        audit = loop.Audit(self.spec, 3.5, resume=True)
+        result = audit.run()
+        self.assertEqual(result["entry"]["status"], "patched")
+        self.assertEqual(result["entry"]["iterations"], 2)
+        self.assertTrue((self.spec.evidence_dir / "attempts.jsonl").read_text().startswith(before))
+        calls = common.read_jsonl(self.spec.evidence_dir / "api_calls.jsonl")
+        self.assertEqual(sum(c["role"] == "solver" for c in calls), 1)
+        self.assertFalse((self.root / "results/discarded").exists())
+        self.check_entry(result)
+
+    def test_resume_rejects_completed_five_round_runs_without_altering_them(self):
+        self.mode = "unpatched"
+        self.repair_codes = ["def tighten(text, gold, info, reward): return 0.0"] * 10
+        self.run_audit()
+        before = (self.spec.evidence_dir / "summary.json").read_text()
+        with self.assertRaises(ValueError):
+            loop.Audit(self.spec, 3.5, resume=True)
+        self.assertEqual((self.spec.evidence_dir / "summary.json").read_text(), before)
+
     def test_rerun_archives_evidence_and_matching_patch_without_losing_install_log(self):
         self.run_audit()
         (self.spec.evidence_dir / "install.log").write_text("installed")
@@ -345,6 +379,22 @@ class LoopTests(unittest.TestCase):
         self.assertEqual(self.n_probe, 2)
         self.assertAlmostEqual(result["entry"]["cost_usd"], .03)
         self.assertEqual(len(common.read_jsonl(self.spec.evidence_dir / "proposals.jsonl")), 2)
+        self.check_entry(result)
+
+    def test_declined_solver_batch_is_excluded_without_retrying_its_tasks(self):
+        batches = []
+        def solve(client, tasks):
+            batches.append([t["id"] for t in tasks])
+            if len(batches) == 1:
+                self.call(client, 0, "solver")
+                return {}
+            return self.solve(client, tasks)
+        with patch.object(loop.roles, "solve", solve):
+            _, result = self.run_audit()
+        self.assertEqual(result["entry"]["status"], "patched")
+        self.assertEqual(len(batches), 2)
+        self.assertFalse(set(batches[0]) & set(batches[1]))
+        self.assertEqual(common.read_jsonl(self.spec.evidence_dir / "solver.jsonl")[0]["responses"], {})
         self.check_entry(result)
 
     def test_missing_model_baseline_prevents_patch_acceptance(self):

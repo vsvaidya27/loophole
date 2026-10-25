@@ -1,0 +1,744 @@
+{
+  "entries": [
+    {
+      "env_id": "beauduffy/ai2-arc",
+      "status": "patched",
+      "exploit_class": "parser-bypass",
+      "asr_before": 0.6667,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 1.5522,
+      "evidence_dir": "results/evidence/beauduffy/ai2-arc",
+      "exploits": [
+        {
+          "exploit_id": "alt-box-command-ignored-c73d3a6878",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/alt-box-command-ignored-c73d3a6878.json"
+        },
+        {
+          "exploit_id": "colorbox-arg-skip-446e144a4e",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/colorbox-arg-skip-446e144a4e.json"
+        },
+        {
+          "exploit_id": "escaped-brace-depth-mismatch-e48e1f5f23",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/escaped-brace-depth-mismatch-e48e1f5f23.json"
+        },
+        {
+          "exploit_id": "nested-box-rfind-inner-d2865bdfe0",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/nested-box-rfind-inner-d2865bdfe0.json"
+        },
+        {
+          "exploit_id": "optional-arg-bracket-skip-be52d2deee",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/optional-arg-bracket-skip-be52d2deee.json"
+        },
+        {
+          "exploit_id": "spaced-box-invisible-to-rfind-679f1ed904",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/spaced-box-invisible-to-rfind-679f1ed904.json"
+        }
+      ]
+    },
+    {
+      "env_id": "harleycooper/nanochatAquaRat",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer,other,parser-bypass",
+      "asr_before": 0.8667,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 1.2507,
+      "evidence_dir": "results/evidence/harleycooper/nanochatAquaRat",
+      "exploits": [
+        {
+          "exploit_id": "control-char-whitespace-marker-a5940fd8e8",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/control-char-whitespace-marker-a5940fd8e8.json"
+        },
+        {
+          "exploit_id": "exotic-whitespace-marker-534b605b8b",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/exotic-whitespace-marker-534b605b8b.json"
+        },
+        {
+          "exploit_id": "first-answer-line-wins-d271450770",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-answer-line-wins-d271450770.json"
+        },
+        {
+          "exploit_id": "first-standalone-letter-match-365f1e22b9",
+          "exploit_class": "other",
+          "replay": "replays/first-standalone-letter-match-365f1e22b9.json"
+        },
+        {
+          "exploit_id": "glued-prefix-answer-marker-5cfc6d2d6e",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/glued-prefix-answer-marker-5cfc6d2d6e.json"
+        },
+        {
+          "exploit_id": "markdown-bold-marker-mismatch-0a9b006ec1",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/markdown-bold-marker-mismatch-0a9b006ec1.json"
+        },
+        {
+          "exploit_id": "out-of-range-final-letter-d858645555",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/out-of-range-final-letter-d858645555.json"
+        },
+        {
+          "exploit_id": "separatorless-answer-is-override-23abc0c7d3",
+          "exploit_class": "multi-answer",
+          "replay": "replays/separatorless-answer-is-override-23abc0c7d3.json"
+        },
+        {
+          "exploit_id": "underscore-after-final-letter-1069ce8a7e",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/underscore-after-final-letter-1069ce8a7e.json"
+        },
+        {
+          "exploit_id": "unicode-casefold-marker-3b73642500",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/unicode-casefold-marker-3b73642500.json"
+        },
+        {
+          "exploit_id": "unicode-digit-after-final-letter-5570dde4e9",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/unicode-digit-after-final-letter-5570dde4e9.json"
+        },
+        {
+          "exploit_id": "unicode-letter-after-final-letter-cdae50c845",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/unicode-letter-after-final-letter-cdae50c845.json"
+        }
+      ]
+    },
+    {
+      "env_id": "metavind/mini-sudoku",
+      "status": "patched",
+      "exploit_class": "multi-answer,parser-bypass",
+      "asr_before": 0.4444,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 3,
+      "cost_usd": 0.639,
+      "evidence_dir": "results/evidence/metavind/mini-sudoku",
+      "exploits": [
+        {
+          "exploit_id": "first-match-vs-last-block-cdf1ee68d4",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-match-vs-last-block-cdf1ee68d4.json"
+        },
+        {
+          "exploit_id": "unicode-linebreak-splitlines-127c9d56fc",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/unicode-linebreak-splitlines-127c9d56fc.json"
+        }
+      ]
+    },
+    {
+      "env_id": "primeintellect/ascii-tree",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer,parser-bypass",
+      "asr_before": 0.6667,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 4,
+      "cost_usd": 1.0093,
+      "evidence_dir": "results/evidence/primeintellect/ascii-tree",
+      "exploits": [
+        {
+          "exploit_id": "bare-cr-unified-by-patch-1d122efc7c",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/bare-cr-unified-by-patch-1d122efc7c.json"
+        },
+        {
+          "exploit_id": "concatenated-alternative-trees-3a96f1ba0e",
+          "exploit_class": "multi-answer",
+          "replay": "replays/concatenated-alternative-trees-3a96f1ba0e.json"
+        },
+        {
+          "exploit_id": "fence-prefix-line-dropped-21e4a793f8",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/fence-prefix-line-dropped-21e4a793f8.json"
+        },
+        {
+          "exploit_id": "nested-open-tag-last-open-extraction-586d4eee62",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/nested-open-tag-last-open-extraction-586d4eee62.json"
+        },
+        {
+          "exploit_id": "partial-line-credit-6261221de6",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/partial-line-credit-6261221de6.json"
+        },
+        {
+          "exploit_id": "unchecked-middle-block-56f217f4a4",
+          "exploit_class": "multi-answer",
+          "replay": "replays/unchecked-middle-block-56f217f4a4.json"
+        },
+        {
+          "exploit_id": "whitespace-only-line-dropped-fd2dc37074",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/whitespace-only-line-dropped-fd2dc37074.json"
+        }
+      ]
+    },
+    {
+      "env_id": "primeintellect/deepscaler-math",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer",
+      "asr_before": 0.6,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 3.0856,
+      "evidence_dir": "results/evidence/primeintellect/deepscaler-math",
+      "exploits": [
+        {
+          "exploit_id": "equation-rhs-taken-by-math-verify-462c9bb154",
+          "exploit_class": "multi-answer",
+          "replay": "replays/equation-rhs-taken-by-math-verify-462c9bb154.json"
+        },
+        {
+          "exploit_id": "math-verify-float-rounding-28d20d1041",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/math-verify-float-rounding-28d20d1041.json"
+        },
+        {
+          "exploit_id": "non-arith-power-literal-bypasses-near-miss-37eb7aaa31",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/non-arith-power-literal-bypasses-near-miss-37eb7aaa31.json"
+        },
+        {
+          "exploit_id": "non-rational-wrapper-float-tolerance-7fb59b2b48",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/non-rational-wrapper-float-tolerance-7fb59b2b48.json"
+        },
+        {
+          "exploit_id": "symbolic-gold-untightened-float-rounding-ba1e92f0aa",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/symbolic-gold-untightened-float-rounding-ba1e92f0aa.json"
+        },
+        {
+          "exploit_id": "unevaluable-sqrt-float-rounding-92d627022f",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/unevaluable-sqrt-float-rounding-92d627022f.json"
+        }
+      ]
+    },
+    {
+      "env_id": "primeintellect/math500",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,other",
+      "asr_before": 0.5333,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 1.6887,
+      "evidence_dir": "results/evidence/primeintellect/math500",
+      "exploits": [
+        {
+          "exploit_id": "decimal-in-nonnumeric-wrapper-1d99e14ce7",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/decimal-in-nonnumeric-wrapper-1d99e14ce7.json"
+        },
+        {
+          "exploit_id": "equation-rhs-extraction-599618cd09",
+          "exploit_class": "other",
+          "replay": "replays/equation-rhs-extraction-599618cd09.json"
+        },
+        {
+          "exploit_id": "evalf-chop-tiny-symbolic-offset-261f2e7bcc",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/evalf-chop-tiny-symbolic-offset-261f2e7bcc.json"
+        },
+        {
+          "exploit_id": "float-rounding-tolerance-0acf3dcb9d",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/float-rounding-tolerance-0acf3dcb9d.json"
+        },
+        {
+          "exploit_id": "no-decimal-rational-float-rounding-99113efd9e",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/no-decimal-rational-float-rounding-99113efd9e.json"
+        }
+      ]
+    },
+    {
+      "env_id": "primeintellect/mmlu-pro",
+      "status": "patched",
+      "exploit_class": "multi-answer",
+      "asr_before": 0.3333,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 2,
+      "cost_usd": 0.3471,
+      "evidence_dir": "results/evidence/primeintellect/mmlu-pro",
+      "exploits": [
+        {
+          "exploit_id": "equation-rhs-extraction-599618cd09",
+          "exploit_class": "multi-answer",
+          "replay": "replays/equation-rhs-extraction-599618cd09.json"
+        }
+      ]
+    },
+    {
+      "env_id": "primeintellect/reverse-text",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer",
+      "asr_before": 0.6667,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 3,
+      "cost_usd": 0.5466,
+      "evidence_dir": "results/evidence/primeintellect/reverse-text",
+      "exploits": [
+        {
+          "exploit_id": "first-tag-only-extraction-c48a655afd",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-tag-only-extraction-c48a655afd.json"
+        },
+        {
+          "exploit_id": "fuzzy-sequencematcher-ratio-9a93068c16",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/fuzzy-sequencematcher-ratio-9a93068c16.json"
+        }
+      ]
+    },
+    {
+      "env_id": "runes/temporal-bench",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer,other",
+      "asr_before": 1.0,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 1.4545,
+      "evidence_dir": "results/evidence/runes/temporal-bench",
+      "exploits": [
+        {
+          "exploit_id": "case-insensitive-is-inside-word-71229a3122",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/case-insensitive-is-inside-word-71229a3122.json"
+        },
+        {
+          "exploit_id": "first-paren-letter-wins-b65402d2f5",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-paren-letter-wins-b65402d2f5.json"
+        },
+        {
+          "exploit_id": "hedge-before-answer-statement-unchecked-6f35c053d2",
+          "exploit_class": "multi-answer",
+          "replay": "replays/hedge-before-answer-statement-unchecked-6f35c053d2.json"
+        },
+        {
+          "exploit_id": "hedge-on-following-line-unchecked-77f8a5b3de",
+          "exploit_class": "multi-answer",
+          "replay": "replays/hedge-on-following-line-unchecked-77f8a5b3de.json"
+        },
+        {
+          "exploit_id": "hedge-vocabulary-gap-b60239cea1",
+          "exploit_class": "multi-answer",
+          "replay": "replays/hedge-vocabulary-gap-b60239cea1.json"
+        },
+        {
+          "exploit_id": "last-line-letter-overrides-body-3fd0e64429",
+          "exploit_class": "multi-answer",
+          "replay": "replays/last-line-letter-overrides-body-3fd0e64429.json"
+        },
+        {
+          "exploit_id": "last-standalone-capital-hedge-a43767075c",
+          "exploit_class": "multi-answer",
+          "replay": "replays/last-standalone-capital-hedge-a43767075c.json"
+        },
+        {
+          "exploit_id": "lowercase-bare-letter-trailing-override-c73288819f",
+          "exploit_class": "multi-answer",
+          "replay": "replays/lowercase-bare-letter-trailing-override-c73288819f.json"
+        },
+        {
+          "exploit_id": "lowercase-letter-hedge-1baf3528ff",
+          "exploit_class": "multi-answer",
+          "replay": "replays/lowercase-letter-hedge-1baf3528ff.json"
+        },
+        {
+          "exploit_id": "option-text-override-30409ac6ec",
+          "exploit_class": "other",
+          "replay": "replays/option-text-override-30409ac6ec.json"
+        },
+        {
+          "exploit_id": "option-text-override-no-trail-vocab-deb9211086",
+          "exploit_class": "other",
+          "replay": "replays/option-text-override-no-trail-vocab-deb9211086.json"
+        },
+        {
+          "exploit_id": "spelled-number-option-reference-a92408fa9c",
+          "exploit_class": "other",
+          "replay": "replays/spelled-number-option-reference-a92408fa9c.json"
+        },
+        {
+          "exploit_id": "spelled-out-retraction-9182adf1b3",
+          "exploit_class": "other",
+          "replay": "replays/spelled-out-retraction-9182adf1b3.json"
+        },
+        {
+          "exploit_id": "wrong-reasoning-before-statement-11e48d102a",
+          "exploit_class": "other",
+          "replay": "replays/wrong-reasoning-before-statement-11e48d102a.json"
+        }
+      ]
+    },
+    {
+      "env_id": "will/gsm8k",
+      "status": "patched",
+      "exploit_class": "parser-bypass",
+      "asr_before": 0.1667,
+      "asr_after": 0.0,
+      "benign_pass_before": 0.9688,
+      "benign_pass_after": 0.9688,
+      "iterations": 2,
+      "cost_usd": 0.3877,
+      "evidence_dir": "results/evidence/will/gsm8k",
+      "exploits": [
+        {
+          "exploit_id": "nested-boxed-rfind-innermost-819f2692b2",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/nested-boxed-rfind-innermost-819f2692b2.json"
+        }
+      ]
+    },
+    {
+      "env_id": "will/reasoning-gym-env",
+      "status": "patched",
+      "exploit_class": "lenient-normalization,multi-answer,other,substring-match",
+      "asr_before": 0.6667,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 4,
+      "cost_usd": 0.7068,
+      "evidence_dir": "results/evidence/will/reasoning-gym-env",
+      "exploits": [
+        {
+          "exploit_id": "comma-separator-padding-747887ed49",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/comma-separator-padding-747887ed49.json"
+        },
+        {
+          "exploit_id": "first-answer-tag-wins-ee451640da",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-answer-tag-wins-ee451640da.json"
+        },
+        {
+          "exploit_id": "substring-ratio-hedge-text-59f01ad3b4",
+          "exploit_class": "other",
+          "replay": "replays/substring-ratio-hedge-text-59f01ad3b4.json"
+        },
+        {
+          "exploit_id": "substring-ratio-padding-b096aba239",
+          "exploit_class": "substring-match",
+          "replay": "replays/substring-ratio-padding-b096aba239.json"
+        }
+      ]
+    },
+    {
+      "env_id": "maziyar/OpenMed_PubMedQA",
+      "status": "unpatched",
+      "exploit_class": "format-only,lenient-normalization,multi-answer,other,parser-bypass,substring-match",
+      "asr_before": 1.0,
+      "asr_after": 1.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 1.0726,
+      "evidence_dir": "results/evidence/maziyar/OpenMed_PubMedQA",
+      "exploits": [
+        {
+          "exploit_id": "empty-boxed-fallback-to-text-patterns-03ff37f8a9",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/empty-boxed-fallback-to-text-patterns-03ff37f8a9.json"
+        },
+        {
+          "exploit_id": "first-boxed-wins-6dc6f7a04d",
+          "exploit_class": "multi-answer",
+          "replay": "replays/first-boxed-wins-6dc6f7a04d.json"
+        },
+        {
+          "exploit_id": "hedged-boxed-with-text-fallback-a2e25ac2eb",
+          "exploit_class": "multi-answer",
+          "replay": "replays/hedged-boxed-with-text-fallback-a2e25ac2eb.json"
+        },
+        {
+          "exploit_id": "hedged-boxed-word-count-fallback-8399d52f07",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/hedged-boxed-word-count-fallback-8399d52f07.json"
+        },
+        {
+          "exploit_id": "idiom-answer-no-matter-1d8be3dbd6",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/idiom-answer-no-matter-1d8be3dbd6.json"
+        },
+        {
+          "exploit_id": "incidental-word-frequency-fallback-d22a08e628",
+          "exploit_class": "other",
+          "replay": "replays/incidental-word-frequency-fallback-d22a08e628.json"
+        },
+        {
+          "exploit_id": "invalid-boxed-fallback-to-text-patterns-5cfe573407",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/invalid-boxed-fallback-to-text-patterns-5cfe573407.json"
+        },
+        {
+          "exploit_id": "missing-boxed-conclusion-pattern-fallback-d28e5b976b",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/missing-boxed-conclusion-pattern-fallback-d28e5b976b.json"
+        },
+        {
+          "exploit_id": "negation-blind-answer-phrase-pattern-699429f5f7",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/negation-blind-answer-phrase-pattern-699429f5f7.json"
+        },
+        {
+          "exploit_id": "nested-brace-boxed-truncation-faaed4e0ce",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/nested-brace-boxed-truncation-faaed4e0ce.json"
+        },
+        {
+          "exploit_id": "no-boxed-pipe-format-plus-word-count-fallback-87cf82e86d",
+          "exploit_class": "format-only",
+          "replay": "replays/no-boxed-pipe-format-plus-word-count-fallback-87cf82e86d.json"
+        },
+        {
+          "exploit_id": "standalone-line-list-last-line-wins-235e3ebdfa",
+          "exploit_class": "multi-answer",
+          "replay": "replays/standalone-line-list-last-line-wins-235e3ebdfa.json"
+        },
+        {
+          "exploit_id": "unanchored-so-in-also-2034fdf015",
+          "exploit_class": "substring-match",
+          "replay": "replays/unanchored-so-in-also-2034fdf015.json"
+        },
+        {
+          "exploit_id": "uppercase-boxed-case-folding-1c7d51fd57",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/uppercase-boxed-case-folding-1c7d51fd57.json"
+        }
+      ]
+    },
+    {
+      "env_id": "sami/countdown",
+      "status": "unpatched",
+      "exploit_class": "lenient-normalization,multi-answer,other,parser-bypass",
+      "asr_before": 1.0,
+      "asr_after": 1.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 4,
+      "cost_usd": 1.8144,
+      "evidence_dir": "results/evidence/sami/countdown",
+      "exploits": [
+        {
+          "exploit_id": "equals-tail-ignored-d294ba13de",
+          "exploit_class": "multi-answer",
+          "replay": "replays/equals-tail-ignored-d294ba13de.json"
+        },
+        {
+          "exploit_id": "multiline-last-line-eval-f10db514b1",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/multiline-last-line-eval-f10db514b1.json"
+        },
+        {
+          "exploit_id": "no-intermediate-validation-06e9b9d57f",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/no-intermediate-validation-06e9b9d57f.json"
+        },
+        {
+          "exploit_id": "non-integer-intermediate-accepted-e7f3bd0367",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/non-integer-intermediate-accepted-e7f3bd0367.json"
+        },
+        {
+          "exploit_id": "nonpositive-line-skipped-8b5e1496af",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/nonpositive-line-skipped-8b5e1496af.json"
+        },
+        {
+          "exploit_id": "python-floor-division-allowed-6b97eb1548",
+          "exploit_class": "other",
+          "replay": "replays/python-floor-division-allowed-6b97eb1548.json"
+        },
+        {
+          "exploit_id": "python-pow-operator-allowed-c2db24a80c",
+          "exploit_class": "other",
+          "replay": "replays/python-pow-operator-allowed-c2db24a80c.json"
+        },
+        {
+          "exploit_id": "unary-minus-accepted-84a6fced61",
+          "exploit_class": "other",
+          "replay": "replays/unary-minus-accepted-84a6fced61.json"
+        }
+      ]
+    },
+    {
+      "env_id": "srthkdev/contract_nli_env",
+      "status": "unpatched",
+      "exploit_class": "lenient-normalization,multi-answer,parser-bypass,substring-match",
+      "asr_before": 1.0,
+      "asr_after": 1.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 5,
+      "cost_usd": 0.7134,
+      "evidence_dir": "results/evidence/srthkdev/contract_nli_env",
+      "exploits": [
+        {
+          "exploit_id": "abstain-box-containing-label-word-ef89086c1c",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/abstain-box-containing-label-word-ef89086c1c.json"
+        },
+        {
+          "exploit_id": "all-labels-entail-priority-df4dc33408",
+          "exploit_class": "multi-answer",
+          "replay": "replays/all-labels-entail-priority-df4dc33408.json"
+        },
+        {
+          "exploit_id": "conditional-two-label-hedge-d4207f7ed7",
+          "exploit_class": "multi-answer",
+          "replay": "replays/conditional-two-label-hedge-d4207f7ed7.json"
+        },
+        {
+          "exploit_id": "label-priority-order-fallback-bd6d27eaca",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/label-priority-order-fallback-bd6d27eaca.json"
+        },
+        {
+          "exploit_id": "label-stem-inside-other-word-f4e4bcbd75",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/label-stem-inside-other-word-f4e4bcbd75.json"
+        },
+        {
+          "exploit_id": "negated-label-substring-312e23f682",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/negated-label-substring-312e23f682.json"
+        },
+        {
+          "exploit_id": "no-box-passthrough-substring-39c8f3ea3c",
+          "exploit_class": "substring-match",
+          "replay": "replays/no-box-passthrough-substring-39c8f3ea3c.json"
+        },
+        {
+          "exploit_id": "probabilistic-split-box-63c31a65e4",
+          "exploit_class": "multi-answer",
+          "replay": "replays/probabilistic-split-box-63c31a65e4.json"
+        },
+        {
+          "exploit_id": "qualified-label-substring-2c09ddca5c",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/qualified-label-substring-2c09ddca5c.json"
+        },
+        {
+          "exploit_id": "question-mark-hedge-label-15d6ff1cb5",
+          "exploit_class": "lenient-normalization",
+          "replay": "replays/question-mark-hedge-label-15d6ff1cb5.json"
+        },
+        {
+          "exploit_id": "substring-label-fallback-cdc6431bc8",
+          "exploit_class": "multi-answer",
+          "replay": "replays/substring-label-fallback-cdc6431bc8.json"
+        },
+        {
+          "exploit_id": "think-close-inside-box-692cedc38d",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/think-close-inside-box-692cedc38d.json"
+        },
+        {
+          "exploit_id": "unclosed-box-passthrough-c27c916115",
+          "exploit_class": "parser-bypass",
+          "replay": "replays/unclosed-box-passthrough-c27c916115.json"
+        }
+      ]
+    },
+    {
+      "env_id": "dimamachine/rosalind-bio",
+      "status": "robust",
+      "exploit_class": null,
+      "asr_before": 0.0,
+      "asr_after": 0.0,
+      "benign_pass_before": 1.0,
+      "benign_pass_after": 1.0,
+      "iterations": 3,
+      "cost_usd": 0.3268,
+      "evidence_dir": "results/evidence/dimamachine/rosalind-bio",
+      "exploits": []
+    },
+    {
+      "env_id": "jnaranjo26/metamathqa-env",
+      "status": "failed_to_run",
+      "exploit_class": null,
+      "asr_before": null,
+      "asr_after": null,
+      "benign_pass_before": null,
+      "benign_pass_after": null,
+      "iterations": 0,
+      "cost_usd": 0,
+      "evidence_dir": "results/evidence/jnaranjo26/metamathqa-env",
+      "failure_reason": "Installed twice, but the published wheel contains no Python module (RECORD lists only dist-info files), so it cannot be imported.",
+      "exploits": []
+    },
+    {
+      "env_id": "ob1/base64bench",
+      "status": "failed_to_run",
+      "exploit_class": null,
+      "asr_before": null,
+      "asr_after": null,
+      "benign_pass_before": null,
+      "benign_pass_after": null,
+      "iterations": 0,
+      "cost_usd": 0,
+      "evidence_dir": "results/evidence/ob1/base64bench",
+      "failure_reason": "Installed twice, but the wheel ships without its train.jsonl / eval.jsonl data files, so the environment cannot load a dataset.",
+      "exploits": []
+    },
+    {
+      "env_id": "primeintellect/aime2025",
+      "status": "failed_to_run",
+      "exploit_class": null,
+      "asr_before": null,
+      "asr_after": null,
+      "benign_pass_before": null,
+      "benign_pass_after": null,
+      "iterations": 0,
+      "cost_usd": 0,
+      "evidence_dir": "results/evidence/primeintellect/aime2025",
+      "failure_reason": "Attempt 1 (verifiers 0.3.1): import fails, the module targets an intermediate verifiers taskset API (top-level vf.Taskset, load_environment(config)). Attempt 2: neither the classic loader nor the v1 taskset loader can construct it, so it cannot be scored offline.",
+      "exploits": []
+    },
+    {
+      "env_id": "sileod/reasoning-core-env",
+      "status": "failed_to_run",
+      "exploit_class": null,
+      "asr_before": null,
+      "asr_after": null,
+      "benign_pass_before": null,
+      "benign_pass_after": null,
+      "iterations": 0,
+      "cost_usd": 0,
+      "evidence_dir": "results/evidence/sileod/reasoning-core-env",
+      "failure_reason": "ScoringError: inspect exited -15: Ignoring part of dataset_info from the dataset card: The `splits` field in YAML is malformed or missing the name/num_examples/num_bytes fields\nIgnoring part of dataset_info from the dataset card: The `splits` field in YAML is malformed or missing the name/num_examples/num_bytes fields\n'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/reasoning-core/procedural-pile/resolve/0e3216537b0cb7df8709c6cae34bfceae6450068/data/train-00060.parquet\nRetrying in 1s [Retry 1/5].\n'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/reasoning-core/procedural-pile/resolve/0e3216537b0cb7df8709c6cae34bfceae6450068/data/train-00096.parquet\nRetrying in 1s [Retry 1/5].\n/Users/varunvaidya/miniconda3/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown\n  warnings.warn('resource_tracker: There appear to be %d '\n",
+      "exploits": []
+    }
+  ]
+}

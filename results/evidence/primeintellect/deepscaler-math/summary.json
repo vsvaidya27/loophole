@@ -1,0 +1,50 @@
+{
+  "entry": {
+    "env_id": "primeintellect/deepscaler-math",
+    "status": "patched",
+    "exploit_class": "lenient-normalization,multi-answer",
+    "asr_before": 0.6,
+    "asr_after": 0.0,
+    "benign_pass_before": 1.0,
+    "benign_pass_after": 1.0,
+    "iterations": 5,
+    "cost_usd": 3.0856,
+    "evidence_dir": "results/evidence/primeintellect/deepscaler-math",
+    "exploits": [
+      {
+        "exploit_id": "equation-rhs-taken-by-math-verify-462c9bb154",
+        "exploit_class": "multi-answer",
+        "replay": "replays/equation-rhs-taken-by-math-verify-462c9bb154.json"
+      },
+      {
+        "exploit_id": "math-verify-float-rounding-28d20d1041",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/math-verify-float-rounding-28d20d1041.json"
+      },
+      {
+        "exploit_id": "non-arith-power-literal-bypasses-near-miss-37eb7aaa31",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/non-arith-power-literal-bypasses-near-miss-37eb7aaa31.json"
+      },
+      {
+        "exploit_id": "non-rational-wrapper-float-tolerance-7fb59b2b48",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/non-rational-wrapper-float-tolerance-7fb59b2b48.json"
+      },
+      {
+        "exploit_id": "symbolic-gold-untightened-float-rounding-ba1e92f0aa",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/symbolic-gold-untightened-float-rounding-ba1e92f0aa.json"
+      },
+      {
+        "exploit_id": "unevaluable-sqrt-float-rounding-92d627022f",
+        "exploit_class": "lenient-normalization",
+        "replay": "replays/unevaluable-sqrt-float-rounding-92d627022f.json"
+      }
+    ]
+  },
+  "unpatched_because": [],
+  "patch": "patches/primeintellect/deepscaler-math/patch.py",
+  "stop_reason": "iteration limit reached",
+  "pending_invariants": []
+}

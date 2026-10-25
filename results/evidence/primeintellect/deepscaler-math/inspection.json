@@ -1,0 +1,732 @@
+{
+  "fatal": null,
+  "rows": {
+    "0": {
+      "digest": "30cc96ba286652bde3ccf9a7c6c4b7318908e27f9af82416afe20d75ef40718b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The operation $\\otimes$ is defined for all nonzero numbers by $a \\otimes b = \\frac{a^{2}}{b}$. Determine $[(1 \\otimes 2) \\otimes 3] - [1 \\otimes (2 \\otimes 3)]$."
+        }
+      ],
+      "gold": "-\\frac{2}{3}",
+      "info": null
+    },
+    "1752": {
+      "digest": "43adf254b227efe887828faa42e8da634d0422b3152b04b18592777cf3956d92",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "LeRoy and Bernardo went on a week-long trip together and agreed to share the costs equally. Over the week, each of them paid for various joint expenses such as gasoline and car rental. At the end of the trip it turned out that LeRoy had paid A dollars and Bernardo had paid B dollars, where $A < B.$ How many dollars must LeRoy give to Bernardo so that they share the costs equally?"
+        }
+      ],
+      "gold": "\\frac{B-A}{2}",
+      "info": null
+    },
+    "2443": {
+      "digest": "d1a1ff795307cafe9cbd0d4c95503f3b7d673490c81d7c58fc7835467d9c4144",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The sum of two nonzero real numbers is $4$ times their product. What is the sum of the reciprocals of the two numbers?"
+        }
+      ],
+      "gold": "4",
+      "info": null
+    },
+    "3181": {
+      "digest": "916e68c7260825d25c64ae01cff0129e0a100ad8749db522e7b7e28d65f59469",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Square \\(ABCD\\) is inscribed in circle \\(\\omega\\) with radius 10. Four additional squares are drawn inside \\(\\omega\\) but outside \\(ABCD\\) such that the lengths of their diagonals are as large as possible. A sixth square is drawn by connecting the centers of the four aforementioned small squares. Find the area of the sixth square."
+        }
+      ],
+      "gold": "144",
+      "info": null
+    },
+    "3505": {
+      "digest": "13e44a16e03a518f41dd56d305cadc46d7133a9f07aafe0696c8f334b8de336e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "In the Year 0 of Cambridge there is one squirrel and one rabbit. Both animals multiply in numbers quickly. In particular, if there are $m$ squirrels and $n$ rabbits in Year $k$, then there will be $2 m+2019$ squirrels and $4 n-2$ rabbits in Year $k+1$. What is the first year in which there will be strictly more rabbits than squirrels?"
+        }
+      ],
+      "gold": "13",
+      "info": null
+    },
+    "5258": {
+      "digest": "98875da050603424fcc52bdb49dc6ee619766281f9a8b4747cc43f6ea0c5e1bb",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The average of $a, b$ and $c$ is 16. The average of $c, d$ and $e$ is 26. The average of $a, b, c, d$, and $e$ is 20. What is the value of $c$?"
+        }
+      ],
+      "gold": "26",
+      "info": null
+    },
+    "6006": {
+      "digest": "76f93a470df7f2fb153690c4db304fc66005814ba7fc52700edc5dd05dc5c13d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "If $ P(x)$ denotes a polynomial of degree $ n$ such that $ P(k)\\equal{}\\frac{k}{k\\plus{}1}$ for $ k\\equal{}0,1,2,\\ldots,n$, determine $ P(n\\plus{}1)$."
+        }
+      ],
+      "gold": "\\frac{(-1)^{n+1} + (n+1)}{n+2}",
+      "info": null
+    },
+    "7011": {
+      "digest": "84add9f94778807c798e3ce4f4e8ae19b660f59672e229b6d7634bce873c16e8",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Let $R$ be the set of all possible remainders when a number of the form $2^n$, $n$ a nonnegative integer, is divided by 1000. Let $S$ be the sum of the elements in $R$. Find the remainder when $S$ is divided by 1000."
+        }
+      ],
+      "gold": "7",
+      "info": null
+    },
+    "7695": {
+      "digest": "c3744c2699b877adfbb2e56c0a3d4ccd001a1f5de6cdbe329412b6433c0a0798",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "There are 7 light bulbs arranged in a row. It is required to light up at least 3 of the bulbs, and adjacent bulbs cannot be lit at the same time. Determine the total number of different ways to light up the bulbs."
+        }
+      ],
+      "gold": "11",
+      "info": null
+    },
+    "8763": {
+      "digest": "197b8959ff44311e91ac73f3e0a8ba9d7ced4a6f13851b7bf407206fd75143a1",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The quadratic function \\( f(x) = x^2 + mx + n \\) has real roots. The inequality \\( s \\leq (m-1)^2 + (n-1)^2 + (m-n)^2 \\) holds for any quadratic function satisfying the above conditions. What is the maximum value of \\( s \\)?"
+        }
+      ],
+      "gold": "9/8",
+      "info": null
+    },
+    "9331": {
+      "digest": "a5891326081381c75e946a1f979c9487a3152091f2a35b3cbb8811aabc7d6917",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The average of \\( p, q, r \\) is 12. The average of \\( p, q, r, t, 2t \\) is 15. Find \\( t \\).\n\n\\( k \\) is a real number such that \\( k^{4} + \\frac{1}{k^{4}} = t + 1 \\), and \\( s = k^{2} + \\frac{1}{k^{2}} \\). Find \\( s \\).\n\n\\( M \\) and \\( N \\) are the points \\( (1, 2) \\) and \\( (11, 7) \\) respectively. \\( P(a, b) \\) is a point on \\( MN \\) such that \\( MP:PN = 1:s \\). Find \\( a \\).\n\nIf the curve \\( y = ax^2 + 12x + c \\) touches the \\( x \\)-axis, find \\( c \\)."
+        }
+      ],
+      "gold": "12",
+      "info": null
+    },
+    "9706": {
+      "digest": "1b3d27c08f6e880e6b70b67daf5d7d723832427c0e0c552bc0b7f76e3069c3f9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given a square \\(ABCD\\) with side length 1, determine the maximum value of \\(PA \\cdot PB \\cdot PC \\cdot PD\\) where point \\(P\\) lies inside or on the boundary of the square."
+        }
+      ],
+      "gold": "\\frac{5}{16}",
+      "info": null
+    },
+    "10516": {
+      "digest": "ec6e6f5e7da94a29a7751a697b462233c7607117cfef2ad79ba5c00edcc70842",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Calculate the definite integral:\n\n$$\n\\int_{1}^{e} \\sqrt{x} \\cdot \\ln^{2} x \\, dx\n$$"
+        }
+      ],
+      "gold": "\\frac{10e\\sqrt{e} - 16}{27}",
+      "info": null
+    },
+    "11727": {
+      "digest": "709f16701caac825604a2a7ce942c822724d96db31e6244a2433a7d461b8ee80",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Simplify \\[\\frac{1}{\\dfrac{2}{\\sqrt{5}+2} + \\dfrac{3}{\\sqrt{7}-2}}.\\]"
+        }
+      ],
+      "gold": "\\frac{2\\sqrt{5} + \\sqrt{7} + 2}{23 + 4\\sqrt{35}}",
+      "info": null
+    },
+    "12180": {
+      "digest": "523f74d072fc628e7a8b66eddc1c5dd897fcd2abfb794b1f7beead78b94899cc",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "\\[\n\\sum_{k=1}^{70} \\frac{k}{x-k} \\geq \\frac{5}{4}\n\\]\nis a union of disjoint intervals the sum of whose lengths is 1988."
+        }
+      ],
+      "gold": "1988",
+      "info": null
+    },
+    "12269": {
+      "digest": "4de229e852cb0ff0563f39eb2120070ee6444d57f5cdee9bbcb8ae5bc79013df",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Consider that for integers from 1 to 1500, $x_1+2=x_2+4=x_3+6=\\cdots=x_{1500}+3000=\\sum_{n=1}^{1500}x_n + 3001$. Find the value of $\\left\\lfloor|S|\\right\\rfloor$, where $S=\\sum_{n=1}^{1500}x_n$."
+        }
+      ],
+      "gold": "1500",
+      "info": null
+    },
+    "12706": {
+      "digest": "349c0e7fcff18a8e7cb3ee499b5d1f9a9b9d70b281a2d49e03bd95e16d701eb7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "A bus ticket costs 1 yuan each. Xiaoming and 6 other children are lining up to buy tickets. Each of the 6 children has only 1 yuan, while Xiaoming has a 5-yuan note. The seller has no change. In how many ways can they line up so that the seller can give Xiaoming change when he buys a ticket?"
+        }
+      ],
+      "gold": "10800",
+      "info": null
+    },
+    "14022": {
+      "digest": "84a5a287d4b3c3fa23e52969aa48abd3baf539933323eeaa9298243040725d28",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "In the trapezoid \\(ABCD\\), the lengths of the bases are \\(AD = 24\\) and \\(BC = 8\\), and the lengths of the diagonals are \\(AC = 13\\) and \\(BD = 5\\sqrt{17}\\). Find the area of the trapezoid."
+        }
+      ],
+      "gold": "80",
+      "info": null
+    },
+    "14594": {
+      "digest": "a005f6d548f5376de11ad62b03b11f194830645ac32fc67f60e4de79abbbe016",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The class monitor wants to buy soda in batches for all 50 students and teachers in the class for the sports day. According to the store's policy, every 5 empty bottles can be exchanged for one soda bottle, so there is no need to buy 50 bottles of soda. Then, the minimum number of soda bottles that need to be bought to ensure everyone gets one bottle of soda is     ."
+        }
+      ],
+      "gold": "40",
+      "info": null
+    },
+    "15775": {
+      "digest": "af5f2d060624c3a48589e192457e97b97245915da3f85d71cc588a4fb6f5c481",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Define a sequence of convex polygons \\( P_n \\) as follows. \\( P_0 \\) is an equilateral triangle with side length 1. \\( P_{n+1} \\) is obtained from \\( P_n \\) by cutting off the corners one-third of the way along each side (for example, \\( P_1 \\) is a regular hexagon with side length \\(\\frac{1}{3}\\)). Find \\( \\lim_{n \\to \\infty} \\) area(\\( P_n \\))."
+        }
+      ],
+      "gold": "\\frac{\\sqrt{3}}{7}",
+      "info": null
+    },
+    "15786": {
+      "digest": "f4a469f2529b43d638729bbcedd3c8fa5ddddc6998cd078a209b4eafd3cb44dd",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Three young married couples were captured by cannibals. Before eating the tourists, the cannibals decided to weigh them. The total weight of all six people was not an integer, but the combined weight of all the wives was exactly 171 kg. Leon weighed the same as his wife, Victor weighed one and a half times more than his wife, and Maurice weighed twice as much as his wife. Georgette weighed 10 kg more than Simone, who weighed 5 kg less than Elizabeth. While the cannibals argued over who to eat first, five of the six young people managed to escape. The cannibals only ate Elizabeth's husband. How much did he weigh?"
+        }
+      ],
+      "gold": "85.5",
+      "info": null
+    },
+    "16456": {
+      "digest": "c6f8d59880bbea29a42390a57697b3c886e56ca3c9a64062540497a8a8a967f9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given that complex numbers $a,$ $b,$ and $c$ are zeros of a polynomial $P(z) = z^3 + qz + r,$ and $|a|^2 + |b|^2 + |c|^2 = 300$. The points corresponding to $a,$ $b,$ and $c$ on the complex plane are the vertices of a right triangle. Find the square of the length of the hypotenuse, $h^2$, given that the triangle's centroid is at the origin."
+        }
+      ],
+      "gold": "450",
+      "info": null
+    },
+    "17527": {
+      "digest": "61cb03e6793713e344c631360ca1f4f1a42d1ca5f7bf725f9343bd2cba541da4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "In the arithmetic sequence $\\{a_n\\}$, $a_4 = 2$ and $a_7 = -4$. Suppose we randomly select numbers from the first 10 terms of $\\{a_n\\}$, replacing the number after each selection. We perform this selection process three times, assuming each selection is independent. What is the probability that among the three selected numbers, exactly two are positive and one is negative?"
+        }
+      ],
+      "gold": "\\frac{6}{25}",
+      "info": null
+    },
+    "19280": {
+      "digest": "82c766dfc0e8ca8a3d14bd6e63ae2ba5c3c090b3165c25d03da1586fc2c001e3",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "For each integer from 1 through 2019, Tala calculated the product of its digits.  Compute the sum of all 2019 of Tala's products."
+        }
+      ],
+      "gold": "184320",
+      "info": null
+    },
+    "21033": {
+      "digest": "a8f41e28e1229ee2e64c4377595e7f84203c2907739d42a9cebcdce30777e688",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given triangle $\\triangle ABC$ with angles $A$, $B$, $C$ and their respective opposite sides $a$, $b$, $c$, such that $\\frac{\\sqrt{3}c}{\\cos C} = \\frac{a}{\\cos(\\frac{3\\pi}{2} + A)}$.\n(I) Find the value of $C$;\n(II) If $\\frac{c}{a} = 2$, $b = 4\\sqrt{3}$, find the area of $\\triangle ABC$."
+        }
+      ],
+      "gold": "2\\sqrt{15} - 2\\sqrt{3}",
+      "info": null
+    },
+    "22786": {
+      "digest": "b9ec07cafd1ab16ac7221c355abea008ebb7dc00a5eaf9e36a1f2a851577cce4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "A group consists of 4 male students and 3 female students. From this group, 4 people are selected to complete three different tasks, with the condition that at least two of the selected individuals must be female, and each task must have at least one person assigned to it. The number of different ways to select and assign these individuals is ____."
+        }
+      ],
+      "gold": "792",
+      "info": null
+    },
+    "23080": {
+      "digest": "3d17e9cd2cd2fd111ee1259962fb51e269b6b519afabd3c8ab98f57968e27489",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given: $2x^2 - 4xy + 4y^2 + 6x + 9 = 0$, then $x + y =$ ?"
+        }
+      ],
+      "gold": "-\\frac{9}{2}",
+      "info": null
+    },
+    "23273": {
+      "digest": "87f4c00aa01b2df1b882586687fe63a34cdd3b501f05e385bfc095483ebb630b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Math City has ten streets, none of which are parallel, and some of which can intersect more than once due to their curved nature. There are two curved streets which each make an additional intersection with three other streets. Calculate the maximum number of police officers needed at intersections."
+        }
+      ],
+      "gold": "51",
+      "info": null
+    },
+    "24538": {
+      "digest": "edeba3f0711d9a272d5396ae8b2f78ff512948393b5d946a3edd9cc056aea8a5",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given positive integers $x$ and $y$ such that $\\frac{1}{x} + \\frac{1}{3y} = \\frac{1}{8}$, find the least possible value of $xy$."
+        }
+      ],
+      "gold": "96",
+      "info": null
+    },
+    "25910": {
+      "digest": "bceded1a4d753cdc1318093b0c03799955425699e1436e10e20422ddb36b344e",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Let the sequence  $\\{x_n\\}$  be defined by  $x_1 \\in \\{5, 7\\}$  and, for  $k \\ge 1, x_{k+1} \\in \\{5^{x_k} , 7^{x_k} \\}$ . For example, the possible values of  $x_3$  are  $5^{5^5}, 5^{5^7}, 5^{7^5}, 5^{7^7}, 7^{5^5}, 7^{5^7}, 7^{7^5}$ , and  $7^{7^7}$ . Determine the sum of all possible values for the last two digits of  $x_{2012}$ ."
+        }
+      ],
+      "gold": "75",
+      "info": null
+    },
+    "26291": {
+      "digest": "dff2dbd6bb19cebd10f20543b1341609595458a8f5d924b1fe8b563cf636907a",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Calculate: \\( 8.0 \\dot{\\dot{1}} + 7.1 \\dot{2} + 6.2 \\dot{3} + 5.3 \\dot{4} + 4.4 \\dot{5} + 3.5 \\dot{6} + 2.6 \\dot{7} + 1.7 \\dot{8} = \\)"
+        }
+      ],
+      "gold": "39.2",
+      "info": null
+    },
+    "27741": {
+      "digest": "81175dfefdc23aa3d7bc0f1f31dda45e372608632c6aad3b096994d7b598982d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "It is known that $F_1$ and $F_2$ are the upper and lower foci of the ellipse $C: \\frac {y^{2}}{a^{2}}+ \\frac {x^{2}}{b^{2}}=1$ ($a>b>0$), where $F_1$ is also the focus of the parabola $C_1: x^{2}=4y$. Point $M$ is the intersection of $C_1$ and $C_2$ in the second quadrant, and $|MF_{1}|= \\frac {5}{3}$.  \n(1) Find the equation of the ellipse $C_1$.  \n(2) Given $A(b,0)$, $B(0,a)$, the line $y=kx$ ($k>0$) intersects $AB$ at point $D$ and intersects the ellipse $C_1$ at points $E$ and $F$. Find the maximum area of the quadrilateral $AEBF$."
+        }
+      ],
+      "gold": "2 \\sqrt {6}",
+      "info": null
+    },
+    "28044": {
+      "digest": "294f7527ce4a9d7a69e0655acb12ed28a51485bf938bef105e7421a048cc30d4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Given a hyperbola with asymptotes $2x \\pm y=0$, that passes through the intersection of the lines $x+y-3=0$ and $2x-y+3t=0$, where $-2 \\leq t \\leq 5$. Find the maximum possible length of the real axis of the hyperbola."
+        }
+      ],
+      "gold": "4\\sqrt{3}",
+      "info": null
+    },
+    "29797": {
+      "digest": "8548ebf7fe28e9d20c5b62289d6d0c13a567c5489ac39d1483c243742c683429",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "What integer should 999,999,999 be multiplied by to get a number consisting of only ones?"
+        }
+      ],
+      "gold": "111111111",
+      "info": null
+    },
+    "30515": {
+      "digest": "22674c3f691ec1f8cbc1977b7e3f78af76468c138a07e5c5d1681e0ae9246af4",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "1. Given that the line $l$ passing through the point $M(-3,0)$ is intercepted by the circle $x^{2}+(y+2)^{2}=25$ to form a chord of length $8$, what is the equation of line $l$?\n2. Circles $C_{1}$: $x^{2}+y^{2}+2x+8y-8=0$ and $C_{2}$: $x^{2}+y^{2}-4x-4y-2=0$ intersect. What is the length of their common chord?\n3. What is the equation of a circle passing through points $A(0,2)$ and $B(-2,2)$, with its center lying on the line $x-y-2=0$?\n4. Given the circle with the equation $(x-2)^{2}+y^{2}=1$, a line passing through the external point $P(3,4)$ intersects the circle at points $A$ and $B$. What is the value of $\\overrightarrow{PA}\\cdot \\overrightarrow{PB}$?"
+        }
+      ],
+      "gold": "16",
+      "info": null
+    },
+    "31550": {
+      "digest": "7142f9d5ba81998f04345ebef11648d3302c6e554d193ec7bc584d1b6dcc56d7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "How many natural numbers between 200 and 400 are divisible by 8?"
+        }
+      ],
+      "gold": "24",
+      "info": null
+    },
+    "33302": {
+      "digest": "e0a15fea52aca1ac14453321a7c191dc31ecdfcbf52ce4aca2f49be506b517a7",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "What is $\\sqrt[4]{81} \\cdot \\sqrt[3]{27} \\cdot \\sqrt{9}$ expressed as a positive integer?"
+        }
+      ],
+      "gold": "27",
+      "info": null
+    },
+    "35055": {
+      "digest": "1bd5705ced8d071a76224c2ec01d0af3df5f36a73b5ec6039e9bc7bbd226681c",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The nine horizontal and nine vertical lines on an $8\\times8$ checkerboard form $r$ rectangles, of which $s$ are squares. The number $s/r$ can be written in the form $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m + n.$\n"
+        }
+      ],
+      "gold": "125",
+      "info": null
+    },
+    "35308": {
+      "digest": "913b77744fac00f3ee4ea868df8e948ce84384fa3f6b3d5bd61cff31e4365b47",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "A fair 6-sided die is rolled once. If I roll $n$, then I win $6-n$ dollars. What is the expected value of my win, in dollars?"
+        }
+      ],
+      "gold": "2.50",
+      "info": null
+    },
+    "35692": {
+      "digest": "2f5f46799a906a2c72b4d2dca92152547746145f4aeb8d88fb80c0e3d6997d9f",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "When plotted in the standard rectangular coordinate system, trapezoid $ABCD$ has vertices $A(1, -2)$, $B(1, 1)$, $C(5, 7)$ and $D(5, 1)$. What is the area of trapezoid $ABCD$?"
+        }
+      ],
+      "gold": "18",
+      "info": null
+    },
+    "36771": {
+      "digest": "07cf63eb618822be4b2f71494fb72ec031a47a49208ab030d37a4f92ff07c998",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The equation \\[\\frac{x^2}{36} + \\frac{(y+5)^2}{16} = 0\\]describes a degenerate ellipse, because the right-hand side is $0$ instead of $1$ (as in the standard form for an ellipse). Of all the points on the graph of this equation, what is the largest possible $y$-coordinate?"
+        }
+      ],
+      "gold": "-5",
+      "info": null
+    },
+    "36808": {
+      "digest": "45efcec4d9578c24d13a10e888741d8c123590a3159bcb018554b512b173b34d",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "When a polynomial is divided by $2x^2 - 7x + 18,$ what are the possible degrees of the remainder?  Enter all the possible values, separated by commas."
+        }
+      ],
+      "gold": "0,1",
+      "info": null
+    },
+    "38064": {
+      "digest": "cc0c4fce8fa4173137f17e02743d9826671c8ee079875305f3e67502a2895437",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "If $n = 2^{10} \\cdot 3^{14} \\cdot 5^{8}$, how many of the natural-number factors of $n$ are multiples of 150?"
+        }
+      ],
+      "gold": "980",
+      "info": null
+    },
+    "38561": {
+      "digest": "c2a66059992ff9f5106fe42f95145b8866318b56b38ad13ff4f42ce5b0e56d09",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "A school is arranging chairs in rows for an assembly. $11$ chairs make a complete row, and right now there are $110$ chairs total. The school wants to have as few empty seats as possible, but all rows of chairs must be complete. If $70$ students will attend the assembly, how many chairs should be removed?"
+        }
+      ],
+      "gold": "33",
+      "info": null
+    },
+    "39176": {
+      "digest": "e82ffdfdeb956addaeefad82b561ddcad09b48c11a5f61cbad8deb3e580a5f74",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Round to the nearest hundredth: 18.4851"
+        }
+      ],
+      "gold": "18.49",
+      "info": null
+    },
+    "39464": {
+      "digest": "80b4f08b569198535f4e27f586c0a5ca172082b91e7190a0e984d58cf4676388",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "A square 10cm on each side has four quarter circles drawn with centers at the four corners. How many square centimeters are in the area of the shaded region? Express your answer in terms of $\\pi$.\n\n[asy]\nunitsize (1.5 cm);\n\ndraw((-1,-1)--(1,-1)--(1,1)--(-1,1)--cycle);\nfilldraw(arc((1,1),1,270,180)--arc((-1,1),1,360,270)--arc((-1,-1),1,90,0)--arc((1,-1),1,180,90)--cycle,gray);\n[/asy]"
+        }
+      ],
+      "gold": "100-25\\pi",
+      "info": null
+    },
+    "39544": {
+      "digest": "1c4d3c3d34710c26f2b627d75b761ddfad648a665d260f4c7f8fbcbb01fd3bda",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "Quadrilateral $ABCD$ is a parallelogram.  What is the degree measure of angle $A$? [asy]\nsize(100);\ndraw((0,0)--(5,2)--(6,7)--(1,5)--cycle);\ndraw((5,2)--(7.5,3));\ndraw(Arc((5,2),1,20,80));\nlabel(\"$D$\",(0,0),SW); label(\"$C$\",(5,2),SE); label(\"$B$\",(6,7),NE); label(\"$A$\",(1,5),NW);\n\nlabel(\"$60^\\circ$\",(6.3,2.8), N);\n[/asy]"
+        }
+      ],
+      "gold": "120",
+      "info": null
+    },
+    "40314": {
+      "digest": "3091892dfbc128a96bb875b54b3cf48c5d5a715a86bc64c2eed7b62ca3682534",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Please reason step by step, and put your final answer within \\boxed{}."
+        },
+        {
+          "role": "user",
+          "content": "The real numbers $a$ and $b$ satisfy\n\\[\\begin{pmatrix} 2 \\\\ a \\\\ -7 \\end{pmatrix} \\times \\begin{pmatrix} 5 \\\\ 4 \\\\ b \\end{pmatrix} = \\mathbf{0}.\\]Enter the ordered pair $(a,b).$"
+        }
+      ],
+      "gold": "\\left( \\frac{8}{5}, -\\frac{35}{2} \\right)",
+      "info": null
+    }
+  },
+  "dataset_size": 40315,
+  "sources": {
+    "deepscaler_math.py": "import verifiers as vf\nfrom datasets import load_dataset\nfrom verifiers.rubrics.math_rubric import MathRubric\nfrom verifiers.utils.data_utils import BOXED_SYSTEM_PROMPT, extract_boxed_answer\n\n\ndef load_environment(\n    dataset_name: str = \"agentica-org/DeepScaleR-Preview-Dataset\",\n    dataset_split: str = \"train\",\n    system_prompt: str = BOXED_SYSTEM_PROMPT,\n    use_think: bool = False,\n) -> vf.Environment:\n    dataset = (\n        load_dataset(dataset_name, split=dataset_split)\n        .map(\n            lambda x: {\n                \"question\": x[\"problem\"],\n                \"task\": \"deepscaler-math\",\n            }\n        )\n        .select_columns([\"question\", \"answer\", \"task\"])\n    )\n\n    parser = vf.ThinkParser(extract_boxed_answer) if use_think else vf.Parser(extract_boxed_answer)\n    rubric = MathRubric(parser=parser)\n\n    return vf.SingleTurnEnv(dataset=dataset, system_prompt=system_prompt, parser=parser, rubric=rubric)\n",
+    "verifiers/rubrics/math_rubric.py": "import asyncio\nimport os\nimport sys\nimport time\nfrom concurrent.futures import ProcessPoolExecutor\n\nfrom math_verify import parse, verify\n\nfrom verifiers.parsers.maybe_think_parser import MaybeThinkParser\nfrom verifiers.parsers.parser import Parser\nfrom verifiers.rubrics.rubric import Rubric\nfrom verifiers.types import Messages, RewardFunc\nfrom verifiers.utils.data_utils import extract_boxed_answer\nfrom verifiers.utils.thread_utils import register_executor, unregister_executor\n\n\ndef verify_response(\n    response: str,\n    answer: str,\n    max_verify_chars: int,\n    timeout_seconds: int = 5,\n) -> tuple[float, float]:\n    \"\"\"\n    Verify a response against an answer using math_verify.\n\n    Top-level function so it can be pickled for ProcessPoolExecutor.\n    Times itself internally so event loop lag doesn't affect scoring.\n    \"\"\"\n    start = time.perf_counter()\n    if response == \"\":\n        elapsed = time.perf_counter() - start\n        return 0.0, elapsed\n\n    if len(response) > max_verify_chars:\n        elapsed = time.perf_counter() - start\n        return 0.0, elapsed\n\n    try:\n        parsed_answer = parse(f\"\\\\boxed{{{answer}}}\", parsing_timeout=timeout_seconds)\n        parsed_response = parse(\n            f\"\\\\boxed{{{response}}}\", parsing_timeout=timeout_seconds\n        )\n        is_correct = verify(\n            parsed_answer, parsed_response, timeout_seconds=timeout_seconds\n        )\n        elapsed = time.perf_counter() - start\n        return float(is_correct), elapsed\n    except BaseException:\n        elapsed = time.perf_counter() - start\n        return 0.0, elapsed\n\n\nclass MathRubric(Rubric):\n    HARD_TIMEOUT_SECONDS: float = 120.0\n    MAX_VERIFY_CHARS: int = 50_000\n\n    def __init__(\n        self,\n        funcs: list[RewardFunc] | None = None,\n        weights: list[float] | None = None,\n        parser: Parser | None = None,\n        max_workers: int = 8,\n        timeout_seconds: float = 5,\n        max_verify_chars: int = MAX_VERIFY_CHARS,\n    ):\n        from functools import partial\n\n        parser = parser or MaybeThinkParser(\n            extract_fn=partial(extract_boxed_answer, strict=True)\n        )\n        self.max_verify_chars = max_verify_chars\n        super().__init__(funcs=funcs, weights=weights, parser=parser)\n        self.add_reward_func(self.correct_answer)\n        self.timeout_seconds = timeout_seconds\n\n        self.executor = ProcessPoolExecutor(max_workers=1)\n        self.executor_name = f\"math-verify-{id(self)}\"\n        register_executor(\n            self.executor_name,\n            self.executor,\n            scaling_fn=lambda c: min(\n                max(1, c // 128), min(max_workers, os.cpu_count() or 1)\n            ),\n        )\n\n    async def correct_answer(\n        self, parser: Parser, completion: Messages, answer: str, **kwargs\n    ) -> float:\n        \"\"\"Reward function that checks if the final answer matches the expected answer.\"\"\"\n        response = parser.parse_answer(completion) or \"\"\n\n        if len(response) > self.max_verify_chars:\n            self.logger.warning(\n                f\"Skipping math verification: parsed response too long \"\n                f\"({len(response)} chars > {self.max_verify_chars} limit)\"\n            )\n            return 0.0\n\n        self.logger.debug(\n            f\"Math verify input: response={response[:200]!r}, answer={answer[:200]!r}\"\n        )\n\n        loop = asyncio.get_running_loop()\n\n        try:\n            reward, elapsed = await asyncio.wait_for(\n                loop.run_in_executor(\n                    self.executor,\n                    verify_response,\n                    response,\n                    answer,\n                    self.max_verify_chars,\n                    int(self.timeout_seconds),\n                ),\n                timeout=self.HARD_TIMEOUT_SECONDS,\n            )\n        except asyncio.TimeoutError:\n            self.logger.warning(\n                f\"Math verification hit hard timeout after {self.HARD_TIMEOUT_SECONDS:.0f}s. \"\n                f\"response={response[:200]!r}, answer={answer[:200]!r}\"\n            )\n            return 0.0\n        except Exception as e:\n            self.logger.warning(\n                f\"Math verification failed: {e}. \"\n                f\"response={response[:200]!r}, answer={answer[:200]!r}\"\n            )\n            return 0.0\n\n        if elapsed > self.timeout_seconds:\n            self.logger.debug(\n                f\"Math verification exceeded time limit after {elapsed:.2f}s (>{self.timeout_seconds:.1f}s). \"\n                f\"response={response[:200]!r}, answer={answer[:200]!r}\"\n            )\n            return 0.0\n\n        return reward\n\n    async def teardown(self):\n        \"\"\"Shut down the PPE cleanly so _python_exit doesn't hang.\n\n        On Python <3.13, workers forked from a threaded process (asyncio +\n        ZMQ) can deadlock. Killing them first lets the manager thread exit,\n        so _python_exit()'s join() returns immediately.\n        \"\"\"\n        await super().teardown()\n        if hasattr(self, \"executor_name\"):\n            unregister_executor(self.executor_name)\n        if hasattr(self, \"executor\"):\n            if sys.version_info < (3, 13):\n                procs = list(\n                    (getattr(self.executor, \"_processes\", None) or {}).values()\n                )\n                for p in procs:\n                    p.kill()\n                for p in procs:\n                    p.join(timeout=5)\n            self.executor.shutdown(wait=True, cancel_futures=True)\n\n    def __del__(self):\n        \"\"\"Best-effort cleanup if teardown() was never called.\"\"\"\n        if hasattr(self, \"executor_name\"):\n            unregister_executor(self.executor_name)\n        if hasattr(self, \"executor\"):\n            self.executor.shutdown(wait=False)\n",
+    "verifiers/parsers/parser.py": "import logging\nfrom typing import Any, Callable\n\nfrom verifiers.types import Messages\n\n\nclass Parser:\n    \"\"\"\n    Parser class for parsing LLM rollouts.\n\n    Default behavior:\n    - `parse` returns text as-is\n    - `parse_answer` returns the last message's content (or text if string)\n    \"\"\"\n\n    def __init__(self, extract_fn: Callable[[str], str] = lambda x: x):\n        self.logger = logging.getLogger(f\"{__name__}.{self.__class__.__name__}\")\n        self.extract_fn = extract_fn\n\n    def parse(self, text: str) -> Any:\n        return self.extract_fn(text)\n\n    def _message_field(self, message: Any, field: str, default: Any = None) -> Any:\n        if isinstance(message, dict):\n            return message.get(field, default)\n        return getattr(message, field, default)\n\n    def _content_to_text(self, content: Any) -> str:\n        if isinstance(content, str):\n            return content\n        if isinstance(content, list):\n            chunks: list[str] = []\n            for part in content:\n                if isinstance(part, dict):\n                    part_type = part.get(\"type\")\n                    if part_type == \"text\":\n                        text = part.get(\"text\")\n                        if isinstance(text, str):\n                            chunks.append(text)\n                    continue\n                text_attr = getattr(part, \"text\", None)\n                if isinstance(text_attr, str):\n                    chunks.append(text_attr)\n            return \" \".join(chunks).strip()\n        return \"\"\n\n    def get_assistant_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract assistant messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"assistant\"\n        ]\n\n    def get_system_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract system messages from a completion.\"\"\"\n        return [\n            msg for msg in completion if self._message_field(msg, \"role\") == \"system\"\n        ]\n\n    def get_user_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract user messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"user\"]\n\n    def get_tool_messages(self, completion: Messages) -> Messages:\n        \"\"\"Helper function to extract tool messages from a completion.\"\"\"\n        return [msg for msg in completion if self._message_field(msg, \"role\") == \"tool\"]\n\n    def parse_answer(self, completion: Messages) -> str | None:\n        if isinstance(completion, str):\n            return self.parse(completion)\n        else:\n            assistant_messages = self.get_assistant_messages(completion)\n            if not assistant_messages:\n                return None\n            ans = self._message_field(assistant_messages[-1], \"content\", \"\") or \"\"\n            return self.parse(self._content_to_text(ans))\n\n    def get_format_reward_func(self) -> Callable:\n        \"\"\"\n        Reward function that checks if the final answer is formatted correctly.\n        \"\"\"\n\n        def format_reward_func(completion: list[dict[str, str]], **kwargs) -> float:\n            return 1.0\n\n        return format_reward_func\n",
+    "verifiers/utils/data_utils.py": "# NOTE: Helper functions for example datasets. Not intended for core functionality.\n\nfrom __future__ import annotations\n\nimport random\nfrom typing import TYPE_CHECKING, Any, Callable, cast\n\nfrom verifiers.types import Messages\n\nif TYPE_CHECKING:\n    from datasets import Dataset\n\n### PROMPTS ###\n\nTHINK_BOXED_SYSTEM_PROMPT = \"Think step-by-step inside <think>...</think> tags. \\\n    Then, give your final answer inside \\\\boxed{}.\"\n\n### https://github.com/huggingface/lighteval/blob/ecef2c662b9418866b6447d33b5e7d5dedd74af8/src/lighteval/tasks/default_prompts.py#L1474\nBOXED_SYSTEM_PROMPT = (\n    \"Please reason step by step, and put your final answer within \\\\boxed{}.\"\n)\n###############\n\n\ndef format_dataset(\n    dataset: Dataset,\n    system_prompt: str | None = None,\n    few_shot: Messages | None = None,\n    question_key: str = \"question\",\n    answer_key: str = \"answer\",\n    map_kwargs: dict = {},\n) -> Dataset:\n    \"\"\"\n    Create `example_id` and `prompt` columns if not present.\n    \"\"\"\n    # if \"id\" column is present and not int, rename it to \"src_id\"\n    if \"example_id\" in dataset.column_names and not isinstance(\n        dataset[\"example_id\"][0], int\n    ):\n        dataset = dataset.rename_column(\"example_id\", \"src_id\")\n    if \"example_id\" not in dataset.column_names:\n        dataset = dataset.add_column(\"example_id\", range(len(dataset)))\n\n    # extract format_prompt as a standalone function to avoid capturing self\n    def format_prompt_fn(prompt_str: str) -> Messages:\n        messages = []\n        if system_prompt:\n            messages.append({\"role\": \"system\", \"content\": system_prompt})\n        if few_shot:\n            messages.extend(few_shot)\n        messages.append({\"role\": \"user\", \"content\": prompt_str})\n        return messages\n\n    if \"prompt\" not in dataset.column_names:\n        if answer_key == \"answer\":\n            dataset = dataset.map(\n                lambda x: {\n                    \"prompt\": format_prompt_fn(x[question_key]),\n                },\n                **map_kwargs,\n            )\n        else:\n            dataset = dataset.map(\n                lambda x: {\n                    \"prompt\": format_prompt_fn(x[question_key]),\n                    \"answer\": x[answer_key],\n                },\n                **map_kwargs,\n            )\n    assert \"example_id\" in dataset.column_names\n    assert \"prompt\" in dataset.column_names\n    return dataset\n\n\ndef extract_boxed_answer(text: str, strict: bool = False) -> str:\n    \"\"\"Extract the last \\\\boxed{...} answer from text.\n\n    Args:\n        text: The text to extract from.\n        strict: If True, return \"\" when no \\\\boxed{} is found (for reward\n            scoring where format compliance matters). If False, return the\n            original text as a passthrough (for environments that use this\n            as a general text extractor).\n    \"\"\"\n\n    def find_matching_brace(s: str, start: int) -> int:\n        count = 1\n        i = start\n        while i < len(s) and count > 0:\n            if s[i] == \"{\":\n                count += 1\n            elif s[i] == \"}\":\n                count -= 1\n            i += 1\n        return i - 1 if count == 0 else -1\n\n    # Find last \\boxed{\n    boxed_start = text.rfind(\"\\\\boxed{\")\n    if boxed_start == -1:\n        return \"\" if strict else text\n    # Find the content between the braces\n    content_start = boxed_start + 7  # len('\\\\boxed{')\n    closing_brace = find_matching_brace(text, content_start)\n\n    if closing_brace == -1:\n        return \"\" if strict else text\n\n    return text[content_start:closing_brace]\n\n\ndef strip_non_numeric(text: str) -> str:\n    return \"\".join(c for c in text if c.isdigit() or c == \".\")\n\n\ndef extract_hash_answer(text: str) -> str:\n    if \"####\" not in text:\n        return text\n    return text.split(\"####\")[1].strip()\n\n\ndef get_preprocess_fn(name: str) -> Callable[[dict], dict]:\n    if name == \"aime2024\":\n\n        def preprocess_aime2024(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": str(int(x[\"answer\"])),\n            }\n\n        return preprocess_aime2024\n    elif name == \"aime2025\":\n\n        def preprocess_aime2025(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"question\"],\n                \"answer\": strip_non_numeric(x[\"answer\"]),\n            }\n\n        return preprocess_aime2025\n    elif name == \"amc2023\":\n\n        def preprocess_amc2023(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_amc2023\n    elif name in [\"gpqa_diamond\", \"gpqa_main\"]:\n\n        def preprocess_gpqa(x: dict[str, Any]) -> dict[str, Any]:\n            q = x[\"Question\"]\n            letters = [\"A\", \"B\", \"C\", \"D\"]\n            random.shuffle(letters)\n            itos = {k: v for k, v in enumerate(letters)}\n            ans = {\n                itos[0]: x[\"Correct Answer\"],\n                itos[1]: x[\"Incorrect Answer 1\"],\n                itos[2]: x[\"Incorrect Answer 2\"],\n                itos[3]: x[\"Incorrect Answer 3\"],\n            }\n            question = f\"Question: {q}\\n\\n\"\n            question += f\"A: {ans['A']}\\n\"\n            question += f\"B: {ans['B']}\\n\"\n            question += f\"C: {ans['C']}\\n\"\n            question += f\"D: {ans['D']}\"\n\n            return {\n                \"question\": question,\n                \"answer\": itos[0],\n            }\n\n        return preprocess_gpqa\n    elif name == \"gsm8k\":\n\n        def preprocess_gsm8k(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"question\"],\n                \"answer\": extract_hash_answer(x[\"answer\"]),\n            }\n\n        return preprocess_gsm8k\n    elif name == \"math\":\n\n        def preprocess_math(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": extract_boxed_answer(x[\"solution\"]),\n            }\n\n        return preprocess_math\n    elif name == \"math500\":\n\n        def preprocess_math500(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_math500\n    elif name == \"mmlu\":\n        mmlu_map = [\"A\", \"B\", \"C\", \"D\"]\n\n        def preprocess_mmlu(x: dict[str, Any]) -> dict[str, Any]:\n            options = x[\"choices\"]\n            answer = x[\"answer\"]\n            question = f\"Question: {x['question']}\\n\"\n            for i, option in enumerate(options):\n                question += f\"\\n{mmlu_map[i]}: {option}\"\n            return {\n                \"question\": question,\n                \"temp_answer\": mmlu_map[answer],\n            }\n\n        return preprocess_mmlu\n    elif name == \"mmlu_pro\":\n        mmlu_map = [\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\"]\n\n        def preprocess_mmlu(x: dict[str, Any]) -> dict[str, Any]:\n            options = x[\"options\"]\n            answer = x[\"answer\"]\n            question = f\"Question: {x['question']}\\n\"\n            for i, option in enumerate(options):\n                question += f\"\\n{mmlu_map[i]}: {option}\"\n            return {\n                \"question\": question,\n                \"answer\": answer,\n            }\n\n        return preprocess_mmlu\n    elif name == \"openbookqa\":\n\n        def preprocess_openbookqa(x: dict[str, Any]) -> dict[str, Any]:\n            choices_texts = x[\"choices\"][\"text\"]\n            choices_labels = x[\"choices\"][\"label\"]\n\n            formatted_choices = []\n            for i in range(len(choices_labels)):\n                formatted_choices.append(f\"{choices_labels[i]}. {choices_texts[i]}\")\n\n            question = f\"Question: {x['question_stem']}\\n\\nChoices:\\n\" + \"\\n\".join(\n                formatted_choices\n            )\n            return {\n                \"question\": question,\n                \"answer\": x[\"answerKey\"],\n            }\n\n        return preprocess_openbookqa\n    elif name in [\"openrs\", \"openrs_easy\", \"openrs_hard\"]:\n\n        def preprocess_openrs(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"problem\"],\n                \"answer\": x[\"answer\"],\n            }\n\n        return preprocess_openrs\n    elif name == \"prime_code\":\n\n        def preprocess_prime_code(x: dict[str, Any]) -> dict[str, Any]:\n            return {\n                \"question\": x[\"prompt\"],\n                \"answer\": x[\"verification_info\"],\n            }\n\n        return preprocess_prime_code\n    else:\n        raise ValueError(f\"Dataset {name} not supported for preprocess_dataset.\")\n\n\ndef load_example_dataset(\n    name: str = \"gsm8k\", split: str | None = None, n: int | None = None, seed: int = 0\n) -> Dataset:\n    from datasets import Dataset, concatenate_datasets, load_dataset\n\n    if name == \"aime2024\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"HuggingFaceH4/aime_2024\")[split]\n    elif name == \"aime2025\":\n        if split is None:\n            split = \"test\"\n        aime_i = cast(\n            Dataset, load_dataset(\"opencompass/AIME2025\", \"AIME2025-I\")[split]\n        )\n        aime_ii = cast(\n            Dataset, load_dataset(\"opencompass/AIME2025\", \"AIME2025-II\")[split]\n        )\n        dataset = concatenate_datasets([aime_i, aime_ii])\n    elif name == \"amc2023\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"knoveleng/AMC-23\")[split]\n    elif name == \"gpqa_diamond\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"Idavidrein/gpqa\", \"gpqa_diamond\")[split]\n    elif name == \"gpqa_main\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"Idavidrein/gpqa\", \"gpqa_main\")[split]\n    elif name == \"gsm8k\":\n        if split is None:\n            split = \"test\"\n        dataset = load_dataset(\"openai/gsm8k\", \"main\")[split]\n    elif name == \"math\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"chiayewken/competition_math\")[split]\n    elif name == \"math500\":\n        if split is None:\n            split = \"test\"\n        dataset = load_dataset(\"HuggingFaceH4/MATH-500\")[split]\n    elif name == \"mmlu\":\n        if split is None:\n            split = \"dev\"\n        dataset = load_dataset(\"cais/mmlu\", \"all\")[split]\n    elif name == \"mmlu_pro\":\n        if split is None:\n            split = \"validation\"\n        dataset = load_dataset(\"TIGER-Lab/MMLU-Pro\")[split]\n    elif name == \"openbookqa\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"allenai/openbookqa\", \"main\")[split]\n    elif name == \"openrs\":\n        if split is None:\n            split = \"train\"\n        dataset = load_dataset(\"knoveleng/open-rs\")[split]\n    elif name == \"openrs_easy\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(Dataset, load_dataset(\"knoveleng/open-rs\")[split])\n        dataset = dataset.filter(lambda x: x[\"level\"] == \"Easy\")\n    elif name == \"openrs_hard\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(Dataset, load_dataset(\"knoveleng/open-rs\")[split])\n        dataset = dataset.filter(lambda x: x[\"level\"] == \"Hard\")\n    elif name == \"prime_code\":\n        if split is None:\n            split = \"train\"\n        dataset = cast(\n            Dataset, load_dataset(\"PrimeIntellect/verifiable-coding-problems\")[split]\n        )\n        dataset = dataset.filter(\n            lambda x: x[\"prompt\"].startswith(\n                \"Solve the following coding problem using the programming language python:\"\n            )\n        )\n    else:\n        raise ValueError(\n            f\"Dataset {name} not supported for preprocess_dataset. \\nPlease ensure that the dataset is formatted with 'prompt' (str) and 'answer' (str) keys.\"\n        )\n\n    preprocess_fn = get_preprocess_fn(name)\n    dataset = cast(Dataset, dataset)\n    if n is not None and n > 0:\n        dataset = dataset.shuffle(seed=seed).select(range(n))\n    dataset = dataset.map(\n        preprocess_fn,\n        num_proc=10,\n        remove_columns=dataset.column_names,\n    )\n    if \"temp_answer\" in dataset.column_names:\n        dataset = dataset.rename_column(\"temp_answer\", \"answer\")\n    return dataset\n"
+  }
+}
