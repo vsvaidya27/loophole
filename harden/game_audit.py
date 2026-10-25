@@ -339,7 +339,10 @@ class GameAudit:
         self.current: Path | None = None  # accepted hardened module, once there is one
 
     def _source(self) -> str:
-        parts = [inspect.getsource(sys.modules[type(self.game).__module__])]
+        if Path(self.ref).is_file():  # compiled modules are loaded from a path, not registered in sys.modules
+            parts = [Path(self.ref).read_text()]
+        else:
+            parts = [inspect.getsource(sys.modules[type(self.game).__module__])]
         base = "env_compiler/multiturn.py" if self.kind == "multi" else "env_compiler/template.py"
         parts.append(f"=== base class ({base}) ===\n" + (ROOT / base).read_text())
         return "\n\n".join(parts)

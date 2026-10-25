@@ -60,6 +60,7 @@ def main() -> int:
     p.add_argument("--cap", type=float, default=3.0, help="hardening spend cap, USD")
     p.add_argument("--single-only", action="store_true", help="refuse games the fit check calls multi-turn")
     args = p.parse_args()
+    sys.stdout.reconfigure(line_buffering=True)  # progress shows up live when logged to a file
     if not (args.description or args.game):
         p.error("give a description or --game")
     py = sys.executable
