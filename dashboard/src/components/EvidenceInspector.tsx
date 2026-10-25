@@ -97,7 +97,7 @@ function RecordEvidence(props: Props) {
     const first = snapshot?.invariants.find(row => row.envId.includes('/ai-')) ?? snapshot?.invariants[0];
     return <>
       <div className="inspector-empty-mark">↗</div><h3 className="inspector-title">Follow one reward failure.</h3>
-      <p className="inspector-intro">Choose a satellite to inspect the submitted answer, recorded reward, and constraint extracted from the failure.</p>
+      <p className="inspector-intro">Choose a rule in the graph to inspect the submitted answer, recorded reward, and constraint extracted from the failure.</p>
       <ol className="inspector-steps">
         <li><strong>Inspect the failure</strong><p>What earned reward, and why?</p></li>
         <li><strong>Review the defense</strong><p>What changed in the grader?</p></li>
