@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "environments": [
+    {
+      "env_id": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+      "source": "game",
+      "title": "Number hunt \u00b7 multi-turn \u00b7 Hub-rule transfer",
+      "status": "patched"
+    }
+  ],
+  "entries": [],
+  "applications": [
+    {
+      "run_id": "hub-to-multiturn-01",
+      "invariant_id": "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+      "target_env_id": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+      "outcome": "blocked",
+      "detail": {
+        "v": 1,
+        "provenance": "Live Moss Hub-only retrieval, operator precondition selection, one Haiku adaptation, sandboxed multi-turn replay",
+        "score_unhardened": 1.0,
+        "score_pre_hardened": 0.0,
+        "reference_unhardened": 1.0,
+        "reference_pre_hardened": 1.0,
+        "attack_total": 60,
+        "attack_blocked": 60,
+        "benign_total": 40,
+        "benign_passed": 40,
+        "seed_count": 20,
+        "scripted_attack_variants": 3,
+        "evidence_path": "results/graph_transfer/hub-to-multiturn-01/report.json",
+        "adaptation_sha256": "fc449ccd8a79155aaf7027e9f88ce4a60d4c2632a848224fe877fff02ea66f64",
+        "model_calls": 1,
+        "model_spend_usd": 0.00057
+      }
+    }
+  ]
+}
