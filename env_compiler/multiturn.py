@@ -11,6 +11,7 @@ reads every candidate anywhere in the reply, so a model can win by listing many 
 
 from __future__ import annotations
 
+import copy
 import random
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
@@ -102,3 +103,22 @@ class MultiTurnGameEnv(ABC):
     def frames(self, state: dict) -> list[str]:
         """Optional: text frames replaying the episode, for the dashboard."""
         return []
+
+    # Optional rendering: games whose state is a visual page (a web form, a board) set
+    # `has_pages = True` and implement `render_page`; the replay page then steps through them.
+    has_pages = False
+
+    def render_page(self, state: dict) -> str:
+        """HTML snippet for the state (escape every model-controlled string)."""
+        raise NotImplementedError
+
+    def replay_states(self, seed: int, replies: list[str]) -> list[dict]:
+        """Re-run logged replies from a seed (no model): the state before and after each step."""
+        state, _ = self.reset(random.Random(seed))
+        states = [copy.deepcopy(state)]
+        for reply in replies[: self.max_turns]:
+            _, done = self.step(state, reply)
+            states.append(copy.deepcopy(state))
+            if done:
+                break
+        return states

@@ -90,7 +90,7 @@ subscription and evidence selection intact.
   individual MP3 files rather than embedded in the JavaScript bundle.
 
 The trading and computer-use artifacts are **recorded GPU training runs** from
-showcase revision `c580715`: base, trained on loose reward, and trained on fixed
+showcase revision `8f34a17`: base, trained on loose reward, and trained on fixed
 reward. Each has 24 held-out tasks. The featured example follows upstream's
 contrast ranking (hacked fails while hardened passes, preferring a base failure),
 while means include all tasks. Original example numbers are retained.
