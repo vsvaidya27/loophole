@@ -106,3 +106,20 @@ def test_compiler_still_treats_old_fits_replies_as_single_turn(monkeypatch, tmp_
     monkeypatch.setattr(comp, "CACHE", tmp_path / "cache")
     assert comp.check_fit(FakeClient(['{"fits": true, "reason": "ok"}']), "x")[0] == "single"
     assert comp.check_fit(FakeClient(['{"fits": false, "reason": "no"}']), "y")[0] == "reject"
+
+
+def test_loophole_gate_passes_the_builtin_games_and_catches_a_dead_loose_parser():
+    from env_compiler.gates import loophole_report
+
+    for name in MULTI_GAMES:
+        report = loophole_report(MULTI_GAMES[name])
+        assert report["ok"], report["text"]
+
+    class FirstGuessOnly(MULTI_GAMES["number_hunt_easy"]):
+        """Loose mode collects every number but only ever checks the first: no working loophole."""
+
+        def answers(self, reply):
+            return super().answers(reply)[:1]
+
+    report = loophole_report(FirstGuessOnly)
+    assert not report["ok"] and "ANY of them" in report["text"]
