@@ -1,6 +1,7 @@
 import type { GraphProjection, GraphNode } from './buildGraph';
 
 const NS = 'http://www.w3.org/2000/svg';
+const palette = ['#f0b96b', '#a88bfa', '#62cbd3', '#7ca5ff', '#ea92bb', '#cadb7c', '#ef946c'];
 function element<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number> = {}, content?: string) {
   const el = document.createElementNS(NS, tag);
   for (const [key, value] of Object.entries(attrs)) el.setAttribute(key, String(value));
@@ -13,9 +14,9 @@ function environmentName(node: GraphNode) {
   if (node.id.includes('/scripted-')) return node.id.replace(/^env:game\/scripted-\d+-\d+-/, '').replaceAll('_', ' ');
   return node.label;
 }
-function wrap(text: string, max = 23) {
+function wrap(value: string, max = 25) {
   const lines: string[] = []; let line = '';
-  for (const word of text.split(' ')) {
+  for (const word of value.split(' ')) {
     if (line && (line + ' ' + word).length > max) { lines.push(line); line = word; }
     else line += (line ? ' ' : '') + word;
   }
@@ -23,98 +24,109 @@ function wrap(text: string, max = 23) {
   return lines;
 }
 
-/** Environments remain unique; each invariant belongs to its actual rule family. */
-export function renderGraph(container: HTMLElement, graph: GraphProjection, selected: string | undefined,
-  onSelect: (id: string) => void) {
-  const connected = new Set<string>(selected ? [selected] : []);
-  for (const edge of graph.edges) if (edge.source === selected || edge.target === selected) {
-    connected.add(edge.source); connected.add(edge.target);
-  }
-  for (const node of graph.nodes) if (node.kind === 'invariant' && connected.has(node.id)) connected.add(`rule:${node.exploitClass}`);
-  const chosenRule = graph.nodes.find(n => n.id === selected && n.kind === 'rule');
-  if (chosenRule) for (const node of graph.nodes) if (node.kind === 'invariant' && `rule:${node.exploitClass}` === chosenRule.id) {
-    connected.add(node.id); connected.add(`env:${node.envId}`);
-  }
+/** Stable environment hubs with invariant satellites; every projected node keeps its identity. */
+export function layoutGraph(graph: GraphProjection, availableWidth: number) {
   const environments = graph.nodes.filter(n => n.kind === 'environment');
+  const invariants = graph.nodes.filter(n => n.kind === 'invariant');
   const rules = graph.nodes.filter(n => n.kind === 'rule');
+  const maxMembers = Math.max(1, ...environments.map(env => invariants.filter(inv => `env:${inv.envId}` === env.id).length));
+  const orbit = Math.max(96, maxMembers * 38 / (2 * Math.PI));
+  const cellWidth = Math.max(360, orbit * 2 + 150), cellHeight = Math.max(330, orbit * 2 + 145);
+  const width = Math.max(760, cellWidth * 2, availableWidth);
+  const columns = Math.max(2, Math.floor(width / cellWidth));
+  const rows = Math.ceil(environments.length / columns);
+  const points = new Map<string, [number, number]>();
+  environments.forEach((env, index) => {
+    const x = (index % columns + .5) * width / columns;
+    const y = 45 + cellHeight / 2 + Math.floor(index / columns) * cellHeight;
+    points.set(env.id, [x, y]);
+    const members = invariants.filter(inv => `env:${inv.envId}` === env.id);
+    members.forEach((inv, i) => {
+      const angle = -Math.PI / 2 + 2 * Math.PI * i / Math.max(1, members.length);
+      points.set(inv.id, [x + Math.cos(angle) * orbit, y + Math.sin(angle) * orbit]);
+    });
+  });
+  const orphans = invariants.filter(inv => !points.has(inv.id));
+  const orphanColumns = Math.max(1, Math.floor(width / 100));
+  orphans.forEach((inv, i) => points.set(inv.id, [60 + i % orphanColumns * 100, 80 + rows * cellHeight + Math.floor(i / orphanColumns) * 70]));
+  const ruleStart = 120 + rows * cellHeight + Math.ceil(orphans.length / orphanColumns) * 70;
+  const ruleColumns = Math.max(1, Math.floor(width / 190));
+  rules.forEach((rule, i) => {
+    const rowCount = Math.min(ruleColumns, rules.length - Math.floor(i / ruleColumns) * ruleColumns);
+    points.set(rule.id, [(i % ruleColumns + .5) * width / rowCount, ruleStart + Math.floor(i / ruleColumns) * 100]);
+  });
+  return { width, height: Math.max(520, ruleStart + Math.ceil(rules.length / ruleColumns) * 100), points, orbit };
+}
+
+/** Uses the existing projection and selection contract; no simulation or new data connection. */
+export function renderGraph(container: HTMLElement, graph: GraphProjection, selected: string | undefined, onSelect: (id: string) => void) {
+  const connected = new Set<string>(selected ? [selected] : []);
+  for (const edge of graph.edges) if (edge.source === selected || edge.target === selected) { connected.add(edge.source); connected.add(edge.target); }
+  for (const node of graph.nodes) if (node.kind === 'invariant' && connected.has(node.id)) { connected.add(`rule:${node.exploitClass}`); connected.add(`env:${node.envId}`); }
+  if (selected?.startsWith('rule:')) for (const node of graph.nodes) if (node.kind === 'invariant' && `rule:${node.exploitClass}` === selected) { connected.add(node.id); connected.add(`env:${node.envId}`); }
   const findings = graph.nodes.filter(n => n.kind === 'invariant');
+  const classes = [...new Set(findings.map(n => n.exploitClass))].sort();
+  const classColor = (name: string) => palette[Math.max(0, classes.indexOf(name)) % palette.length];
   let lastWidth = -1;
   function draw() {
-    const width = Math.max(620, container.clientWidth);
-    if (width === lastWidth) return;
-    lastWidth = width;
-    const height = Math.max(600, rules.length * 390 + 160, Math.ceil(environments.length / 2) * 220 + 100);
-    const cx = width / 2;
-    const svg = element('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'group', 'aria-label': 'Entire knowledge store: environment nodes linked to invariants inside shared rule clusters' });
+    const measured = container.clientWidth;
+    if (measured === lastWidth) return;
+    lastWidth = measured;
+    const { width, height, points, orbit } = layoutGraph(graph, measured);
+    const svg = element('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'group', 'aria-label': 'Live invariant network. Environments are central hubs, surrounded by their recorded failures. Shared rule families connect below.' });
     svg.classList.add('network-svg');
     const defs = element('defs');
-    const gradient = element('radialGradient', { id: 'rule-wash' });
-    gradient.append(element('stop', { offset: '0%', 'stop-color': '#e8e2ff', 'stop-opacity': '.7' }), element('stop', { offset: '100%', 'stop-color': '#f4f1fc', 'stop-opacity': '.65' }));
+    const glow = element('filter', { id: 'node-glow', x: '-100%', y: '-100%', width: '300%', height: '300%' });
+    glow.append(element('feGaussianBlur', { stdDeviation: 6 })); defs.append(glow);
     const arrow = element('marker', { id: 'transfer-arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 5, markerHeight: 5, orient: 'auto' });
-    arrow.append(element('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#178577' }));
-    defs.append(gradient, arrow); svg.append(defs);
-    const points = new Map<string, [number, number]>();
-    const ry = 174, rx = Math.min(174, width * .235);
-    environments.forEach((env, index) => {
-      const pair = Math.floor(index / 2), rows = Math.ceil(environments.length / 2);
-      points.set(env.id, [width * (index % 2 === 0 ? .135 : .865), rows === 1 ? height / 2 : 140 + pair * (height - 280) / (rows - 1)]);
-    });
-    rules.forEach((rule, index) => {
-      const cy = rules.length === 1 ? height / 2 : 230 + index * 390;
-      points.set(rule.id, [cx, cy]);
-      const region = element('g', { class: `rule-region${selected && !connected.has(rule.id) ? ' subdued' : ''}`, role: 'button', tabindex: 0, 'aria-label': `Rule family: ${rule.label}` });
-      region.append(element('ellipse', { cx, cy, rx, ry, fill: 'url(#rule-wash)' }));
-      region.append(element('text', { x: cx, y: cy - ry + 31, 'text-anchor': 'middle', class: 'cluster-eyebrow' }, 'SHARED RULE FAMILY'));
-      wrap(rule.label, 25).forEach((line, i) => region.append(element('text', { x: cx, y: cy - ry + 55 + i * 17, 'text-anchor': 'middle', class: 'cluster-title' }, line)));
-      region.append(element('text', { x: cx, y: cy + ry - 24, 'text-anchor': 'middle', class: 'cluster-count' }, `${rule.memberCount} invariants · ${rule.envCount} environments`));
-      region.append(element('title', {}, `${rule.label}. The region contains related invariants, not environments. Select to inspect.`));
-      const choose = () => onSelect(rule.id); region.addEventListener('click', choose);
-      region.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(); } });
-      svg.append(region);
-      const members = findings.filter(n => `rule:${n.exploitClass}` === rule.id);
-      members.forEach((inv, i) => {
-        const env = points.get(`env:${inv.envId}`);
-        const peers = members.filter(n => n.envId === inv.envId);
-        const slot = peers.findIndex(n => n.id === inv.id) - (peers.length - 1) / 2;
-        const angle = env ? Math.atan2((env[1] - cy) / ry, (env[0] - cx) / rx) + slot * .65 : 2 * Math.PI * i / Math.max(1, members.length);
-        points.set(inv.id, [cx + rx * .64 * Math.cos(angle), cy + 15 + ry * .49 * Math.sin(angle)]);
-      });
-    });
-    let orphan = 0;
-    for (const inv of findings) if (!points.has(inv.id)) points.set(inv.id, [cx, height - 80 - orphan++ * 55]);
-    const edgeLayer = element('g', { class: 'network-edges' }); svg.append(edgeLayer);
-    for (const edge of graph.edges) {
-      // Containment in the shaded rule region represents membership.
-      if (edge.kind === 'instance_of') continue;
-      const a = points.get(edge.source), b = points.get(edge.target);
-      if (!a || !b) continue;
-      const [x1, y1] = a, [x2, y2] = b;
-      const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
-      const from = graph.nodes.find(n => n.id === edge.source), to = graph.nodes.find(n => n.id === edge.target);
-      const padA = from?.kind === 'environment' ? 24 : 12, padB = to?.kind === 'environment' ? 28 : 12;
-      const sx = x1 + dx / len * padA, sy = y1 + dy / len * padA, tx = x2 - dx / len * padB, ty = y2 - dy / len * padB;
-      const transfer = edge.kind === 'applied_to';
-      const curvature = transfer ? 62 : edge.kind === 'similar_to' ? -25 : 0;
-      const path = element('path', { d: `M ${sx} ${sy} Q ${(sx + tx) / 2 - dy / len * curvature} ${(sy + ty) / 2 + dx / len * curvature} ${tx} ${ty}`,
-        class: `network-edge ${edge.kind}${selected && edge.source !== selected && edge.target !== selected ? ' subdued' : ''}` });
-      if (transfer) path.setAttribute('marker-end', 'url(#transfer-arrow)');
-      const meanings = { found_in: 'Invariant extracted from this environment', applied_to: `Tested transfer: ${edge.outcome}`, similar_to: `Embedding similarity ${edge.weight?.toFixed(2)}; not proof of transfer` };
-      path.append(element('title', {}, meanings[edge.kind])); edgeLayer.append(path);
+    arrow.append(element('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#63d6ad' })); defs.append(arrow); svg.append(defs);
+    for (const env of graph.nodes.filter(n => n.kind === 'environment')) {
+      const [x, y] = points.get(env.id)!;
+      const orbitGroup = element('g', { class: `environment-orbits${selected && !connected.has(env.id) ? ' subdued' : ''}`, 'aria-hidden': 'true' });
+      orbitGroup.append(element('circle', { cx: x, cy: y, r: orbit, class: 'satellite-orbit' }));
+      orbitGroup.append(element('circle', { cx: x, cy: y, r: 52, class: 'hub-orbit' }));
+      svg.append(orbitGroup);
     }
-    const invariantIndex = new Map(findings.map((n, i) => [n.id, i + 1]));
-    for (const node of graph.nodes.filter(n => n.kind !== 'rule')) {
+    const edges = element('g', { class: 'network-edges' }); svg.append(edges);
+    for (const edge of graph.edges) {
+      const a = points.get(edge.source), b = points.get(edge.target); if (!a || !b) continue;
+      const [x1, y1] = a, [x2, y2] = b, length = Math.hypot(x2 - x1, y2 - y1) || 1;
+      const source = graph.nodes.find(n => n.id === edge.source), target = graph.nodes.find(n => n.id === edge.target);
+      const padA = source?.kind === 'environment' ? 37 : 17, padB = target?.kind === 'environment' ? 39 : 17;
+      const sx = x1 + (x2 - x1) / length * padA, sy = y1 + (y2 - y1) / length * padA;
+      const tx = x2 - (x2 - x1) / length * padB, ty = y2 - (y2 - y1) / length * padB;
+      const bend = edge.kind === 'found_in' ? 0 : edge.kind === 'applied_to' ? 60 : -26;
+      const active = !selected || (connected.has(edge.source) && connected.has(edge.target));
+      const path = element('path', { d: `M ${sx} ${sy} Q ${(sx + tx) / 2 - (ty - sy) / length * bend} ${(sy + ty) / 2 + (tx - sx) / length * bend} ${tx} ${ty}`, class: `network-edge ${edge.kind}${active ? '' : ' subdued'}${edge.outcome ? ` outcome-${edge.outcome}` : ''}` });
+      if (edge.kind === 'found_in' && source?.kind === 'invariant') path.style.stroke = classColor(source.exploitClass);
+      if (edge.kind === 'applied_to') path.setAttribute('marker-end', 'url(#transfer-arrow)');
+      const meaning = { found_in: 'Failure recorded in this environment', instance_of: 'Member of this shared rule family', applied_to: `Transfer test: ${edge.outcome}`, similar_to: `Similarity ${edge.weight?.toFixed(2)}; not proof of transfer` };
+      path.append(element('title', {}, meaning[edge.kind])); edges.append(path);
+    }
+    const findingIndex = new Map(findings.map((n, i) => [n.id, i + 1]));
+    for (const node of graph.nodes) {
       const [x, y] = points.get(node.id)!;
-      const group = element('g', { class: `network-node ${node.kind}${selected === node.id ? ' selected' : ''}${selected && !connected.has(node.id) ? ' subdued' : ''}`,
-        role: 'button', tabindex: 0, 'aria-label': `${node.kind}: ${node.label}`, 'aria-pressed': String(selected === node.id) });
-      group.append(element('circle', { cx: x, cy: y, r: node.kind === 'environment' ? 24 : 12, class: 'node-halo' }));
-      group.append(element('circle', { cx: x, cy: y, r: node.kind === 'environment' ? 17 : 8, class: 'node-core' }));
+      const color = node.kind === 'invariant' ? classColor(node.exploitClass) : node.kind === 'rule' ? '#ac93ee' : ['patched', 'robust', 'done'].includes(node.status) ? '#75dec0' : '#8daafa';
+      const radius = node.kind === 'environment' ? 34 : node.kind === 'rule' ? 17 : 14;
+      const group = element('g', { class: `network-node ${node.kind}${selected === node.id ? ' selected' : ''}${selected && !connected.has(node.id) ? ' subdued' : ''}`, role: 'button', tabindex: 0, 'aria-label': `${node.kind}: ${node.label}`, 'aria-pressed': String(selected === node.id), 'data-node-id': node.id, style: `--node-color:${color}` });
+      group.append(element('circle', { cx: x, cy: y, r: radius + 5, fill: color, opacity: .22, filter: 'url(#node-glow)', class: 'node-glow' }));
+      group.append(element('circle', { cx: x, cy: y, r: radius + 4, class: 'node-halo' }));
+      group.append(element('circle', { cx: x, cy: y, r: radius, class: 'node-core' }));
       if (node.kind === 'environment') {
-        wrap(environmentName(node), 22).forEach((line, i, lines) => group.append(element('text', { x, y: y - 39 - (lines.length - 1 - i) * 17, 'text-anchor': 'middle', class: 'environment-label' }, line)));
-        const provenance = node.id.includes('/scripted-') ? 'Scripted calibration' : node.id.includes('/ai-') ? 'Model-generated pilot' : node.source;
-        group.append(element('text', { x, y: y + 44, 'text-anchor': 'middle', class: 'environment-meta' }, provenance));
-        group.append(element('text', { x, y: y + 60, 'text-anchor': 'middle', class: 'environment-status' }, node.status));
+        const initials = environmentName(node).split(/\s+/).map(word => word[0]).slice(0, 2).join('').toUpperCase();
+        group.append(element('text', { x, y: y + 6, 'text-anchor': 'middle', class: 'hub-initials' }, initials));
+        const lines = wrap(environmentName(node), 27).slice(0, 2);
+        lines.forEach((line, i) => group.append(element('text', { x, y: y + orbit + 43 + i * 17, 'text-anchor': 'middle', class: 'environment-label' }, line)));
+        const origin = node.id.includes('/scripted-') ? 'Scripted calibration' : node.id.includes('/ai-') ? 'Model-generated pilot' : node.source;
+        group.append(element('text', { x, y: y + orbit + 48 + lines.length * 17, 'text-anchor': 'middle', class: 'environment-meta' }, `${origin} · ${node.status}`));
+      } else if (node.kind === 'invariant') {
+        group.append(element('text', { x, y: y + 3, 'text-anchor': 'middle', class: 'invariant-number' }, String(findingIndex.get(node.id))));
+        const dx = x - (points.get(`env:${node.envId}`)?.[0] ?? x), dy = y - (points.get(`env:${node.envId}`)?.[1] ?? y);
+        const side = Math.abs(dx) > 45;
+        group.append(element('text', { x: side ? x + (dx > 0 ? 24 : -24) : x, y: side ? y + 4 : y + (dy > 0 ? 31 : -25), 'text-anchor': side ? dx > 0 ? 'start' : 'end' : 'middle', class: 'invariant-label' }, `I${findingIndex.get(node.id)}`));
       } else {
-        group.append(element('text', { x, y: y + 29, 'text-anchor': 'middle', class: 'invariant-label' }, `I${invariantIndex.get(node.id)}`));
+        group.append(element('text', { x, y: y + 5, 'text-anchor': 'middle', class: 'rule-symbol' }, '◇'));
+        wrap(node.label, 25).slice(0, 2).forEach((line, i) => group.append(element('text', { x, y: y + 35 + i * 15, 'text-anchor': 'middle', class: 'cluster-title' }, line)));
       }
       group.append(element('title', {}, `${node.label}\n${node.id}`));
       const choose = () => onSelect(node.id); group.addEventListener('click', choose);
