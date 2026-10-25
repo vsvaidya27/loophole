@@ -121,7 +121,16 @@ def examples_for(game) -> list[dict]:
 
 def module_source(game_ref: str, kind: str, rules: str, summary: str) -> str:
     """A loadable module: class Game = the shipped game (strict=False) with `tighten` applied."""
-    ref = str(Path(game_ref).resolve()) if Path(game_ref).is_file() else game_ref
+    ref = repr(str(Path(game_ref).resolve()) if Path(game_ref).is_file() else game_ref)
+    base_import = ''
+    if Path(game_ref).is_file():
+        try:
+            relative = Path(game_ref).resolve().relative_to(ROOT).as_posix()
+        except ValueError:
+            pass  # external trusted fixtures retain their absolute path
+        else:
+            base_import = 'from pathlib import Path as _Path\nfrom env_compiler import loader as _loader\n'
+            ref = f'str(_Path(_loader.__file__).resolve().parents[1] / {relative!r})'
     if kind == "multi":
         hooks = '''    def step(self, state, reply):
         state.setdefault("_replies", []).append(reply)  # tighten() sees the whole episode
@@ -143,8 +152,8 @@ Rules: {doc}
 """
 
 from env_compiler.loader import load_game as _load_game
-
-_Base = type(_load_game({ref!r}, strict=False))
+{base_import}
+_Base = type(_load_game({ref}, strict=False))
 
 # ---- tightened rules (written by the audit's fixer, checked offline before acceptance)
 {rules.strip()}
@@ -311,8 +320,10 @@ def show_case(c: dict) -> str:
 # ------------------------------------------------------------------ the audit
 
 class GameAudit:
-    def __init__(self, game_ref: str, cap: float, from_rollouts: Path | None):
+    def __init__(self, game_ref: str, cap: float | None, from_rollouts: Path | None):
         from env_compiler.loader import load_game
+        from harden.store.moss_retrieval import require_moss_config
+        require_moss_config()
 
         from harden.audit.llm import Claude
         from harden.store.mirror import EXPLOIT_CLASSES
@@ -323,8 +334,10 @@ class GameAudit:
         self.oracle = load_game(game_ref, strict=True)  # exact rules, used only to verify
         self.kind = kind_of(self.game)
         self.name = self.game.name
-        digest = hashlib.sha256(Path(game_ref).read_bytes() if Path(game_ref).is_file() else game_ref.encode()).hexdigest()[:8]
+        generated = Path(game_ref).is_file()
+        digest = hashlib.sha256(Path(game_ref).read_bytes() if generated else game_ref.encode()).hexdigest()[:8]
         self.env_id = f"game/{self.name}-{digest}"
+        self.title = f"{self.name} · {self.kind}-turn" + (" · model-generated" if generated else "")
         OUT.mkdir(exist_ok=True)
         self.module_path = OUT / f"{self.name}.py"
         self.evidence_path = OUT / f"{self.name}.audit.json"
@@ -351,19 +364,13 @@ class GameAudit:
         return "\n\n".join(parts)
 
     def _retrieve(self) -> str:
-        """Rules learned on other environments, offered as untrusted reference."""
-        try:
-            from harden.store.mirror import DB_PATH
-            from harden.store.retrieval import GraphRetriever, SQLiteKnowledgeSource, prompt_context
-
-            if not DB_PATH.is_file():
-                return ""
-            matches = GraphRetriever(SQLiteKnowledgeSource(DB_PATH).load()).retrieve(
-                self.source[:20000], self.game.description, k=5, target_env_id=self.env_id)
-            return prompt_context(matches, max_chars=6000)[0] if matches else ""
-        except Exception as e:  # noqa: BLE001 - retrieval is optional context
-            print(f"knowledge retrieval skipped: {type(e).__name__}: {e}")
-            return ""
+        """Required Moss retrieval; errors abort before hacker/fixer model calls."""
+        from harden.store.moss_retrieval import retrieve_context
+        result = retrieve_context(self.source, self.game.description, target_env_id=self.env_id)
+        self.knowledge_source = result.receipt['source']
+        self.retrieval_receipt = result.receipt
+        self.offered_invariant_ids = result.offered_ids
+        return result.text
 
     def _rollout_candidates(self, path: Path) -> list[dict]:
         """Replies a hacked GRPO policy produced (trainer.rollout output), as extra probe candidates.
@@ -428,7 +435,9 @@ class GameAudit:
         result = self.claude.call(role="prober", iteration=iteration, system=self.system(role),
                                   messages=[{"role": "user", "content": "\n\n".join(parts)}],
                                   effort="high", max_tokens=16000, schema=hacker_schema(self.kind, self.classes))
-        return list(result.data["proposals"]) if result.ok else []
+        if not result.ok or not result.data.get("proposals"):
+            raise ValueError('Hacker returned no valid proposals; audit cannot infer robustness')
+        return list(result.data["proposals"])
 
     def repair(self, iteration: int, open_cases, closed_cases, feedback: str | None):
         unit = "reply sequence" if self.kind == "multi" else "reply"
@@ -456,7 +465,7 @@ class GameAudit:
         from harden.store import mirror
 
         mirror.clear_environment(self.env_id)
-        mirror.record_environment(self.env_id, source="game", title=self.name, status="hardening")
+        mirror.record_environment(self.env_id, source="game", title=self.title, status="hardening")
         ref_scores = [score_case(self.game, b) for b in self.benign if b["required"]]
         if min(ref_scores, default=0) < 1.0:
             raise SystemExit(f"{self.name}: a reference solution scores {min(ref_scores):.2f} on the shipped game")
@@ -464,7 +473,9 @@ class GameAudit:
         for iteration in range(1, MAX_ITER + 1):
             proposals = self.probe(iteration) + (self.seeded if iteration == 1 else [])
             cases = [self.case_for(p) for p in proposals if p.get("replies") or p.get("completion")]
-            env_scores = self.score(cases) or [0.0] * len(cases)
+            env_scores = self.score(cases)
+            if env_scores is None:
+                raise ValueError('Episode replay failed; audit cannot treat a scoring error as a blocked attack')
             new = []
             for c, env in zip(cases, env_scores):
                 c.update(iteration=iteration, env=env, oracle=score_case(self.oracle, c))
@@ -552,13 +563,14 @@ class GameAudit:
                     invariants.append(inv.title)
             except Exception as e:  # noqa: BLE001 - invariants are a by-product; keep the audit result
                 print(f"  invariant for {mech} skipped: {type(e).__name__}: {e}")
-        mirror.record_environment(self.env_id, source="game", title=self.name, status=status)
+        mirror.record_environment(self.env_id, source="game", title=self.title, status=status)
         report = {
             "game": self.ref, "name": self.name, "kind": self.kind, "env_id": self.env_id, "status": status,
             "hardened_module": str(self.module_path.relative_to(ROOT)) if self.current else None,
             "rules": self.rules, "rules_summary": self.summary, "iterations": self.iterations,
             "attempts": self.attempts, "invariants": invariants, "cost_usd": round(self.claude.spent, 4),
-            "retrieved_knowledge": bool(self.knowledge),
+            "retrieved_knowledge": bool(self.knowledge), "knowledge_source": getattr(self, 'knowledge_source', None),
+            "retrieval": getattr(self, 'retrieval_receipt', None),
         }
         self.evidence_path.write_text(json.dumps(report, indent=1, default=str))
         print(f"{self.name}: {status}; {len(confirmed)} confirmed false positives, {len(invariants)} invariants, "
@@ -578,7 +590,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     p.add_argument("game", help="built-in game name or path to a game module")
-    p.add_argument("--cap", type=float, default=3.0, help="spend cap for this game, USD")
+    p.add_argument("--cap", type=float, default=None, help="optional hard spend cap in USD; disabled by default")
     p.add_argument("--from-rollouts", type=Path, help="trainer.rollout JSON; its hacked policy's replies join iteration 1")
     args = p.parse_args(argv)
     report = GameAudit(args.game, args.cap, args.from_rollouts).run()

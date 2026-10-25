@@ -10,6 +10,7 @@ import json
 import os
 import shutil
 from pathlib import Path
+from types import SimpleNamespace
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -30,6 +31,8 @@ class LoopTests(unittest.TestCase):
     def setUp(self):
         self.stack = ExitStack()
         self.addCleanup(self.stack.close)
+        self.stack.enter_context(patch('harden.store.moss_retrieval.require_moss_config', return_value=None))
+        self.stack.enter_context(patch('harden.store.moss_retrieval.retrieve_context', return_value=SimpleNamespace(text='[]', receipt={'backend':'moss-test'}, offered_ids=())))
         self.root = Path(self.stack.enter_context(tempfile.TemporaryDirectory(prefix="audit-loop-test-")))
         self.spec = replace(common.load_envs()[0]["primeintellect/reverse-text"], dataset_size=100)
         interpreter = self.root / self.spec.python

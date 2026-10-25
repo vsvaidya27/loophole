@@ -1,4 +1,4 @@
-"""Opt-in integration with complete(system, messages, max_tokens) hacker/fixer clients.
+"""Moss-backed integration with complete(system, messages, max_tokens) hacker/fixer clients.
 
 The caller owns candidate execution, sandboxing, replay, and persistence. This module
 never imports or executes model-generated code, and never calls an external model itself.
@@ -10,7 +10,8 @@ import math
 from dataclasses import dataclass
 from typing import Callable, Protocol
 
-from .retrieval import GraphRetriever, KnowledgeSnapshot, Match, prompt_context
+from .retrieval import KnowledgeSnapshot, Match, prompt_context
+from .moss_retrieval import MossRetriever
 
 
 class CompletionClient(Protocol):
@@ -138,7 +139,7 @@ def run_knowledge_transfer(client: CompletionClient, snapshot: KnowledgeSnapshot
                            target_env_id: str, run_id: str,
                            replay: Callable[[str, Match], ReplayResult],
                            leaderboard_env_ids: frozenset[str], k: int = 5) -> TransferResult:
-    """One opt-in entry point for compiler/hardener orchestration, with no writes.
+    """Required-Moss entry point for compiler/hardener orchestration, with no writes.
 
     The caller explicitly supplies the current leaderboard exclusion set. Persist
     returned applications even when rejected, and adopt candidate only if accepted.
@@ -146,7 +147,7 @@ def run_knowledge_transfer(client: CompletionClient, snapshot: KnowledgeSnapshot
     if (not run_id.strip() or target_env_id in leaderboard_env_ids
             or target_env_id.startswith('seed/')):
         raise ValueError('Target must be outside seed data and the audited leaderboard')
-    matches = GraphRetriever(snapshot).retrieve(original, task, k, target_env_id=target_env_id)
+    matches = MossRetriever(snapshot).retrieve(original, task, k, target_env_id=target_env_id)
     proposal = propose_fix(client, original, task, matches)
     return validate_transfer(proposal, matches, run_id=run_id, target_env_id=target_env_id,
                              replay=replay, leaderboard_env_ids=leaderboard_env_ids)

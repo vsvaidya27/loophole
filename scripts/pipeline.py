@@ -57,13 +57,16 @@ def main() -> int:
     p.add_argument("--steps", type=int, default=60)
     p.add_argument("--lr", type=float, help="default: 2e-5 single-turn, 5e-6 multi-turn")
     p.add_argument("--shots", type=int, default=0, help="single-turn prompt shots")
-    p.add_argument("--cap", type=float, default=3.0, help="hardening spend cap, USD")
+    p.add_argument("--cap", type=float, default=None, help="optional hardening spend cap in USD; disabled by default")
     p.add_argument("--single-only", action="store_true", help="refuse games the fit check calls multi-turn")
     args = p.parse_args()
     sys.stdout.reconfigure(line_buffering=True)  # progress shows up live when logged to a file
     if not (args.description or args.game):
         p.error("give a description or --game")
     py = sys.executable
+
+    from harden.store.moss_retrieval import require_moss_config
+    require_moss_config()  # retrieval must be configured before paid compilation
 
     # 1. compile
     ref = args.game

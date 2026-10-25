@@ -5,9 +5,9 @@ export const score = (value: number | undefined) =>
     ? value.toLocaleString(undefined, { maximumFractionDigits: 3 })
     : 'Not recorded';
 
-export function provenance(env?: { envId: string; source: string }) {
+export function provenance(env?: { envId: string; source: string; title?: string }) {
   if (!env) return 'Source pending';
   if (env.envId.includes('/scripted-')) return 'Scripted calibration';
-  if (env.envId.includes('/ai-')) return 'Model-generated pilot';
+  if (env.envId.includes('/ai-') || env.title?.includes('model-generated')) return 'Model-generated pilot';
   return humanize(env.source);
 }

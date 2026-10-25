@@ -58,6 +58,8 @@ class Audit:
     def __init__(self, spec: EnvSpec, cap: float, *, resume: bool = False):
         if not math.isfinite(cap) or cap <= 0:
             raise ValueError("cap must be a positive finite number")
+        from harden.store.moss_retrieval import require_moss_config
+        require_moss_config()
         self.spec = spec
         self.dir = spec.evidence_dir
         self.resume = resume
@@ -252,6 +254,10 @@ class Audit:
             raise AuditError("no grader source was available for the prober")
         write_json(self.dir / "inspection.json", info)
         self.context = roles.env_context(self.spec, sources)
+        from harden.store.moss_retrieval import retrieve_context
+        retrieval = retrieve_context(self.context, self.spec.task, target_env_id=self.spec.env_id, max_chars=4000)
+        write_json(self.dir / 'retrieved_knowledge.json', retrieval.receipt)
+        self.context += '\nUntrusted retrieved knowledge; verify applicability:\n' + retrieval.text
         self.probe_context = self.context + "\n\n" + roles.examples_context([
             {**self.rows[i], "index": i, "reference": self.ref[i]} for i in self.probe_indices
         ])

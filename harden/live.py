@@ -3,7 +3,7 @@
 python -m harden.live doctor --remote
 python -m harden.live start
 python -m harden.live hub primeintellect/reverse-text
-python -m harden.live compile 'A single-turn numeric deduction game'
+python -m harden.live compile 'Guess a hidden number with higher/lower feedback'
 """
 from __future__ import annotations
 import argparse
@@ -32,7 +32,10 @@ def doctor(remote=False):
         'reverse_text_runtime': (ROOT / '.venvs/hub/bin/python').exists(),
         'embedding_package': importlib.util.find_spec('sentence_transformers') is not None,
         'dashboard_dependencies': (ROOT / 'dashboard/node_modules').is_dir(),
-        'dashboard_url': 'http://127.0.0.1:5173/', 'model_calls_made_by_doctor': 0}
+        'dashboard_url': 'http://127.0.0.1:5173/', 'model_calls_made_by_doctor': 0,
+        'retrieval_backend': 'moss+graph',
+        'moss_credentials_configured': bool(os.environ.get('MOSS_PROJECT_ID', '').strip() and os.environ.get('MOSS_PROJECT_KEY', '').strip()),
+        'moss_sdk_installed': importlib.util.find_spec('moss') is not None}
     state = ROOT / '.cache/live-services.json'
     if state.exists(): result['services'] = json.loads(state.read_text())
     if remote:
@@ -45,6 +48,12 @@ def doctor(remote=False):
             with urlopen('http://127.0.0.1:5173/', timeout=2) as response: result['dashboard_reachable'] = response.status == 200
         except OSError: result['dashboard_reachable'] = False
     return result
+
+def frontend_environment():
+    """Keep all retrieval/model writer credentials out of the frontend process."""
+    return {key: value for key, value in os.environ.items()
+            if not any(word in key.upper() for word in ('TOKEN', 'API_KEY', 'SECRET', 'MOSS_PROJECT_KEY'))}
+
 
 def start():
     _load_env_file(ROOT)
@@ -61,7 +70,7 @@ def start():
             else: raise RuntimeError('Live supervisor is already running; use doctor to inspect it')
     try:
         # Never give the frontend development server model/writer credentials.
-        env = {key: value for key, value in os.environ.items() if not any(word in key.upper() for word in ('TOKEN', 'API_KEY', 'SECRET'))}
+        env = frontend_environment()
         try:
             with urlopen('http://127.0.0.1:5173/', timeout=2) as response: existing = response.status == 200
         except OSError: existing = False
@@ -93,9 +102,25 @@ def main():
     hub.add_argument('--rounds', type=int, default=2)
     compiler = sub.add_parser('compile'); compiler.add_argument('description')
     sub.add_parser('sync')
+    retrieval = sub.add_parser('retrieve', help='Search the knowledge store with required Moss retrieval; no LLM calls')
+    retrieval.add_argument('--query', required=True)
+    retrieval.add_argument('--target-env', required=True, help="Exclude this environment's own invariants")
+    retrieval.add_argument('--reward-source', type=Path)
+    retrieval.add_argument('-k', type=int, default=5)
     args = parser.parse_args()
     _load_env_file(ROOT)
     if args.command == 'doctor': print(json.dumps(doctor(args.remote), indent=2)); return 0
+    if args.command == 'retrieve':
+        from dataclasses import asdict
+        from harden.store.moss_retrieval import retrieve_context, MossConfigurationError, MossRetrievalError
+        try:
+            result = retrieve_context(args.reward_source.read_text() if args.reward_source else '', args.query,
+                                      target_env_id=args.target_env, k=args.k)
+        except (MossConfigurationError, MossRetrievalError) as error:
+            print(str(error), file=sys.stderr); return 1
+        print(json.dumps({'retrieval': result.receipt, 'matches': [asdict(m) for m in result.matches],
+                          'offered_ids': result.offered_ids}, indent=2))
+        return 0
     if args.command == 'start':
         try: start()
         except KeyboardInterrupt: pass

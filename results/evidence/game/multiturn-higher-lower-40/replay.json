@@ -1,0 +1,170 @@
+{
+  "kind": "multi",
+  "env_id": "game/higher_lower_40-852c07fa",
+  "status": "patched",
+  "attack_rewards_original": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "attack_rewards_repaired": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "benign_total": 16,
+  "benign_passed": 16,
+  "gates_ok": true,
+  "gates": "PASS higher_lower_40: reference=1.00 null=0.000 random=0.170",
+  "knowledge_source": "spacetimedb",
+  "model_calls": 8,
+  "estimated_total_usd": 0.00799367,
+  "reference_episodes": [
+    {
+      "seed": 1384926830,
+      "turns": 5,
+      "reward": 1.0,
+      "transcript": [
+        [
+          "env",
+          "I'm thinking of a whole number between 1 and 40. You have 7 guesses. After each guess I'll say higher, lower or correct. One guess per reply.\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>20</answer>"
+        ],
+        [
+          "agent",
+          "<answer>20</answer>"
+        ],
+        [
+          "env",
+          "Lower."
+        ],
+        [
+          "agent",
+          "<answer>10</answer>"
+        ],
+        [
+          "env",
+          "Lower."
+        ],
+        [
+          "agent",
+          "<answer>5</answer>"
+        ],
+        [
+          "env",
+          "Lower."
+        ],
+        [
+          "agent",
+          "<answer>2</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>3</answer>"
+        ],
+        [
+          "env",
+          "Correct!"
+        ]
+      ]
+    },
+    {
+      "seed": 192104286,
+      "turns": 5,
+      "reward": 1.0,
+      "transcript": [
+        [
+          "env",
+          "I'm thinking of a whole number between 1 and 40. You have 7 guesses. After each guess I'll say higher, lower or correct. One guess per reply.\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>20</answer>"
+        ],
+        [
+          "agent",
+          "<answer>20</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>30</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>35</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>38</answer>"
+        ],
+        [
+          "env",
+          "Lower."
+        ],
+        [
+          "agent",
+          "<answer>36</answer>"
+        ],
+        [
+          "env",
+          "Correct!"
+        ]
+      ]
+    },
+    {
+      "seed": 1458373125,
+      "turns": 4,
+      "reward": 1.0,
+      "transcript": [
+        [
+          "env",
+          "I'm thinking of a whole number between 1 and 40. You have 7 guesses. After each guess I'll say higher, lower or correct. One guess per reply.\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>20</answer>"
+        ],
+        [
+          "agent",
+          "<answer>20</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>30</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>35</answer>"
+        ],
+        [
+          "env",
+          "Higher."
+        ],
+        [
+          "agent",
+          "<answer>38</answer>"
+        ],
+        [
+          "env",
+          "Correct!"
+        ]
+      ]
+    }
+  ],
+  "spend_scope": "This pilot only: higher_lower_40 audit log and its two compiler calls; excludes imported ledger history."
+}

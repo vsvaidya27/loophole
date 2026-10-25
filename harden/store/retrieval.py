@@ -107,7 +107,22 @@ def tokens(text: str) -> set[str]:
     }
 
 
+def eligible_invariants(snapshot: KnowledgeSnapshot, target_env_id: str) -> dict[str, dict]:
+    """Exclude self, seed and incomplete sources before indexing or graph expansion."""
+    envs = {row['env_id']: row['source'] for row in snapshot.environments}
+    eligible = {}
+    for row in snapshot.invariants:
+        env = row.get('env_id')
+        if env == target_env_id or not isinstance(env, str) or env.startswith('seed/') or envs.get(env) not in ('hub', 'game'):
+            continue
+        if any(not isinstance(row.get(field), str) or not row[field].strip() for field in COLUMNS['invariant']):
+            continue
+        eligible[row['invariant_id']] = row
+    return eligible
+
+
 class GraphRetriever:
+    """Deterministic offline baseline retained for comparisons; audits use MossRetriever."""
     def __init__(self, snapshot: KnowledgeSnapshot):
         self.snapshot = snapshot
 
@@ -120,16 +135,7 @@ class GraphRetriever:
         """
         if not target_env_id.strip() or not isinstance(k, int) or isinstance(k, bool) or not 0 <= k <= 100:
             raise ValueError('target_env_id and k in [0,100] are required')
-        envs = {row['env_id']: row['source'] for row in self.snapshot.environments}
-        eligible = {}
-        for row in self.snapshot.invariants:
-            env = row['env_id']
-            if env == target_env_id or env.startswith('seed/') or envs.get(env) not in ('hub', 'game'):
-                continue
-            fields = COLUMNS['invariant']
-            if any(not isinstance(row.get(field), str) or not row[field].strip() for field in fields):
-                continue
-            eligible[row['invariant_id']] = row
+        eligible = eligible_invariants(self.snapshot, target_env_id)
         query = tokens(env_source + '\n' + task)
         direct, reasons = {}, {}
         for key, row in eligible.items():

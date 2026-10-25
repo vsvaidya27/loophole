@@ -12,7 +12,7 @@ from harden.audit.roles import PROBER_SCHEMA
 from harden.model_client import CompilerClient
 from harden.store import mirror
 from harden.store.extract import extract_invariant
-from harden.store.retrieval import SpacetimeKnowledgeSource, SQLiteKnowledgeSource, GraphRetriever, prompt_context
+from harden.store.moss_retrieval import require_moss_config, retrieve_context
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -26,11 +26,20 @@ def evaluate(original, candidate=None, attempts=()):
     return json.loads(result.stdout.splitlines()[-1])
 
 
+def audit_episode_game(original):
+    """Use the shared episode-aware audit, including sequential feedback and replay."""
+    from harden.game_audit import GameAudit
+    return GameAudit(str(original), cap=None, from_rollouts=None).run()
+
+
 def run(description):
+    require_moss_config()  # fail before any paid compiler request
     compiler = CompilerClient()
-    compiled = compile_game(description, ROOT / 'compiled', client=compiler, max_attempts=2)
+    compiled = compile_game(description, ROOT / 'compiled', client=compiler, max_attempts=2, allow_multiturn=True)
     if not compiled.ok: return {'status': 'compile_failed', 'reason': compiled.reason}
     original = compiled.path.resolve()
+    if compiled.kind == 'multi':
+        return audit_episode_game(original)
     env_id = 'game/ai-' + hashlib.sha256(original.read_bytes()).hexdigest()[:12]
     evidence = ROOT / 'results/evidence' / env_id; evidence.mkdir(parents=True, exist_ok=True)
     source = original.read_text()
@@ -38,12 +47,9 @@ def run(description):
     mirror.record_environment(env_id, source='game', title=description[:100], status='hardening')
     base = evaluate(original)
     if not all(row['original'] == 1 for row in base['references']): raise ValueError('Original references failed')
-    try:
-        knowledge = SpacetimeKnowledgeSource(os.environ.get('SPACETIME_HOST', 'https://maincloud.spacetimedb.com'), os.environ.get('SPACETIME_DB', 'loophole-knowledge-calhacks-2026'), timeout=30).load()
-    except OSError:
-        knowledge = SQLiteKnowledgeSource(ROOT / 'invariants.db').load()
-    matches = GraphRetriever(knowledge).retrieve(source, description, target_env_id=env_id)
-    context, offered = prompt_context(matches, max_chars=6000)
+    retrieval = retrieve_context(source, description, target_env_id=env_id)
+    context, offered = retrieval.text, retrieval.offered_ids
+    (evidence / 'retrieval.json').write_text(json.dumps(retrieval.receipt, indent=2))
     schema = json.loads(json.dumps(PROBER_SCHEMA))
     props = schema['properties']['proposals']['items']
     props['properties']['source_invariant_id'] = {'type': ['string', 'null']}
@@ -119,5 +125,8 @@ def run(description):
     (evidence/'result.json').write_text(json.dumps(result,indent=2)); return result
 
 if __name__ == '__main__':
-    try: print(json.dumps(run(sys.argv[1]),indent=2))
+    try:
+        result = run(sys.argv[1])
+        print(json.dumps(result,indent=2))
+        sys.exit(0 if result.get('status') in ('patched', 'robust', 'done') else 1)
     except Exception as error: print(json.dumps({'status':'stopped','reason':f'{type(error).__name__}: {error}'})); sys.exit(1)

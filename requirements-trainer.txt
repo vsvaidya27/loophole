@@ -7,3 +7,7 @@ accelerate
 datasets
 verifiers>=0.3,<0.4
 peft==0.17.1  # --lora
+
+# Full compiler/audit/training pipeline requires shared Haiku and Moss retrieval.
+anthropic==2.3.0
+moss==1.21.0

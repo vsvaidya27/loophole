@@ -7,7 +7,7 @@ function environmentName(node: GraphNode) {
   if (node.kind !== 'environment') return node.label;
   if (node.id.includes('/ai-') && node.label.toLowerCase().includes('arithmetic')) return 'Generated arithmetic';
   if (node.id.includes('/scripted-')) return node.id.replace(/^env:game\/scripted-\d+-\d+-/, '').replaceAll('_', ' ');
-  return node.label;
+  return node.label.replace(' · model-generated', '').replaceAll('_', ' ');
 }
 function wrap(value: string, max = 25) {
   const lines: string[] = [];
@@ -101,7 +101,7 @@ export function InvariantNetwork({ graph, selected, onSelect }: Props) {
             <text x={x} y={y + 6} textAnchor="middle" className="hub-initials">{name.split(/\s+/).map(word => word[0]).slice(0, 2).join('').toUpperCase()}</text>
             {lines.map((line, index) => <text key={index} x={x} y={y + orbit + 43 + index * 17} textAnchor="middle" className="environment-label">{line}</text>)}
             <text x={x} y={y + orbit + 48 + lines.length * 17} textAnchor="middle" className="environment-meta">
-              {node.id.includes('/scripted-') ? 'Scripted calibration' : node.id.includes('/ai-') ? 'Model-generated pilot' : node.source} · {node.status}
+              {node.id.includes('/scripted-') ? 'Scripted calibration' : (node.id.includes('/ai-') || node.label.includes('model-generated')) ? 'Model-generated pilot' : node.source} · {node.status}
             </text>
           </>}
           {node.kind === 'invariant' && <>

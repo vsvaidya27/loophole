@@ -36,7 +36,7 @@ export function App() {
 
   const environments = snapshot?.rows.environments ?? [];
   const calibrationCount = environments.filter(env => env.envId.startsWith('game/scripted-')).length;
-  const pilotCount = environments.filter(env => env.envId.startsWith('game/ai-')).length;
+  const pilotCount = environments.filter(env => env.envId.startsWith('game/ai-') || env.title.includes('model-generated')).length;
   const selectedInvariant = graph.nodes.find(node => node.id === selected && node.kind === 'invariant');
   const environmentFocus = selected?.startsWith('env:') ? selected : selectedInvariant?.kind === 'invariant' ? `env:${selectedInvariant.envId}` : '';
   const emptyMessage = snapshot
