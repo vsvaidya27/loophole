@@ -3,7 +3,7 @@
 python -m harden.live doctor --remote
 python -m harden.live start
 python -m harden.live hub primeintellect/reverse-text
-python -m harden.live compile 'A single-turn numeric deduction game'
+python -m harden.live compile 'Guess a hidden number with higher/lower feedback'
 """
 from __future__ import annotations
 import argparse

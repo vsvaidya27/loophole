@@ -11,7 +11,7 @@ function environmentName(node: GraphNode) {
   if (node.kind !== 'environment') return node.label;
   if (node.id.includes('/ai-') && node.label.toLowerCase().includes('arithmetic')) return 'Generated arithmetic';
   if (node.id.includes('/scripted-')) return node.id.replace(/^env:game\/scripted-\d+-\d+-/, '').replaceAll('_', ' ');
-  return node.label;
+  return node.label.replace(' · model-generated', '').replaceAll('_', ' ');
 }
 function wrap(text: string, max = 23) {
   const lines: string[] = []; let line = '';
@@ -110,7 +110,7 @@ export function renderGraph(container: HTMLElement, graph: GraphProjection, sele
       group.append(element('circle', { cx: x, cy: y, r: node.kind === 'environment' ? 17 : 8, class: 'node-core' }));
       if (node.kind === 'environment') {
         wrap(environmentName(node), 22).forEach((line, i, lines) => group.append(element('text', { x, y: y - 39 - (lines.length - 1 - i) * 17, 'text-anchor': 'middle', class: 'environment-label' }, line)));
-        const provenance = node.id.includes('/scripted-') ? 'Scripted calibration' : node.id.includes('/ai-') ? 'Model-generated pilot' : node.source;
+        const provenance = node.id.includes('/scripted-') ? 'Scripted calibration' : (node.id.includes('/ai-') || node.label.includes('model-generated')) ? 'Model-generated pilot' : node.source;
         group.append(element('text', { x, y: y + 44, 'text-anchor': 'middle', class: 'environment-meta' }, provenance));
         group.append(element('text', { x, y: y + 60, 'text-anchor': 'middle', class: 'environment-status' }, node.status));
       } else {

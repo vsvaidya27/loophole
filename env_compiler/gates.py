@@ -34,7 +34,7 @@ def main(path: str) -> dict:
         reports.append({"strict": strict, "text": str(r), "ok": r.ok})
     if issubclass(cls, MultiTurnGameEnv):
         reports.append(loophole_report(cls))
-    return {"ok": all(r["ok"] for r in reports), "reports": reports, "error": None}
+    return {"ok": all(r["ok"] for r in reports), "reports": reports, "error": None, "kind": getattr(cls, "kind", "single")}
 
 
 LOOPHOLE_LOOSE_MIN, LOOPHOLE_STRICT_MAX = 0.8, 0.3

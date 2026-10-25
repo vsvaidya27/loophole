@@ -200,6 +200,7 @@ class CompileResult:
     reason: str = ""  # refusal or last failure
     attempts: int = 0
     suggestions: list[str] | None = None
+    kind: str = "single"
 
 
 def make_client(provider: str | None = None):
@@ -299,7 +300,7 @@ def compile_game(
             path.write_text(code)
             result = run_gates(path)
             if result["ok"]:
-                return CompileResult(True, name=path.stem, path=path, attempts=attempt)
+                return CompileResult(True, name=path.stem, path=path, attempts=attempt, kind=result.get("kind", kind))
             last = feedback(result)
         messages += [
             {"role": "assistant", "content": text},

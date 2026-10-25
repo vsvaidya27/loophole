@@ -100,6 +100,7 @@ def test_compiler_compiles_multiturn_by_default_and_refuses_it_when_single_only(
     client = FakeClient([_fit("multi"), f"```python\n{good}\n```"])
     result = comp.compile_game("guess my number with hints", tmp_path / "out", client=client)
     assert result.ok, result.reason
+    assert result.kind == "multi"
 
 
 def test_compiler_still_treats_old_fits_replies_as_single_turn(monkeypatch, tmp_path):

@@ -36,7 +36,7 @@ function details() {
   } else if (selected.startsWith('env:')) {
     const env = snapshot.rows.environments.find(row => row.envId === selected!.slice(4));
     if (env) {
-      text(panel, 'h3', env.title); text(panel, 'p', `${env.envId.includes('/scripted-') ? 'Scripted calibration' : env.envId.includes('/ai-') ? 'Model-generated pilot' : env.source} · ${env.status}`);
+      text(panel, 'h3', env.title); text(panel, 'p', `${env.envId.includes('/scripted-') ? 'Scripted calibration' : (env.envId.includes('/ai-') || env.title.includes('model-generated')) ? 'Model-generated pilot' : env.source} · ${env.status}`);
       const members = snapshot.invariants.filter(i => i.envId === env.envId);
       text(panel, 'h4', `${members.length} invariant records extracted here`);
       for (const inv of members) {
@@ -61,7 +61,7 @@ function render() {
   if (selected && !graph.nodes.some(n => n.id === selected)) selected = undefined;
   const envs = snapshot.rows.environments;
   const calibrationCount = envs.filter(r => r.envId.startsWith('game/scripted-')).length;
-  byId('scope').textContent = `All ${envs.length} environments · ${calibrationCount} scripted calibration records · ${envs.filter(r => r.envId.startsWith('game/ai-')).length} model-generated pilot${envs.filter(r => r.envId.startsWith('game/ai-')).length === 1 ? '' : 's'}. Select any node or cluster to follow its evidence.`;
+  byId('scope').textContent = `All ${envs.length} environments · ${calibrationCount} scripted calibration records · ${envs.filter(r => (r.envId.startsWith('game/ai-') || r.title.includes('model-generated'))).length} model-generated pilot${envs.filter(r => (r.envId.startsWith('game/ai-') || r.title.includes('model-generated'))).length === 1 ? '' : 's'}. Select any node or cluster to follow its evidence.`;
   const visibleIds = new Set(envs.map(row => row.envId));
   const invs = snapshot.invariants.filter(row => visibleIds.has(row.envId));
   const exploits = snapshot.exploits.filter(row => visibleIds.has(row.envId));

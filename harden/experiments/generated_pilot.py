@@ -26,11 +26,19 @@ def evaluate(original, candidate=None, attempts=()):
     return json.loads(result.stdout.splitlines()[-1])
 
 
+def audit_episode_game(original):
+    """Use the shared episode-aware audit, including sequential feedback and replay."""
+    from harden.game_audit import GameAudit
+    return GameAudit(str(original), cap=None, from_rollouts=None).run()
+
+
 def run(description):
     compiler = CompilerClient()
-    compiled = compile_game(description, ROOT / 'compiled', client=compiler, max_attempts=2)
+    compiled = compile_game(description, ROOT / 'compiled', client=compiler, max_attempts=2, allow_multiturn=True)
     if not compiled.ok: return {'status': 'compile_failed', 'reason': compiled.reason}
     original = compiled.path.resolve()
+    if compiled.kind == 'multi':
+        return audit_episode_game(original)
     env_id = 'game/ai-' + hashlib.sha256(original.read_bytes()).hexdigest()[:12]
     evidence = ROOT / 'results/evidence' / env_id; evidence.mkdir(parents=True, exist_ok=True)
     source = original.read_text()
@@ -119,5 +127,8 @@ def run(description):
     (evidence/'result.json').write_text(json.dumps(result,indent=2)); return result
 
 if __name__ == '__main__':
-    try: print(json.dumps(run(sys.argv[1]),indent=2))
+    try:
+        result = run(sys.argv[1])
+        print(json.dumps(result,indent=2))
+        sys.exit(0 if result.get('status') in ('patched', 'robust', 'done') else 1)
     except Exception as error: print(json.dumps({'status':'stopped','reason':f'{type(error).__name__}: {error}'})); sys.exit(1)
