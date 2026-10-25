@@ -4,7 +4,7 @@
   "source": {
     "path": "results/leaderboard.json",
     "sha256": "829c1e30e4ff8996aef2688cf598cfe9e8700d4724e2643283e252791094e121",
-    "commit": "ff9b5fe027d36fb0017b97da779ba8ef9eb436f0",
+    "commit": "2c533ad9ff228caef55e06b9677babd664add6ff",
     "checkerPassed": true,
     "checkerLog": "results/audit_batch/check_leaderboard.log",
     "protocol": "At most five rounds of three probes, with independent correctness checks and benign-answer repair gates."

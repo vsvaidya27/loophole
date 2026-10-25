@@ -86,6 +86,13 @@ therefore be separate findings, and rates are not whole-dataset guarantees.
 
 ## Frontend structure
 
+The **Live Hub replay** view at `/#hub-replay` provides an interactive before/after
+comparison for `primeintellect/reverse-text`. It re-scores saved responses through
+the actual original grader and accepted patch when Run is clicked. Start the
+loopback scoring service with `.venvs/hub/bin/python -m harden.experiments.hub_demo`
+from the repository root. See [HUB_REPLAY_DEMO.md](../docs/HUB_REPLAY_DEMO.md) for the
+walkthrough, provenance, runtime requirements, and production proxy setup.
+
 - `src/main.tsx` mounts the dashboard in React Strict Mode.
 - `src/App.tsx` owns record selection and composes the dashboard.
 - `src/hooks/useLiveStore.ts` manages the existing SpacetimeDB connection, reconnects,

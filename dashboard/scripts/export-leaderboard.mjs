@@ -71,7 +71,7 @@ requireValue(new Set(findings.map(f => f.id)).size === findings.length, 'Duplica
 const dataset = {
   version: 1, auditDate: '2026-10-24',
   source: { path: 'results/leaderboard.json', sha256: createHash('sha256').update(boardText).digest('hex'),
-    commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
+    commit: execFileSync('git', ['log', '-1', '--format=%H', '--', 'results/audit_batch/final_manifest.json'], { cwd: root, encoding: 'utf8' }).trim(),
     checkerPassed: manifest.checker.passed, checkerLog: manifest.checker.log,
     protocol: 'At most five rounds of three probes, with independent correctness checks and benign-answer repair gates.',
   }, entries,

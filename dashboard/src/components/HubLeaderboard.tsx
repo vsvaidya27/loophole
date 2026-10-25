@@ -17,6 +17,7 @@ function AuditEvidence({ entry, inGraph, onInspect }: { entry: AuditEntry; inGra
   return <div className="lb-evidence">
     <div className="lb-evidence-head"><div><div className="eyebrow">RECORDED AUDIT / {entry.publisher}</div><h3>{entry.name}</h3></div>
       <div className="lb-evidence-actions">
+        {entry.envId === 'primeintellect/reverse-text' && <a href="#hub-replay">Run live comparison →</a>}
         <a href={evidenceUrl(entry.status === 'failed_to_run' ? `${entry.evidenceDir}/install.log` : `${entry.evidenceDir}/summary.json`)} target="_blank" rel="noreferrer">Run evidence ↗</a>
         <button disabled={!inGraph} onClick={() => onInspect(`env:${entry.envId}`)}>{inGraph ? 'Inspect in knowledge graph →' : 'Not in current graph feed'}</button>
       </div>
