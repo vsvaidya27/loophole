@@ -33,11 +33,11 @@ Every Hub number is re-scored from saved evidence by [`scripts/check_leaderboard
 flowchart LR
     task["Plain-English task"] --> compiler["Compiler<br/>(Claude Haiku)"]
     compiler --> env["RL environment"]
-    hub["Prime Intellect<br/>Hub environment"] --> loop
-    env --> loop{"Hardening loop"}
-    graph[("Knowledge graph<br/>SpacetimeDB + Moss")] -- "closest rules" --> loop
-    loop -- "confirmed loopholes<br/>become rules" --> graph
-    loop --> hardened["Hardened reward"]
+    hub["Prime Intellect<br/>Hub environment"] --> harden
+    env --> harden{"Hardening loop"}
+    kg[("Knowledge graph<br/>SpacetimeDB + Moss")] -- "closest rules" --> harden
+    harden -- "confirmed loopholes<br/>become rules" --> kg
+    harden --> hardened["Hardened reward"]
     hardened --> train["GRPO training"]
     hardened --> board["Leaderboard"]
 ```
