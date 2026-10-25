@@ -30,7 +30,7 @@ from .verify import strict_verdict
 
 N_GROUND_TRUTH = 24
 N_PROBE_POOL = 10
-N_SOLVER_POOL = 24
+N_SOLVER_POOL = 48  # room for a low-accuracy solver; the loop stops once MIN_MODEL answers verify
 SOLVER_BATCH = 8
 MIN_MODEL = ck.MIN_MODEL_RECORDS
 MAX_ITER = ck.MAX_ITERATIONS

@@ -211,21 +211,26 @@ SOLVER_SCHEMA = {
 }
 
 
+SOLVER_CHUNK = 4  # tasks per call: 8 full responses overran Haiku's output limit on reverse-text
+
+
 def solve(claude: Claude, tasks: list[dict]) -> dict[int, str]:
-    """tasks: {id, messages}. Returns {id: response}."""
-    blocks = [f"=== task {t['id']} ===\n{_messages_text(t['messages'])}" for t in tasks]
-    result = claude.call(
-        role="solver",
-        iteration=0,
-        system=[{"type": "text", "text": SOLVER_SYSTEM}],
-        messages=[{"role": "user", "content": "\n\n".join(blocks)}],
-        effort="low",
-        max_tokens=4000,
-        schema=SOLVER_SCHEMA,
-    )
-    if not result.ok:
-        return {}
-    return {r["id"]: r["response"] for r in result.data["responses"]}
+    """tasks: {id, messages}. Returns {id: response}, asking SOLVER_CHUNK tasks per call."""
+    answers = {}
+    for start in range(0, len(tasks), SOLVER_CHUNK):
+        blocks = [f"=== task {t['id']} ===\n{_messages_text(t['messages'])}" for t in tasks[start:start + SOLVER_CHUNK]]
+        result = claude.call(
+            role="solver",
+            iteration=0,
+            system=[{"type": "text", "text": SOLVER_SYSTEM}],
+            messages=[{"role": "user", "content": "\n\n".join(blocks)}],
+            effort="low",
+            max_tokens=6000,
+            schema=SOLVER_SCHEMA,
+        )
+        if result.ok:
+            answers.update({r["id"]: r["response"] for r in result.data["responses"]})
+    return answers
 
 
 # ------------------------------------------------------------------ repairer
