@@ -1,0 +1,64 @@
+# Showcase
+
+The five demos we show, built into one page. Each demo is a reward that gets hacked and a fixed
+version, replayed side by side: the untrained base policy, a policy trained on the hackable reward,
+and a policy trained on the fixed reward, all on the same held-out tasks. The true score always
+uses the fixed reward.
+
+| Demo | Folder | Game | Kind |
+| --- | --- | --- | --- |
+| Voice support agent | `voice/` | refund-desk judge audit | recorded calls, two judges |
+| Snake | `snake/` | `snake_easy` | single-turn |
+| Lights Out | `lights_out/` | `lights_out` | single-turn |
+| Trading simulator | `trading/` | `trading_sim` | single-turn |
+| Computer use | `webagent/` | `web_form` | multi-turn |
+
+## Build the page
+
+```bash
+python -m showcase.build                    # -> demo/showcase.html (open it in a browser)
+python -m showcase.build --out dashboard/public/showcase.html   # served by the dashboard
+```
+
+## What each demo needs
+
+Every demo folder holds a `card.json` (the story: hook, loophole, expected result, the commands to
+run) and `artifacts/` (small committed data, so the page works offline). The build picks, per demo:
+
+1. a committed real artifact (`artifacts/rollouts.json` with `"placeholder": false`), else
+2. a fresh GPU run, `rollouts/<game>.json` from `python -m trainer.rollout`, else
+3. the committed placeholder.
+
+**Placeholders are scripted stand-ins, not trained models.** The base policy is a random answer, the
+"hacked" policy lists several candidates, the "hardened" policy is the reference solver. Their scores
+come from the real reward functions, and the page labels them. `python -m showcase.placeholders`
+regenerates them. They exist so the page, the layout and the replay work before the GPU runs finish.
+
+## Replacing a placeholder with a real run (on the GPU box)
+
+```bash
+# per demo, see its card.json "run" list; for example Snake:
+python -m trainer.train snake_easy --out runs/snake_easy-hardened
+python -m trainer.train snake_easy --loose --out runs/snake_easy-hacked
+python -m trainer.rollout snake_easy --n 24      # -> rollouts/snake_easy.json (with training curves)
+python -m showcase.build
+```
+
+To keep the result without the GPU box, copy `rollouts/<game>.json` to
+`showcase/<demo>/artifacts/rollouts.json` and set `"placeholder": false` in it, then commit.
+
+## Voice
+
+The voice tab is real data: the calls and their ground truth come from the judge-hardening audit
+(`results/voice_audit_llm`). `python -m showcase.voice.build_voice --rejudge --audio` re-scores
+the picked calls with the baseline and the hardened judge prompts (Haiku) and reads each line with
+Cartesia voices (agent Skylar, customer Daniel). It needs `ANTHROPIC_API_KEY` and `CARTESIA_API_KEY`
+in `.env`. The audit client (`harden/audit/llm.py`) reads `.env` with `setdefault`, so a stale
+`ANTHROPIC_API_KEY` already exported in your shell wins over `.env`; if you get a 401, run it as
+`env -u ANTHROPIC_API_KEY -u ANTHROPIC_BASE_URL python -m showcase.voice.build_voice ...`.
+
+## Page template
+
+The page is `trainer/viz_template.html`, shared with `python -m trainer.viz`. Game tabs, scorecards,
+training curves, animated boards, chat transcripts, rendered web pages (computer use) and the voice
+tab all live there; `showcase/build.py` only picks data and fills in the title and caption text.
