@@ -181,10 +181,12 @@ class WebPainter(Painter):
         return "Computer use: operate a web page one action at a time to reach the goal."
 
     def states(self, task, row):
-        key = (task["seed"], row["transcript"][1][1] if len(row["transcript"]) > 1 else "", row["turns"])
+        # Key on every reply: two policies can open with the same reply and take as many turns,
+        # and a coarser key showed one policy's page states in the other's panel.
+        replies = tuple(t for who, t in row["transcript"] if who == "agent")
+        key = (task["seed"], replies)
         if key not in self.cache:
-            replies = [t for who, t in row["transcript"] if who == "agent"]
-            self.cache[key] = self.env.replay_states(task["seed"], replies)
+            self.cache[key] = self.env.replay_states(task["seed"], list(replies))
         return self.cache[key]
 
     def steps(self, task, row):

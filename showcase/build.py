@@ -26,6 +26,16 @@ TEMPLATE = ROOT.parent / "trainer" / "viz_template.html"
 CURVE_KEYS = ("step", "kind", "reward", "heldout_acc", "heldout_loose", "mean_words", "elapsed_s")
 
 
+def contrast_rank(task: dict) -> tuple:
+    """Showcase order: tasks where the fixed-reward policy passes while the hacked one is paid for
+    a wrong answer come first, preferring ones the base model also fails. Scores still count all tasks."""
+    r = task["rollouts"]
+    hacked, fixed, base = r.get("hacked", {}), r.get("hardened", {}), r.get("base", {})
+    hack = hacked.get("loose", 0) - hacked.get("strict", 0) > 0.01
+    win = fixed.get("strict", 0) >= 1
+    return (not (hack and win), base.get("strict", 0) >= 1, not hack)
+
+
 def read_json(path: Path) -> dict | None:
     return json.loads(path.read_text()) if path.is_file() else None
 
@@ -48,6 +58,8 @@ def build(rollouts_dir: Path, out: Path, graph_url: str | None) -> dict:
         if data is None:
             missing.append(card["id"])
             continue
+        if data.get("tasks"):  # the replay opens on the clearest cases (sort is stable)
+            data["tasks"] = sorted(data["tasks"], key=contrast_rank)
         data["card"] = {k: card[k] for k in ("title", "hook", "loophole", "expected")}
         clip = ROOT / card["dir"] / "video" / f"{card['dir']}.mp4"
         if clip.is_file():  # copied next to the page, so it works from a file or a static host

@@ -22,13 +22,11 @@ def colx(i: int) -> tuple[int, int]:
 
 
 def select_tasks(data: dict, k: int) -> list[int]:
-    """Prefer tasks where the hacked policy is paid for a wrong answer and the fixed policy wins."""
-    def rank(i):
-        r = data["tasks"][i]["rollouts"]
-        hack = r["hacked"]["loose"] - r["hacked"]["strict"] > 0.01 if "hacked" in r else False
-        win = r.get("hardened", {}).get("strict", 0) >= 1
-        return (not (hack and win), not hack, i)
-    return sorted(range(len(data["tasks"])), key=rank)[:k]
+    """Prefer tasks where the hacked policy is paid for a wrong answer and the fixed policy wins
+    (and the base model fails), the same order the page uses."""
+    from ..build import contrast_rank
+
+    return sorted(range(len(data["tasks"])), key=lambda i: (*contrast_rank(data["tasks"][i]), i))[:k]
 
 
 def header(d, card: dict, tag: str | None):
