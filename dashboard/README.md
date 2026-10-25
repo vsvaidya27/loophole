@@ -1,8 +1,7 @@
 # Live knowledge dashboard
 
-This is the live companion to the existing `trainer/viz_template.html` replay page.
-All fetched team branches were checked: that replay page was the only existing visual
-UI; `dashboard/` previously contained graph projection and SDK bindings only.
+A React + TypeScript dashboard for the live knowledge store, built with Vite. It is
+the live companion to the existing `trainer/viz_template.html` replay page.
 
 ```sh
 npm ci --prefix dashboard
@@ -49,3 +48,19 @@ link back to the live graph; its existing rendering stays intact.
 The production build is static (`dashboard/dist`); deploy those files on any static host
 with HTTPS. The service address is already public, but the local dev URL is not a public
 frontend deployment. Close the live tab when done to let the hosted database become idle.
+
+## Frontend structure
+
+- `src/main.tsx` mounts the dashboard in React Strict Mode.
+- `src/App.tsx` owns record selection and composes the dashboard.
+- `src/hooks/useLiveStore.ts` manages the existing SpacetimeDB connection, reconnects,
+  page restoration, and cleanup. Displayed records stay visible with a stale label
+  until the new subscription arrives.
+- `src/components/` contains the React SVG network, evidence inspector, connection
+  status, and audit table. Keyed records retain keyboard focus during live updates.
+- `src/graph/layoutGraph.ts` and `buildGraph.ts` remain pure layout and projection
+  functions. Generated bindings and the six public table subscriptions are unchanged.
+
+The test suite includes subscription and layout tests plus DOM interaction tests for
+selection, evidence tabs, live updates, reconnects, and lifecycle cleanup. Test data
+is isolated in test files; the application always uses the configured live database.
