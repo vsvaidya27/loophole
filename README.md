@@ -136,3 +136,10 @@ the ground truth of every call.
   calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
   a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
 - The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort, and so do the hacker and fixer (the Gemini free tier allows only 20 requests a day). `VOICE_ENV_SIM=gemini` / `VOICE_ENV_PLANNER=gemini` switch them back. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.
+
+## Live demo dashboard and pilot status
+
+Run `npm ci --prefix dashboard` then `npm run dev --prefix dashboard` to view the live
+knowledge graph at `http://127.0.0.1:5173/`. It subscribes to the hosted database directly.
+See [live demo status](docs/LIVE_DEMO_STATUS.md) for measured compiler calibration
+results, the prepared Prime Intellect pilot, and the unfinished audit-runner work.

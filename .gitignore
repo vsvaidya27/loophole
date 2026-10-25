@@ -32,3 +32,6 @@ spacetimedb/dist/
 # trainer rollouts and demo page (regenerate with trainer.rollout / trainer.viz)
 rollouts/
 demo/
+
+# dashboard build output
+dashboard/dist/

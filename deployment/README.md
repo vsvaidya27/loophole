@@ -78,3 +78,12 @@ was preserved. Do not run multiple branches publishing over this shared database
 
 This service is deployed and minimally verified. Real audit ingestion, model-selected
 patches, the SQLite watch/sync pusher, and live dashboard wiring remain integration work.
+
+## Subsequent live calibration
+
+The service is no longer empty: the scripted compiler calibration `scripted-20261024`
+was explicitly published during live-dashboard verification. It contains 3 game
+environments, 3 per-environment multi-answer exploit instances/invariants, one shared
+class rule, and 2 cross-game transfer outcomes. These are measured scripted results
+against planted compiler-library loopholes, not model-discovered Hub exploits. See
+`docs/LIVE_DEMO_STATUS.md` and `results/compiler_pilot/scripted-20261024/report.json`.

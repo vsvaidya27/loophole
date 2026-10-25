@@ -1,0 +1,13 @@
+{
+  "run_id": "scripted-20261024",
+  "provenance": "scripted compiler calibration, not a model-driven Hub audit",
+  "N": 3,
+  "M": 3,
+  "attempts": 60,
+  "confirmed_cases": 60,
+  "blocked_cases": 60,
+  "benign_passed": 60,
+  "benign_total": 60,
+  "mechanism_count_note": "M counts one confirmed mechanism per environment, not every repeated completion.",
+  "embedding_note": "No embedding model loaded. Rule/source/transfer edges work; similarity edges await real embeddings."
+}

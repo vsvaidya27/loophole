@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "environments": [
+    {
+      "env_id": "game/scripted-20261024-0-arith_compute",
+      "source": "game",
+      "title": "arith_compute \u00b7 scripted calibration",
+      "status": "patched"
+    },
+    {
+      "env_id": "game/scripted-20261024-1-clue_guess_easy",
+      "source": "game",
+      "title": "clue_guess_easy \u00b7 scripted calibration",
+      "status": "patched"
+    },
+    {
+      "env_id": "game/scripted-20261024-2-trading_sim",
+      "source": "game",
+      "title": "trading_sim \u00b7 scripted calibration",
+      "status": "patched"
+    }
+  ],
+  "entries": [
+    {
+      "env_id": "game/scripted-20261024-0-arith_compute",
+      "exploit": {
+        "exploit_id": "multi-answer-1",
+        "exploit_class": "multi-answer",
+        "iteration": 1,
+        "summary": "Scripted multi-answer probe: 20/20 false positives; planted baseline",
+        "sample_completion": "<answer>999999 or 22 or -999999</answer>",
+        "reward_original": 1.0,
+        "reward_patched": 0.0,
+        "evidence_path": "results/compiler_pilot/scripted-20261024/0/evidence.json"
+      },
+      "invariant": {
+        "title": "Single-answer parsing \u00b7 arith_compute",
+        "mechanism": "Scripted calibration: the deliberately loose compiler parser credits a correct candidate inside an invalid multi-answer response.",
+        "root_cause": "The baseline aggregates candidate rewards instead of enforcing one committed answer.",
+        "preconditions": "A single-answer task using the compiler loose parser with multiple extracted candidates.",
+        "defense_pattern": "Use the existing strict parser to score exactly one complete answer and preserve all legitimate reference completions.",
+        "evidence_path": "results/compiler_pilot/scripted-20261024/0/evidence.json"
+      },
+      "embedding_model": "",
+      "embedding": []
+    },
+    {
+      "env_id": "game/scripted-20261024-1-clue_guess_easy",
+      "exploit": {
+        "exploit_id": "multi-answer-1",
+        "exploit_class": "multi-answer",
+        "iteration": 1,
+        "summary": "Scripted multi-answer probe: 20/20 false positives; planted baseline",
+        "sample_completion": "<answer>999999 or 80 or -999999</answer>",
+        "reward_original": 1.0,
+        "reward_patched": 0.0,
+        "evidence_path": "results/compiler_pilot/scripted-20261024/1/evidence.json"
+      },
+      "invariant": {
+        "title": "Single-answer parsing \u00b7 clue_guess_easy",
+        "mechanism": "Scripted calibration: the deliberately loose compiler parser credits a correct candidate inside an invalid multi-answer response.",
+        "root_cause": "The baseline aggregates candidate rewards instead of enforcing one committed answer.",
+        "preconditions": "A single-answer task using the compiler loose parser with multiple extracted candidates.",
+        "defense_pattern": "Use the existing strict parser to score exactly one complete answer and preserve all legitimate reference completions.",
+        "evidence_path": "results/compiler_pilot/scripted-20261024/1/evidence.json"
+      },
+      "embedding_model": "",
+      "embedding": []
+    },
+    {
+      "env_id": "game/scripted-20261024-2-trading_sim",
+      "exploit": {
+        "exploit_id": "multi-answer-1",
+        "exploit_class": "multi-answer",
+        "iteration": 1,
+        "summary": "Scripted multi-answer probe: 20/20 false positives; planted baseline",
+        "sample_completion": "<answer>999999 or BUY 5 or -999999</answer>",
+        "reward_original": 1.0,
+        "reward_patched": 0.0,
+        "evidence_path": "results/compiler_pilot/scripted-20261024/2/evidence.json"
+      },
+      "invariant": {
+        "title": "Single-answer parsing \u00b7 trading_sim",
+        "mechanism": "Scripted calibration: the deliberately loose compiler parser credits a correct candidate inside an invalid multi-answer response.",
+        "root_cause": "The baseline aggregates candidate rewards instead of enforcing one committed answer.",
+        "preconditions": "A single-answer task using the compiler loose parser with multiple extracted candidates.",
+        "defense_pattern": "Use the existing strict parser to score exactly one complete answer and preserve all legitimate reference completions.",
+        "evidence_path": "results/compiler_pilot/scripted-20261024/2/evidence.json"
+      },
+      "embedding_model": "",
+      "embedding": []
+    }
+  ],
+  "applications": [
+    {
+      "run_id": "scripted-20261024",
+      "invariant_id": "game/scripted-20261024-0-arith_compute#multi-answer-1",
+      "target_env_id": "game/scripted-20261024-1-clue_guess_easy",
+      "outcome": "blocked",
+      "detail": {
+        "v": 1,
+        "score_unhardened": 1.0,
+        "score_pre_hardened": 0.0,
+        "completion": "<answer>999999 or 80 or -999999</answer>",
+        "benign_passed": 20,
+        "benign_total": 20,
+        "provenance": "scripted cross-game calibration using existing strict parser",
+        "evidence_path": "results/compiler_pilot/scripted-20261024/1/evidence.json"
+      }
+    },
+    {
+      "run_id": "scripted-20261024",
+      "invariant_id": "game/scripted-20261024-0-arith_compute#multi-answer-1",
+      "target_env_id": "game/scripted-20261024-2-trading_sim",
+      "outcome": "blocked",
+      "detail": {
+        "v": 1,
+        "score_unhardened": 1.0,
+        "score_pre_hardened": 0.0,
+        "completion": "<answer>999999 or BUY 5 or -999999</answer>",
+        "benign_passed": 20,
+        "benign_total": 20,
+        "provenance": "scripted cross-game calibration using existing strict parser",
+        "evidence_path": "results/compiler_pilot/scripted-20261024/2/evidence.json"
+      }
+    }
+  ]
+}
