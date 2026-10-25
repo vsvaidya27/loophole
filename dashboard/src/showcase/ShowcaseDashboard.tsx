@@ -21,10 +21,7 @@ function DemoStats({ demo }: { demo: Demo }) {
     <article className="showcase-stat policy-hardened"><span className="eyebrow">HONEST CALLS PASSED</span><div className="stat-transition"><strong>{percent(demo.summary.benign_before)}</strong><span>→</span><strong>{percent(demo.summary.benign_after)}</strong></div><p>Baseline judge → hardened judge</p></article>
     <article className="showcase-stat"><span className="eyebrow">EVIDENCE TO EXPLORE</span><strong className="stat-value">{demo.samples}<small>selected calls</small></strong><p>Two judge verdicts for each call</p></article>
   </div>;
-  return <div className="showcase-stats">{policies.map(policy => {
-    const score = demo.scores[policy];
-    return <article className={`showcase-stat policy-${policy}`} key={policy}><div className="stat-heading"><span className="policy-dot" /><h3>{policyNames[policy]}</h3><span>{policyCaption(demo.placeholder, policy)}</span></div><div className="stat-values"><div><strong>{score ? percent(score.strict) : '—'}</strong><span>True score</span></div><div><strong>{score ? percent(score.loose) : '—'}</strong><span>Loose reward</span></div></div><p>Mean across {demo.samples} identical tasks</p></article>;
-  })}</div>;
+  return null;
 }
 
 type View = 'walkthrough' | 'replay' | 'video';

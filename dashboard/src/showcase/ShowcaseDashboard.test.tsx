@@ -52,12 +52,10 @@ describe('Showcase dashboard', () => {
   it('preserves trained-run provenance, aggregate scores, and navigation to the three demos', async () => {
     expect(container.textContent).toContain('Recorded training run');
     expect(container.textContent).toContain('Trained on fixed reward');
-    expect(node('.showcase-stats .policy-hacked').textContent).toContain('100%');
-    expect(node('.showcase-stats .policy-hardened').textContent).toContain('50%');
+    expect(document.querySelector('.showcase-stats')).toBeNull();
     const hackedReplay = node('.policy-replay.policy-hacked');
-    expect(hackedReplay.textContent).toContain('100%');
+    expect(hackedReplay.textContent).not.toMatch(/\d+%/);
     expect(hackedReplay.textContent).toContain('Reward exceeds the true score');
-    expect(container.textContent).toContain('Means include all 24 held-out tasks');
     expect(container.textContent).not.toContain('Reference solver');
     expect(node<HTMLSelectElement>('[aria-label="Replay example"]').value).toBe('1');
     expect(container.querySelectorAll('.demo-selector a')).toHaveLength(3);
@@ -86,7 +84,7 @@ describe('Showcase dashboard', () => {
     expect(node('.policy-hacked .order-label').textContent).toContain('BUY 7, SELL 7');
     await click(node('[aria-label="Restart replay"]'));
     expect(node('[aria-label="Current replay step"]').textContent).toBe('0 / 3');
-    expect(node('.policy-replay.policy-hacked .replay-scores').textContent).toContain('Loose reward100%');
+    expect(document.querySelector('.replay-scores')).toBeNull();
   });
 
   it('stops the old timer and resets playback when changing examples', async () => {
@@ -173,11 +171,11 @@ describe('Showcase dashboard', () => {
     await click(button('Next: RL environment →'));
     expect(node('[aria-label="Original RL environment"]').textContent).toContain('Reward feeds the next policy update');
     await click(button('Next: Reward loophole →'));
-    expect(node('.loophole-metrics').textContent).toContain('Original reward100%');
-    expect(node('.loophole-metrics').textContent).toContain('True task score0%');
+    expect(container.querySelector('.loophole-metrics')).toBeNull();
+    expect(node('.loophole-explanation').textContent).toContain('LOOPHOLE FOUND');
     await click(button('Next: Improved environment →'));
-    expect(node('.same-exploit').textContent).toContain('Original100%→Revised0%');
-    expect(node('.positive-check').textContent).toContain('23% → 50%');
+    expect(container.querySelector('.same-exploit strong')).toBeNull();
+    expect(document.querySelector('.positive-check')).toBeNull();
     expect(node('.preserved-state').textContent).toContain('Same task');
     expect(node('.story-episode-label').textContent).toContain('Trained on the fixed reward');
     await click(button('Next: Knowledge graph →'));
