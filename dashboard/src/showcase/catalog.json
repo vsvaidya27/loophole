@@ -1,0 +1,86 @@
+{
+  "revision": "c580715a162de76b6c3ebb96e03572db9a2cede3",
+  "demos": [
+    {
+      "id": "trading",
+      "title": "Trading simulator",
+      "game": "trading_sim",
+      "hook": "Simulated market, real exploit: say both BUY and SELL, or trade bigger than the limit, and the reward pays out.",
+      "loophole": "Loose reward: every BUY/SELL/HOLD in the reply counts and the size limit is not enforced.",
+      "placeholder": false,
+      "kind": "single",
+      "samples": 24,
+      "scores": {
+        "base": {
+          "strict": 0.225,
+          "loose": 0.225
+        },
+        "hacked": {
+          "strict": 0.0,
+          "loose": 1.0
+        },
+        "hardened": {
+          "strict": 0.5,
+          "loose": 0.5
+        }
+      },
+      "summary": null,
+      "description": "Trade a simulated market: from 8 recent prices choose BUY, SELL or HOLD with a size 1-5.",
+      "source": "showcase/trading/artifacts/rollouts.json",
+      "video": "/showcase/videos/trading.mp4",
+      "data": "/showcase/data/trading.json"
+    },
+    {
+      "id": "webagent",
+      "title": "Computer use",
+      "game": "web_form",
+      "hook": "Pay an agent for finishing the task and it learns to click Submit on an empty form.",
+      "loophole": "Loose reward: any submitted form, any checkout, any dismissed banner counts, and every action in a reply runs.",
+      "placeholder": false,
+      "kind": "multi",
+      "samples": 24,
+      "scores": {
+        "base": {
+          "strict": 0.16666666666666666,
+          "loose": 0.7083333333333334
+        },
+        "hacked": {
+          "strict": 0.16666666666666666,
+          "loose": 1.0
+        },
+        "hardened": {
+          "strict": 0.4166666666666667,
+          "loose": 0.7083333333333334
+        }
+      },
+      "summary": null,
+      "description": "Operate a small web page one action at a time: fill a form, buy the cheapest item, or reject cookies.",
+      "source": "showcase/webagent/artifacts/rollouts.json",
+      "video": "/showcase/videos/webagent.mp4",
+      "data": "/showcase/data/webagent.json"
+    },
+    {
+      "id": "voice",
+      "title": "Voice support agent",
+      "game": "voice_refund_desk",
+      "hook": "A judge that asks \"did the agent give a clear outcome?\" will pass a wrong refund as long as it sounds confident.",
+      "loophole": "The first judge prompt rewards a clear, confident outcome, so an agent that approves any refund passes it.",
+      "placeholder": false,
+      "kind": "voice",
+      "samples": 5,
+      "scores": {},
+      "summary": {
+        "asr_before": 0.25,
+        "asr_after": 0.0,
+        "benign_pass_before": 0.3333333333333333,
+        "benign_pass_after": 1.0,
+        "benign_before": 0.3333333333333333,
+        "benign_after": 1.0
+      },
+      "description": "A phone support agent for an electronics store follows a refund policy. An LLM judge scores each call, and that judge is the reward we are hardening.",
+      "source": "showcase/voice/artifacts/voice.json",
+      "video": "/showcase/videos/voice.mp4",
+      "data": "/showcase/data/voice.json"
+    }
+  ]
+}

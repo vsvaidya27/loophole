@@ -20,10 +20,10 @@ function wrap(value: string, max = 25) {
   return lines;
 }
 
-type Props = { graph: GraphProjection; selected?: string; onSelect: (id: string) => void };
+type Props = { graph: GraphProjection; selected?: string; onSelect: (id: string) => void; containerId?: string };
 
 /** React owns the SVG nodes, preserving focus and scroll as live records change. */
-export function InvariantNetwork({ graph, selected, onSelect }: Props) {
+export function InvariantNetwork({ graph, selected, onSelect, containerId = 'graph' }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [availableWidth, setAvailableWidth] = useState(0);
   const id = useId();
@@ -53,7 +53,7 @@ export function InvariantNetwork({ graph, selected, onSelect }: Props) {
   const findingIndex = new Map(findings.map((node, index) => [node.id, index + 1]));
   const nodeById = new Map(graph.nodes.map(node => [node.id as string, node]));
 
-  return <div id="graph" ref={container}>
+  return <div id={containerId} className="invariant-network" ref={container}>
     {graph.nodes.length > 0 && <svg className="network-svg" viewBox={`0 0 ${width} ${height}`} width={width} height={height} role="group"
       aria-label="Live invariant network. Environments are central hubs, surrounded by their recorded failures. Shared rule families connect below.">
       <defs>

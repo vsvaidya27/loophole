@@ -63,4 +63,54 @@ frontend deployment. Close the live tab when done to let the hosted database bec
 
 The test suite includes subscription and layout tests plus DOM interaction tests for
 selection, evidence tabs, live updates, reconnects, and lifecycle cleanup. Test data
-is isolated in test files; the application always uses the configured live database.
+is isolated in test files; Live audits always uses the configured live database.
+
+## Showcase dashboard
+
+Choose **Showcase** in the shared navigation, or open `/#showcase/trading`. The three
+demos from the upstream `showcase` branch use the same React shell, dark panels,
+colors, and responsive layout as Live audits. Switching views keeps the live
+subscription and evidence selection intact.
+
+- **Guided demo** is the default: initial task → RL environment visualization →
+  reward loophole → revised environment → knowledge graph. Use Next/Back or the
+  five stage buttons to present it. Episodes can be played or stepped through.
+  The final evidence map explains the selected example; the expandable recorded
+  graph uses the existing live subscription and opens nodes in Live audits.
+- Trading and computer use include interactive replays with
+  play/pause, stepping, speed controls, a scrubber, and a task selector. Compare the
+  three policies' strict scores with what the loose reward pays, and inspect raw
+  answers or recorded actions. Captured web pages run in sandboxed frames with
+  scripts, network access, and form submissions disabled.
+- Voice support includes five selected audit calls, per-turn synthesized audio,
+  both judge verdicts, and their prompts. Aggregate rates are from the full audit.
+- Every demo includes its original film. Media loads on demand; audio is stored as
+  individual MP3 files rather than embedded in the JavaScript bundle.
+
+The trading and computer-use artifacts are **recorded GPU training runs** from
+showcase revision `c580715`: base, trained on loose reward, and trained on fixed
+reward. Each has 24 held-out tasks. The featured example follows upstream's
+contrast ranking (hacked fails while hardened passes, preferring a base failure),
+while means include all tasks. Original example numbers are retained.
+Computer use has separate strict and loose episodes, so its replay provides an
+environment selector and uses the matching pages and action transcript.
+Voice uses recorded simulated audit calls with Cartesia voices reading the text;
+it demonstrates a revised judge, not a retrained agent. The walkthrough does not
+run training, generate environments, or publish knowledge records. The live graph
+shows existing audit data separately from the explanatory example map.
+
+The imported source revision, catalog metrics, evidence JSON, and media are checked
+in. Refresh them deliberately after fetching a newer showcase branch:
+
+```sh
+git fetch upstream showcase
+python3 dashboard/scripts/import_showcase.py --ref upstream/showcase
+npm test --prefix dashboard
+npm run build --prefix dashboard
+```
+
+The importer reads Git objects and copies only showcase artifacts, so it does not
+replace the dashboard with the older application from that branch. The Showcase
+tests cover the guided sequence, reward comparisons, graph inspection, playback
+lifecycle, strict/loose episodes, example changes, all three demos, evidence labels,
+asset loading failures, video selection, and catalog agreement with source data.
