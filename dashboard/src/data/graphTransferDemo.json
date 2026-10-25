@@ -1,0 +1,271 @@
+{
+  "version": 1,
+  "runId": "hub-to-multiturn-01",
+  "checkedAt": "2026-10-25T11:29:00.790206+00:00",
+  "status": "validated",
+  "targetId": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+  "targetName": "Number hunt: 1\u201340 with higher/lower feedback",
+  "targetRef": "number_hunt_easy",
+  "targetKind": "multi-turn compiler-library game",
+  "source": {
+    "invariant_id": "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+    "env_id": "metavind/mini-sudoku",
+    "exploit_class": "multi-answer",
+    "title": "First-match answer extraction rewards hedged multi-answer responses",
+    "mechanism": "The response holds several answer blocks with different contents. The parser's regex search returns the first block rather than the last, so a correct grid in any earlier block earns full credit even when the final, committed answer is different and wrong. The format check only looks at the opening and closing tags of the message, so it passes as well.",
+    "preconditions": "Applies to any grader that extracts an answer from tagged or delimited regions with a regex or XML parser, where the response may contain more than one such region and only one is scored.",
+    "defense_pattern": "Score only the last answer block, using finditer and taking the final match. Better still, assign zero when multiple answer blocks have differing contents. Apply the same extracted value consistently across all reward components, including partial and format credit.",
+    "score": 0.5307615995407104,
+    "reasons": [
+      "Moss hybrid relevance 0.531"
+    ]
+  },
+  "selection": "Operator selected a returned rule with tagged-output preconditions; no rule text was edited.",
+  "retrieval": {
+    "backend": "moss+graph",
+    "source": "spacetimedb",
+    "model": "moss-minilm",
+    "snapshot_sha256": "fef1cdf70cb5531c9842d4ea077ba55ab4e17f176cea4d18f0145dce52411ba8",
+    "target_env_id": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+    "indexed_documents": 95,
+    "alpha": 0.65,
+    "min_score": 0.2,
+    "offered_candidates": [
+      "runes/temporal-bench#last-standalone-capital-hedge-a43767075c",
+      "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+      "harleycooper/nanochatAquaRat#first-answer-line-wins-d271450770",
+      "harleycooper/nanochatAquaRat#separatorless-answer-is-override-23abc0c7d3",
+      "srthkdev/contract_nli_env#probabilistic-split-box-63c31a65e4"
+    ],
+    "cold_or_cached": "cached",
+    "query_characters": 298,
+    "index_ready_ms": 1099.748,
+    "query_ms": 7.225,
+    "elapsed_ms": 1993.753
+  },
+  "query": "A multi-turn hidden-number game expects one tagged integer guess per turn, but its loose parser collects every numeric candidate and rewards a reply if any guess matches. Retrieve a reusable rule that rejects multi-answer hedging while preserving valid single guesses.",
+  "adaptation": {
+    "code": "import re\n\ndef tighten(replies, state, reward):\n    # Penalize any reply that does not contain exactly one complete <answer>integer</answer>\n    # and no other numeric candidates; each reply is checked independently.\n    # Only lowers reward; range 1..40.\n    if not replies:\n        return reward\n    for reply in replies:\n        text = reply or \"\"\n        tagged = re.findall(r\"<answer>\\s*(\\d+)\\s*</answer>\", text)\n        if len(tagged) != 1:\n            return min(reward, 0.0)\n        if not (1 <= int(tagged[0]) <= 40):\n            return min(reward, 0.0)\n        stripped = re.sub(r\"<answer>\\s*\\d+\\s*</answer>\", \"\", text)\n        if re.search(r\"\\d\", stripped):\n            return min(reward, 0.0)\n    return reward\n",
+    "summary": "Adapted the first-match-vs-last-block invariant: each reply must contain exactly one complete <answer>integer</answer> in range 1..40 and no other numeric candidates; otherwise reward is lowered to 0. Only lowers reward, uses only re, and reads no hidden state. This is a format/ambiguity check, not a claim of generic improvement.",
+    "applied_invariant_id": "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4"
+  },
+  "modulePath": "results/graph_transfer/hub-to-multiturn-01/adapted_game.py",
+  "moduleSha256": "fc449ccd8a79155aaf7027e9f88ce4a60d4c2632a848224fe877fff02ea66f64",
+  "validation": {
+    "passed": true,
+    "attackCases": 60,
+    "attackVariants": 3,
+    "seeds": 20,
+    "blocked": 60,
+    "benignTotal": 40,
+    "benignPassed": 40,
+    "rewardBefore": 1,
+    "rewardAfter": 0,
+    "gates": "PASS number_hunt_easy: reference=1.00 null=0.000 random=0.170",
+    "referenceTurns": [
+      5,
+      5,
+      5,
+      4,
+      4,
+      4,
+      6,
+      2,
+      4,
+      6,
+      6,
+      5,
+      5,
+      5,
+      5,
+      4,
+      5,
+      3,
+      5,
+      4
+    ],
+    "attackExample": {
+      "seed": 1384154382,
+      "replies": [
+        "<answer>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40</answer>"
+      ],
+      "mechanism": "candidate-list-in-tag",
+      "original": 1.0,
+      "strict": 0.0
+    },
+    "referenceTranscript": [
+      [
+        "env",
+        "I'm thinking of a whole number between 1 and 40. You have 7 guesses. After each guess I'll say higher, lower or correct. One guess per reply.\nReply with only the final answer inside <answer></answer> tags. Example reply: <answer>57</answer>"
+      ],
+      [
+        "agent",
+        "<answer>20</answer>"
+      ],
+      [
+        "env",
+        "Lower."
+      ],
+      [
+        "agent",
+        "<answer>10</answer>"
+      ],
+      [
+        "env",
+        "Higher."
+      ],
+      [
+        "agent",
+        "<answer>15</answer>"
+      ],
+      [
+        "env",
+        "Lower."
+      ],
+      [
+        "agent",
+        "<answer>12</answer>"
+      ],
+      [
+        "env",
+        "Lower."
+      ],
+      [
+        "agent",
+        "<answer>11</answer>"
+      ],
+      [
+        "env",
+        "Correct!"
+      ]
+    ],
+    "referenceExample": {
+      "seed": 1384154382,
+      "replies": [
+        "<answer>20</answer>",
+        "<answer>10</answer>",
+        "<answer>15</answer>",
+        "<answer>12</answer>",
+        "<answer>11</answer>"
+      ],
+      "variant": "reference"
+    },
+    "attackScores": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "benignScores": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "modelCalls": 1,
+  "modelSpendUsd": 0.00057,
+  "limitations": [
+    "One transfer with one model adaptation; no baseline or efficiency improvement is established.",
+    "Target has a planted loose parser; attacks are three scripted variants across 20 seeds, not 60 novel findings.",
+    "The model adapted a retrieved rule; it did not generate the target game or discover the scripted attacks."
+  ],
+  "publication": {
+    "hosted": true,
+    "sourceInvariantId": "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+    "targetEnvId": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+    "outcome": "blocked"
+  }
+}

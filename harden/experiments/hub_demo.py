@@ -117,6 +117,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if not self.allowed(): return self.respond(403, {'error': 'Local demo origin required'})
+        if self.path == '/api/hub-demo/transfer/replay': return self.transfer_replay()
         if self.path != '/api/hub-demo/score': return self.respond(404, {'error': 'Not found'})
         try:
             size = int(self.headers.get('Content-Length', '0'))
@@ -133,6 +134,29 @@ class Handler(BaseHTTPRequestHandler):
             # Provider/file exception text may contain local details; never return it to the browser.
             print(f'Live scoring failed: {type(exc).__name__}', flush=True)
             self.respond(503, {'error': f'Live scoring failed ({type(exc).__name__}); inspect the installed reverse-text runtime and cached dataset. No scores were substituted.'})
+        finally: LOCK.release()
+
+    def transfer_replay(self):
+        try:
+            size = int(self.headers.get('Content-Length', '0'))
+            if not 0 < size <= 64 or json.loads(self.rfile.read(size)) != {}:
+                raise ValueError('Expected empty request')
+        except (ValueError, TypeError): return self.respond(400, {'error': 'Expected an empty JSON object'})
+        if not LOCK.acquire(blocking=False): return self.respond(409, {'error': 'A replay is running; retry when it finishes'})
+        try:
+            from harden.experiments.graph_transfer_demo import verify
+            report = json.loads((ROOT / 'results/graph_transfer/hub-to-multiturn-01/report.json').read_text())
+            module = ROOT / report['modulePath']
+            if hashlib.sha256(module.read_bytes()).hexdigest() != report['moduleSha256']:
+                raise ValueError('Saved adaptation changed')
+            started = time.perf_counter()
+            result = verify(module)
+            self.respond(200, {'runId': report['runId'], 'moduleSha256': report['moduleSha256'],
+                              'checkedAt': datetime.now(timezone.utc).isoformat(),
+                              'validation': result, 'modelCalls': 0,
+                              'elapsedMs': round((time.perf_counter() - started) * 1000, 2)})
+        except Exception as exc:
+            self.respond(503, {'error': f'Transfer replay failed ({type(exc).__name__}); no scores were substituted'})
         finally: LOCK.release()
 
 

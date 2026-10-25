@@ -10,6 +10,7 @@ import type { GraphProjection } from './graph/buildGraph';
 const emptyGraph: GraphProjection = { nodes: [], edges: [], diagnostics: [] };
 const HubLeaderboard = lazy(() => import('./components/HubLeaderboard').then(module => ({ default: module.HubLeaderboard })));
 const HubReplay = lazy(() => import('./components/HubReplay').then(module => ({ default: module.HubReplay })));
+const GraphTransferDemo = lazy(() => import('./components/GraphTransferDemo').then(module => ({ default: module.GraphTransferDemo })));
 
 function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphProjection }) {
   const ids = new Set(snapshot?.rows.environments.map(env => env.envId));
@@ -25,8 +26,8 @@ function Metrics({ snapshot, graph }: { snapshot?: LiveSnapshot; graph: GraphPro
 }
 
 export function App() {
-  type View = 'network' | 'leaderboard' | 'hub-replay';
-  const hashView = (): View => window.location.hash === '#hub-replay' ? 'hub-replay' : window.location.hash === '#leaderboard' ? 'leaderboard' : 'network';
+  type View = 'network' | 'leaderboard' | 'hub-replay' | 'knowledge-demo';
+  const hashView = (): View => window.location.hash === '#knowledge-demo' ? 'knowledge-demo' : window.location.hash === '#hub-replay' ? 'hub-replay' : window.location.hash === '#leaderboard' ? 'leaderboard' : 'network';
   const [view, setView] = useState<View>(hashView);
   const live = useLiveStore();
   const { snapshot, status } = live;
@@ -60,10 +61,11 @@ export function App() {
       : 'Waiting for the initial subscription…';
 
   return <main>
-    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a href="/replay.html">Training replays <span aria-hidden="true">↗</span></a></nav></header>
+    <header className="page-header"><div><a className="wordmark" href="/" aria-label="Loophole home"><span aria-hidden="true">∞</span> loophole</a><h1>Reward integrity</h1></div><nav aria-label="Main navigation"><a aria-current={view === 'network' ? 'page' : undefined} href="#network" onClick={e => { e.preventDefault(); navigate('network'); }}>Knowledge graph</a><a aria-current={view === 'leaderboard' ? 'page' : undefined} href="#leaderboard" onClick={e => { e.preventDefault(); navigate('leaderboard'); }}>Hub leaderboard</a><a aria-current={view === 'hub-replay' ? 'page' : undefined} href="#hub-replay" onClick={e => { e.preventDefault(); navigate('hub-replay'); }}>Live Hub replay</a><a aria-current={view === 'knowledge-demo' ? 'page' : undefined} href="#knowledge-demo" onClick={e => { e.preventDefault(); navigate('knowledge-demo'); }}>Rule transfer</a><a href="/replay.html">Training replays <span aria-hidden="true">↗</span></a></nav></header>
     <ConnectionStatus {...live} />
     {view === 'leaderboard' && <Suspense fallback={<p className="lb-no-results" role="status">Loading saved audit results…</p>}><HubLeaderboard snapshot={snapshot} onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
     {view === 'hub-replay' && <Suspense fallback={<p className="lb-no-results" role="status">Loading Hub replay…</p>}><HubReplay onInspect={id => { select(id); navigate('network'); }} /></Suspense>}
+    {view === 'knowledge-demo' && <Suspense fallback={<p className="lb-no-results" role="status">Loading transfer evidence…</p>}><GraphTransferDemo onInspect={(id, tab) => { select(id, tab); navigate('network'); }} /></Suspense>}
     <div hidden={view !== 'network'}>
     <Metrics snapshot={snapshot} graph={graph} />
     <section className="workspace" ref={workspace}>

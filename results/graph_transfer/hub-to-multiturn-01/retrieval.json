@@ -1,0 +1,91 @@
+{
+  "receipt": {
+    "backend": "moss+graph",
+    "source": "spacetimedb",
+    "model": "moss-minilm",
+    "snapshot_sha256": "fef1cdf70cb5531c9842d4ea077ba55ab4e17f176cea4d18f0145dce52411ba8",
+    "target_env_id": "game/graph-transfer-number-hunt-hub-to-multiturn-01",
+    "indexed_documents": 95,
+    "alpha": 0.65,
+    "min_score": 0.2,
+    "offered_candidates": [
+      "runes/temporal-bench#last-standalone-capital-hedge-a43767075c",
+      "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+      "harleycooper/nanochatAquaRat#first-answer-line-wins-d271450770",
+      "harleycooper/nanochatAquaRat#separatorless-answer-is-override-23abc0c7d3",
+      "srthkdev/contract_nli_env#probabilistic-split-box-63c31a65e4"
+    ],
+    "cold_or_cached": "cached",
+    "query_characters": 298,
+    "index_ready_ms": 1099.748,
+    "query_ms": 7.225,
+    "elapsed_ms": 1993.753
+  },
+  "matches": [
+    {
+      "invariant_id": "runes/temporal-bench#last-standalone-capital-hedge-a43767075c",
+      "env_id": "runes/temporal-bench",
+      "exploit_class": "multi-answer",
+      "title": "Last-standalone-letter fallback rewards hedged multi-letter answers",
+      "mechanism": "When the response matches none of the explicit answer patterns, the parser falls back to the last standalone capital letter in the text. A response naming several candidate options gets full credit whenever the gold letter happens to come last.",
+      "preconditions": "Applies to multiple-choice graders whose letter extractor uses a cascade of regex patterns that ends in a permissive 'last capital letter' or 'any letter' fallback.",
+      "defense_pattern": "Require the final answer to be a single unambiguous letter in an accepted format, for example the whole answer line fully matching an optional 'answer is' prefix plus one letter. Give zero credit when the response names more than one distinct option letter or no letter can be strictly extracted.",
+      "score": 0.5890501141548157,
+      "reasons": [
+        "Moss hybrid relevance 0.589"
+      ]
+    },
+    {
+      "invariant_id": "metavind/mini-sudoku#first-match-vs-last-block-cdf1ee68d4",
+      "env_id": "metavind/mini-sudoku",
+      "exploit_class": "multi-answer",
+      "title": "First-match answer extraction rewards hedged multi-answer responses",
+      "mechanism": "The response holds several answer blocks with different contents. The parser's regex search returns the first block rather than the last, so a correct grid in any earlier block earns full credit even when the final, committed answer is different and wrong. The format check only looks at the opening and closing tags of the message, so it passes as well.",
+      "preconditions": "Applies to any grader that extracts an answer from tagged or delimited regions with a regex or XML parser, where the response may contain more than one such region and only one is scored.",
+      "defense_pattern": "Score only the last answer block, using finditer and taking the final match. Better still, assign zero when multiple answer blocks have differing contents. Apply the same extracted value consistently across all reward components, including partial and format credit.",
+      "score": 0.5307615995407104,
+      "reasons": [
+        "Moss hybrid relevance 0.531"
+      ]
+    },
+    {
+      "invariant_id": "harleycooper/nanochatAquaRat#first-answer-line-wins-d271450770",
+      "env_id": "harleycooper/nanochatAquaRat",
+      "exploit_class": "multi-answer",
+      "title": "First-match answer extraction lets an early guess override a later final answer",
+      "mechanism": "The response puts an answer marker with one letter early, then revises and ends with a different marker and letter. The parser takes the earliest regex match, so the early letter gets graded, and the response is credited whenever that letter matches gold even though its final committed answer is different.",
+      "preconditions": "Applies to any grader that pulls a single answer token (letter, number, boxed value) from free-form text with a regex returning the first match, when the response may contain more than one answer marker.",
+      "defense_pattern": "Grade the answer that follows the last answer marker, or reject responses whose answer markers disagree. Require the extracted token to be a standalone valid option, and fall back to a bare-letter-only response only when no marker exists.",
+      "score": 0.5106521844863892,
+      "reasons": [
+        "Moss hybrid relevance 0.511"
+      ]
+    },
+    {
+      "invariant_id": "harleycooper/nanochatAquaRat#separatorless-answer-is-override-23abc0c7d3",
+      "env_id": "harleycooper/nanochatAquaRat",
+      "exploit_class": "multi-answer",
+      "title": "Multiple conflicting answer letters; grader picks a favorable one",
+      "mechanism": "The response gives several different answer letters: a bare letter, a formal 'Answer: X' marker, and a later informal restatement. The extractor returns whichever single match its search order finds first (or last under a loose pattern), so any listed letter that matches gold earns full credit even though the declared answer is a different letter.",
+      "preconditions": "Applies to multiple-choice graders that extract one option letter by regex search over free text, especially with fallback branches that accept bare letters or loosely phrased answer markers.",
+      "defense_pattern": "Parse only the mandated strict marker format (e.g. 'Answer:' followed by a standalone letter) and use its last occurrence. Accept a bare letter only when the whole response is just that letter. Score zero if the marker is missing, or if the response states conflicting final letters.",
+      "score": 0.5080934762954712,
+      "reasons": [
+        "Moss hybrid relevance 0.508"
+      ]
+    },
+    {
+      "invariant_id": "srthkdev/contract_nli_env#probabilistic-split-box-63c31a65e4",
+      "env_id": "srthkdev/contract_nli_env",
+      "exploit_class": "multi-answer",
+      "title": "Ordered substring fallback rewards hedged multi-label answers",
+      "mechanism": "When the extracted answer is not exactly one valid label, the grader scans it for label substrings in a fixed priority order and returns the first one found. A response naming several labels, for example with fractional weights, is therefore mapped to whichever label has highest priority, and it earns full credit whenever that label is the gold one.",
+      "preconditions": "This applies to classification graders that, after an exact-match attempt fails, map free-form or boxed text to a label by substring or keyword search over several candidate labels.",
+      "defense_pattern": "Count how many distinct valid labels occur in the extracted answer. Give zero credit if there are none or more than one, and only map to a label when exactly one is present. Alternatively, require the normalized answer to equal a single label after stripping only formatting such as \\text{} and punctuation.",
+      "score": 0.5042458176612854,
+      "reasons": [
+        "Moss hybrid relevance 0.504"
+      ]
+    }
+  ]
+}

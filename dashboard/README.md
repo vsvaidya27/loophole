@@ -86,6 +86,12 @@ therefore be separate findings, and rates are not whole-dataset guarantees.
 
 ## Frontend structure
 
+**Rule transfer** at `/#knowledge-demo` shows a validated Mini Sudoku rule being
+adapted to a different multi-turn number game. Its source, retrieval, adaptation,
+60 attack cases, and 40 benign checks are backed by the saved experiment. The
+Replay validation button recomputes the accepted module's checks in the local OS
+sandbox with no new model call. See [GRAPH_TRANSFER_DEMO.md](../docs/GRAPH_TRANSFER_DEMO.md).
+
 The **Live Hub replay** view at `/#hub-replay` provides an interactive before/after
 comparison for `primeintellect/reverse-text`. It re-scores saved responses through
 the actual original grader and accepted patch when Run is clicked. Start the
