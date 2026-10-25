@@ -90,7 +90,7 @@ function KnowledgeGraph({ example, demo, graph, liveStatus, onInspect }: { examp
   return <>
     <div className="lineage-heading"><span className="eyebrow">EVIDENCE MAP / THIS EXAMPLE</span><span>Select a node to inspect its meaning</span></div>
     <div className="lineage-canvas"><svg viewBox="0 0 890 330" role="group" aria-label="Example knowledge graph: task, original environment, reward loophole, reusable constraint, revised environment and validation">
-      <defs><marker id={arrow} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="#647c8a" /></marker></defs>
+      <defs><marker id={arrow} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="#837d77" /></marker></defs>
       {edges.map(edge => <g key={edge.label}><path d={edge.path} className="lineage-edge" markerEnd={`url(#${arrow})`} /><text x={edge.x} y={edge.y} className="lineage-edge-label" textAnchor="middle">{edge.label}</text></g>)}
       {nodes.map(node => <g key={node.id} role="button" tabIndex={0} aria-label={`Inspect ${node.label}`} aria-pressed={selected === node.id} onClick={() => setSelected(node.id)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelected(node.id); } }} className={`lineage-node ${node.kind} ${selected === node.id ? 'selected' : ''}`}>
         <rect x={node.x - 105} y={node.y - 39} width="210" height="78" rx="12" /><circle cx={node.x - 84} cy={node.y - 13} r="3" /><text x={node.x - 72} y={node.y - 9} className="lineage-node-label">{node.label}</text><text x={node.x - 84} y={node.y + 15} className="lineage-node-sub">{node.sub}</text>
