@@ -322,6 +322,8 @@ def show_case(c: dict) -> str:
 class GameAudit:
     def __init__(self, game_ref: str, cap: float | None, from_rollouts: Path | None):
         from env_compiler.loader import load_game
+        from harden.store.moss_retrieval import require_moss_config
+        require_moss_config()
 
         from harden.audit.llm import Claude
         from harden.store.mirror import EXPLOIT_CLASSES
@@ -362,28 +364,13 @@ class GameAudit:
         return "\n\n".join(parts)
 
     def _retrieve(self) -> str:
-        """Rules learned on other environments, offered as untrusted reference."""
-        try:
-            from harden.store.mirror import DB_PATH
-            import os
-            from harden.store.retrieval import GraphRetriever, SpacetimeKnowledgeSource, SQLiteKnowledgeSource, prompt_context
-
-            try:
-                knowledge = SpacetimeKnowledgeSource(
-                    os.environ.get('SPACETIME_HOST', 'https://maincloud.spacetimedb.com'),
-                    os.environ.get('SPACETIME_DB', 'loophole-knowledge-calhacks-2026'), timeout=15).load()
-                self.knowledge_source = knowledge.source
-            except OSError:
-                if not DB_PATH.is_file(): raise
-                knowledge = SQLiteKnowledgeSource(DB_PATH).load()
-                self.knowledge_source = knowledge.source
-                print('Hosted retrieval unavailable; using local mirror without graph-neighbour expansion')
-            matches = GraphRetriever(knowledge).retrieve(
-                self.source[:20000], self.game.description, k=5, target_env_id=self.env_id)
-            return prompt_context(matches, max_chars=6000)[0] if matches else ""
-        except Exception as e:  # noqa: BLE001 - retrieval is optional context
-            print(f"knowledge retrieval skipped: {type(e).__name__}: {e}")
-            return ""
+        """Required Moss retrieval; errors abort before hacker/fixer model calls."""
+        from harden.store.moss_retrieval import retrieve_context
+        result = retrieve_context(self.source, self.game.description, target_env_id=self.env_id)
+        self.knowledge_source = result.receipt['source']
+        self.retrieval_receipt = result.receipt
+        self.offered_invariant_ids = result.offered_ids
+        return result.text
 
     def _rollout_candidates(self, path: Path) -> list[dict]:
         """Replies a hacked GRPO policy produced (trainer.rollout output), as extra probe candidates.
@@ -583,6 +570,7 @@ class GameAudit:
             "rules": self.rules, "rules_summary": self.summary, "iterations": self.iterations,
             "attempts": self.attempts, "invariants": invariants, "cost_usd": round(self.claude.spent, 4),
             "retrieved_knowledge": bool(self.knowledge), "knowledge_source": getattr(self, 'knowledge_source', None),
+            "retrieval": getattr(self, 'retrieval_receipt', None),
         }
         self.evidence_path.write_text(json.dumps(report, indent=1, default=str))
         print(f"{self.name}: {status}; {len(confirmed)} confirmed false positives, {len(invariants)} invariants, "

@@ -149,6 +149,9 @@ class RetrievalTests(unittest.TestCase):
 
 class LoopTests(unittest.TestCase):
     def setUp(self):
+        self.retriever_patch = patch('harden.store.knowledge_loop.MossRetriever', side_effect=GraphRetriever)
+        self.retriever_patch.start()
+        self.addCleanup(self.retriever_patch.stop)
         self.matches = GraphRetriever(snapshot()).retrieve('substring', '', target_env_id='game/target')
         self.proposal = FixProposal('candidate', ('a',))
 

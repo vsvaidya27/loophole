@@ -1,5 +1,9 @@
 # Graph knowledge retrieval and hacker/fixer integration
 
+> Current production retrieval requires Moss. See [MOSS_RETRIEVAL.md](MOSS_RETRIEVAL.md)
+> for credentials, caching, failure behavior and current commands. The lexical-ranking
+> design below is retained as a historical baseline; it is not a fallback backend.
+
 ## Plan and implemented boundary
 
 1. Read the existing public environment, invariant, and similarity-edge tables.

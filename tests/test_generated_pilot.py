@@ -8,6 +8,7 @@ from harden.experiments import generated_pilot as pilot
 
 def test_live_pilot_allows_multiturn(monkeypatch):
     captured = {}
+    monkeypatch.setattr(pilot, 'require_moss_config', lambda: None)
     monkeypatch.setattr(pilot, 'CompilerClient', lambda: object())
 
     def compile_game(*args, **kwargs):
@@ -40,6 +41,7 @@ def test_saved_model_pilot_still_replays_under_current_main():
 def test_multi_turn_compile_routes_to_episode_audit(monkeypatch, tmp_path):
     path = tmp_path / 'game.py'
     path.write_text('# compiler output')
+    monkeypatch.setattr(pilot, 'require_moss_config', lambda: None)
     monkeypatch.setattr(pilot, 'CompilerClient', lambda: object())
     monkeypatch.setattr(pilot, 'compile_game', lambda *a, **k: SimpleNamespace(ok=True, path=path, kind='multi'))
     monkeypatch.setattr(pilot, 'evaluate', lambda *a, **k: (_ for _ in ()).throw(AssertionError('Single-turn evaluator called')))
@@ -88,6 +90,7 @@ def tighten(replies, state, reward):
         monkeypatch.setattr(ga, 'OUT', folder)
         monkeypatch.setattr(mirror, 'DB_PATH', folder / 'mirror.db')
         monkeypatch.setattr(llm, 'Claude', FakeClaude)
+        monkeypatch.setattr('harden.store.moss_retrieval.require_moss_config', lambda: None)
         monkeypatch.setattr(ga.GameAudit, '_retrieve', lambda self: '')
         audit = ga.GameAudit('number_hunt_easy', cap=None, from_rollouts=None)
         result = audit.run()

@@ -8,6 +8,8 @@ Put the Anthropic key in the repository root `.env`:
 
 ```dotenv
 ANTHROPIC_API_KEY=your-key-here
+MOSS_PROJECT_ID=your-project-id
+MOSS_PROJECT_KEY=your-project-key
 ```
 
 The file is ignored by Git. Never put the key in the dashboard, a `VITE_` variable,
@@ -70,9 +72,10 @@ environments locally; they do not rent Prime cloud instances.
    validation gates. Generated games run through OS isolation (macOS sandbox-exec or Linux
    bubblewrap). The multi-turn path replays reply sequences against fresh seeded
    episodes, including environment feedback, and validates repairs against benign episodes.
-2. Public SQL reads retrieve knowledge from other environments. Retrieval excludes
-   the current target. Retrieved text is labeled untrusted context, and does not
-   establish that a rule applies to the target.
+2. Required Moss hybrid retrieval ranks eligible invariant records loaded from hosted
+   SpacetimeDB, then expands one graph hop. Retrieval excludes the current target and
+   seeds. Both roles receive bounded untrusted context. Missing credentials or Moss
+   failures stop the audit explicitly; there is no keyword fallback. See `MOSS_RETRIEVAL.md`.
 3. Haiku proposes candidate reward loopholes. Actual reward replay and an independent
    correctness check distinguish false positives from unusual valid answers. The
    Hub path uses deterministic answer checks first, with a separate verifier role
@@ -170,7 +173,8 @@ and reproducible. The graph includes both pilots and all calibration records.
    to each retrieved rule.
 5. Keep services alive on the chosen demo machine or deploy compute/frontend for a
    public demo. Only the hosted knowledge store is independently running remotely.
-6. Moss retrieval is a proposed optional integration; it has not been implemented.
+6. Moss retrieval is now required and implemented. Add the project ID/key, run the
+   retrieval-only check, then measure retrieval quality; older pilot evidence predates Moss.
 
 Final validation: 175 Python tests + 15 subtests passed; one opt-in Hub smoke check
 was skipped. Dashboard: 4 tests and production build passed. SpacetimeDB: 65 tests

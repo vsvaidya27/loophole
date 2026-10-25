@@ -34,7 +34,8 @@ it does not claim Hub leaderboard acceptance or trained-policy performance.
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
 interface, so hub environments and compiled games run through the same engine.
 
-Graph knowledge retrieval and hacker/fixer adapters are in `harden/store/retrieval.py`
+Required Moss retrieval is in `harden/store/moss_retrieval.py` (see
+[setup and credential instructions](docs/MOSS_RETRIEVAL.md)). Graph contracts and hacker/fixer adapters are in `harden/store/retrieval.py`
 and `harden/store/knowledge_loop.py`. See [the integration guide](docs/GRAPH_RETRIEVAL.md)
 for the plan, orchestration example, and cross-branch tests.
 

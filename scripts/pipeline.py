@@ -65,6 +65,9 @@ def main() -> int:
         p.error("give a description or --game")
     py = sys.executable
 
+    from harden.store.moss_retrieval import require_moss_config
+    require_moss_config()  # retrieval must be configured before paid compilation
+
     # 1. compile
     ref = args.game
     if ref is None:

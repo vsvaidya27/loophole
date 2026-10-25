@@ -12,7 +12,7 @@ from harden.audit.roles import PROBER_SCHEMA
 from harden.model_client import CompilerClient
 from harden.store import mirror
 from harden.store.extract import extract_invariant
-from harden.store.retrieval import SpacetimeKnowledgeSource, SQLiteKnowledgeSource, GraphRetriever, prompt_context
+from harden.store.moss_retrieval import require_moss_config, retrieve_context
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -33,6 +33,7 @@ def audit_episode_game(original):
 
 
 def run(description):
+    require_moss_config()  # fail before any paid compiler request
     compiler = CompilerClient()
     compiled = compile_game(description, ROOT / 'compiled', client=compiler, max_attempts=2, allow_multiturn=True)
     if not compiled.ok: return {'status': 'compile_failed', 'reason': compiled.reason}
@@ -46,12 +47,9 @@ def run(description):
     mirror.record_environment(env_id, source='game', title=description[:100], status='hardening')
     base = evaluate(original)
     if not all(row['original'] == 1 for row in base['references']): raise ValueError('Original references failed')
-    try:
-        knowledge = SpacetimeKnowledgeSource(os.environ.get('SPACETIME_HOST', 'https://maincloud.spacetimedb.com'), os.environ.get('SPACETIME_DB', 'loophole-knowledge-calhacks-2026'), timeout=30).load()
-    except OSError:
-        knowledge = SQLiteKnowledgeSource(ROOT / 'invariants.db').load()
-    matches = GraphRetriever(knowledge).retrieve(source, description, target_env_id=env_id)
-    context, offered = prompt_context(matches, max_chars=6000)
+    retrieval = retrieve_context(source, description, target_env_id=env_id)
+    context, offered = retrieval.text, retrieval.offered_ids
+    (evidence / 'retrieval.json').write_text(json.dumps(retrieval.receipt, indent=2))
     schema = json.loads(json.dumps(PROBER_SCHEMA))
     props = schema['properties']['proposals']['items']
     props['properties']['source_invariant_id'] = {'type': ['string', 'null']}
