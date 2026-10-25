@@ -26,11 +26,13 @@ Vite configuration: frontend environment values are public in the browser bundle
 The app subscribes once to six public tables and updates on insert/update/delete events,
 without polling. It labels initial load, connection loss and errors, supports reconnect,
 always includes the entire store, and uses the shared `buildGraph` projection.
-The network shows environments as blue nodes, invariant records as amber nodes, and
-shared rule families as shaded clusters. Source, similarity and tested-transfer links
-are distinct; selection highlights evidence without filtering data. Select a node
-for mechanism, preconditions, defense, source evidence path, recorded rewards and transfer
-details. It displays recorded evidence, not an independent certification of it.
+The dark node canvas shows each environment as a large hub, with its invariant
+records as colored satellites. Satellite colors distinguish failure classes. Violet
+diamond nodes represent shared rule families; the full graph remains visible when
+you focus a node. Source, similarity and tested-transfer links
+are distinct; selection highlights evidence without filtering data. Select an invariant for the Failure, Defense, and Transfer inspector tabs: submitted
+completion, original and patched rewards, mechanism, preconditions, defense, evidence
+path, and recorded transfer outcomes. Missing measurements stay explicitly unavailable. It displays recorded evidence, not an independent certification of it.
 
 The game/training replay link initially shows an honest empty placeholder. Generate the
 actual replay from rollout artifacts when they exist:
