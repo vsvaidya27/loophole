@@ -56,16 +56,31 @@ def test_rollout_stops_at_the_turn_budget_for_a_useless_policy():
     assert all(r.reward == 0.0 and len(r.turns) == game.max_turns for r in recs)
 
 
+class TinyBody(torch.nn.Module):
+    def __init__(self, vocab):
+        super().__init__()
+        self.emb = torch.nn.Embedding(vocab, 8)
+
+    def forward(self, input_ids, attention_mask=None):
+        return type("O", (), {"last_hidden_state": self.emb(input_ids)})
+
+
 class TinyLM(torch.nn.Module):
-    """A 2-layer toy language model: enough to check the loss only touches reply tokens."""
+    """A 2-layer toy language model shaped like a Hugging Face causal LM (a base model returning
+    hidden states, plus an output head): enough to check the loss only touches reply tokens."""
+
+    base_model_prefix = "model"
 
     def __init__(self, vocab=16):
         super().__init__()
-        self.emb = torch.nn.Embedding(vocab, 8)
+        self.model = TinyBody(vocab)
         self.out = torch.nn.Linear(8, vocab)
 
+    def get_output_embeddings(self):
+        return self.out
+
     def forward(self, input_ids, attention_mask=None):
-        return type("O", (), {"logits": self.out(self.emb(input_ids))})
+        return type("O", (), {"logits": self.out(self.model(input_ids).last_hidden_state)})
 
 
 def test_policy_gradient_raises_probability_of_rewarded_replies():
