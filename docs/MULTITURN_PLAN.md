@@ -1,6 +1,13 @@
 # Multi-turn compatibility plan
 
-Amends [BUILD_PLAN.pdf](BUILD_PLAN.pdf). Status: draft for team review. Branch: `multi-turn`.
+Amends [BUILD_PLAN.pdf](BUILD_PLAN.pdf). Status: draft for team review.
+
+> **Where the code is.** The multi-turn code described here is on branch
+> [`multi-turn`](https://github.com/vsvaidya27/loophole/tree/multi-turn) and is **not merged into
+> `main` yet**. File paths below (for example `env_compiler/multiturn.py`,
+> `trainer/multiturn_grpo.py`) refer to that branch. This document was published to `main` first so
+> the whole team plans against the same scope; when the branch merges, this file gets updated to
+> match what landed.
 
 ## 1. What changed and why
 
@@ -33,7 +40,7 @@ rewritten, and every shared entry point dispatches on `kind`.
 Visual or audio-in games, real-time or live-data games, LLM-judge rewards inside the *game*
 reward, more than about 10 turns per episode, replies longer than 64 tokens.
 
-## 2. What is built on this branch
+## 2. What is built (on branch `multi-turn`)
 
 | Piece | State |
 | --- | --- |
@@ -163,7 +170,8 @@ optional and not on the critical path; do it only if the hardening engine needs 
 
 | Phase | Work | Done when |
 | --- | --- | --- |
-| M0 (done) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | 84 then 123 tests pass on this branch |
+| M0 (done, on branch `multi-turn`) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | full suite passes on the branch (123 tests) |
+| M0b | Merge `multi-turn` into `main` (after M1 shows the trainer learns) | single-turn tests still green; this file updated to match |
 | M1 GPU validation | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
 | M2 trainer parity | `--shots`, `--lora`, logits-at-reply-positions, optional vLLM | same flags as single-turn work or error clearly |
 | M3 compiler | Real-model corpus run, latency, Claude backend | corpus target in section 3 met |
@@ -192,6 +200,8 @@ M1 gates everything after it: nothing else is worth building if the multi-turn t
 - Team: pick the hero multi-turn demo game (hint game, Wordle-like, or something with a scripted opponent).
 
 ## 8. Decision log
+- **2026-10-24 (later):** the plan was published to `main` ahead of the code, at the owner's request and
+  without review, so the team shares one scope. The code stays on `multi-turn` until M0b.
 - **2026-10-24:** single-turn stays the default and the demo path; multi-turn is an additive track
   behind `kind`. Reason: protects the demo-critical path while allowing richer games. Supersedes the
   original plan's "refuse multi-turn" rule only when `--allow-multiturn` is passed.
