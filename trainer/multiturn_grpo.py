@@ -90,6 +90,13 @@ def trim_reply(ids: list[int], eos_ids: set[int], pad_id: int | None) -> list[in
     return ids
 
 
+def autocast(device: str):
+    """bf16 compute on CUDA (weights stay fp32); a no-op elsewhere."""
+    import torch
+
+    return torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda")
+
+
 def hf_generator(model, tokenizer, device: str, sample: bool, temperature: float = 1.0) -> GenerateFn:
     import torch
 
@@ -104,7 +111,7 @@ def hf_generator(model, tokenizer, device: str, sample: bool, temperature: float
         kwargs = {"do_sample": True, "temperature": temperature, "top_k": 0, "top_p": 1.0} if sample else {"do_sample": False}
         was_training = model.training
         model.eval()
-        with torch.no_grad():
+        with torch.no_grad(), autocast(device):
             out = model.generate(**enc, max_new_tokens=MAX_REPLY_TOKENS, pad_token_id=tokenizer.pad_token_id, **kwargs)
         if was_training:
             model.train()
@@ -147,9 +154,14 @@ def policy_gradient_step(model, optimizer, recs: list[EpisodeRecord], group_size
             target_mask[i, len(c) : len(seq)] = True  # only the model's own reply tokens
             adv[i] = a
         ids, attn, target_mask, adv = ids.to(device), attn.to(device), target_mask.to(device), adv.to(device)
-        logits = model(input_ids=ids, attention_mask=attn).logits[:, :-1].float()
-        logp = -F.cross_entropy(logits.reshape(-1, logits.shape[-1]), ids[:, 1:].reshape(-1), reduction="none").view(ids.shape[0], -1)
-        loss = -((adv[:, None] * logp) * target_mask[:, 1:]).sum() / total_tokens
+        # Project only the reply positions to the vocabulary: the context (game text) is most of each
+        # sequence, and full-vocabulary logits for it dominate memory. Same log-probs, same loss.
+        mask = target_mask[:, 1:]
+        with autocast(device):
+            hidden = getattr(model, model.base_model_prefix)(input_ids=ids, attention_mask=attn).last_hidden_state
+            logits = model.get_output_embeddings()(hidden[:, :-1][mask]).float()
+        logp = -F.cross_entropy(logits, ids[:, 1:][mask], reduction="none")
+        loss = -(adv[:, None].expand_as(mask)[mask] * logp).sum() / total_tokens
         loss.backward()
         total += float(loss.detach())
     torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -171,9 +183,10 @@ def train_multiturn(args, strict_game: MultiTurnGameEnv, train_game: MultiTurnGa
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     device = pick_device()
-    dtype = torch.bfloat16 if device == "cuda" else torch.float32
+    # fp32 master weights and optimizer state, bf16 autocast for compute (as TRL's bf16=True does):
+    # with bf16 weights, AdamW steps at lr ~1e-6 round away or to noise and the policy can collapse.
     tokenizer = AutoTokenizer.from_pretrained(args.model)
-    model = AutoModelForCausalLM.from_pretrained(args.model, dtype=dtype).to(device)
+    model = AutoModelForCausalLM.from_pretrained(args.model, dtype=torch.float32).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
 
     args.out.mkdir(parents=True, exist_ok=True)

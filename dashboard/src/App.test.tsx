@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Timestamp } from 'spacetimedb';
 import { App } from './App';
 import { connectLive, type LiveHandlers, type LiveSnapshot } from './live';
+import voice from '../public/showcase/data/voice.json';
 
 vi.mock('./live', async importOriginal => ({
   ...await importOriginal<typeof import('./live')>(),
@@ -69,6 +70,7 @@ afterEach(async () => {
   if (root) await act(() => root!.unmount());
   container.remove();
   vi.unstubAllGlobals();
+  window.history.replaceState(null, '', '/');
 });
 
 describe('React live dashboard', () => {
@@ -190,5 +192,48 @@ describe('React live dashboard', () => {
     expect(element('#empty').textContent).toContain('Connected. No knowledge records');
     await publish();
     expect(element('#selection-kind').textContent).toBe('No selection');
+  });
+
+  it('returns from Showcase with the same live subscription and selected evidence', async () => {
+    await publish();
+    await click(element('[data-node-id="inv:failure-one"]'));
+    await click(button('Defense'));
+    const count = sessions.length;
+    const selectedNode = element('[data-node-id="inv:failure-one"]');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+    await act(async () => {
+      window.history.replaceState(null, '', '#showcase/voice');
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    });
+    expect(element('nav[aria-label="Main navigation"] a[aria-current]').textContent).toBe('Showcase');
+    expect(container.querySelector('.showcase-dashboard')).not.toBeNull();
+    await act(() => {
+      window.history.replaceState(null, '', '#network');
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    });
+    expect(element('nav[aria-label="Main navigation"] a[aria-current]').textContent).toBe('Knowledge graph');
+    expect(element('[data-node-id="inv:failure-one"]')).toBe(selectedNode);
+    expect(button('Defense').getAttribute('aria-selected')).toBe('true');
+    expect(sessions).toHaveLength(count);
+  });
+
+  it('opens evidence from the guided demo’s live graph using the existing subscription', async () => {
+    await publish();
+    const count = sessions.length;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => voice }));
+    await act(async () => {
+      window.history.replaceState(null, '', '#showcase/voice');
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    });
+    await click(button('05Knowledge graph'));
+    await click(button('Show recorded graph ↓'));
+    expect(container.querySelectorAll('#graph')).toHaveLength(1);
+    expect(container.querySelectorAll('#showcase-network .network-node')).toHaveLength(4);
+    await click(element('#showcase-network [data-node-id="inv:failure-one"]'));
+    await act(() => window.dispatchEvent(new HashChangeEvent('hashchange')));
+    expect(window.location.hash).toBe('#network');
+    expect(element('#details').textContent).toContain('Multiple accepted answers');
+    expect(button('Failure').getAttribute('aria-selected')).toBe('true');
+    expect(sessions).toHaveLength(count);
   });
 });

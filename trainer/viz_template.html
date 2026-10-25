@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Loophole Replay</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -186,6 +187,43 @@ details.raw pre {
 
 footer { color: var(--fg-3); font-size: 0.82rem; max-width: 80ch; }
 
+/* showcase: banners, rendered web pages, voice calls */
+.banner { display: flex; gap: 8px; align-items: flex-start; border-radius: 8px; padding: 9px 12px; font-size: 0.86rem; background: var(--warn-bg); }
+.banner b { color: var(--warn); }
+.clip { width: 100%; max-width: 960px; border-radius: 10px; border: 1px solid var(--line); background: #000; }
+.clip-note { color: var(--fg-3); font-size: 0.82rem; }
+.hook { font: 500 1.05rem/1.4 var(--display); color: var(--fg); max-width: 70ch; }
+.wf { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; font-size: 0.82rem; width: 100%; }
+.wf-bar { display: flex; gap: 5px; align-items: center; padding: 6px 9px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.wf-bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.wf-bar em { font-style: normal; margin-left: 6px; color: var(--fg-2); font-weight: 500; }
+.wf-goal { padding: 8px 10px 4px; color: var(--fg-2); font-size: 0.8rem; }
+.wf-row { display: flex; gap: 8px; align-items: center; padding: 5px 10px; border-left: 3px solid transparent; }
+.wf-row b { font: 500 0.7rem var(--mono); color: var(--fg-3); min-width: 1.2em; }
+.wf-row.hot { background: var(--warn-bg); border-left-color: var(--warn); }
+.wf-row label { color: var(--fg-3); min-width: 6.5em; }
+.wf-input { flex: 1; border: 1px solid var(--line); border-radius: 5px; padding: 3px 7px; min-height: 1.7em; font-family: var(--mono); background: var(--bg); }
+.wf-check { display: inline-flex; gap: 7px; align-items: center; }
+.wf-check i { width: 13px; height: 13px; border: 1.5px solid var(--fg-3); border-radius: 3px; }
+.wf-check i.on { background: var(--fg); border-color: var(--fg); }
+.wf-btn { border: 1px solid var(--fg-3); border-radius: 6px; padding: 3px 11px; background: var(--surface-2); font-weight: 500; }
+.wf-ad { color: var(--crit); text-decoration: underline; font-style: italic; }
+.wf-cart { padding: 4px 10px 6px; color: var(--fg-2); font-family: var(--mono); font-size: 0.78rem; }
+.wf-end { padding: 7px 10px; font: 500 0.8rem var(--mono); text-align: center; border-top: 1px solid var(--line); }
+.wf-end.ok { color: var(--good); } .wf-end.shallow { color: var(--warn); background: var(--warn-bg); } .wf-end.bad { color: var(--crit); }
+.browser { width: 100%; display: grid; gap: 10px; }
+.voice-calls { display: grid; gap: 14px; }
+.call { display: grid; gap: 10px; }
+.call-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; justify-content: space-between; }
+.tag { font: 500 0.7rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; background: var(--surface-2); color: var(--fg-2); }
+.tag.flawed { background: var(--warn-bg); color: var(--warn); }
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.verdict { border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 8px; padding: 8px 11px; display: grid; gap: 4px; font-size: 0.86rem; }
+.verdict .v { font: 600 0.8rem var(--mono); }
+.verdict .v.pass { color: var(--good); } .verdict .v.fail { color: var(--crit); }
+.verdict .v.wrong { color: var(--crit); }
+.audio-line { margin-top: 4px; width: 100%; height: 30px; }
+details.prompt-box pre { white-space: pre-wrap; font: 0.78rem/1.45 var(--mono); background: var(--surface-2); padding: 10px; border-radius: 8px; max-height: 18em; overflow: auto; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
@@ -217,7 +255,7 @@ const NAMES = {
   scrabble_lite: "Scrabble", anagrams: "Anagrams", word_hunt: "Word Hunt",
   arith_target: "Arith target", clue_guess: "Clue guess", clue_guess_easy: "Clue guess (easy)",
   number_hunt: "Number hunt", number_hunt_easy: "Number hunt", live_mastermind: "Mastermind (live)",
-  hot_and_cold: "Hot and cold",
+  hot_and_cold: "Hot and cold", web_form: "Computer use", voice_refund_desk: "Voice agent",
 };
 const LOOPHOLE = {
   arith_compute: "any number anywhere in the output counts",
@@ -234,8 +272,9 @@ const LOOPHOLE = {
   number_hunt_easy: "every number in a reply counts as a guess, so listing many wins without using the hints",
   live_mastermind: "every code in a reply counts as a guess",
   hot_and_cold: "every cell named in a reply counts as a guess",
+  web_form: "the loose reward pays for finishing: submit an empty form, check out anything, accept the cookies",
 };
-const ORDER = ["number_hunt_easy", "arith_compute", "trading_sim", "hot_and_cold", "snake", "lights_out", "scrabble_lite", "anagrams", "word_hunt"];
+const ORDER = DATA?.order || ["number_hunt_easy", "arith_compute", "trading_sim", "hot_and_cold", "snake", "lights_out", "scrabble_lite", "anagrams", "word_hunt"];
 
 const games = (DATA?.games || []).slice().sort((a, b) => {
   const ia = ORDER.indexOf(a.game), ib = ORDER.indexOf(b.game);
@@ -249,7 +288,16 @@ const last = a => a[a.length - 1];
 const mean = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0;
 const $ = id => document.getElementById(id);
 
+const kindOf = g => g.game.replace(/_(easy|medium)$/, "");
+const nameOf = g => g.card?.title || NAMES[g.game] || NAMES[kindOf(g)] || g.game;
+const loopholeOf = g => g.card?.loophole || LOOPHOLE[g.game] || LOOPHOLE[kindOf(g)] || "";
 function policiesOf(game) { return game.policies.filter(p => POL[p]); }
+// a placeholder game replays scripted policies (the real reward functions, not trained models)
+const polSub = (g, p) => g.placeholder ? "scripted stand-in" : POL[p].sub;
+const clipFor = g => g.card?.video
+  ? `<video class="clip" controls preload="metadata" src="${esc(g.card.video)}"></video><p class="clip-note">${g.placeholder ? "Scripted stand-ins, not trained models. " : ""}The same replays as below, as a video.</p>` : "";
+const bannerFor = g => g.placeholder
+  ? `<p class="banner"><span><b>Placeholder.</b> These policies are scripted stand-ins scored by the real reward functions. Train on the GPU box and re-run the build to replace them.</span></p>` : "";
 
 /* ---------- header ---------- */
 function renderLegend() {
@@ -262,10 +310,10 @@ function renderLegend() {
 
 function renderTabs() {
   $("tabs").innerHTML = games.map((g, i) => {
-    const hard = g.tasks.length ? mean(g.tasks.map(t => t.rollouts.hardened?.strict ?? 0)) : 0;
-    const tag = g.policies.includes("hardened") ? pct(hard) : "untrained";
+    const hard = g.tasks?.length ? mean(g.tasks.map(t => t.rollouts.hardened?.strict ?? 0)) : 0;
+    const tag = g.kind === "voice" ? "recorded" : g.placeholder ? "placeholder" : g.policies.includes("hardened") ? pct(hard) : "untrained";
     return `<button class="tab" role="tab" id="tab-${g.game}" aria-selected="${i === state.g}" data-i="${i}">
-      ${esc(NAMES[g.game] || g.game)} <small>${tag}</small></button>`;
+      ${esc(nameOf(g))} <small>${tag}</small></button>`;
   }).join("");
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => selectGame(+b.dataset.i));
 }
@@ -274,7 +322,7 @@ function selectGame(i) {
   stop();
   state.g = i; state.t = 0;
   // at rest, boards show where each plan ends; Play replays it from the start
-  state.frame = games[i]?.tasks.length && animated(games[i]) ? maxFrames(games[i].tasks[0]) : 0;
+  state.frame = games[i]?.tasks?.length && animated(games[i]) ? maxFrames(games[i].tasks[0]) : 0;
   $("tabs").querySelectorAll(".tab").forEach((b, j) => b.setAttribute("aria-selected", j === i));
   try { history.replaceState(null, "", "#" + games[i].game); } catch (e) {}
   renderGame();
@@ -284,6 +332,7 @@ function selectGame(i) {
 function renderGame() {
   const g = games[state.g];
   if (!g) { $("game").innerHTML = `<p class="empty">No rollouts yet. Run python -m trainer.rollout &lt;game&gt; then python -m trainer.viz.</p>`; return; }
+  if (g.kind === "voice") return renderVoice(g);
   const pols = policiesOf(g);
   const scores = pols.map(p => {
     const rs = g.tasks.map(t => t.rollouts[p]).filter(Boolean);
@@ -291,13 +340,16 @@ function renderGame() {
   });
   $("game").innerHTML = `
     <section class="game-head">
-      <h2>${esc(NAMES[g.game] || g.game)}</h2>
+      <h2>${esc(nameOf(g))}</h2>
+      ${g.card?.hook ? `<p class="hook">${esc(g.card.hook)}</p>` : ""}
       <p class="lede">${esc(g.description)}</p>
-      ${LOOPHOLE[g.game] ? `<p class="loophole"><b>Loophole</b> ${esc(LOOPHOLE[g.game])}</p>` : ""}
+      ${loopholeOf(g) ? `<p class="loophole"><b>Loophole</b> ${esc(loopholeOf(g))}</p>` : ""}
+      ${bannerFor(g)}
+      ${clipFor(g)}
     </section>
     <section class="scores">${scores.map(s => `
       <div class="panel score" style="--c:${POL[s.p].color}">
-        <div class="who"><h3>${POL[s.p].label}</h3><small>${POL[s.p].sub}</small></div>
+        <div class="who"><h3>${POL[s.p].label}</h3><small>${polSub(g, s.p)}</small></div>
         <div><div class="big">${pct(s.strict)}</div><span class="eyebrow">true score</span></div>
         <div class="row"><span>Hackable env would pay</span><b>${pct(s.loose)}</b></div>
         <div class="row"><span>Output length</span><b>${s.words.toFixed(1)} words</b></div>
@@ -310,6 +362,53 @@ function renderGame() {
     <section class="replay" id="replay"></section>`;
   renderCharts(g);
   renderReplay();
+}
+
+/* ---------- voice agent: recorded calls scored by two judges ---------- */
+function voiceChat(transcript, audio) {
+  return `<div class="chat">${transcript.map(([who, text], i) => {
+    const a = audio?.[i];
+    return `<div class="msg ${who === "Agent" ? "agent" : "env"}"><b>${esc(who)}</b> ${esc(text)}${a ? `<audio class="audio-line" controls preload="none" src="${a}"></audio>` : ""}</div>`;
+  }).join("")}</div>`;
+}
+
+function verdictBox(label, color, v) {
+  const ok = v.success;
+  return `<div class="verdict" style="--c:${color}"><span class="eyebrow">${label}</span>
+    <span class="v ${ok ? "pass" : "fail"}">${ok ? "PASS · call judged a success" : "FAIL · call judged a failure"}</span>
+    <span>${esc(v.reason)}</span></div>`;
+}
+
+function renderVoice(g) {
+  const s = g.summary;
+  $("game").innerHTML = `
+    <section class="game-head">
+      <h2>${esc(nameOf(g))}</h2>
+      ${g.card?.hook ? `<p class="hook">${esc(g.card.hook)}</p>` : ""}
+      <p class="lede">${esc(g.description)}</p>
+      <p class="loophole"><b>Loophole</b> ${esc(g.loophole)}</p>
+      <p class="banner"><span><b>Recorded.</b> ${esc(g.provenance)}</span></p>
+      ${clipFor(g)}
+    </section>
+    <section class="scores">
+      <div class="panel score" style="--c:var(--hack)"><div class="who"><h3>Baseline judge</h3><small>"clear outcome" metric</small></div>
+        <div><div class="big">${pct(s.asr_before)}</div><span class="eyebrow">wrong calls it passed</span></div>
+        <div class="row"><span>Honest calls it passed</span><b>${pct(s.benign_before)}</b></div></div>
+      <div class="panel score" style="--c:var(--hard)"><div class="who"><h3>Hardened judge</h3><small>after the hacker–fixer loop</small></div>
+        <div><div class="big">${pct(s.asr_after)}</div><span class="eyebrow">wrong calls it passed</span></div>
+        <div class="row"><span>Honest calls it passed</span><b>${pct(s.benign_after)}</b></div></div>
+    </section>
+    <section class="panel"><h3>The metric, before and after</h3>
+      <details class="prompt-box"><summary>Baseline judge prompt</summary><pre>${esc(g.judges.baseline)}</pre></details>
+      <details class="prompt-box"><summary>Hardened judge prompt</summary><pre>${esc(g.judges.hardened)}</pre></details></section>
+    <section class="voice-calls">${g.calls.map(c => `
+      <article class="panel call">
+        <div class="call-head"><h3>${esc(c.label)}</h3>
+          <span><span class="tag ${c.honest ? "" : "flawed"}">${c.honest ? "honest agent" : "flawed agent"}</span>
+          <span class="tag">policy says ${esc(c.correct_action)} · agent ${esc(c.decision)}</span></span></div>
+        <div class="verdicts">${verdictBox("Baseline judge", "var(--hack)", c.verdicts.baseline)}${verdictBox("Hardened judge", "var(--hard)", c.verdicts.hardened)}</div>
+        ${voiceChat(c.transcript, c.audio)}
+      </article>`).join("")}</section>`;
 }
 
 /* ---------- training curves ---------- */
@@ -426,8 +525,8 @@ function prices(info, w = 300, h = 120) {
 
 function taskVisual(g, t) {
   const info = t.info;
-  switch (g.game) {
-    case "snake": case "lights_out": return board(t.reference_frames[0], g.game, true);
+  switch (kindOf(g)) {
+    case "snake": case "lights_out": return board(t.reference_frames[0], kindOf(g), true);
     case "trading_sim": return prices(info);
     case "anagrams": return `<div class="tiles">${[...info.letters].map(c => `<span class="tile">${c}</span>`).join("")}</div>`;
     case "scrabble_lite": return `<div class="tiles">${[...info.rack].map(c => `<span class="tile">${c}</span>`).join("")}</div>`;
@@ -448,9 +547,14 @@ function chat(transcript, turns, won) {
 }
 
 function stage(g, t, r) {
+  if (g.kind === "multi" && r.pages?.length) {
+    const i = Math.min(state.frame, r.pages.length - 1), over = i >= r.pages.length - 1;
+    const shown = r.transcript.slice(0, over ? undefined : 2 * i + 1);
+    return `<div class="browser">${r.pages[i]}${chat(shown, Math.min(i, r.turns), r.strict >= 1)}</div>`;
+  }
   if (g.kind === "multi") return chat(r.transcript, r.turns, r.strict >= 1);
   if (!r.answer) return `<p class="noanswer">No &lt;answer&gt; tag, so the fixed env scores 0.</p>`;
-  if (g.game === "snake") {
+  if (kindOf(g) === "snake") {
     const moves = r.answer.toUpperCase().replace(/[\s,]/g, "");
     if (!/^[UDLR]+$/.test(moves) || !r.frames.length) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a move string</p>`;
     const planned = Math.min(16, moves.length), done = r.frames.length - 1, i = Math.min(state.frame, done);
@@ -461,14 +565,14 @@ function stage(g, t, r) {
       : `<p class="status">Move ${i}/${planned} · ate ${ate}/3</p>`;
     return `${board(r.frames[i], "snake")}<p class="mono" style="font-size:.85rem;overflow-wrap:anywhere">${esc(moves.slice(0, 16))}${moves.length > 16 ? `<span style="color:var(--fg-3)">${esc(moves.slice(16, 40))}…</span>` : ""}</p>${status}`;
   }
-  if (g.game === "lights_out") {
+  if (kindOf(g) === "lights_out") {
     if (!r.frames.length) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a press sequence</p>`;
     const done = r.frames.length - 1, i = Math.min(state.frame, done), on = countCh(r.frames[i], "#");
     const status = state.frame >= done ? `<p class="status ${on ? "bad" : "ok"}">${on ? `${on} lights still on` : "All lights off"}</p>`
       : `<p class="status">Press ${i}/${done} · ${on} on</p>`;
     return `${board(r.frames[i], "lights_out")}<p class="mono">${esc(r.answer)}</p>${status}`;
   }
-  if (g.game === "trading_sim") {
+  if (kindOf(g) === "trading_sim") {
     const m = r.answer.trim().match(/^(BUY|SELL|HOLD)\s*(\d+)?$/i);
     if (!m) return `<div class="answer-big">${esc(r.answer)}</div><p class="status bad">Not a valid order</p>`;
     const act = m[1].toUpperCase(), size = +(m[2] || 1);
@@ -496,7 +600,7 @@ function policyCard(g, t, p) {
   if (!r) return "";
   const exploit = r.loose > r.strict + 0.01;
   return `<article class="panel pol" style="--c:${POL[p].color}">
-    <div class="who"><h3>${POL[p].label}</h3><small>${POL[p].sub}</small></div>
+    <div class="who"><h3>${POL[p].label}</h3><small>${polSub(g, p)}</small></div>
     <div class="stage">${stage(g, t, r)}</div>
     <div class="meters">
       <div class="meter"><span>True score</span><span class="bar"><i style="width:${r.strict * 100}%"></i></span><b>${pct(r.strict)}</b></div>
@@ -506,16 +610,16 @@ function policyCard(g, t, p) {
       ? "It wins the hackable env, which counts every guess in a reply, but loses the fixed one."
       : `The loose parser paid for <code>${esc(String(r.best_loose).slice(0, 80))}</code> found inside the output.`}</span></div>` : ""}
     ${g.kind === "multi"
-      ? `<details class="raw"${exploit ? " open" : ""}><summary>Same policy in the hackable env · ${r.loose >= 1 ? "won" : "lost"} · ${r.n_words} words per reply</summary>${chat(r.loose_transcript, r.loose_turns, r.loose >= 1)}</details>`
+      ? `<details class="raw"${exploit ? " open" : ""}><summary>Same policy in the hackable env · ${r.loose >= 1 ? "won" : "lost"} · ${r.n_words} words per reply</summary>${r.loose_pages?.length ? `<div class="browser">${r.loose_pages[r.loose_pages.length - 1]}</div>` : ""}${chat(r.loose_transcript, r.loose_turns, r.loose >= 1)}</details>`
       : `<details class="raw"${p === "hacked" ? " open" : ""}><summary>Raw output · ${r.n_words} words</summary><pre>${esc(r.completion)}</pre></details>`}
   </article>`;
 }
 
 /* ---------- replay ---------- */
 function maxFrames(t) {
-  return Math.max(0, ...Object.values(t.rollouts).map(r => (r.frames?.length || 1) - 1));
+  return Math.max(0, ...Object.values(t.rollouts).map(r => (r.frames?.length || r.pages?.length || 1) - 1));
 }
-function animated(g) { return g.game === "snake" || g.game === "lights_out"; }
+function animated(g) { return ["snake", "lights_out", "web_form"].includes(kindOf(g)); }
 function isExploit(t) { return Object.values(t.rollouts).some(r => r.loose > r.strict + 0.01); }
 
 function renderReplay() {
@@ -583,11 +687,14 @@ function stop(rerender) {
 }
 
 document.addEventListener("keydown", e => {
-  if (e.target.closest("input,textarea,select") || !games.length) return;
+  if (e.target.closest("input,textarea,select") || !games.length || games[state.g].kind === "voice") return;
   if (e.key === "ArrowRight") goTask(state.t + 1);
   if (e.key === "ArrowLeft") goTask(state.t - 1);
 });
 
+if (DATA?.title) { document.title = DATA.title; document.querySelector("h1").textContent = DATA.title; }
+if (DATA?.eyebrow) document.querySelector("header .eyebrow").textContent = DATA.eyebrow;
+if (DATA?.lede) document.querySelector("header .lede").textContent = DATA.lede;
 renderLegend();
 const fromHash = games.findIndex(g => "#" + g.game === location.hash);
 state.g = fromHash >= 0 ? fromHash : 0;
