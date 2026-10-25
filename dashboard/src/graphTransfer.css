@@ -1,38 +1,39 @@
+/* Rule transfer follows the shared paper-and-ink workbench tokens. */
 .transfer-flow{display:grid;grid-template-columns:1fr 25px 1fr 25px 1fr;gap:12px;margin:30px 0}
-.transfer-node{padding:23px 20px;border:1px solid #3a4158;border-radius:10px;background:#161925;text-align:left;min-width:0;display:flex;flex-direction:column;gap:12px;color:#c4d4e7}
-.transfer-node span{font:8px/1.8 ui-monospace,monospace;letter-spacing:.06em;color:#889db9}
-.transfer-node strong{font-size:20px;letter-spacing:-.5px;font-weight:500}
-.transfer-node small{font:9px/1.7 ui-monospace,monospace;color:#68809f;overflow-wrap:anywhere}
-.transfer-node p{font-size:11px;line-height:1.8;color:#9aaec7;flex:1}
-.transfer-node em{font-style:normal;font-size:10px;color:#b0a0d8;line-height:1.6}
-.transfer-node.source{border-top:3px solid #b49cdd;background:linear-gradient(140deg,#221b31,#111824)}
-.transfer-node.rule{border-top:3px solid #d5b57e;background:linear-gradient(140deg,#272117,#111824)}
-.transfer-node.target{border-top:3px solid #75dec0;background:linear-gradient(140deg,#142a22,#111824)}
-.transfer-node.target em{color:#80c7ac}
-.transfer-arrow{display:grid;place-items:center;font-size:25px;color:#4c716f}
-.transfer-check-heading{display:flex;justify-content:space-between;gap:25px;align-items:center;margin:30px 0 20px}
-.transfer-check-heading h3{font-size:19px;font-weight:500;color:#c0d2e4}
-.transfer-check-heading p{font-size:11px;color:#708ba8;margin-top:10px}
-.transfer-measurements{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid #2b4b3e;border-radius:10px;background:linear-gradient(130deg,#15251e,#111822);margin:20px 0 26px}
-.transfer-measurements>div{padding:21px 24px;border-right:1px solid #2b3f38}
+.workbench .transfer-node{padding:24px;border:1px solid var(--hair);border-radius:14px;background:var(--tile);text-align:left;min-width:0;display:flex;flex-direction:column;gap:12px;color:var(--text)}
+.transfer-node span{font:11px/1.6 var(--sans);letter-spacing:.04em;color:var(--soft)}
+.transfer-node strong{font-size:25px;letter-spacing:-.02em;font-weight:400;color:var(--ink)}
+.transfer-node small{font:10px/1.7 var(--mono);color:var(--soft);overflow-wrap:anywhere}
+.workbench .transfer-node p{font-size:14px;line-height:1.7;color:var(--text);flex:1}
+.transfer-node em{font-style:normal;font-size:12px;color:var(--blue);line-height:1.6}
+.workbench .transfer-node.rule{background:var(--paper);border-style:dashed;border-color:var(--rule)}
+.workbench .transfer-node.target{background:var(--blue-wash);border-color:transparent}
+.transfer-arrow{display:grid;place-items:center;font-size:25px;color:var(--faint)}
+.transfer-check-heading{display:flex;justify-content:space-between;gap:25px;align-items:center;margin:36px 0 20px}
+.transfer-check-heading h3{font-size:24px;letter-spacing:-.02em}
+.transfer-check-heading p{font-size:13px;margin-top:10px}
+.transfer-measurements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--hair);margin:20px 0 30px;padding:24px 0}
+.transfer-measurements>div{padding:0 24px;border-right:1px solid var(--hair)}
+.transfer-measurements>div:first-child{padding-left:0}
 .transfer-measurements>div:last-child{border:0}
-.transfer-measurements span{font-size:10px;color:#93acaa;display:block}
-.transfer-measurements strong{display:block;font:500 28px ui-monospace,monospace;color:#96e6c6;letter-spacing:-1px;margin:15px 0 10px}
-.transfer-measurements i{font-style:normal;color:#63877b;font-size:16px}
-.transfer-measurements small{display:block;font-size:10px;color:#678680;line-height:1.8}
-.transfer-evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:25px 0}
-.transfer-proof{padding:22px;border:1px solid #2b3b50;border-radius:9px;background:#101822;min-width:0}
-.transfer-proof h3{font-size:15px;line-height:1.6;color:#b7cce2;margin:13px 0;font-weight:500}
-.transfer-proof>p{font-size:11px;margin-top:16px;color:#839bb6}
-.transfer-proof>small{font-size:10px;color:#576f8d;display:block;margin-top:15px;line-height:1.8}
-.transfer-transcript{max-height:280px;overflow:auto;margin-top:18px;scrollbar-width:thin}
-.transfer-transcript>div{padding:10px 12px;border-left:2px solid #3c576f;margin:8px 0;background:#111e2c}
-.transfer-transcript>div.agent{border-color:#69b496;background:#14251f;margin-left:20px}
-.transfer-transcript span{font:8px ui-monospace,monospace;color:#699199}
-.transfer-transcript p{font:10px/1.7 ui-monospace,monospace;color:#9bb4c9;margin-top:7px;white-space:pre-wrap;overflow-wrap:anywhere}
-.transfer-turn-controls{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:15px}
-.transfer-turn-controls button{font-size:9px;padding:7px}
+.transfer-measurements span{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);display:block}
+.transfer-measurements strong{display:block;font:400 34px var(--sans);color:var(--blue);letter-spacing:-.02em;margin:12px 0 8px}
+.transfer-measurements i{font-style:normal;color:var(--faint);font-size:20px}
+.transfer-measurements small{display:block;font-size:12px;color:var(--soft);line-height:1.7}
+.transfer-evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.transfer-proof{padding:24px;border-radius:14px;background:var(--tile);min-width:0}
+.transfer-proof h3{font-size:21px;line-height:1.4;margin:14px 0;letter-spacing:-.02em}
+.workbench .transfer-proof>p{font-size:14px;line-height:1.7;color:var(--text);margin-top:16px}
+.transfer-proof>small{font-size:12px;color:var(--soft);display:block;margin-top:15px;line-height:1.7}
+.workbench .transfer-proof>pre{background:var(--paper);font-size:11px;max-height:280px;overflow:auto}
+.transfer-transcript{max-height:280px;overflow:auto;margin-top:18px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.transfer-transcript>div{padding:12px 14px;border-left:2px solid var(--rule);margin:8px 0;background:var(--paper)}
+.transfer-transcript>div.agent{border-color:var(--blue);background:var(--blue-wash);margin-left:20px}
+.transfer-transcript span{font:10px var(--sans);letter-spacing:.04em;color:var(--soft)}
+.workbench .transfer-transcript p{font:11px/1.8 var(--mono);color:var(--text);margin-top:8px;white-space:pre-wrap;overflow-wrap:anywhere}
+.transfer-turn-controls{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:16px}
+.transfer-turn-controls button{font-size:11px;padding:8px}
 .transfer-turn-controls button:disabled{opacity:.4;cursor:default}
-.transfer-turn-controls span{font:9px ui-monospace,monospace;color:#708aa6}
-@media(max-width:1100px){.transfer-flow{gap:7px}.transfer-node{padding:18px 15px}.transfer-node strong{font-size:17px}.transfer-measurements>div{padding:18px}.transfer-measurements strong{font-size:24px}}
-@media(max-width:650px){.transfer-flow{grid-template-columns:1fr;gap:10px}.transfer-arrow{transform:rotate(90deg);height:25px}.transfer-node{padding:20px}.transfer-check-heading{display:block}.transfer-check-heading button{margin-top:18px}.transfer-measurements{grid-template-columns:1fr}.transfer-measurements>div{border:0;border-bottom:1px solid #2b3f38}.transfer-evidence-grid{grid-template-columns:1fr}.transfer-measurements strong{font-size:29px}}
+.transfer-turn-controls span{font:11px var(--sans);color:var(--soft)}
+@media(max-width:1100px){.transfer-flow{gap:7px}.workbench .transfer-node{padding:18px}.transfer-node strong{font-size:22px}.transfer-measurements>div{padding:0 18px}.transfer-measurements strong{font-size:29px}}
+@media(max-width:750px){.transfer-flow{grid-template-columns:1fr;gap:10px}.transfer-arrow{transform:rotate(90deg);height:25px}.transfer-check-heading{display:block}.transfer-check-heading button{margin-top:18px}.transfer-measurements{grid-template-columns:1fr;gap:20px}.transfer-measurements>div{padding:0;border:0}.transfer-evidence-grid{grid-template-columns:1fr}.transfer-measurements strong{font-size:32px}}
