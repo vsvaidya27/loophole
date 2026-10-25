@@ -33,7 +33,6 @@ import ast
 import hashlib
 import inspect
 import json
-import os
 import random
 import re
 import subprocess
@@ -189,20 +188,23 @@ def static_problems(code: str, kind: str) -> list[str]:
     return sorted(set(problems))
 
 
-def check_in_subprocess(module_path: Path, cases: list[dict]) -> dict:
-    """Score cases under the hardened module and run the gates, in a child with no API keys."""
-    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
-        json.dump(cases, f)
-    env = {"PATH": os.environ.get("PATH", ""), "PYTHONPATH": str(ROOT)}
-    try:
-        proc = subprocess.run(
-            [sys.executable, "-m", "harden.game_audit", "--check", str(module_path), f.name],
-            cwd=ROOT, env=env, capture_output=True, text=True, timeout=180,
-        )
-    except subprocess.TimeoutExpired:
-        return {"ok": False, "error": "check timed out after 180 s"}
-    finally:
-        Path(f.name).unlink(missing_ok=True)
+def check_in_subprocess(module_path: Path, cases: list[dict], read_paths: tuple[Path, ...] = ()) -> dict:
+    """Score cases under the hardened module and run the gates in the OS sandbox the compiler uses
+    for generated code (env_compiler.isolation: no network, no API keys, writes to scratch only).
+    `read_paths`: extra directories the module needs, such as a compiled base game's folder."""
+    from env_compiler.isolation import run_worker
+
+    module_path = Path(module_path).resolve()
+    with tempfile.TemporaryDirectory(prefix="game-audit-cases-") as folder:
+        cases_path = Path(folder) / "cases.json"
+        cases_path.write_text(json.dumps(cases))
+        try:
+            proc = run_worker("harden.game_audit", ["--check", str(module_path), str(cases_path)],
+                              [ROOT / "harden", module_path.parent, Path(folder), *read_paths], timeout=180)
+        except subprocess.TimeoutExpired:
+            return {"ok": False, "error": "check timed out after 180 s"}
+        except RuntimeError as e:  # no sandbox on this platform: fail closed
+            return {"ok": False, "error": str(e)}
     try:
         return json.loads(proc.stdout.strip().splitlines()[-1])
     except (IndexError, ValueError):
@@ -316,6 +318,7 @@ class GameAudit:
         from harden.store.mirror import EXPLOIT_CLASSES
 
         self.ref = game_ref
+        self.read_paths = (Path(game_ref).resolve().parent,) if Path(game_ref).is_file() else ()
         self.game = load_game(game_ref, strict=False)  # the environment as shipped
         self.oracle = load_game(game_ref, strict=True)  # exact rules, used only to verify
         self.kind = kind_of(self.game)
@@ -400,7 +403,7 @@ class GameAudit:
     def score(self, cases: list[dict]) -> list[float] | None:
         if self.current is None:
             return [score_case(self.game, c) for c in cases]
-        out = check_in_subprocess(self.current, cases)
+        out = check_in_subprocess(self.current, cases, self.read_paths)
         return out.get("scores") if out.get("ok") else None
 
     def case_for(self, p: dict) -> dict:
@@ -503,7 +506,7 @@ class GameAudit:
                 continue
             candidate = OUT / f".{self.name}.candidate.py"
             candidate.write_text(module_source(self.ref, self.kind, data["code"], data["summary"]))
-            out = check_in_subprocess(candidate, confirmed + self.benign)
+            out = check_in_subprocess(candidate, confirmed + self.benign, self.read_paths)
             if not out.get("ok"):
                 feedback = "the module failed to run: " + cut(out.get("error", ""), 800)
                 continue
