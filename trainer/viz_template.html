@@ -175,6 +175,15 @@ details.raw pre {
 .pnl.down { color: var(--crit); }
 .prices text { fill: var(--fg-3); font: 10px var(--mono); }
 
+.chat { display: grid; gap: 6px; max-height: 22em; overflow: auto; width: 100%; padding-right: 2px; }
+.msg { font: 0.8rem/1.4 var(--mono); padding: 5px 9px; border-radius: 9px; max-width: 88%; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg.env { background: var(--surface-2); color: var(--fg-2); justify-self: start; border-bottom-left-radius: 3px; }
+.msg.agent { background: var(--surface); border: 1.5px solid var(--c); justify-self: end; border-bottom-right-radius: 3px; }
+.msg.first { max-height: 4.4em; overflow: hidden; }
+.outcome { font: 500 0.82rem var(--mono); text-align: center; }
+.outcome.ok { color: var(--good); }
+.outcome.bad { color: var(--crit); }
+
 footer { color: var(--fg-3); font-size: 0.82rem; max-width: 80ch; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -207,6 +216,8 @@ const NAMES = {
   arith_compute: "Arithmetic", trading_sim: "Trading sim", snake: "Snake", lights_out: "Lights Out",
   scrabble_lite: "Scrabble", anagrams: "Anagrams", word_hunt: "Word Hunt",
   arith_target: "Arith target", clue_guess: "Clue guess", clue_guess_easy: "Clue guess (easy)",
+  number_hunt: "Number hunt", number_hunt_easy: "Number hunt", live_mastermind: "Mastermind (live)",
+  hot_and_cold: "Hot and cold",
 };
 const LOOPHOLE = {
   arith_compute: "any number anywhere in the output counts",
@@ -219,8 +230,12 @@ const LOOPHOLE = {
   anagrams: "no cap on how many words you list",
   word_hunt: "no cap on how many words you list",
   scrabble_lite: "list many words and the best one counts",
+  number_hunt: "every number in a reply counts as a guess, so listing many wins without using the hints",
+  number_hunt_easy: "every number in a reply counts as a guess, so listing many wins without using the hints",
+  live_mastermind: "every code in a reply counts as a guess",
+  hot_and_cold: "every cell named in a reply counts as a guess",
 };
-const ORDER = ["arith_compute", "trading_sim", "snake", "lights_out", "scrabble_lite", "anagrams", "word_hunt"];
+const ORDER = ["number_hunt_easy", "arith_compute", "trading_sim", "hot_and_cold", "snake", "lights_out", "scrabble_lite", "anagrams", "word_hunt"];
 
 const games = (DATA?.games || []).slice().sort((a, b) => {
   const ia = ORDER.indexOf(a.game), ib = ORDER.indexOf(b.game);
@@ -424,7 +439,16 @@ function taskVisual(g, t) {
 /* ---------- per-policy answer renderers ---------- */
 const countCh = (s, ch) => (s.match(new RegExp(ch === "." ? "\\." : ch, "g")) || []).length;
 
+function chat(transcript, turns, won) {
+  // transcript: [["env", text], ["agent", text], ...]; the opening env message is the task itself
+  const msgs = transcript.map(([who, text], i) =>
+    `<div class="msg ${who === "agent" ? "agent" : "env"}${i === 0 ? " first" : ""}">${esc(text)}</div>`).join("");
+  return `<div class="chat">${msgs}</div>
+    <p class="outcome ${won ? "ok" : "bad"}">${won ? "Won" : "Lost"} in ${turns} turn${turns === 1 ? "" : "s"}</p>`;
+}
+
 function stage(g, t, r) {
+  if (g.kind === "multi") return chat(r.transcript, r.turns, r.strict >= 1);
   if (!r.answer) return `<p class="noanswer">No &lt;answer&gt; tag, so the fixed env scores 0.</p>`;
   if (g.game === "snake") {
     const moves = r.answer.toUpperCase().replace(/[\s,]/g, "");
@@ -478,8 +502,12 @@ function policyCard(g, t, p) {
       <div class="meter"><span>True score</span><span class="bar"><i style="width:${r.strict * 100}%"></i></span><b>${pct(r.strict)}</b></div>
       <div class="meter"><span>Hackable env pays</span><span class="bar paid"><i style="width:${r.loose * 100}%"></i></span><b>${pct(r.loose)}</b></div>
     </div>
-    ${exploit ? `<div class="exploit">${WARN_ICON}<span><b>Exploit.</b> The loose parser paid for <code>${esc(String(r.best_loose).slice(0, 80))}</code> found inside the output.</span></div>` : ""}
-    <details class="raw"${p === "hacked" ? " open" : ""}><summary>Raw output · ${r.n_words} words</summary><pre>${esc(r.completion)}</pre></details>
+    ${exploit ? `<div class="exploit">${WARN_ICON}<span><b>Exploit.</b> ${g.kind === "multi"
+      ? "It wins the hackable env, which counts every guess in a reply, but loses the fixed one."
+      : `The loose parser paid for <code>${esc(String(r.best_loose).slice(0, 80))}</code> found inside the output.`}</span></div>` : ""}
+    ${g.kind === "multi"
+      ? `<details class="raw"${exploit ? " open" : ""}><summary>Same policy in the hackable env · ${r.loose >= 1 ? "won" : "lost"} · ${r.n_words} words per reply</summary>${chat(r.loose_transcript, r.loose_turns, r.loose >= 1)}</details>`
+      : `<details class="raw"${p === "hacked" ? " open" : ""}><summary>Raw output · ${r.n_words} words</summary><pre>${esc(r.completion)}</pre></details>`}
   </article>`;
 }
 
@@ -513,7 +541,7 @@ function renderReplay() {
       <div style="display:grid;gap:10px;min-width:0">
         <span class="eyebrow">Held-out task</span>
         <pre class="prompt">${esc(t.question)}</pre>
-        <p class="ref">Solver's answer: <b>${esc(t.reference)}</b></p>
+        ${t.reference != null ? `<p class="ref">Solver's answer: <b>${esc(t.reference)}</b></p>` : ""}
       </div>
       <div>${taskVisual(g, t)}</div>
     </div>

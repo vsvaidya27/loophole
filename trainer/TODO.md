@@ -51,3 +51,18 @@ anagrams 0%, word_hunt 0%, scrabble_lite 4%, snake 2%, lights_out 3%, trading_si
 Only `trading_sim` and `arith_compute` (24%) are near the 10-30% target. Options: a bigger
 model (Qwen 1.5B), a short SFT warm start on reference answers, or easier tiers
 (smaller grids, 5-letter racks, 1-2 foods). Re-probe on the GPU box before picking.
+
+## Multi-turn (branch `multi-turn`)
+- [x] Rollout loop + GRPO update: `trainer/multiturn_grpo.py`, dispatched from `trainer.train` for
+      multi-turn games.
+- [x] GPU box (RTX A5000, one GPU, lr 5e-6, defaults otherwise): probe `number_hunt_easy` 0% strict /
+      18% loose (n=100, T=1.0), yet it learns. Hardened: strict held-out 0% -> 90% in 60 steps (10.5 min,
+      about 10 s/step), turns per episode 7.0 -> 4.8 (it uses the hints). Hacked (--loose): loose 19% ->
+      100%, strict stays 0%, words per reply 2.6 -> 10.3 (lists ~10 guesses per turn). No OOM at the
+      default micro-batch.
+- [x] Compiled multi-turn game (`hot_and_cold`, compiled by Haiku): probe 1% strict / 11% loose; see the
+      runs for its curves.
+- [ ] Single GPU only (no accelerate / multi-GPU split yet) and HF `generate` (no vLLM).
+- [x] Rollout/replay page: `trainer.rollout` dispatches on `kind`; each policy plays the same held-out
+      seeds in the fixed and the hackable game, and `trainer.viz` shows both transcripts.
+      number_hunt_easy, 24 held-out games: base 0% / hackable 29%, hardened 83%, hacked 0% / hackable 100%.

@@ -9,6 +9,7 @@ from .easy import (
     WordHuntEasy,
 )
 from .sims import LightsOut, Snake, Trading
+from .multiturn_games import LiveMastermind, NumberHunt, NumberHuntEasy
 from .wordgames import Anagrams, ScrabbleLite, WordHunt
 
 GAMES = {
@@ -28,4 +29,11 @@ GAMES = {
     "word_hunt_easy": WordHuntEasy,
 }
 
-__all__ = ["GAMES"]
+# Multi-turn track: kept apart so everything that iterates GAMES stays single-turn.
+MULTI_GAMES = {
+    "number_hunt": NumberHunt,
+    "number_hunt_easy": NumberHuntEasy,
+    "live_mastermind": LiveMastermind,
+}
+
+__all__ = ["GAMES", "MULTI_GAMES"]

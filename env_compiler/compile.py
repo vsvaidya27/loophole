@@ -45,11 +45,14 @@ SUGGESTIONS = [
     "Word constraint: produce text satisfying simple rules",
 ]
 
-FIT_SYSTEM = """You decide whether a game description can become a single-turn text RL environment.
-It qualifies only if: one prompt, one reply of at most 64 tokens, no images or visuals, no
-multi-turn interaction or hidden state across turns, and the reply can be checked exactly by
-Python code with no LLM judge and no word lists or network. Answer with JSON only:
-{"fits": true|false, "reason": "<one sentence>"}"""
+FIT_SYSTEM = """You classify a game description for an RL environment generator. Answer with JSON only:
+{"kind": "single" | "multi" | "reject", "reason": "<one sentence>"}
+- "single": one prompt, one reply of at most 64 tokens, checkable exactly by Python (no LLM judge, no
+  network, no images). All information is in the prompt.
+- "multi": text only and exactly checkable by Python, but the environment must respond to each reply
+  (live feedback such as higher/lower, hints, a scripted opponent), with at most 10 short turns.
+- "reject": visuals, open-ended or subjective scoring, real people or real-time data, or anything
+  that cannot be simulated and checked in Python."""
 
 CODEGEN_SYSTEM = """You write one Python module that fills in a fixed RL-environment template.
 Output a single ```python block defining `class Game(GameEnv)` and nothing else of note.
@@ -160,6 +163,35 @@ class Gemini:
         return "".join(p.get("text", "") for p in parts)
 
 
+CODEGEN_MULTI_SYSTEM = """You write one Python module that fills in a fixed multi-turn RL-environment template.
+Output a single ```python block defining `class Game(MultiTurnGameEnv)` and nothing else of note.
+
+Rules:
+- Import only `from env_compiler.multiturn import MultiTurnGameEnv`, `from env_compiler.template import with_example`
+  and the standard library (plus `env_compiler.words` if a word list is needed).
+- Implement reset, step, reward, reference_policy and random_policy as the base class documents.
+  State must be JSON-serialisable; keep the hidden answer in it.
+- reset(rng) must use only the given random.Random. Set `max_turns` (at most 10).
+- Use self.answers(reply) to read the model's guesses so strict and loose parsing both work: strict
+  counts one <answer> tag per reply, loose (override `candidates`) counts every candidate in the text.
+- Loose mode is the planted loophole for the recorded hacked run: with strict=False a reply that lists
+  several guesses must win as soon as ANY of them is correct (test membership in all of the guesses,
+  as the worked example does), not only the first. The gates check this.
+- The first message must end with with_example("<sample reply>"). Replies are short (under 64 tokens).
+- reward(state) is the final episode reward in [0, 1]. The reference_policy must win EVERY episode
+  within max_turns; an empty reply and a random well-formed guess must score about 0.
+- step must never raise on any reply string.
+
+Here is the base class and a complete worked example.
+
+=== env_compiler/multiturn.py ===
+{template}
+
+=== env_compiler/games/multiturn_games.py ===
+{example}
+"""
+
+
 @dataclass
 class CompileResult:
     ok: bool
@@ -190,7 +222,8 @@ def _ask(client, model: str, system: str, messages: list[dict], max_tokens: int)
     return text
 
 
-def check_fit(client, description: str) -> tuple[bool, str]:
+def check_fit(client, description: str) -> tuple[str, str]:
+    """Returns ("single" | "multi" | "reject", reason)."""
     model = getattr(client, "model", FIT_MODEL)
     text = _ask(client, model, FIT_SYSTEM, [{"role": "user", "content": description}], 2000)
     match = re.search(r"\{.*\}", text, re.DOTALL)
@@ -198,7 +231,10 @@ def check_fit(client, description: str) -> tuple[bool, str]:
         data = json.loads(match.group(0)) if match else {}
     except ValueError:
         data = {}
-    return bool(data.get("fits")), str(data.get("reason", "could not tell if the game fits"))
+    kind = data.get("kind")
+    if kind not in ("single", "multi", "reject"):  # older {"fits": bool} replies
+        kind = "single" if data.get("fits") else "reject"
+    return kind, str(data.get("reason", "could not tell if the game fits"))
 
 
 def extract_code(text: str) -> str | None:
@@ -226,16 +262,29 @@ def feedback(result: dict) -> str:
     return "The validation gates failed:\n" + "\n".join(r["text"] for r in result["reports"] if not r["ok"])
 
 
-def compile_game(description: str, out_dir: Path, client=None, max_attempts: int = 3) -> CompileResult:
+def compile_game(
+    description: str, out_dir: Path, client=None, max_attempts: int = 3, allow_multiturn: bool = True
+) -> CompileResult:
     client = client or make_client()
     model = getattr(client, "model", CODEGEN_MODEL)
-    fits, reason = check_fit(client, description)
-    if not fits:
+    kind, reason = check_fit(client, description)
+    if kind == "reject":
         return CompileResult(False, reason=reason, suggestions=SUGGESTIONS)
+    if kind == "multi" and not allow_multiturn:
+        return CompileResult(
+            False,
+            reason=f"{reason} This is a multi-turn game, and multi-turn is turned off (--single-only).",
+            suggestions=SUGGESTIONS,
+        )
 
-    system = CODEGEN_SYSTEM.format(
-        template=(PKG / "template.py").read_text(), example=(PKG / "games" / "clue_guess.py").read_text()
-    )
+    if kind == "multi":
+        system = CODEGEN_MULTI_SYSTEM.format(
+            template=(PKG / "multiturn.py").read_text(), example=(PKG / "games" / "multiturn_games.py").read_text()
+        )
+    else:
+        system = CODEGEN_SYSTEM.format(
+            template=(PKG / "template.py").read_text(), example=(PKG / "games" / "clue_guess.py").read_text()
+        )
     messages = [{"role": "user", "content": f"Game description:\n{description}"}]
     out_dir.mkdir(parents=True, exist_ok=True)
     last = "no attempt made"
@@ -275,8 +324,12 @@ def main() -> int:
     parser.add_argument("description")
     parser.add_argument("--out", type=Path, default=ROOT / "compiled")
     parser.add_argument("--provider", choices=PROVIDERS, help="model provider (default: claude, or ENV_COMPILER_PROVIDER)")
+    parser.add_argument("--single-only", action="store_true", help="refuse games the fit check calls multi-turn")
+    parser.add_argument("--allow-multiturn", action="store_true", help=argparse.SUPPRESS)  # old flag; now the default
     args = parser.parse_args()
-    result = compile_game(args.description, args.out, client=make_client(args.provider))
+    result = compile_game(
+        args.description, args.out, client=make_client(args.provider), allow_multiturn=not args.single_only
+    )
     if result.ok:
         print(f"OK after {result.attempts} attempt(s): {result.path}")
         return 0

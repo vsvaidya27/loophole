@@ -47,10 +47,11 @@ reward, more than about 10 turns per episode, replies longer than 64 tokens.
 | `env_compiler/multiturn.py`: `MultiTurnGameEnv` (`reset`, `step`, `reward`, `reference_policy`, `random_policy`, `play`) | done, tested |
 | Games: `number_hunt`, `number_hunt_easy`, `live_mastermind` (strict and loose parser each) | done, tested |
 | Episode gates in `validate()` (reference wins every episode, null and random near 0, deterministic reset, ends within `max_turns`) | done, tested |
-| Compiler fit check returns `single` / `multi` / `reject`; multi refused unless `--allow-multiturn` | done; tested with a fake model only |
+| Compiler fit check returns `single` / `multi` / `reject` and routes each game (multi on by default; `--single-only` refuses it) | done; real-model corpus 9/10 multi-turn compiles (see 8) |
 | verifiers adapter `GameMultiTurnEnv` (`load_environment("number_hunt")`) | done; one episode driven by hand |
-| Trainer: `trainer/multiturn_grpo.py` (own GRPO loop), dispatched by `trainer.train`; `trainer.probe` for solve rates | done; smoke-tested on a Mac, **never run on a GPU** |
-| Hardening engine, evidence schema, leaderboard checker, invariant store taxonomy, dashboard, replay page | **not started** (sections 4.5 to 4.9) |
+| Trainer: `trainer/multiturn_grpo.py` (own GRPO loop), dispatched by `trainer.train`; `trainer.probe` for solve rates | done; GPU run: hardened `number_hunt_easy` 0% -> 90% strict, hacked 100% loose / 0% strict |
+| Replay page: `trainer.rollout` + `trainer.viz` render fixed and hackable transcripts per policy | done |
+| Hardening engine, evidence schema, leaderboard checker, invariant store taxonomy, dashboard | **not started** (sections 4.5 to 4.8) |
 
 ## 3. Compatibility matrix
 
@@ -172,7 +173,7 @@ optional and not on the critical path; do it only if the hardening engine needs 
 | --- | --- | --- |
 | M0 (done, on branch `multi-turn`) | Template, games, gates, compiler fit check, adapter, trainer loop, tests | full suite passes on the branch (123 tests) |
 | M0b | Merge `multi-turn` into `main` (after M1 shows the trainer learns) | single-turn tests still green; this file updated to match |
-| M1 GPU validation | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
+| M1 GPU validation (done for `number_hunt_easy`) | Probe and train `number_hunt_easy` and `live_mastermind`; tune lr and batch; fix memory | hardened climbs, loose diverges, curves saved |
 | M2 trainer parity | `--shots`, `--lora`, logits-at-reply-positions, optional vLLM | same flags as single-turn work or error clearly |
 | M3 compiler | Real-model corpus run, latency, Claude backend | corpus target in section 3 met |
 | M4 hardening | Replay, planted exploit found and patched, evidence note | needs Varun: schema review first |
@@ -200,6 +201,10 @@ M1 gates everything after it: nothing else is worth building if the multi-turn t
 - Team: pick the hero multi-turn demo game (hint game, Wordle-like, or something with a scripted opponent).
 
 ## 8. Decision log
+- **2026-10-24 (evening):** multi-turn compiles by default; the fit check picks single or multi per
+  game, and `--single-only` restores the old refusal. Reason: on Claude Haiku 5.5 a 15-description
+  corpus routed 15/15 correctly (10 multi, 3 single, 2 reject) and 9/10 multi-turn games compiled
+  and passed the episode gates within 3 attempts (15-50 s each), meeting the section 3 target.
 - **2026-10-24 (later):** the plan was published to `main` ahead of the code, at the owner's request and
   without review, so the team shares one scope. The code stays on `multi-turn` until M0b.
 - **2026-10-24:** single-turn stays the default and the demo path; multi-turn is an additive track

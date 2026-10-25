@@ -10,8 +10,7 @@ judge types live. The full plan, demo script and timeline are in
 > track (the environment answers each reply), selected by a `kind` field. The amended scope,
 > per-component work, owners, phases and risks are in
 > [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md); where it differs from the PDF, the markdown
-> plan wins for multi-turn work. It changes nothing for single-turn code. The multi-turn code is
-> on branch `multi-turn` and is not merged into `main` yet.
+> plan wins for multi-turn work. It changes nothing for single-turn code.
 
 ## Live compiler / hacker / fixer / graph demo
 
@@ -28,8 +27,8 @@ it does not claim Hub leaderboard acceptance or trained-policy performance.
 | Hardening engine | Hacker / judge / fixer / solver loop on a reward function (Claude for each role); runs the hub audit that produces the leaderboard | Varun |
 | Invariant store | Turns each confirmed exploit into a reusable rule in `invariants.db` (mechanism, preconditions, defense); SpacetimeDB module and pusher by Rishab, audit-side writes and retrieval by Varun | Varun, Rishab |
 | Invariant graph | Similarity edges and rules computed by SpacetimeDB reducers, plus `buildGraph` for the dashboard (see [docs/INVARIANT_STORE.md](docs/INVARIANT_STORE.md)) | Rishab |
-| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); multi-turn environments are planned, see [docs/MULTITURN_PLAN.md](docs/MULTITURN_PLAN.md) | Rohan |
-| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy; a multi-turn rollout loop is on branch `multi-turn` | Rohan |
+| Env compiler | Plain-English game → single-turn verifiers environment (task generator, parser, reward, reference solver); or a multi-turn one when the game needs the environment to answer each reply ([plan](docs/MULTITURN_PLAN.md)) | Rohan |
+| Trainer | GRPO on a 0.5–1B model (TRL + vLLM on our GPU server); streams reward and held-out accuracy; multi-turn games use a separate rollout loop (`trainer/multiturn_grpo.py`) | Rohan |
 | Dashboard | Leaderboard, invariant graph, game input box, live training curves | Anirudh |
 
 All environments share Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers)
@@ -157,6 +156,38 @@ the ground truth of every call.
   calls. Cartesia metrics have no update endpoint, so a hardened judge prompt is published as
   a new, versioned metric. Needs `CARTESIA_API_KEY` and `GEMINI_API_KEY` in `.env`.
 - The simulation side (customer, agent under test, judge, call classifier) runs on Claude Haiku 5.5 at low effort, and so do the hacker and fixer (the Gemini free tier allows only 20 requests a day). `VOICE_ENV_SIM=gemini` / `VOICE_ENV_PLANNER=gemini` switch them back. Gemini calls are throttled (`VOICE_ENV_MIN_INTERVAL`, default 2s); all calls are cached in `.cache/`. Needs `ANTHROPIC_API_KEY` too.
+
+## Multi-turn track (experimental, `multi-turn` branch)
+
+A separate environment type for games where the environment answers each reply. It sits next
+to the single-turn `GameEnv` and is selected by `kind == "multi"`; nothing in the single-turn
+path (games, trainer, hardening, leaderboard checker) depends on it.
+
+- `env_compiler/multiturn.py`: `MultiTurnGameEnv` with `reset(rng)`, `step(state, reply)`,
+  an episode-level `reward(state)`, a scripted `reference_policy` and a `random_policy`.
+  `play(policy, seed)` runs a full episode. State is JSON-serialisable.
+- Games (`MULTI_GAMES`, kept apart from `GAMES`): `number_hunt` (higher/lower) and
+  `live_mastermind` (the interactive version of `clue_guess`). Loose parser: a reply that lists
+  many guesses counts every one, so spamming wins.
+- Gates: `validate()` dispatches on `kind`. Multi-turn requires a reference policy that wins
+  every episode, near-zero null and random policies, deterministic resets, and episodes that
+  end within `max_turns`.
+- Compiler: the fit check returns `single`, `multi` or `reject` and routes the game. Multi-turn games
+  use their own template and worked example; `--single-only` refuses them.
+- verifiers: `load_environment("number_hunt")` returns a `MultiTurnEnv` adapter (`GameMultiTurnEnv`).
+- Trainer: `python -m trainer.train number_hunt_easy --out runs/x` runs a small self-contained GRPO
+  loop (`trainer/multiturn_grpo.py`) instead of TRL, because TRL's `GRPOTrainer` assumes one
+  completion per prompt (and the pinned TRL 0.24 has no multi-turn hook). Same objective as our TRL
+  runs (beta 0, one update per batch): group-normalised episode reward times the log-probability of
+  the model's own reply tokens, with each turn a separate (context, reply) sample so environment text
+  never enters the loss. Metrics land in the same `metrics.jsonl` format (held-out accuracy is strict
+  and greedy). Single GPU, HF generation, no vLLM. `trainer.probe` reports a game's base solve rate.
+- Hardening: `python -m harden.game_audit GAME` runs the audit loop on single- and multi-turn games
+  (Claude probes the shipped game, exact replay verifies, the fixer writes a `tighten` rule) and
+  writes `hardened/<name>.py`; train on it with `--oracle GAME`. `python scripts/pipeline.py
+  "description"` runs compile, harden, train (hardened and hacked) and the replay page in one go.
+- Not supported yet: multi-turn entries in the leaderboard evidence schema (`check_leaderboard.py`
+  scores one string per completion; any change there goes through Varun).
 
 ## Live demo dashboard and pilot status
 

@@ -33,6 +33,9 @@ spacetimedb/dist/
 rollouts/
 demo/
 
+# hardened game modules and audit evidence (regenerate with harden.game_audit)
+hardened/
+
 # dashboard build output
 dashboard/dist/
 
