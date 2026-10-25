@@ -1,0 +1,10 @@
+.snake-mark{font:inherit;padding:0;color:#245681}.snake-mark svg{width:19px;height:19px}
+.snake-board{border:1px solid #c2bcb5;background:#eae5e0;border-radius:9px;margin-top:13px;padding:12px}
+.snake-board-heading{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:11px}.snake-board-heading h2{font-size:12px;font-weight:500;color:#3a352f}.snake-board-heading>span{font:9px 'Fragment Mono',ui-monospace,monospace;color:#706b64}
+.snake-grid{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:5px;width:min(100%,280px);margin:0 auto;aspect-ratio:1}
+.snake-grid i{display:block;border-radius:6px;background:#e3ded9;border:1px solid #d3cdc7}
+.snake-grid i.snake-body{background:#88a1b9;border-color:#7690a9}
+.snake-grid i.snake-head{background:#2c5d89;border-color:#245681;box-shadow:0 0 0 2px #2c5d8930}
+.snake-grid i.snake-food{background:radial-gradient(circle at 38% 35%,#d6a25a,#a8742e 70%);border-color:#8f6226;border-radius:50%;transform:scale(.74)}
+.snake-legend{display:flex;justify-content:center;gap:14px;margin-top:11px;font-size:8px;color:#78726c}.snake-legend span{display:flex;align-items:center;gap:5px}.snake-legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.snake-legend .snake-head{background:#2c5d89}.snake-legend .snake-body{background:#88a1b9}.snake-legend .snake-food{background:#b98236;border-radius:50%}
